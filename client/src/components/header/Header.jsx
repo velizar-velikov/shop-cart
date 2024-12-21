@@ -8,7 +8,7 @@ export default function Header() {
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand as={Link} to="/">
-                    Navbar
+                    Velizar fashion
                 </Navbar.Brand>
                 <Nav className="ml-auto">
                     <Nav.Link as={Link} to="/">

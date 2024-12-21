@@ -6,6 +6,7 @@ import Register from './components/register/Register.jsx';
 import Footer from './components/footer/Footer.jsx';
 import Create from './components/create/Create.jsx';
 import Catalog from './components/catalog/Catalog.jsx';
+import Home from './components/home/Home.jsx';
 
 function App() {
     return (
@@ -13,7 +14,7 @@ function App() {
             <Header />
             <main>
                 <Routes>
-                    <Route path="/" element={<Catalog />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/catalog" element={<Catalog />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />

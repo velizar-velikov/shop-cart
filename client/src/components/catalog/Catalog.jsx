@@ -1,9 +1,9 @@
-import CatalogCard from './catalog-card/CatalogCard.jsx';
-import { Container, Row } from 'react-bootstrap';
+import CatalogCard from '../catalog-card/CatalogCard.jsx';
+import { Row } from 'react-bootstrap';
 import CatalogSearch from './catalog-search/CatalogSearch.jsx';
 import Paginator from './pagination/Pagination.jsx';
 
-const arr = [1, 2, 3, 4, 5];
+const arr = [1, 2, 3, 4];
 
 export default function Catalog() {
     return (
