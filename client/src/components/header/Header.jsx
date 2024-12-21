@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 export default function Header() {
     return (
-        <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar className="p-0" bg="dark" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     Velizar fashion
                 </Navbar.Brand>
-                <Nav className="ml-auto">
+                <Nav className="ml-auto navbar navbar-expand-sm justify-content-end">
                     <Nav.Link as={Link} to="/">
                         Home
                     </Nav.Link>

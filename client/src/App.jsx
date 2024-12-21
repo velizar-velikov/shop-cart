@@ -8,6 +8,7 @@ import Create from './components/create/Create.jsx';
 import Catalog from './components/catalog/Catalog.jsx';
 import Home from './components/home/Home.jsx';
 import LoadingSpinner from './components/loading-spinner/LoadingSpinner.jsx';
+import ProductDetails from './components/product-details/ProductDetails.jsx';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/catalog/:id/details" element={<ProductDetails />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/create" element={<Create />} />
