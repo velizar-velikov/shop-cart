@@ -9,6 +9,10 @@ export default function Register() {
             <Form>
                 <h2>Register</h2>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control type="text" placeholder="Peter" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="name@example.com" />
                 </Form.Group>
