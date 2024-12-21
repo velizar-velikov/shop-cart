@@ -11,6 +11,7 @@ import LoadingSpinner from './components/loading-spinner/LoadingSpinner.jsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
 import CreateReview from './components/create-review/CreateReview.jsx';
 import ProductReviews from './components/product-reviews/ProductReviews.jsx';
+import Cart from './components/cart/Cart.jsx';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/create" element={<Create />} />
+                    <Route path="/cart" element={<Cart />} />
                 </Routes>
             </main>
             <Footer />

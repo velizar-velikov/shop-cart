@@ -5,7 +5,6 @@ import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CreateReview from '../create-review/CreateReview.jsx';
-import ProductReviewModal from '../product-reviews/ProductReviewModal.jsx';
 
 export default function ProductDetails() {
     const [showAddReview, setShowAddReview] = useState(false);
