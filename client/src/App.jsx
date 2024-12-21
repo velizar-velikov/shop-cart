@@ -7,6 +7,7 @@ import Footer from './components/footer/Footer.jsx';
 import Create from './components/create/Create.jsx';
 import Catalog from './components/catalog/Catalog.jsx';
 import Home from './components/home/Home.jsx';
+import LoadingSpinner from './components/loading-spinner/LoadingSpinner.jsx';
 
 function App() {
     return (
