@@ -35,6 +35,8 @@ export default function ProductDetails() {
                                 better during exercise!
                             </p>
                             <p className="h4 font-weight-bold">$39</p>
+                            {/* show when out of stock from all sizes */}
+                            <p className="text-danger">Out of stock</p>
                             <Form>
                                 <div className="d-flex gap-3">
                                     <Form.Group className="col-4">
