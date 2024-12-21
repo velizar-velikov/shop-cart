@@ -2,10 +2,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Button, Form } from 'react-bootstrap';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import CreateReview from '../create-review/CreateReview.jsx';
 
 export default function ProductDetails() {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        setShow(true);
+    };
+
     return (
         <div className="mx-4 mx-md-0 mx-lg-0">
+            {show && <CreateReview show={show} setShow={setShow} />}
             <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
                 <Row className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row">
                     <Col className="d-flex justify-content-center align-items-center">
@@ -26,9 +36,14 @@ export default function ProductDetails() {
                                         <i className="fa fa-star text-warning"></i>
                                         <i className="fa fa-star text-warning"></i>
                                     </div>
-                                    <p className="small fst-italic">4.1/ 104 reviews</p>
+                                    <p className="small fst-italic">
+                                        4.1/{' '}
+                                        <a className="" href="/catalog/:id/reviews">
+                                            104 reviews
+                                        </a>
+                                    </p>
                                 </div>
-                                <a href="/catalog/:id/reviews/add">Add review</a>
+                                <Link onClick={handleShow}>Add review</Link>
                             </div>
                             <p className="small">
                                 This t-shirt is from all natural cotton material, which will help your body breathe that much

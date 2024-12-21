@@ -30,7 +30,7 @@ export default function Header() {
                         Logout
                     </Nav.Link>
                     <Nav.Link as={Link} to="/cart" className="mx-2 mt-1 px-1 fa-lg">
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <i className="fa-solid fa-cart-shopping"></i>
                     </Nav.Link>
                 </Nav>
             </Container>

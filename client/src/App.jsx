@@ -9,12 +9,14 @@ import Catalog from './components/catalog/Catalog.jsx';
 import Home from './components/home/Home.jsx';
 import LoadingSpinner from './components/loading-spinner/LoadingSpinner.jsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
+import CreateReview from './components/create-review/CreateReview.jsx';
 
 function App() {
     return (
         <div className="d-flex flex-column min-vh-100">
             <Header />
             <main>
+                {/* <CreateReview /> */}
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/catalog" element={<Catalog />} />
