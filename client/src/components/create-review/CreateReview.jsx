@@ -2,9 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-export default function CreateReview({ show, setShow }) {
-    const handleClose = () => setShow(false);
-
+export default function CreateReview({ show, handleClose }) {
     return (
         <>
             <Modal show={show} onHide={handleClose}>

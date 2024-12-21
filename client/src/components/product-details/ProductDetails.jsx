@@ -5,17 +5,17 @@ import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CreateReview from '../create-review/CreateReview.jsx';
+import ProductReviewModal from '../product-reviews/ProductReviewModal.jsx';
 
 export default function ProductDetails() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => {
-        setShow(true);
-    };
+    const [showAddReview, setShowAddReview] = useState(false);
+
+    const handleShowAddReview = () => setShowAddReview(true);
+    const handleCloseAddReview = () => setShowAddReview(false);
 
     return (
         <div className="mx-4 mx-md-0 mx-lg-0">
-            {show && <CreateReview show={show} setShow={setShow} />}
+            {showAddReview && <CreateReview show={handleShowAddReview} handleClose={handleCloseAddReview} />}
             <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
                 <Row className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row">
                     <Col className="d-flex justify-content-center align-items-center">
@@ -37,13 +37,10 @@ export default function ProductDetails() {
                                         <i className="fa fa-star text-warning"></i>
                                     </div>
                                     <p className="small fst-italic">
-                                        4.1/{' '}
-                                        <a className="" href="/catalog/:id/reviews">
-                                            104 reviews
-                                        </a>
+                                        4.1/ <Link to="/catalog/:id/reviews">104 reviews</Link>
                                     </p>
                                 </div>
-                                <Link onClick={handleShow}>Add review</Link>
+                                <Link onClick={handleShowAddReview}>Add review</Link>
                             </div>
                             <p className="small">
                                 This t-shirt is from all natural cotton material, which will help your body breathe that much
