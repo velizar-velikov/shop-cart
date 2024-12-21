@@ -1,6 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
     return (
@@ -23,7 +24,7 @@ export default function Register() {
                     Register
                 </Button>
                 <p className="mt-3 text-end">
-                    Already have an account? click <a href="/login">here</a>
+                    Already have an account? click <Link to="/login">here</Link>
                 </p>
             </Form>
         </Container>
