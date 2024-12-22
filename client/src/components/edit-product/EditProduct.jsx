@@ -2,11 +2,15 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function EditProduct() {
     return (
         <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
             <Form>
+                <Link to={`/catalog/:id/details`}>
+                    <i className="fa-solid fa-arrow-left fa-lg mb-3 text-dark"></i>
+                </Link>
                 <h2>Edit product</h2>
 
                 <Row className="d-flex">
