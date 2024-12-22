@@ -2,24 +2,62 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
+import { useForm } from '../../hooks/useForm.js';
+import productsAPI from '../../api/products-api.js';
+import { useNavigate } from 'react-router-dom';
+
+const initialValues = {
+    name: '',
+    brand: '',
+    category: '',
+    price: 0,
+    imageUrl: '',
+    summary: '',
+    description: '',
+};
 
 export default function CreateProduct() {
+    const navigate = useNavigate();
+
+    const createHandler = async (values) => {
+        try {
+            const product = await productsAPI.create(values);
+            navigate(`/catalog/${product._id}/details`);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler);
+
     return (
         <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
-            <Form>
+            <Form onSubmit={submitHandler}>
                 <h2>Add product</h2>
 
                 <Row className="d-flex">
                     <Col>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Short sleeve t-shirt" />
+                            <Form.Control
+                                value={values.name}
+                                onChange={changeHandler}
+                                name="name"
+                                type="text"
+                                placeholder="Short sleeve t-shirt"
+                            />
                         </Form.Group>
                     </Col>
                     <Col>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Brand</Form.Label>
-                            <Form.Control type="text" placeholder="Nike" />
+                            <Form.Control
+                                value={values.brand}
+                                onChange={changeHandler}
+                                name="brand"
+                                type="text"
+                                placeholder="Nike"
+                            />
                         </Form.Group>
                     </Col>
                 </Row>
@@ -27,7 +65,7 @@ export default function CreateProduct() {
                     <Col>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Category</Form.Label>
-                            <Form.Select size="sm">
+                            <Form.Select value={values.category} onChange={changeHandler} name="category" size="sm">
                                 <option>T-shirts</option>
                                 <option>Shorts</option>
                                 <option>Sweatshirts</option>
@@ -38,22 +76,41 @@ export default function CreateProduct() {
                     <Col>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Price</Form.Label>
-                            <Form.Control type="number" min="0" />
+                            <Form.Control value={values.price} onChange={changeHandler} name="price" type="number" min="0" />
                         </Form.Group>
                     </Col>
                 </Row>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Image URL</Form.Label>
-                    <Form.Control type="text" placeholder="https://..." />
+                    <Form.Control
+                        value={values.imageUrl}
+                        onChange={changeHandler}
+                        name="imageUrl"
+                        type="text"
+                        placeholder="https://..."
+                    />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Summary (up to 40 characters)</Form.Label>
-                    <Form.Control type="text" placeholder="comfortable cotton t-shirt" />
+                    <Form.Control
+                        value={values.summary}
+                        onChange={changeHandler}
+                        name="summary"
+                        type="text"
+                        placeholder="comfortable cotton t-shirt"
+                    />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Full description</Form.Label>
-                    <Form.Control as="textarea" rows={3} placeholder="Great for summer and spring and also..." />
+                    <Form.Control
+                        value={values.description}
+                        onChange={changeHandler}
+                        name="description"
+                        as="textarea"
+                        rows={3}
+                        placeholder="Great for summer and spring and also..."
+                    />
                 </Form.Group>
                 <p className="small">
                     <span className="d-inline-block mr-3">Note:</span>
