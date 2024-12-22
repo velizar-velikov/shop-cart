@@ -89,7 +89,9 @@ export default function ProductDetails() {
                                     </Button>
                                 </Col>
                                 <Col sm={2} className="">
-                                    <Button className="mb-1">Edit</Button>
+                                    <Button as={Link} to="/catalog/:id/edit" className="mb-1">
+                                        Edit
+                                    </Button>
                                 </Col>
                                 <Col sm={3}>
                                     <Button as={Link} onClick={handleShowDelete} className="btn-danger mb-1">
