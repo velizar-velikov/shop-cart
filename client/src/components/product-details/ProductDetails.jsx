@@ -3,12 +3,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CreateReview from '../create-review/CreateReview.jsx';
 import AddStock from '../add-stock/AddStock.jsx';
 import DeleteProduct from '../delete-product/DeleteProduct.jsx';
+import { useGetOneProduct } from '../../hooks/useProducts.js';
 
 export default function ProductDetails() {
+    const { productId } = useParams();
+    console.log(productId);
+
+    const [product] = useGetOneProduct(productId);
+
     const [showAddReview, setShowAddReview] = useState(false);
     const [showAddStock, setShowAddStock] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
@@ -28,18 +34,15 @@ export default function ProductDetails() {
             {showAddStock && <AddStock show={handleShowAddStock} handleClose={handleCloseAddStock} />}
             {showDelete && <DeleteProduct show={handleShowDelete} handleClose={handleCloseDelete} />}
 
-            <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
+            <Container className="container-sm col-12 col-md-10 col-lg-7 mt-3 mb-3 p-4 bg-dark-subtle shadow rounded-3">
                 <Row className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row">
                     <Col className="d-flex justify-content-center align-items-center">
-                        <img
-                            className="card-img"
-                            src="https://www.tennis-point.co.uk/dw/image/v2/BBDP_PRD/on/demandware.static/-/Sites-master-catalog/default/dwf9d22348/images/004/454/52032000_000.jpg?q=80&sw=2000"
-                        />
+                        <img className="card-img" src={product.imageUrl} />
                     </Col>
                     <Col className="d-flex align-items-center">
                         <div className="d-flex flex-column justify-content-between">
-                            <h6 className="text-secondary">Nike</h6>
-                            <h1>Sports t-shirt</h1>
+                            <h6 className="text-secondary">{product.brand}</h6>
+                            <h1>{product.name}</h1>
                             <div className="d-flex gap-3">
                                 <div className="rating">
                                     <div className="stars">
@@ -49,16 +52,16 @@ export default function ProductDetails() {
                                         <i className="fa fa-star text-warning"></i>
                                     </div>
                                     <p className="small fst-italic">
-                                        4.1/ <Link to="/catalog/:id/reviews">104 reviews</Link>
+                                        4.1/ <Link to={`/catalog/${product._id}/reviews`}>104 reviews</Link>
                                     </p>
                                 </div>
                                 <Link onClick={handleShowAddReview}>Add review</Link>
                             </div>
-                            <p className="small">
-                                This t-shirt is from all natural cotton material, which will help your body breathe that much
-                                better during exercise!
+                            <p className="small">{product.description}</p>
+                            <p className="h4 font-weight-bold">
+                                {'$ '}
+                                {product.price}
                             </p>
-                            <p className="h4 font-weight-bold">$39</p>
                             {/* show when out of stock from all sizes */}
                             <p className="text-danger">Out of stock</p>
 
@@ -89,7 +92,7 @@ export default function ProductDetails() {
                                     </Button>
                                 </Col>
                                 <Col sm={2} className="">
-                                    <Button as={Link} to="/catalog/:id/edit" className="mb-1">
+                                    <Button as={Link} to={`/catalog/${product._id}/edit`} className="mb-1">
                                         Edit
                                     </Button>
                                 </Col>
