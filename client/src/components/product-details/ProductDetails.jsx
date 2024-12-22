@@ -6,10 +6,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CreateReview from '../create-review/CreateReview.jsx';
 import AddStock from '../add-stock/AddStock.jsx';
+import DeleteProduct from '../delete-product/DeleteProduct.jsx';
 
 export default function ProductDetails() {
     const [showAddReview, setShowAddReview] = useState(false);
     const [showAddStock, setShowAddStock] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     const handleShowAddReview = () => setShowAddReview(true);
     const handleCloseAddReview = () => setShowAddReview(false);
@@ -17,11 +19,15 @@ export default function ProductDetails() {
     const handleShowAddStock = () => setShowAddStock(true);
     const handleCloseAddStock = () => setShowAddStock(false);
 
+    const handleShowDelete = () => setShowDelete(true);
+    const handleCloseDelete = () => setShowDelete(false);
+
     return (
         <div className="mx-4 mx-md-0 mx-lg-0">
             {showAddReview && <CreateReview show={handleShowAddReview} handleClose={handleCloseAddReview} />}
             {showAddStock && <AddStock show={handleShowAddStock} handleClose={handleCloseAddStock} />}
-            
+            {showDelete && <DeleteProduct show={handleShowDelete} handleClose={handleCloseDelete} />}
+
             <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
                 <Row className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row">
                     <Col className="d-flex justify-content-center align-items-center">
@@ -86,7 +92,9 @@ export default function ProductDetails() {
                                     <Button className="mb-1">Edit</Button>
                                 </Col>
                                 <Col sm={3}>
-                                    <Button className="btn-danger mb-1">Delete</Button>
+                                    <Button as={Link} onClick={handleShowDelete} className="btn-danger mb-1">
+                                        Delete
+                                    </Button>
                                 </Col>
                             </Row>
                         </div>
