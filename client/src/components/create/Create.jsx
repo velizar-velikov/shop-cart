@@ -9,15 +9,30 @@ export default function Create() {
             <Form>
                 <h2>Add product</h2>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="Short sleeve t-shirt" />
-                </Form.Group>
                 <Row className="d-flex">
+                    <Col>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Short sleeve t-shirt" />
+                        </Form.Group>
+                    </Col>
                     <Col>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Brand</Form.Label>
                             <Form.Control type="text" placeholder="Nike" />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="d-flex align-items-center">
+                    <Col>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select size="sm">
+                                <option>T-shirts</option>
+                                <option>Shorts</option>
+                                <option>Sweatshirts</option>
+                                <option>Pants</option>
+                            </Form.Select>
                         </Form.Group>
                     </Col>
                     <Col>
