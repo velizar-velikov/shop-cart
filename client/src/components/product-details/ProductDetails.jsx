@@ -5,16 +5,23 @@ import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CreateReview from '../create-review/CreateReview.jsx';
+import AddStock from '../add-stock/AddStock.jsx';
 
 export default function ProductDetails() {
     const [showAddReview, setShowAddReview] = useState(false);
+    const [showAddStock, setShowAddStock] = useState(false);
 
     const handleShowAddReview = () => setShowAddReview(true);
     const handleCloseAddReview = () => setShowAddReview(false);
 
+    const handleShowAddStock = () => setShowAddStock(true);
+    const handleCloseAddStock = () => setShowAddStock(false);
+
     return (
         <div className="mx-4 mx-md-0 mx-lg-0">
             {showAddReview && <CreateReview show={handleShowAddReview} handleClose={handleCloseAddReview} />}
+            {showAddStock && <AddStock show={handleShowAddStock} handleClose={handleCloseAddStock} />}
+            
             <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
                 <Row className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row">
                     <Col className="d-flex justify-content-center align-items-center">
@@ -71,7 +78,9 @@ export default function ProductDetails() {
                             {/* for owner */}
                             <Row className="d-flex align-items-center">
                                 <Col sm={5}>
-                                    <Button className="btn-dark mb-1">Add in stock</Button>
+                                    <Button as={Link} onClick={handleShowAddStock} className="btn-dark mb-1">
+                                        Add in stock
+                                    </Button>
                                 </Col>
                                 <Col sm={2} className="">
                                     <Button className="mb-1">Edit</Button>
