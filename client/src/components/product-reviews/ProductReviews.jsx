@@ -5,11 +5,15 @@ import { Link } from 'react-router-dom';
 export default function ProductReviews() {
     return (
         <Container className="container-sm col-8 col-md-7 col-lg-6 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
-            <div className="d-flex  mb-3">
+            <div className="d-flex mb-3 gap-5">
                 <Button as={Link} to="/catalog/:id/details" className="col-2 h-50">
                     Back
                 </Button>
-                <h3 className="col-6 col-md-8 text-center">Sports t-shirt reviews</h3>
+                <h3 className="text-center d-flex flex-wrap justify-content-center align-items-center gap-2">
+                    <span>Sports t-shirt</span>
+                    <span className="h6 text-secondary">Nike</span>
+                    <span className="ms-3">reviews</span>
+                </h3>
             </div>
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
