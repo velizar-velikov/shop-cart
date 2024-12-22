@@ -46,3 +46,5 @@ const productsAPI = {
     deleteById,
     getDistinctCategories,
 };
+
+export default productsAPI;
