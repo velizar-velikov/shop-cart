@@ -48,7 +48,9 @@ export default function ProductDetails() {
                             <p className="h4 font-weight-bold">$39</p>
                             {/* show when out of stock from all sizes */}
                             <p className="text-danger">Out of stock</p>
-                            <Form>
+
+                            {/* for users that are not owners */}
+                            {/* <Form>
                                 <div className="d-flex gap-3">
                                     <Form.Group className="col-4">
                                         <Form.Label>Amount</Form.Label>
@@ -64,7 +66,20 @@ export default function ProductDetails() {
                                     </Form.Group>
                                 </div>
                                 <Button className="col-6 mt-4 m-sm-2 m-lg-4">Add to cart</Button>
-                            </Form>
+                            </Form> */}
+
+                            {/* for owner */}
+                            <Row className="d-flex align-items-center">
+                                <Col sm={5}>
+                                    <Button className="btn-dark mb-1">Add in stock</Button>
+                                </Col>
+                                <Col sm={2} className="">
+                                    <Button className="mb-1">Edit</Button>
+                                </Col>
+                                <Col sm={3}>
+                                    <Button className="btn-danger mb-1">Delete</Button>
+                                </Col>
+                            </Row>
                         </div>
                     </Col>
                 </Row>
