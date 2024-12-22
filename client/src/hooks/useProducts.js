@@ -14,3 +14,17 @@ export function useGetProducts() {
 
     return [products, setProducts];
 }
+
+export function useGetLatestProducts() {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        async function loadProducts() {
+            const products = await productsAPI.getLatest(3);
+            setProducts(products);
+        }
+        loadProducts();
+    }, []);
+
+    return [products, setProducts];
+}

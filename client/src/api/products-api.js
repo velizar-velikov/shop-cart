@@ -11,6 +11,19 @@ function getAll() {
     return requester.get(host + endpoints.all);
 }
 
+function getLatest(productsCount) {
+    const urlParams = new URLSearchParams({
+        sortBy: '_createdOn%20desc',
+        offset: '0',
+        pageSize: productsCount,
+    });
+
+    const url = new URL(host + endpoints.all);
+    url.search = decodeURIComponent(urlParams);
+
+    return requester.get(url);
+}
+
 function getOne(productId) {
     return requester.get(host + endpoints.byId(productId));
 }
@@ -40,6 +53,7 @@ function getDistinctCategories() {
 
 const productsAPI = {
     getAll,
+    getLatest,
     getOne,
     create,
     editById,

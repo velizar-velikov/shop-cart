@@ -1,10 +1,13 @@
 import { Button, Row } from 'react-bootstrap';
 import CatalogCard from '../catalog-card/CatalogCard.jsx';
 import { Link } from 'react-router-dom';
+import { useGetLatestProducts } from '../../hooks/useProducts.js';
 
 const arr = [1, 2, 3];
 
 export default function Home() {
+    const [products] = useGetLatestProducts();
+
     return (
         <section id="catalog" className="container-fluid overflow-hidden mb-4">
             <h1 className="mt-4 text-center">
@@ -13,7 +16,7 @@ export default function Home() {
                     Start your shopping therapy <Link to="/catalog">now!</Link>
                 </span>
             </h1>
-            {arr.length == 0 ? (
+            {products.length == 0 ? (
                 <p className="position-absolute top-50 start-50 translate-middle fs-1 px-3 py-2 px-lg-5 py-lg-3 rounded bg-dark-subtle">
                     No clothes yet.
                 </p>
@@ -23,8 +26,8 @@ export default function Home() {
                         <h3>Latest clothes:</h3>
                     </div>
                     <Row className="d-flex justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
-                        {arr.map((el) => (
-                            <CatalogCard key={el} />
+                        {products.map((product) => (
+                            <CatalogCard key={product._id} {...product} />
                         ))}
                     </Row>
                 </div>
