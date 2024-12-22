@@ -27,10 +27,22 @@ function deleteById(productId) {
     return requester.delete(host + endpoints.byId(productId));
 }
 
+function getDistinctCategories() {
+    const urlParams = new URLSearchParams({
+        distinct: 'category',
+        select: 'category',
+    });
+
+    const url = `${host}${endpoints.all}?${urlParams.toString()}`;
+
+    return requester.get(url);
+}
+
 const productsAPI = {
     getAll,
     getOne,
     create,
     editById,
     deleteById,
+    getDistinctCategories,
 };
