@@ -42,3 +42,5 @@ export function useGetOneProduct(productId) {
 
     return [product, setProduct];
 }
+
+export function useCreateProduct() {}
