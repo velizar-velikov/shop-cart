@@ -18,7 +18,7 @@ export default function Header() {
                         Catalog
                     </Nav.Link>
                     <Nav.Link as={Link} to="/create">
-                        Create
+                        Create product
                     </Nav.Link>
                     <Nav.Link as={Link} to="/login">
                         Login

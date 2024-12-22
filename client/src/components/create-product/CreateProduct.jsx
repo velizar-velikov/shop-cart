@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 
-export default function Create() {
+export default function CreateProduct() {
     return (
         <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
             <Form>
@@ -38,7 +38,7 @@ export default function Create() {
                     <Col>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Price</Form.Label>
-                            <Form.Control type="number" />
+                            <Form.Control type="number" min="0" />
                         </Form.Group>
                     </Col>
                 </Row>
