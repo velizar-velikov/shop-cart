@@ -17,16 +17,19 @@ export function useGetProducts() {
 
 export function useGetLatestProducts() {
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         async function loadProducts() {
+            setIsLoading(true);
             const products = await productsAPI.getLatest(3);
             setProducts(products);
+            setIsLoading(false);
         }
         loadProducts();
     }, []);
 
-    return [products, setProducts];
+    return { products, isLoading };
 }
 
 export function useGetOneProduct(productId) {
