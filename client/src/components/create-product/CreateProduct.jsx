@@ -131,7 +131,8 @@ export default function CreateProduct() {
                 <p className="small">
                     <span className="d-inline-block mr-3">Note:</span>
                     <span className="d-inline-block">
-                        Product will be added with stock of 1 from each size ( S, M, L ). If you want to add in stock you will be
+                        Before publishing a product, you need to have at least 1 item of each size (S, M, L) in stock. Product
+                        will be added with stock of 1 from each size ( S, M, L ). If you want to add more in stock, you will be
                         able to do it from product description after you have created the product.
                     </span>
                 </p>
