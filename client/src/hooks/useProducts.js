@@ -3,16 +3,19 @@ import productsAPI from '../api/products-api.js';
 
 export function useGetProducts() {
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         async function loadProducts() {
+            setIsLoading(true);
             const products = await productsAPI.getAll();
             setProducts(products);
+            setIsLoading(false);
         }
         loadProducts();
     }, []);
 
-    return [products, setProducts];
+    return { products, isLoading };
 }
 
 export function useGetLatestProducts() {
