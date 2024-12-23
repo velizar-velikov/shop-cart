@@ -31,16 +31,19 @@ export function useGetLatestProducts() {
 
 export function useGetOneProduct(productId) {
     const [product, setProduct] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         async function loadProduct() {
+            setIsLoading(true);
             const product = await productsAPI.getOne(productId);
             setProduct(product);
+            setIsLoading(false);
         }
         loadProduct();
     }, []);
 
-    return [product, setProduct];
+    return { product, isLoading };
 }
 
 export function useCreateProduct() {}
