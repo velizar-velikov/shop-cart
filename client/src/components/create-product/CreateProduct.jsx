@@ -6,11 +6,12 @@ import { useForm } from '../../hooks/useForm.js';
 import productsAPI from '../../api/products-api.js';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useCreateProduct } from '../../hooks/useProducts.js';
 
 const initialValues = {
     name: '',
     brand: '',
-    category: '',
+    category: 'T-shirts',
     price: 0,
     imageUrl: '',
     summary: '',
@@ -20,6 +21,8 @@ const initialValues = {
 export default function CreateProduct() {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
+
+    const createProduct = useCreateProduct();
 
     const createHandler = async (values) => {
         console.log(values);
@@ -33,7 +36,7 @@ export default function CreateProduct() {
                 throw new Error('All fields are required.');
             }
 
-            const product = await productsAPI.create(values);
+            const product = await createProduct(values);
             navigate(`/catalog/${product._id}/details`);
         } catch (error) {
             console.log(error.message);

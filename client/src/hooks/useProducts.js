@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import productsAPI from '../api/products-api.js';
+import stockAPI from '../api/stock-api.js';
 
 export function useGetProducts() {
     const [products, setProducts] = useState([]);
@@ -52,4 +53,13 @@ export function useGetOneProduct(productId) {
     return { product, isLoading };
 }
 
-export function useCreateProduct() {}
+export function useCreateProduct() {
+    const createHandler = async (productData) => {
+        const product = await productsAPI.create(productData);
+        await stockAPI.initializeStockForProduct(product._id);
+
+        return product;
+    };
+
+    return createHandler;
+}

@@ -9,7 +9,7 @@ const endpoints = {
 
 function buildUrlForProduct(productId) {
     const urlParams = new URLSearchParams({
-        where: `productId=${productId}`,
+        where: `productId="${productId}"`,
     });
     const url = `${host}${endpoints.all}?${urlParams.toString()}`;
 
@@ -31,25 +31,28 @@ function initializeStockForProduct(productId) {
     return requester.post(host + endpoints.all, { productId, sizes });
 }
 
-function getSizesForProduct(productId) {
+async function getSizesForProduct(productId) {
     const urlParams = new URLSearchParams({
-        where: `productId=${productId}`,
+        where: `productId="${productId}"`,
         select: 'sizes',
     });
     const url = `${host}${endpoints.all}?${urlParams.toString()}`;
 
-    return requester.get(url);
+    const sizesResponse = await requester.get(url);
+
+    return sizesResponse;
 }
 
 async function addStockForProduct(productId, sizesToAdd) {
-    const sizes = await getSizesForProduct(productId);
+    let sizes = {};
 
     sizes.small = sizes.small + (sizesToAdd.small || 0);
     sizes.medium = sizes.medium + (sizesToAdd.medium || 0);
     sizes.large = sizes.large + (sizesToAdd.large || 0);
 
-    const url = buildUrlForProduct(productId);
-    return requester.put(url, { productId, sizes });
+    const stock = await getStockForProduct(productId);
+
+    requester.put(host + endpoints.byId(stock._id), { productId, sizes: sizesToAdd });
 }
 
 // currently not possible because the server lets only the owners of the item to edit it
