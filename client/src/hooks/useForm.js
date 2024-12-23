@@ -14,7 +14,7 @@ export function useForm(initialValues, submitCallback) {
         event.preventDefault();
 
         submitCallback(values);
-        setValues(initialValues);
+        // setValues(initialValues);
     };
 
     return {
