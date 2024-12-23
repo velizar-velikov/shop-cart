@@ -13,24 +13,29 @@ import CreateReview from './components/create-review/CreateReview.jsx';
 import ProductReviews from './components/product-reviews/ProductReviews.jsx';
 import Cart from './components/cart/Cart.jsx';
 import EditProduct from './components/edit-product/EditProduct.jsx';
+import { AuthContextProvider } from './contexts/AuthContext.jsx';
+import Logout from './components/logout/Logout.jsx';
 
 function App() {
     return (
         <div className="d-flex flex-column min-vh-100">
-            <Header />
-            <main>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/catalog" element={<Catalog />} />
-                    <Route path="/catalog/:productId/details" element={<ProductDetails />} />
-                    <Route path="/catalog/:productId/edit" element={<EditProduct />} />
-                    <Route path="/catalog/:productId/reviews" element={<ProductReviews />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/create" element={<CreateProduct />} />
-                    <Route path="/cart" element={<Cart />} />
-                </Routes>
-            </main>
+            <AuthContextProvider>
+                <Header />
+                <main>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/catalog" element={<Catalog />} />
+                        <Route path="/catalog/:productId/details" element={<ProductDetails />} />
+                        <Route path="/catalog/:productId/edit" element={<EditProduct />} />
+                        <Route path="/catalog/:productId/reviews" element={<ProductReviews />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/logout" element={<Logout />} />
+                        <Route path="/create" element={<CreateProduct />} />
+                        <Route path="/cart" element={<Cart />} />
+                    </Routes>
+                </main>
+            </AuthContextProvider>
             <Footer />
         </div>
     );
