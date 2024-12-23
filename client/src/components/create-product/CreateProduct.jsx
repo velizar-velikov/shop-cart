@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useForm } from '../../hooks/useForm.js';
 import productsAPI from '../../api/products-api.js';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const initialValues = {
     name: '',
@@ -18,13 +19,25 @@ const initialValues = {
 
 export default function CreateProduct() {
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
 
     const createHandler = async (values) => {
+        console.log(values);
+
+        const sanitizedValues = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.toString().trim()]));
+
         try {
+            const hasEmptyField = Object.values(sanitizedValues).some((value) => !value);
+
+            if (hasEmptyField) {
+                throw new Error('All fields are required.');
+            }
+
             const product = await productsAPI.create(values);
             navigate(`/catalog/${product._id}/details`);
         } catch (error) {
             console.log(error.message);
+            setErrorMessage(error.message);
         }
     };
 
