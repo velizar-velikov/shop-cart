@@ -4,9 +4,13 @@
 
 ## 2. Delete product functionality with confirmation [x]
 
-## 3. Add review
+## 3. Add review [x]
 
-### 3.1 All reviews section - current user review (if he has left a review already) should be first, the rest would be sorted from newest to oldest
+### 3.1 All reviews section
+
+#### 3.1.1 Listing all reviews [x]
+
+#### 3.1.2 Current user review (if he has left a review for this product) should be first, the rest would be sorted from newest to oldest
 
 ### 3.2 Edit review functionality from section reviews
 
