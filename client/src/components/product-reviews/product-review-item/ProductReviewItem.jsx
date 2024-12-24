@@ -1,8 +1,6 @@
 import Accordion from 'react-bootstrap/Accordion';
 
-export default function ProductReviewItem({ index }) {
-    console.log(index);
-
+export default function ProductReviewItem({ index, text }) {
     return (
         <Accordion.Item eventKey={index.toString()}>
             <Accordion.Header>
@@ -16,7 +14,7 @@ export default function ProductReviewItem({ index }) {
                     <p className="">Peter Petrov</p>
                 </div>
             </Accordion.Header>
-            <Accordion.Body>This t-shirt is very comfortable and ideal for gym sessions or outdoor runs</Accordion.Body>
+            <Accordion.Body>{text}</Accordion.Body>
         </Accordion.Item>
     );
 }

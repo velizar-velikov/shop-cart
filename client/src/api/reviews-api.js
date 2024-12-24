@@ -6,13 +6,19 @@ const endpoints = {
     all: '/data/reviews',
 };
 
-function getReviewsForProduct(productId) {
+async function getReviewsForProduct(productId) {
     const urlParams = new URLSearchParams({
         where: `productId=${productId}`,
     });
     const url = `${host}${endpoints.all}?${urlParams.toString()}`;
 
-    return requester.get(url);
+    const result = await requester.get(url);
+
+    if (result.message == 'Resource not found') {
+        return [];
+    }
+
+    return result;
 }
 
 function createReviewForProduct(productId, rating, text) {
