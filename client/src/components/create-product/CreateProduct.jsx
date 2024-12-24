@@ -25,8 +25,6 @@ export default function CreateProduct() {
     const createProduct = useCreateProduct();
 
     const createHandler = async (values) => {
-        console.log(values);
-
         const sanitizedValues = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.toString().trim()]));
 
         try {

@@ -37,7 +37,6 @@ export function useGetLatestProducts() {
 }
 
 export function useGetOneProduct(productId) {
-    const [product, setProduct] = useState([]);
     const [product, setProduct] = useState({
         name: '',
         brand: '',
@@ -71,4 +70,14 @@ export function useCreateProduct() {
     };
 
     return createHandler;
+}
+
+export function useEditProduct() {
+    const editHandler = async (productId, productData) => {
+        const product = await productsAPI.editById(productId, productData);
+
+        return product;
+    };
+
+    return editHandler;
 }
