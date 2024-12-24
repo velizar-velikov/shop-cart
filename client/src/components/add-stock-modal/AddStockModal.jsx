@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
-export default function AddStock({ show, handleClose }) {
+export default function AddStockModal({ show, handleClose }) {
     return (
         <>
             <Modal show={show} onHide={handleClose}>

@@ -3,9 +3,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import CreateReview from '../create-review/CreateReview.jsx';
-import AddStock from '../add-stock/AddStock.jsx';
-import DeleteProduct from '../delete-product/DeleteProduct.jsx';
+import CreateReviewModal from '../create-review-modal/CreateReviewModal.jsx';
+import AddStockModal from '../add-stock-modal/AddStockModal.jsx';
+import DeleteProductModal from '../delete-product-modal/DeleteProductModal.jsx';
 import { useGetOneProduct } from '../../hooks/useProducts.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
@@ -16,18 +16,18 @@ export default function ProductDetails() {
 
     const { product, isLoading } = useGetOneProduct(productId);
 
-    const [showAddReview, setShowAddReview] = useState(false);
-    const [showAddStock, setShowAddStock] = useState(false);
-    const [showDelete, setShowDelete] = useState(false);
+    const [showAddReviewModal, setShowAddReviewModal] = useState(false);
+    const [showAddStockModal, setShowAddStockModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const handleShowAddReview = () => setShowAddReview(true);
-    const handleCloseAddReview = () => setShowAddReview(false);
+    const handleShowAddReview = () => setShowAddReviewModal(true);
+    const handleCloseAddReview = () => setShowAddReviewModal(false);
 
-    const handleShowAddStock = () => setShowAddStock(true);
-    const handleCloseAddStock = () => setShowAddStock(false);
+    const handleShowAddStock = () => setShowAddStockModal(true);
+    const handleCloseAddStock = () => setShowAddStockModal(false);
 
-    const handleShowDelete = () => setShowDelete(true);
-    const handleCloseDelete = () => setShowDelete(false);
+    const handleShowDelete = () => setShowDeleteModal(true);
+    const handleCloseDelete = () => setShowDeleteModal(false);
 
     const { isAuthenticated } = useAuthContext();
 
@@ -37,9 +37,11 @@ export default function ProductDetails() {
                 <LoadingSpinner />
             ) : (
                 <div className="mx-4 mx-md-0 mx-lg-0">
-                    {showAddReview && <CreateReview show={handleShowAddReview} handleClose={handleCloseAddReview} />}
-                    {showAddStock && <AddStock show={handleShowAddStock} handleClose={handleCloseAddStock} />}
-                    {showDelete && <DeleteProduct show={handleShowDelete} handleClose={handleCloseDelete} />}
+                    {showAddReviewModal && <CreateReviewModal show={handleShowAddReview} handleClose={handleCloseAddReview} />}
+                    {showAddStockModal && <AddStockModal show={handleShowAddStock} handleClose={handleCloseAddStock} />}
+                    {showDeleteModal && (
+                        <DeleteProductModal show={handleShowDelete} handleClose={handleCloseDelete} {...product} />
+                    )}
 
                     <Container className="container-sm col-12 col-md-10 col-lg-7 mt-3 mb-3 p-4 bg-dark-subtle shadow rounded-3">
                         <Row className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row">
@@ -75,7 +77,7 @@ export default function ProductDetails() {
                                     {isAuthenticated && (
                                         <ActionButtons
                                             product={product}
-                                            showAddStock={showAddStock}
+                                            handleShowAddStock={handleShowAddStock}
                                             handleShowDelete={handleShowDelete}
                                         />
                                     )}

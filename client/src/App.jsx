@@ -9,7 +9,7 @@ import Catalog from './components/catalog/Catalog.jsx';
 import Home from './components/home/Home.jsx';
 import LoadingSpinner from './components/loading-spinner/LoadingSpinner.jsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
-import CreateReview from './components/create-review/CreateReview.jsx';
+import CreateReviewModal from './components/create-review-modal/CreateReviewModal.jsx';
 import ProductReviews from './components/product-reviews/ProductReviews.jsx';
 import Cart from './components/cart/Cart.jsx';
 import EditProduct from './components/edit-product/EditProduct.jsx';
