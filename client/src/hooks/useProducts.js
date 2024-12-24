@@ -38,6 +38,15 @@ export function useGetLatestProducts() {
 
 export function useGetOneProduct(productId) {
     const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState({
+        name: '',
+        brand: '',
+        category: 'T-shirts',
+        price: 0,
+        imageUrl: '',
+        summary: '',
+        description: '',
+    });
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
