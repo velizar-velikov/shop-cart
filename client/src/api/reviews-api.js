@@ -8,7 +8,7 @@ const endpoints = {
 
 async function getReviewsForProduct(productId) {
     const urlParams = new URLSearchParams({
-        where: `productId=${productId}`,
+        where: `productId="${productId}"`,
     });
     const url = `${host}${endpoints.all}?${urlParams.toString()}`;
 
@@ -21,8 +21,8 @@ async function getReviewsForProduct(productId) {
     return result;
 }
 
-function createReviewForProduct(productId, rating, text) {
-    return requester.post(host + endpoints.all, { productId, rating, text });
+function createReviewForProduct(productId, rating, text, reviewerFullName) {
+    return requester.post(host + endpoints.all, { productId, rating, text, reviewerFullName });
 }
 
 const reviewsAPI = {

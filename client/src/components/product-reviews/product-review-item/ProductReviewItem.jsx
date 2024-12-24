@@ -1,6 +1,6 @@
 import Accordion from 'react-bootstrap/Accordion';
 
-export default function ProductReviewItem({ index, text }) {
+export default function ProductReviewItem({ index, text, reviewerFullName }) {
     return (
         <Accordion.Item eventKey={index.toString()}>
             <Accordion.Header>
@@ -11,7 +11,7 @@ export default function ProductReviewItem({ index, text }) {
                         <i className="fa fa-star text-warning"></i>
                         <i className="fa fa-star text-warning"></i>
                     </div>
-                    <p className="">Peter Petrov</p>
+                    <p className="">{reviewerFullName}</p>
                 </div>
             </Accordion.Header>
             <Accordion.Body>{text}</Accordion.Body>

@@ -4,6 +4,7 @@ import { usePersistedState } from '../hooks/usePersistedState.js';
 const AuthContext = createContext({
     userId: '',
     firstName: '',
+    lastName: '',
     email: '',
     accessToken: '',
     isAuthenticated: false,

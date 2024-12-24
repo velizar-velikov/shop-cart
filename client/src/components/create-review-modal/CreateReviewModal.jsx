@@ -1,19 +1,51 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { useAddReviewForProduct } from '../../hooks/useReviews.js';
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm.js';
 
+const initialValues = {
+    rating: '5',
+    text: '',
+};
+
+// TODO: show feedback to user that he has successfully added his review
 export default function CreateReviewModal({ show, handleClose }) {
+    const { productId } = useParams();
+    const { firstName, lastName } = useAuthContext();
+    const userFullName = `${firstName} ${lastName}`;
+    const addReview = useAddReviewForProduct();
+
+    const addReviewHandler = async ({ rating, text }) => {
+        const rating_sanitized = rating.trim();
+        const text_sanitized = text.trim();
+
+        try {
+            if (!rating_sanitized || !text_sanitized) {
+                throw new Error('All fields are required.');
+            }
+
+            await addReview(productId, rating_sanitized, text_sanitized, userFullName);
+            handleClose();
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+    const { values, changeHandler, submitHandler } = useForm(initialValues, addReviewHandler);
+
     return (
         <>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add review</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <Form>
+                <Form onSubmit={submitHandler}>
+                    <Modal.Body>
                         <Form.Group className="col-4 mt-1">
                             <Form.Label>Rating (out of 5)</Form.Label>
-                            <Form.Select size="sm">
+                            <Form.Select size="sm" name="rating" value={values.rating} onChange={changeHandler}>
                                 <option>5</option>
                                 <option>4</option>
                                 <option>3</option>
@@ -23,18 +55,25 @@ export default function CreateReviewModal({ show, handleClose }) {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Describe your experience</Form.Label>
-                            <Form.Control as="textarea" rows={3} placeholder="My opinion about this product is..." />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                name="text"
+                                placeholder="My opinion about this product is..."
+                                value={values.text}
+                                onChange={changeHandler}
+                            />
                         </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Publish
-                    </Button>
-                </Modal.Footer>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button type="button" variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button type="submit" variant="primary">
+                            Publish
+                        </Button>
+                    </Modal.Footer>
+                </Form>
             </Modal>
         </>
     );

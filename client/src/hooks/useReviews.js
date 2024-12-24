@@ -23,3 +23,12 @@ export function useAGetAllReviewsForProduct(productId) {
 
     return { reviews, isLoading };
 }
+
+export function useAddReviewForProduct() {
+    const addReviewHandler = async (productId, rating, text, reviewerFullName) => {
+        const result = await reviewsAPI.createReviewForProduct(productId, rating, text, reviewerFullName);
+        return result;
+    };
+
+    return addReviewHandler;
+}

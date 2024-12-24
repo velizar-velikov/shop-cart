@@ -66,7 +66,7 @@ export default function ProductDetails() {
                                             </p>
                                         </div>
 
-                                        {!isOwner && <Link onClick={handleShowAddReview}>Add review</Link>}
+                                        {isAuthenticated && !isOwner && <Link onClick={handleShowAddReview}>Add review</Link>}
                                     </div>
                                     <p className="small">{product.description}</p>
                                     <p className="h4 font-weight-bold">
