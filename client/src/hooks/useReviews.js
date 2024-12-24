@@ -24,7 +24,7 @@ export function useAGetAllReviewsForProduct(productId) {
     return { reviews, isLoading };
 }
 
-export function useGetUserReviewsForProduct(productId, userId) {
+export function useGetUserReviewsForProduct(productId, userId, hasAddedNewReview) {
     const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -42,7 +42,7 @@ export function useGetUserReviewsForProduct(productId, userId) {
             }
         }
         loadUserReviews();
-    }, []);
+    }, [hasAddedNewReview]);
 
     return { userReviews: reviews, hasUserReviewed: reviews.length > 0, isLoading };
 }

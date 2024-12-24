@@ -24,7 +24,11 @@ export default function ProductDetails() {
     const { userId, isAuthenticated } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
-    const { hasUserReviewed, isLoading: isUserReviewsLoading } = useGetUserReviewsForProduct(productId, userId);
+    const { hasUserReviewed, isLoading: isUserReviewsLoading } = useGetUserReviewsForProduct(
+        productId,
+        userId,
+        hasAddedNewReview
+    );
 
     const canUserReview = isAuthenticated && !isOwner && !hasUserReviewed;
     console.log({ isAuthenticated, isOwner, hasUserReviewed, canUserReview });
