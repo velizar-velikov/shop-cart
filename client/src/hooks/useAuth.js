@@ -9,6 +9,7 @@ export function useLogin() {
         changeAuthState({
             userId: result._id,
             firstName: result.firstName,
+            lastName: result.lastName,
             email: result.email,
             accessToken: result.accessToken,
         });
@@ -27,6 +28,7 @@ export function useRegister() {
         changeAuthState({
             userId: result._id,
             firstName: result.firstName,
+            lastName: result.lastName,
             email: result.email,
             accessToken: result.accessToken,
         });
