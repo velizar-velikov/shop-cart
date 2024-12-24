@@ -7,8 +7,14 @@ const endpoints = {
     byId: (id) => `/data/products/${id}`,
 };
 
-function getAll() {
-    return requester.get(host + endpoints.all);
+async function getAll() {
+    const urlParams = new URLSearchParams({
+        sortBy: `_createdOn%20desc`,
+    });
+    const url = new URL(host + endpoints.all);
+    url.search = decodeURIComponent(urlParams);
+
+    return requester.get(url);
 }
 
 function getLatest(productsCount) {
