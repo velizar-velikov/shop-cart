@@ -1337,6 +1337,7 @@
     var seedData = {
         products: {
             '4ae9357a-fb35-4095-94a1-293cc4f949ee': {
+                // peter@abv.bg
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
                 name: 'Cotton shorts',
                 brand: 'Nike',
@@ -1350,7 +1351,8 @@
                 _id: '4ae9357a-fb35-4095-94a1-293cc4f949ee',
             },
             '4ae9357a-fb35-4095-94a1-293cc4f949ef': {
-                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
+                // peter@abv.bg
+                _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
                 name: 'All new sweatshirt',
                 brand: 'Adidas',
                 category: 'sweatshirts',
@@ -1361,80 +1363,107 @@
                 _createdOn: 1734878989596,
                 _id: '4ae9357a-fb35-4095-94a1-293cc4f949ef',
             },
-            '4ae9357a-fb35-4095-94a1-293cc4f949eg': {
+            '13105966-1e44-4678-8274-8fdd0fcfbff4': {
+                // peter@abv.bg
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
-                name: 'Cotton shorts',
-                brand: 'Nike',
-                category: 'shorts',
-                price: '29',
-                imageUrl:
-                    'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/847276ff-5ec0-4635-a216-3233e2f691f0/M+NK+DF+ACD23+SHORT+K+BR.png',
-                summary: 'comfy breathable shorts',
-                description: 'You will bearly feel that theese short are on you. That is how comfortable they are.',
-                _createdOn: 1734878989597,
-                _id: '4ae9357a-fb35-4095-94a1-293cc4f949eg',
+                name: 'Essential t-shirt men',
+                brand: 'Puma',
+                category: '',
+                price: '40',
+                imageUrl: 'https://brandzz.co.za/wp-content/uploads/2023/01/40026-Grey.jpg',
+                summary: 'Everyday t-shirt',
+                description: 'This t-shirt will make look very handsome',
+                _createdOn: 1734950228130,
+                _id: '13105966-1e44-4678-8274-8fdd0fcfbff4',
             },
-            '4ae9357a-fb35-4095-94a1-293cc4f949e1': {
+            '8e5e4bbb-bbe3-46c1-904a-f8b5809a06d1': {
+                // george@abv.bg
                 _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
-                name: 'All new sweatshirt',
-                brand: 'Adidas',
-                category: 'sweatshirts',
-                price: '69',
-                imageUrl: 'https://m.media-amazon.com/images/I/41ALo0oIuyL._AC_UY1000_.jpg',
-                summary: 'Perfect for cold days',
-                description: 'This sweatshirt will keep you warm even on the coldest days',
-                _createdOn: 1734878989598,
-                _id: '4ae9357a-fb35-4095-94a1-293cc4f949e1',
+                name: 'bluza',
+                brand: 'temu',
+                category: 'Sweatshirts',
+                price: '9',
+                imageUrl:
+                    'https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/7eb8b23868cc69677920c5e5ee3a13f1.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp',
+                summary: 'leka bluza',
+                description: 'udobna i dobra bluza na mnogo niska cena',
+                _createdOn: 1734965028449,
+                _id: '8e5e4bbb-bbe3-46c1-904a-f8b5809a06d1',
             },
-            '4ae9357a-fb35-4095-94a1-293cc4f949ea': {
+            'bb48a439-97f6-45d0-83e6-88e36938bcb7': {
+                // george@abv.bg
+                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
+                name: 'Jeans t-shirt',
+                brand: 'Calvin Klein',
+                category: 'T-shirts',
+                price: '100',
+                imageUrl: 'https://static.glami.bg/img/800x800bt/488039150-calvin-klein-jeans-men-t-shirt.jpg',
+                summary: 'slick shirt',
+                description: 'You will be very handsome with this t-shirt',
+                _createdOn: 1734967714320,
+                _id: 'bb48a439-97f6-45d0-83e6-88e36938bcb7',
+            },
+        },
+        stock: {
+            '12b1784c-9657-4cd7-a28c-478c6907941f': {
+                // peter@abv.bg
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
-                name: 'Cotton shorts',
-                brand: 'Nike',
-                category: 'shorts',
-                price: '29',
-                imageUrl:
-                    'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/847276ff-5ec0-4635-a216-3233e2f691f0/M+NK+DF+ACD23+SHORT+K+BR.png',
-                summary: 'comfy breathable shorts',
-                description: 'You will bearly feel that theese short are on you. That is how comfortable they are.',
-                _createdOn: 1734878989599,
-                _id: '4ae9357a-fb35-4095-94a1-293cc4f949ea',
+                productId: '4ae9357a-fb35-4095-94a1-293cc4f949ee',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1734878989595,
+                _id: '12b1784c-9657-4cd7-a28c-478c6907941f',
             },
-            '4ae9357a-fb35-4095-94a1-293cc4f949eb': {
-                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
-                name: 'All new sweatshirt',
-                brand: 'Adidas',
-                category: 'sweatshirts',
-                price: '69',
-                imageUrl: 'https://m.media-amazon.com/images/I/41ALo0oIuyL._AC_UY1000_.jpg',
-                summary: 'Perfect for cold days',
-                description: 'This sweatshirt will keep you warm even on the coldest days',
-                _createdOn: 1734878989600,
-                _id: '4ae9357a-fb35-4095-94a1-293cc4f949eb',
-            },
-            '4ae9357a-fb35-4095-94a1-293cc4f949e2': {
+            '12b1784c-9657-4cd7-a28c-478c6907941a': {
+                // peter@abv.bg
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
-                name: 'Cotton shorts',
-                brand: 'Nike',
-                category: 'shorts',
-                price: '29',
-                imageUrl:
-                    'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/847276ff-5ec0-4635-a216-3233e2f691f0/M+NK+DF+ACD23+SHORT+K+BR.png',
-                summary: 'comfy breathable shorts',
-                description: 'You will bearly feel that theese short are on you. That is how comfortable they are.',
-                _createdOn: 1734878989601,
-                _id: '4ae9357a-fb35-4095-94a1-293cc4f949e2',
+                productId: '4ae9357a-fb35-4095-94a1-293cc4f949ef',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1734878989596,
+                _id: '12b1784c-9657-4cd7-a28c-478c6907941a',
             },
-            '4ae9357a-fb35-4095-94a1-293cc4f949ec': {
+            '12b1784c-9657-4cd7-a28c-478c6907941a': {
+                // peter@abv.bg
+                _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
+                productId: '35c62d76-8152-4626-8712-eeb96381bea8',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1734950228130,
+                _id: '12b1784c-9657-4cd7-a28c-478c6907941a',
+            },
+            '12b1784c-9657-4cd7-a28c-478c69079413': {
+                // george@abv.bg
                 _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
-                name: 'All new sweatshirt',
-                brand: 'Adidas',
-                category: 'sweatshirts',
-                price: '69',
-                imageUrl: 'https://m.media-amazon.com/images/I/41ALo0oIuyL._AC_UY1000_.jpg',
-                summary: 'Perfect for cold days',
-                description: 'This sweatshirt will keep you warm even on the coldest days',
-                _createdOn: 1734878989602,
-                _id: '4ae9357a-fb35-4095-94a1-293cc4f949ec',
+                productId: '8e5e4bbb-bbe3-46c1-904a-f8b5809a06d1',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1734965028449,
+                _id: '12b1784c-9657-4cd7-a28c-478c69079413',
+            },
+            '12b1784c-9657-4cd7-a28c-478c6907941e': {
+                // george@abv.bg
+                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
+                productId: 'bb48a439-97f6-45d0-83e6-88e36938bcb7',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1734967714320,
+                _id: '12b1784c-9657-4cd7-a28c-478c6907941e',
             },
         },
         recipes: {
