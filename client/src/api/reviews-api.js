@@ -21,6 +21,21 @@ async function getReviewsForProduct(productId) {
     return result;
 }
 
+async function getUserReviewsForProduct(productId, userId) {
+    const urlParams = new URLSearchParams({
+        where: `productId="${productId}" AND _ownerId="${userId}"`,
+    });
+    const url = `${host}${endpoints.all}?${urlParams.toString()}`;
+
+    const result = await requester.get(url);
+
+    if (result.message == 'Resource not found') {
+        return [];
+    }
+
+    return result;
+}
+
 function createReviewForProduct(productId, rating, text, reviewerFullName) {
     return requester.post(host + endpoints.all, { productId, rating, text, reviewerFullName });
 }
@@ -47,6 +62,7 @@ async function getRatingInfo(productId) {
 
 const reviewsAPI = {
     getReviewsForProduct,
+    getUserReviewsForProduct,
     createReviewForProduct,
     getRatingInfo,
 };

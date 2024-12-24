@@ -24,6 +24,29 @@ export function useAGetAllReviewsForProduct(productId) {
     return { reviews, isLoading };
 }
 
+export function useGetUserReviewsForProduct(productId, userId) {
+    const [reviews, setReviews] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        async function loadUserReviews() {
+            setIsLoading(true);
+            try {
+                const result = await reviewsAPI.getUserReviewsForProduct(productId, userId);
+                setReviews(result);
+            } catch (error) {
+                console.log(error.message);
+                setReviews([]);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        loadUserReviews();
+    }, []);
+
+    return { userReviews: reviews, hasUserReviewed: reviews.length > 0, isLoading };
+}
+
 export function useAddReviewForProduct() {
     const [review, setReview] = useState({});
 
@@ -37,17 +60,21 @@ export function useAddReviewForProduct() {
 }
 
 export function useGetRatingInfo(productId, hasAddedNewReview) {
+    const [isLoading, setIsLoading] = useState(false);
+
     const [ratingInfo, setRatingInfo] = useState({
         averageRating: 0,
         ratingsCount: 0,
     });
     useEffect(() => {
         async function loadRatingInfo() {
+            setIsLoading(true);
             const result = await reviewsAPI.getRatingInfo(productId);
             setRatingInfo(result);
+            setIsLoading(false);
         }
         loadRatingInfo();
     }, [hasAddedNewReview]);
 
-    return ratingInfo;
+    return { ...ratingInfo, isLoading };
 }

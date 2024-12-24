@@ -10,7 +10,7 @@ import { useGetOneProduct } from '../../hooks/useProducts.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
-import { useGetRatingInfo } from '../../hooks/useReviews.js';
+import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/useReviews.js';
 import RatingStars from './rating-stars/RatingStars.jsx';
 
 export default function ProductDetails() {
@@ -18,9 +18,16 @@ export default function ProductDetails() {
 
     const [hasAddedNewReview, setHasAddedNewReview] = useState(false);
 
-    const { product, isLoading } = useGetOneProduct(productId);
-    const { averageRating, ratingsCount } = useGetRatingInfo(productId, hasAddedNewReview);
-    console.log({ averageRating, ratingsCount });
+    const { product, isLoading: isProductLoading } = useGetOneProduct(productId);
+    const { averageRating, ratingsCount, isLoading: isRatingInfoLoading } = useGetRatingInfo(productId, hasAddedNewReview);
+
+    const { userId, isAuthenticated } = useAuthContext();
+    const isOwner = userId == product._ownerId;
+
+    const { hasUserReviewed, isLoading: isUserReviewsLoading } = useGetUserReviewsForProduct(productId, userId);
+
+    const canUserReview = isAuthenticated && !isOwner && !hasUserReviewed;
+    console.log({ isAuthenticated, isOwner, hasUserReviewed, canUserReview });
 
     const [showAddReviewModal, setShowAddReviewModal] = useState(false);
     const [showAddStockModal, setShowAddStockModal] = useState(false);
@@ -35,12 +42,11 @@ export default function ProductDetails() {
     const handleShowDelete = () => setShowDeleteModal(true);
     const handleCloseDelete = () => setShowDeleteModal(false);
 
-    const { userId, isAuthenticated } = useAuthContext();
-    const isOwner = userId == product._ownerId;
+    const isPageLoading = isProductLoading || isRatingInfoLoading || isUserReviewsLoading;
 
     return (
         <>
-            {isLoading ? (
+            {isPageLoading ? (
                 <LoadingSpinner />
             ) : (
                 <div className="mx-4 mx-md-0 mx-lg-0">
@@ -75,7 +81,7 @@ export default function ProductDetails() {
                                             </p>
                                         </div>
 
-                                        {isAuthenticated && !isOwner && <Link onClick={handleShowAddReview}>Add review</Link>}
+                                        {canUserReview && <Link onClick={handleShowAddReview}>Add review</Link>}
                                     </div>
                                     <p className="small">{product.description}</p>
                                     <p className="h4 font-weight-bold">
