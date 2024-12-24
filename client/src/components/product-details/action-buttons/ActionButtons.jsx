@@ -5,7 +5,6 @@ import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 export default function ActionButtons({ product, handleShowAddStock, handleShowDelete }) {
     const { userId } = useAuthContext();
     const isOwner = userId == product._ownerId;
-    console.log({ isOwner });
 
     return (
         <>

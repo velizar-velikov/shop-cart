@@ -1,8 +1,8 @@
 # Plan
 
-## 1. Edit product page
+## 1. Edit product page [x]
 
-## 2. Delete product functionality with confirmation
+## 2. Delete product functionality with confirmation [x]
 
 ## 3. Add review
 

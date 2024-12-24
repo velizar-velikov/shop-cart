@@ -29,7 +29,8 @@ export default function ProductDetails() {
     const handleShowDelete = () => setShowDeleteModal(true);
     const handleCloseDelete = () => setShowDeleteModal(false);
 
-    const { isAuthenticated } = useAuthContext();
+    const { userId, isAuthenticated } = useAuthContext();
+    const isOwner = userId == product._ownerId;
 
     return (
         <>
@@ -64,7 +65,8 @@ export default function ProductDetails() {
                                                 4.1/ <Link to={`/catalog/${product._id}/reviews`}>104 reviews</Link>
                                             </p>
                                         </div>
-                                        <Link onClick={handleShowAddReview}>Add review</Link>
+
+                                        {!isOwner && <Link onClick={handleShowAddReview}>Add review</Link>}
                                     </div>
                                     <p className="small">{product.description}</p>
                                     <p className="h4 font-weight-bold">
