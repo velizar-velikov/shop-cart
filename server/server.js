@@ -1376,6 +1376,20 @@
                 _createdOn: 1734950228130,
                 _id: '13105966-1e44-4678-8274-8fdd0fcfbff4',
             },
+            '9a30723f-f5a9-40f6-87d7-950119c2a04b': {
+                // peter@abv.bg
+                _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
+                name: 'Track pants',
+                brand: 'Gymshark',
+                category: 'Pants',
+                price: '59',
+                imageUrl:
+                    'https://cdn.shopify.com/s/files/1/2446/8477/files/CarlosxRestDayTrackPantGSBlackA2C3Q-BB2J-0737_11ffcd91-a190-449c-a945-bed194f14c6e.jpg?v=1727190654',
+                summary: 'Baggy pants for track day',
+                description: 'These pants will give you enough room to make use of the best workout',
+                _createdOn: 1735031722887,
+                _id: '9a30723f-f5a9-40f6-87d7-950119c2a04b',
+            },
             '8e5e4bbb-bbe3-46c1-904a-f8b5809a06d1': {
                 // george@abv.bg
                 _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
@@ -1403,6 +1417,19 @@
                 _createdOn: 1734967714320,
                 _id: 'bb48a439-97f6-45d0-83e6-88e36938bcb7',
             },
+            'e6e4706a-2eb0-4026-846c-1071c83349c6': {
+                // george@abv.bg
+                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
+                name: 'Short sleeve t-shirt',
+                brand: 'Alphalete',
+                category: 'T-shirts',
+                price: '60',
+                imageUrl: 'https://i.ebayimg.com/images/g/pykAAOSwB4lkys-H/s-l1200.jpg',
+                summary: 'Sporty but comfortable',
+                description: 'Perfect for both workouts and casual outside clothes combined with jeans',
+                _createdOn: 1735034436119,
+                _id: 'e6e4706a-2eb0-4026-846c-1071c83349c6',
+            },
         },
         stock: {
             '12b1784c-9657-4cd7-a28c-478c6907941f': {
@@ -1429,17 +1456,29 @@
                 _createdOn: 1734878989596,
                 _id: '12b1784c-9657-4cd7-a28c-478c6907941a',
             },
-            '12b1784c-9657-4cd7-a28c-478c6907941a': {
+            '12b1784c-9657-4cd7-a28c-478c6907941b': {
                 // peter@abv.bg
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
-                productId: '35c62d76-8152-4626-8712-eeb96381bea8',
+                productId: '13105966-1e44-4678-8274-8fdd0fcfbff4',
                 sizes: {
                     small: 1,
                     medium: 1,
                     large: 1,
                 },
                 _createdOn: 1734950228130,
-                _id: '12b1784c-9657-4cd7-a28c-478c6907941a',
+                _id: '12b1784c-9657-4cd7-a28c-478c6907941b',
+            },
+            '12b1784c-9657-4cd7-a28c-478c69079415': {
+                // peter@abv.bg
+                _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
+                productId: '9a30723f-f5a9-40f6-87d7-950119c2a04b',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1735031722887,
+                _id: '12b1784c-9657-4cd7-a28c-478c69079415',
             },
             '12b1784c-9657-4cd7-a28c-478c69079413': {
                 // george@abv.bg
@@ -1464,6 +1503,18 @@
                 },
                 _createdOn: 1734967714320,
                 _id: '12b1784c-9657-4cd7-a28c-478c6907941e',
+            },
+            '12b1784c-9657-4cd7-a28c-478c69079414': {
+                // george@abv.bg
+                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
+                productId: 'e6e4706a-2eb0-4026-846c-1071c83349c6',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1735034436119,
+                _id: '12b1784c-9657-4cd7-a28c-478c69079414',
             },
         },
         recipes: {
