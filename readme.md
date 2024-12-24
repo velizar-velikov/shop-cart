@@ -12,6 +12,12 @@
 
 #### 3.1.2 Current user review (if he has left a review for this product) should be first, the rest would be sorted from newest to oldest
 
+#### 3.1.3 Details page should show average product rating and reviews count [x]
+
+#### 3.1.4 Details page star rating should show correct stars filled based on the average rating [x]
+
+#### 3.1.5 Once a user has reviewed a product, he should not be able to review it again / only edit or delete his review
+
 ### 3.2 Edit review functionality from section reviews
 
 ### 3.3 Delete review functionality from section reviews

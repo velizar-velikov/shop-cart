@@ -32,3 +32,19 @@ export function useAddReviewForProduct() {
 
     return addReviewHandler;
 }
+
+export function useGetRatingInfo(productId) {
+    const [ratingInfo, setRatingInfo] = useState({
+        averageRating: 0,
+        ratingsCount: 0,
+    });
+    useEffect(() => {
+        async function loadRatingInfo() {
+            const result = await reviewsAPI.getRatingInfo(productId);
+            setRatingInfo(result);
+        }
+        loadRatingInfo();
+    }, []);
+
+    return ratingInfo;
+}

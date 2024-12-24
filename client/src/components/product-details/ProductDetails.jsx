@@ -10,11 +10,15 @@ import { useGetOneProduct } from '../../hooks/useProducts.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+import { useGetRatingInfo } from '../../hooks/useReviews.js';
+import RatingStars from './rating-stars/RatingStars.jsx';
 
 export default function ProductDetails() {
     const { productId } = useParams();
 
     const { product, isLoading } = useGetOneProduct(productId);
+    const { averageRating, ratingsCount } = useGetRatingInfo(productId);
+    console.log({ averageRating, ratingsCount });
 
     const [showAddReviewModal, setShowAddReviewModal] = useState(false);
     const [showAddStockModal, setShowAddStockModal] = useState(false);
@@ -55,14 +59,11 @@ export default function ProductDetails() {
                                     <h1>{product.name}</h1>
                                     <div className="d-flex gap-3">
                                         <div className="rating">
-                                            <div className="stars">
-                                                <i className="fa fa-star text-warning"></i>
-                                                <i className="fa fa-star text-warning"></i>
-                                                <i className="fa fa-star text-warning"></i>
-                                                <i className="fa fa-star text-warning"></i>
-                                            </div>
+                                            <RatingStars averageRating={averageRating} />
+
                                             <p className="small fst-italic">
-                                                4.1/ <Link to={`/catalog/${product._id}/reviews`}>104 reviews</Link>
+                                                {averageRating.toFixed(1)}/{' '}
+                                                <Link to={`/catalog/${product._id}/reviews`}>{ratingsCount} reviews</Link>
                                             </p>
                                         </div>
 
