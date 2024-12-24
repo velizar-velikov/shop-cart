@@ -1,6 +1,9 @@
 import { Button, Container } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { Link, useParams } from 'react-router-dom';
+import ProductReviewItem from './product-review-item/ProductReviewItem.jsx';
+
+const arr = [1, 2, 3, 4];
 
 export default function ProductReviews() {
     const { productId } = useParams();
@@ -16,36 +19,15 @@ export default function ProductReviews() {
                     <span className="ms-3">reviews</span>
                 </h3>
             </div>
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>
-                        <div className="rating d-flex gap-3">
-                            <div className="stars">
-                                <i className="fa fa-star text-warning"></i>
-                                <i className="fa fa-star text-warning"></i>
-                                <i className="fa fa-star text-warning"></i>
-                                <i className="fa fa-star text-warning"></i>
-                            </div>
-                            <p className="">Peter Petrov</p>
-                        </div>
-                    </Accordion.Header>
-                    <Accordion.Body>This t-shirt is very comfortable and ideal for gym sessions or outdoor runs</Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>
-                        <div className="rating d-flex gap-3">
-                            <div className="stars">
-                                <i className="fa fa-star text-warning"></i>
-                                <i className="fa fa-star text-warning"></i>
-                                <i className="fa fa-star text-warning"></i>
-                                <i className="fa fa-star text-warning"></i>
-                            </div>
-                            <p className="">John Johnson</p>
-                        </div>
-                    </Accordion.Header>
-                    <Accordion.Body>This t-shirt is very good for the price</Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
+            {arr.length == 0 ? (
+                <p className="text-center">There are no reviews for this product yet. Be the first to rate it!</p>
+            ) : (
+                <Accordion defaultActiveKey="0">
+                    {arr.map((item, index) => (
+                        <ProductReviewItem key={item} index={index} />
+                    ))}
+                </Accordion>
+            )}
         </Container>
     );
 }
