@@ -16,7 +16,11 @@
 
 #### 3.1.4 Details page star rating should show correct stars filled based on the average rating [x]
 
-#### 3.1.5 Once a user has reviewed a product, he should not be able to review it again / only edit or delete his review
+#### 3.1.5 As soon as the users adds his review, details page should update with new rating [x]
+
+##### 3.1.5.1 and removed add review button
+
+#### 3.1.6 Once a user has reviewed a product, he should not be able to review it again / only edit or delete his review
 
 ### 3.2 Edit review functionality from section reviews
 

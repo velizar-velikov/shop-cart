@@ -16,8 +16,10 @@ import RatingStars from './rating-stars/RatingStars.jsx';
 export default function ProductDetails() {
     const { productId } = useParams();
 
+    const [hasAddedNewReview, setHasAddedNewReview] = useState(false);
+
     const { product, isLoading } = useGetOneProduct(productId);
-    const { averageRating, ratingsCount } = useGetRatingInfo(productId);
+    const { averageRating, ratingsCount } = useGetRatingInfo(productId, hasAddedNewReview);
     console.log({ averageRating, ratingsCount });
 
     const [showAddReviewModal, setShowAddReviewModal] = useState(false);
@@ -42,7 +44,13 @@ export default function ProductDetails() {
                 <LoadingSpinner />
             ) : (
                 <div className="mx-4 mx-md-0 mx-lg-0">
-                    {showAddReviewModal && <CreateReviewModal show={handleShowAddReview} handleClose={handleCloseAddReview} />}
+                    {showAddReviewModal && (
+                        <CreateReviewModal
+                            show={handleShowAddReview}
+                            handleClose={handleCloseAddReview}
+                            updateDetails={() => setHasAddedNewReview(true)}
+                        />
+                    )}
                     {showAddStockModal && <AddStockModal show={handleShowAddStock} handleClose={handleCloseAddStock} />}
                     {showDeleteModal && (
                         <DeleteProductModal show={handleShowDelete} handleClose={handleCloseDelete} {...product} />

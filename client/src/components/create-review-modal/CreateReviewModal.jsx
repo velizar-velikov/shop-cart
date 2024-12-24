@@ -12,7 +12,7 @@ const initialValues = {
 };
 
 // TODO: show feedback to user that he has successfully added his review
-export default function CreateReviewModal({ show, handleClose }) {
+export default function CreateReviewModal({ show, handleClose, updateDetails }) {
     const { productId } = useParams();
     const { firstName, lastName } = useAuthContext();
     const userFullName = `${firstName} ${lastName}`;
@@ -29,6 +29,7 @@ export default function CreateReviewModal({ show, handleClose }) {
 
             await addReview(productId, rating_sanitized, text_sanitized, userFullName);
             handleClose();
+            updateDetails();
         } catch (error) {
             console.log(error.message);
         }

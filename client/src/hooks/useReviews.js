@@ -25,15 +25,18 @@ export function useAGetAllReviewsForProduct(productId) {
 }
 
 export function useAddReviewForProduct() {
+    const [review, setReview] = useState({});
+
     const addReviewHandler = async (productId, rating, text, reviewerFullName) => {
         const result = await reviewsAPI.createReviewForProduct(productId, rating, text, reviewerFullName);
+        setReview(result);
         return result;
     };
 
     return addReviewHandler;
 }
 
-export function useGetRatingInfo(productId) {
+export function useGetRatingInfo(productId, hasAddedNewReview) {
     const [ratingInfo, setRatingInfo] = useState({
         averageRating: 0,
         ratingsCount: 0,
@@ -44,7 +47,7 @@ export function useGetRatingInfo(productId) {
             setRatingInfo(result);
         }
         loadRatingInfo();
-    }, []);
+    }, [hasAddedNewReview]);
 
     return ratingInfo;
 }
