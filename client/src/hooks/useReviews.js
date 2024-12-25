@@ -13,9 +13,11 @@ export function useAGetAllReviewsForProduct(productId, userId) {
                 if (userId) {
                     // moving the user review to the beginning so he can see his own review at the top
                     const userReviewIndex = result.findIndex((review) => review._ownerId == userId);
-                    const userReview = result.splice(userReviewIndex, 1)[0];
-                    userReview.reviewerFullName = userReview.reviewerFullName + ' (you)';
-                    result.unshift(userReview);
+                    if (userReviewIndex !== -1) {
+                        const userReview = result.splice(userReviewIndex, 1)[0];
+                        userReview.reviewerFullName = userReview.reviewerFullName + ' (you)';
+                        result.unshift(userReview);
+                    }
                 }
                 setReviews(result);
             } catch (error) {
