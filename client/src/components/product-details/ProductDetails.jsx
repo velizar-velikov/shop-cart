@@ -24,11 +24,10 @@ export default function ProductDetails() {
     const { userId, isAuthenticated } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
-    const { hasUserReviewed, isLoading: isUserReviewsLoading } = useGetUserReviewsForProduct(
-        productId,
-        userId,
-        hasAddedNewReview
-    );
+    // only make request to see if the user has left a review if the user is authenticated
+    const { hasUserReviewed, isLoading: isUserReviewsLoading } = !isAuthenticated
+        ? { hasUserReviewed: false, isLoading: false }
+        : useGetUserReviewsForProduct(productId, userId, hasAddedNewReview);
 
     const canUserReview = isAuthenticated && !isOwner && !hasUserReviewed;
 
