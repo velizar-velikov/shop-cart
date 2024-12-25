@@ -23,9 +23,12 @@ async function getCatalogProducts(currentPage, search) {
         where: `category="${search.category}" AND name LIKE "${search.name}"`,
         offset: ((currentPage - 1) * pageSize).toString(),
         pageSize: pageSize.toString(),
-        sortBy: `_createdOn%20desc`,
+        // sortBy: `_createdOn%20desc`,
     });
-    const url = `${host}${endpoints.all}?${urlParams.toString()}`;
+    const urlParamSort = new URLSearchParams({
+        sortBy: '_createdOn%20desc',
+    });
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
 
     return requester.get(url);
 }
