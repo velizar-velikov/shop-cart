@@ -12,6 +12,7 @@ import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/useReviews.js';
 import RatingStars from '../rating-stars/RatingStars.jsx';
+import { useGetSizesForProduct } from '../../hooks/useStock.js';
 
 export default function ProductDetails() {
     const { productId } = useParams();
@@ -20,6 +21,9 @@ export default function ProductDetails() {
 
     const { product, isLoading: isProductLoading } = useGetOneProduct(productId);
     const { averageRating, ratingsCount, isLoading: isRatingInfoLoading } = useGetRatingInfo(productId, hasAddedNewReview);
+
+    const { sizes } = useGetSizesForProduct(productId);
+    console.log(sizes);
 
     const { userId, isAuthenticated } = useAuthContext();
     const isOwner = userId == product._ownerId;
@@ -98,6 +102,7 @@ export default function ProductDetails() {
                                     {isAuthenticated && (
                                         <ActionButtons
                                             product={product}
+                                            sizes={sizes}
                                             handleShowAddStock={handleShowAddStock}
                                             handleShowDelete={handleShowDelete}
                                         />

@@ -40,7 +40,7 @@ async function getSizesForProduct(productId) {
 
     const sizesResponse = await requester.get(url);
 
-    return sizesResponse;
+    return sizesResponse[0]?.sizes;
 }
 
 async function addStockForProduct(productId, sizesToAdd) {
@@ -73,6 +73,7 @@ async function removeSizeOfProduct(productId, sizeToRemove) {
 
 const stockAPI = {
     getStockForProduct,
+    getSizesForProduct,
     initializeStockForProduct,
     addStockForProduct,
     removeSizeOfProduct,

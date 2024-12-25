@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import stockAPI from '../api/stock-api.js';
 
 export function useAddStock() {
@@ -7,4 +8,18 @@ export function useAddStock() {
     };
 
     return addStockHandler;
+}
+
+export function useGetSizesForProduct(productId) {
+    const [sizes, setSizes] = useState([]);
+
+    useEffect(() => {
+        async function loadSizes() {
+            const result = await stockAPI.getSizesForProduct(productId);
+            setSizes(result);
+        }
+        loadSizes();
+    }, []);
+
+    return { sizes };
 }

@@ -2,10 +2,11 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 
-export default function ActionButtons({ product, handleShowAddStock, handleShowDelete }) {
+export default function ActionButtons({ product, sizes, handleShowAddStock, handleShowDelete }) {
     const { userId } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
+    // sizes.small = 4;
     return (
         <>
             {isOwner ? (
@@ -36,9 +37,9 @@ export default function ActionButtons({ product, handleShowAddStock, handleShowD
                         <Form.Group className="col-4 mt-1">
                             <Form.Label>Size</Form.Label>
                             <Form.Select size="sm">
-                                <option>Small</option>
-                                <option>Medium</option>
-                                <option>Large</option>
+                                <option>Small{sizes.small <= 3 && <p> ({sizes.small} left)</p>}</option>
+                                <option>Medium {sizes.medium <= 3 && <p> ({sizes.medium} left)</p>}</option>
+                                <option>Large {sizes.large <= 3 && <p> ({sizes.large} left)</p>}</option>
                             </Form.Select>
                         </Form.Group>
                     </div>
