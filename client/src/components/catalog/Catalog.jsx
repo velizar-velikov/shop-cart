@@ -14,8 +14,8 @@ export default function Catalog() {
     });
     const { products, isLoading } = useGetCatalogProducts(currentPage, search);
 
-    const updateSearch = (search) => {
-        setSearch(search);
+    const updateSearch = (newSearch) => {
+        setSearch((oldSearchState) => newSearch);
         setCurrentPage(1);
     };
 

@@ -6,6 +6,8 @@ export default function CatalogSearch({ searchState, updateSearch }) {
         values.category = values.category.trim();
         values.name = values.name.trim();
 
+        console.log({ values });
+
         try {
             if (!values.category) {
                 throw new Error('Please select a category first');
@@ -30,7 +32,7 @@ export default function CatalogSearch({ searchState, updateSearch }) {
                                 value={values.category}
                                 onChange={changeHandler}
                             >
-                                <option>All Categories</option>
+                                <option>All categories</option>
                                 <option>T-shirts</option>
                                 <option>Shorts</option>
                                 <option>Sweatshirts</option>
