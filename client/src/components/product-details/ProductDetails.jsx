@@ -31,7 +31,6 @@ export default function ProductDetails() {
     );
 
     const canUserReview = isAuthenticated && !isOwner && !hasUserReviewed;
-    console.log({ isAuthenticated, isOwner, hasUserReviewed, canUserReview });
 
     const [showAddReviewModal, setShowAddReviewModal] = useState(false);
     const [showAddStockModal, setShowAddStockModal] = useState(false);

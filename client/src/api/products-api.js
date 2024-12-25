@@ -17,6 +17,19 @@ async function getAll() {
     return requester.get(url);
 }
 
+async function getCatalogProducts(currentPage, search) {
+    const pageSize = 4;
+    const urlParams = new URLSearchParams({
+        where: `category="${search.category}" AND name LIKE "${search.name}"`,
+        offset: ((currentPage - 1) * pageSize).toString(),
+        pageSize: pageSize.toString(),
+        sortBy: `_createdOn%20desc`,
+    });
+    const url = `${host}${endpoints.all}?${urlParams.toString()}`;
+
+    return requester.get(url);
+}
+
 function getLatest(productsCount) {
     const urlParams = new URLSearchParams({
         sortBy: '_createdOn%20desc',
@@ -59,6 +72,7 @@ function getDistinctCategories() {
 
 const productsAPI = {
     getAll,
+    getCatalogProducts,
     getLatest,
     getOne,
     create,

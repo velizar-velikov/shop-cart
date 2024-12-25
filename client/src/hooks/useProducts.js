@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import productsAPI from '../api/products-api.js';
 import stockAPI from '../api/stock-api.js';
 
-export function useGetProducts() {
+export function useGetCatalogProducts(currentPage, search) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function loadProducts() {
             setIsLoading(true);
-            const products = await productsAPI.getAll();
+            const products = await productsAPI.getCatalogProducts(currentPage, search);
             setProducts(products);
             setIsLoading(false);
         }

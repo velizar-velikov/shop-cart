@@ -1371,7 +1371,7 @@
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
                 name: 'Essential t-shirt men',
                 brand: 'Puma',
-                category: '',
+                category: 'T-shirts',
                 price: '40',
                 imageUrl: 'https://brandzz.co.za/wp-content/uploads/2023/01/40026-Grey.jpg',
                 summary: 'Everyday t-shirt',

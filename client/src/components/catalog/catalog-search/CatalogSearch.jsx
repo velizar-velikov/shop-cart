@@ -7,13 +7,18 @@ export default function CatalogSearch() {
                 <div className="col-md-6">
                     <form>
                         <div className="input-group mb-3">
-                            <FormSelect className="form-select" style={{ maxWidth: 150 }}>
-                                <option defaultValue="All categories">All Categories</option>
-                                <option defaultValue="1">T-shirts</option>
-                                <option defaultValue="2">Shorts</option>
-                                <option defaultValue="3">Sweatshirts</option>
+                            <FormSelect
+                                className="form-select"
+                                style={{ maxWidth: 150 }}
+                                name="category"
+                                defaultValue="All categories"
+                            >
+                                <option>All Categories</option>
+                                <option>T-shirts</option>
+                                <option>Shorts</option>
+                                <option>Sweatshirts</option>
                             </FormSelect>
-                            <FormControl type="text" placeholder="Product name" />
+                            <FormControl type="text" placeholder="Product name" name="name" />
                             <Button className="btn-primary" type="submit">
                                 Search
                             </Button>
