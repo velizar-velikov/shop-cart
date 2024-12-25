@@ -5,11 +5,13 @@ import ProductReviewItem from './product-review-item/ProductReviewItem.jsx';
 import { useAGetAllReviewsForProduct } from '../../hooks/useReviews.js';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { useGetOneProduct } from '../../hooks/useProducts.js';
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
 
 export default function ProductReviews() {
     const { productId } = useParams();
+    const { userId } = useAuthContext();
     const { product, isLoading: isLoadingProduct } = useGetOneProduct(productId);
-    const { reviews, isLoading: isLoadingReviews } = useAGetAllReviewsForProduct(productId);
+    const { reviews, isLoading: isLoadingReviews } = useAGetAllReviewsForProduct(productId, userId);
     return (
         <>
             {isLoadingProduct || isLoadingReviews ? (

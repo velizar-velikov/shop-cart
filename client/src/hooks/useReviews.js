@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import reviewsAPI from '../api/reviews-api.js';
 
-export function useAGetAllReviewsForProduct(productId) {
+export function useAGetAllReviewsForProduct(productId, userId) {
     const [reviews, setReviews] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -9,7 +9,14 @@ export function useAGetAllReviewsForProduct(productId) {
         async function loadReviews() {
             setIsLoading(true);
             try {
-                const result = await reviewsAPI.getReviewsForProduct(productId);
+                let result = await reviewsAPI.getReviewsForProduct(productId);
+                if (userId) {
+                    // moving the user review to the beginning so he can see his own review at the top
+                    const userReviewIndex = result.findIndex((review) => review._ownerId == userId);
+                    const userReview = result.splice(userReviewIndex, 1)[0];
+                    userReview.reviewerFullName = userReview.reviewerFullName + ' (you)';
+                    result.unshift(userReview);
+                }
                 setReviews(result);
             } catch (error) {
                 console.log(error.message);

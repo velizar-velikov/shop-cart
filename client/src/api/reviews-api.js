@@ -10,7 +10,12 @@ async function getReviewsForProduct(productId) {
     const urlParams = new URLSearchParams({
         where: `productId="${productId}"`,
     });
-    const url = `${host}${endpoints.all}?${urlParams.toString()}`;
+
+    const urlParamSort = new URLSearchParams({
+        sortBy: '_createdOn%20desc',
+    });
+
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
 
     const result = await requester.get(url);
 
