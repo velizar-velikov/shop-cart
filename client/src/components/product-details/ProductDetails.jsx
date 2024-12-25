@@ -59,7 +59,9 @@ export default function ProductDetails() {
                             updateDetails={() => setHasAddedNewReview(true)}
                         />
                     )}
-                    {showAddStockModal && <AddStockModal show={handleShowAddStock} handleClose={handleCloseAddStock} />}
+                    {showAddStockModal && (
+                        <AddStockModal show={handleShowAddStock} handleClose={handleCloseAddStock} product={product} />
+                    )}
                     {showDeleteModal && (
                         <DeleteProductModal show={handleShowDelete} handleClose={handleCloseDelete} {...product} />
                     )}

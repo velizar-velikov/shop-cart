@@ -44,19 +44,21 @@ async function getSizesForProduct(productId) {
 }
 
 async function addStockForProduct(productId, sizesToAdd) {
-    let sizes = {};
+    // request matches only one stock, but we receive it in an array
+    const stock = (await getStockForProduct(productId))[0];
+    console.log({ productId, stock });
+    const sizes = stock.sizes;
 
-    sizes.small = sizes.small + (sizesToAdd.small || 0);
-    sizes.medium = sizes.medium + (sizesToAdd.medium || 0);
-    sizes.large = sizes.large + (sizesToAdd.large || 0);
+    sizes.small = Number(sizes.small) + Number(sizesToAdd.small || 0);
+    sizes.medium = Number(sizes.medium) + Number(sizesToAdd.medium || 0);
+    sizes.large = Number(sizes.large) + Number(sizesToAdd.large || 0);
 
-    const stock = await getStockForProduct(productId);
-
-    requester.put(host + endpoints.byId(stock._id), { productId, sizes: sizesToAdd });
+    requester.put(host + endpoints.byId(stock._id), { productId, sizes });
 }
 
 // currently not possible because the server lets only the owners of the item to edit it
 // when adding to cart the user is not the owner
+// TODO: shady fix: add X-Admin header to go around that
 async function removeSizeOfProduct(productId, sizeToRemove) {
     const sizes = await getSizesForProduct(productId);
 
