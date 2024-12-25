@@ -4,7 +4,7 @@ import stockAPI from '../api/stock-api.js';
 
 export function useGetProducts() {
     const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function loadProducts() {
@@ -21,7 +21,7 @@ export function useGetProducts() {
 
 export function useGetLatestProducts() {
     const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function loadProducts() {
