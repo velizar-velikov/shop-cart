@@ -24,6 +24,7 @@ export default function ProductDetails() {
 
     const { sizes } = useGetSizesForProduct(productId);
     console.log(sizes);
+    const isOutOfStock = Object.entries(sizes).every(([key, value]) => value == 0);
 
     const { userId, isAuthenticated } = useAuthContext();
     const isOwner = userId == product._ownerId;
@@ -97,7 +98,7 @@ export default function ProductDetails() {
                                         {product.price}
                                     </p>
                                     {/* show when out of stock from all sizes */}
-                                    <p className="text-danger">Out of stock</p>
+                                    {isOutOfStock && <p className="text-danger">Out of stock</p>}
 
                                     {isAuthenticated && (
                                         <ActionButtons
