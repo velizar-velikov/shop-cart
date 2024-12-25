@@ -31,7 +31,7 @@ export default function ActionButtons({ product, handleShowAddStock, handleShowD
                     <div className="d-flex gap-3">
                         <Form.Group className="col-4">
                             <Form.Label>Amount</Form.Label>
-                            <Form.Control type="number" defaultValue="1"></Form.Control>
+                            <Form.Control type="number" defaultValue="1" min="1"></Form.Control>
                         </Form.Group>
                         <Form.Group className="col-4 mt-1">
                             <Form.Label>Size</Form.Label>

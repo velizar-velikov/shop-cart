@@ -11,7 +11,7 @@ import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/useReviews.js';
-import RatingStars from './rating-stars/RatingStars.jsx';
+import RatingStars from '../rating-stars/RatingStars.jsx';
 
 export default function ProductDetails() {
     const { productId } = useParams();
@@ -75,7 +75,7 @@ export default function ProductDetails() {
                                     <h1>{product.name}</h1>
                                     <div className="d-flex gap-3">
                                         <div className="rating">
-                                            <RatingStars averageRating={averageRating} />
+                                            <RatingStars rating={averageRating} />
 
                                             <p className="small fst-italic">
                                                 {averageRating.toFixed(1)}/{' '}
