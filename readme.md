@@ -10,7 +10,7 @@
 
 #### 3.1.1 Listing all reviews [x]
 
-#### 3.1.2 Current user review (if he has left a review for this product) should be first, the rest would be sorted from newest to oldest
+#### 3.1.2 Current user review (if he has left a review for this product) should be first, the rest would be sorted from newest to oldest [x]
 
 #### 3.1.3 Details page should show average product rating and reviews count [x]
 
@@ -18,9 +18,9 @@
 
 #### 3.1.5 As soon as the users adds his review, details page should update with new rating [x]
 
-##### 3.1.5.1 and removed add review button
+##### 3.1.5.1 and removed add review button [x]
 
-#### 3.1.6 Once a user has reviewed a product, he should not be able to review it again / only edit or delete his review
+#### 3.1.6 Once a user has reviewed a product, he should not be able to review it again [x]
 
 ### 3.2 Edit review functionality from section reviews
 
@@ -40,8 +40,12 @@
 
 ### 6.1 Search by category and product - [x]
 
-#### 6.1.1 When search is found, catalog should go to first page
+#### 6.1.1 When search is found, catalog should go to first page [x]
 
 #### 6.1.2 Search field should be reset and a text "results for: \_\_\_" should be shown
 
-### 6.2 Pagination should work with the found search
+### 6.2 Pagination should work with the found search [x]
+
+### 6.2 Connect the category, search and current page with the URL
+
+## 7. Add in stock [x]
