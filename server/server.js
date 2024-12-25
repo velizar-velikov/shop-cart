@@ -1393,6 +1393,20 @@
                 _createdOn: 1735031722887,
                 _id: '9a30723f-f5a9-40f6-87d7-950119c2a04b',
             },
+            '52789d06-0e19-4b9d-9d51-63e2f051bc07': {
+                // peter@abv.bg
+                _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
+                name: 'Панталон широки крачоли',
+                brand: 'Bershka',
+                category: 'Pants',
+                price: '38',
+                imageUrl:
+                    'https://cdn.aboutstatic.com/file/images/819a9ea74186dd575af1c59d6eda3ee0.jpg?quality=75&height=480&width=360',
+                summary: 'Панталон с ръб',
+                description: 'В най-новата мода, направен изцяло по дизайн на Коко Шанел.',
+                _createdOn: 1735110697634,
+                _id: '52789d06-0e19-4b9d-9d51-63e2f051bc07',
+            },
             '8e5e4bbb-bbe3-46c1-904a-f8b5809a06d1': {
                 // george@abv.bg
                 _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
@@ -1432,6 +1446,19 @@
                 description: 'Perfect for both workouts and casual outside clothes combined with jeans',
                 _createdOn: 1735034436119,
                 _id: 'e6e4706a-2eb0-4026-846c-1071c83349c6',
+            },
+            'b8a3427d-e478-44a8-b623-eba89a73c3a6': {
+                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
+                name: 'Mens Loose Fit Hoodie',
+                brand: 'H&M',
+                category: 'Sweatshirts',
+                price: '55',
+                imageUrl:
+                    'https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/27227778/2024/1/30/a32b9110-ae44-4d28-b0e1-e621f41c6bde1706555173515HMLooseFitHoodie1.jpg',
+                summary: 'Baggy blue hoodie',
+                description: 'This hoodie is made from 100% cotton and it is ideal for the cold season.',
+                _createdOn: 1735111002966,
+                _id: 'b8a3427d-e478-44a8-b623-eba89a73c3a6',
             },
         },
         stock: {
@@ -1474,6 +1501,18 @@
             '12b1784c-9657-4cd7-a28c-478c69079415': {
                 // peter@abv.bg
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
+                productId: '52789d06-0e19-4b9d-9d51-63e2f051bc07',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1735110697634,
+                _id: '12b1784c-9657-4cd7-a28c-478c69079415',
+            },
+            '12b1784c-9657-4cd7-a28c-478c69079416': {
+                // peter@abv.bg
+                _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
                 productId: '9a30723f-f5a9-40f6-87d7-950119c2a04b',
                 sizes: {
                     small: 1,
@@ -1481,7 +1520,7 @@
                     large: 1,
                 },
                 _createdOn: 1735031722887,
-                _id: '12b1784c-9657-4cd7-a28c-478c69079415',
+                _id: '12b1784c-9657-4cd7-a28c-478c69079416',
             },
             '12b1784c-9657-4cd7-a28c-478c69079413': {
                 // george@abv.bg
@@ -1506,6 +1545,18 @@
                 },
                 _createdOn: 1734967714320,
                 _id: '12b1784c-9657-4cd7-a28c-478c6907941e',
+            },
+            '12b1784c-9657-4cd7-a28c-478c69079418': {
+                // george@abv.bg
+                _ownerId: '847ec027-f659-4086-8032-5173e2f9c93a',
+                productId: 'b8a3427d-e478-44a8-b623-eba89a73c3a6',
+                sizes: {
+                    small: 1,
+                    medium: 1,
+                    large: 1,
+                },
+                _createdOn: 1735111002966,
+                _id: '12b1784c-9657-4cd7-a28c-478c69079418',
             },
             '12b1784c-9657-4cd7-a28c-478c69079414': {
                 // george@abv.bg
