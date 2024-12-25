@@ -2,12 +2,22 @@ import CatalogCard from '../catalog-card/CatalogCard.jsx';
 import { Row } from 'react-bootstrap';
 import CatalogSearch from './catalog-search/CatalogSearch.jsx';
 import Paginator from './pagination/Pagination.jsx';
-import { useGetProducts } from '../../hooks/useProducts.js';
+import { useGetCatalogProducts } from '../../hooks/useProducts.js';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+import { useState } from 'react';
 
 export default function Catalog() {
-    const { products, isLoading } = useGetProducts();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [search, setSearch] = useState({
+        category: 'All categories',
+        name: '',
+    });
+    const { products, isLoading } = useGetCatalogProducts(currentPage, search);
 
+    const updateSearch = (search) => {
+        setSearch(search);
+        setCurrentPage(1);
+    };
     return (
         <>
             {isLoading ? (
@@ -15,7 +25,7 @@ export default function Catalog() {
             ) : (
                 <section id="catalog" className="container-fluid overflow-hidden mb-4">
                     <h1 className="mt-4 text-center">Browse store</h1>
-                    <CatalogSearch />
+                    <CatalogSearch searchState={search} updateSearch={updateSearch} />
                     {products.length == 0 ? (
                         <p className="position-absolute top-50 start-50 translate-middle fs-1 px-3 py-2 px-lg-5 py-lg-3 rounded bg-dark-subtle">
                             No clothes yet.
@@ -27,7 +37,7 @@ export default function Catalog() {
                                     <CatalogCard key={product._id} {...product} />
                                 ))}
                             </Row>
-                            <Paginator />
+                            <Paginator setCurrentPage={setCurrentPage} />
                         </div>
                     )}
                 </section>

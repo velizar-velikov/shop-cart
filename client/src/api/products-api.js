@@ -19,15 +19,18 @@ async function getAll() {
 
 async function getCatalogProducts(currentPage, search) {
     const pageSize = 4;
+    const category_search_string = search.category == 'All categories' ? '' : search.category;
+
     const urlParams = new URLSearchParams({
-        where: `category="${search.category}" AND name LIKE "${search.name}"`,
+        where: `category LIKE "${category_search_string}" AND name LIKE "${search.name}"`,
         offset: ((currentPage - 1) * pageSize).toString(),
         pageSize: pageSize.toString(),
-        // sortBy: `_createdOn%20desc`,
     });
+
     const urlParamSort = new URLSearchParams({
         sortBy: '_createdOn%20desc',
     });
+
     const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
 
     return requester.get(url);

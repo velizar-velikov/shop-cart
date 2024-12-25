@@ -14,7 +14,7 @@ export function useGetCatalogProducts(currentPage, search) {
             setIsLoading(false);
         }
         loadProducts();
-    }, []);
+    }, [currentPage, search]);
 
     return { products, isLoading };
 }
