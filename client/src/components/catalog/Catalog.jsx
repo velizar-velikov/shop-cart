@@ -18,6 +18,7 @@ export default function Catalog() {
         setSearch(search);
         setCurrentPage(1);
     };
+
     return (
         <>
             {isLoading ? (
@@ -37,7 +38,7 @@ export default function Catalog() {
                                     <CatalogCard key={product._id} {...product} />
                                 ))}
                             </Row>
-                            <Paginator setCurrentPage={setCurrentPage} />
+                            <Paginator currentPage={currentPage} setCurrentPage={setCurrentPage} />
                         </div>
                     )}
                 </section>
