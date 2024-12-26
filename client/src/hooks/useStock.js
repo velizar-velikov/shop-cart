@@ -21,5 +21,5 @@ export function useGetSizesForProduct(productId) {
         loadSizes();
     }, []);
 
-    return { sizes };
+    return { sizes, setSizes };
 }

@@ -46,14 +46,13 @@ async function getSizesForProduct(productId) {
 async function addStockForProduct(productId, sizesToAdd) {
     // request matches only one stock, but we receive it in an array
     const stock = (await getStockForProduct(productId))[0];
-    console.log({ productId, stock });
     const sizes = stock.sizes;
 
     sizes.small = Number(sizes.small) + Number(sizesToAdd.small || 0);
     sizes.medium = Number(sizes.medium) + Number(sizesToAdd.medium || 0);
     sizes.large = Number(sizes.large) + Number(sizesToAdd.large || 0);
 
-    requester.put(host + endpoints.byId(stock._id), { productId, sizes });
+    return requester.put(host + endpoints.byId(stock._id), { productId, sizes });
 }
 
 // currently not possible because the server lets only the owners of the item to edit it

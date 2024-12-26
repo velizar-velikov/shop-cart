@@ -12,12 +12,11 @@ const initialValues = {
 };
 
 // TODO: show user feedback on successfull add in stock operation
-export default function AddStockModal({ show, handleClose, product, sizes }) {
+export default function AddStockModal({ show, handleClose, product, sizes, updateSizes }) {
     const { productId } = useParams();
     const addStock = useAddStock();
 
     const addStockHandler = async (sizesValues) => {
-        console.log(sizesValues);
         sizesValues.small = sizesValues.small.trim();
         sizesValues.medium = sizesValues.medium.trim();
         sizesValues.large = sizesValues.large.trim();
@@ -33,7 +32,9 @@ export default function AddStockModal({ show, handleClose, product, sizes }) {
             if (areAllSizesZeroes) {
                 throw new Error('At least one size quantity must be greater than zero.');
             }
-            await addStock(productId, sizesValues);
+            const updatedStock = await addStock(productId, sizesValues);
+            console.log(updatedStock);
+            updateSizes(updatedStock.sizes);
         } catch (error) {
             console.log(error.message);
         } finally {
