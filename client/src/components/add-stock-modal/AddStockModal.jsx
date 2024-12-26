@@ -12,7 +12,7 @@ const initialValues = {
 };
 
 // TODO: show user feedback on successfull add in stock operation
-export default function AddStockModal({ show, handleClose, product }) {
+export default function AddStockModal({ show, handleClose, product, sizes }) {
     const { productId } = useParams();
     const addStock = useAddStock();
 
@@ -31,7 +31,7 @@ export default function AddStockModal({ show, handleClose, product }) {
                 throw new Error('Sizes must be non-negative');
             }
             if (areAllSizesZeroes) {
-                throw new Error('At least one size quantity to add must be greater than zero.');
+                throw new Error('At least one size quantity must be greater than zero.');
             }
             await addStock(productId, sizesValues);
         } catch (error) {
@@ -56,7 +56,7 @@ export default function AddStockModal({ show, handleClose, product }) {
                     <Modal.Body>
                         <div className="d-flex gap-1">
                             <Form.Group className="col-4 mt-1">
-                                <Form.Label>S (Small)</Form.Label>
+                                <Form.Label>S (in stock: {sizes.small})</Form.Label>
                                 <Form.Control
                                     type="number"
                                     min="0"
@@ -66,7 +66,7 @@ export default function AddStockModal({ show, handleClose, product }) {
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group className="col-4 mt-1">
-                                <Form.Label>M (Medium)</Form.Label>
+                                <Form.Label>M (in stock: {sizes.medium})</Form.Label>
                                 <Form.Control
                                     type="number"
                                     min="0"
@@ -76,7 +76,7 @@ export default function AddStockModal({ show, handleClose, product }) {
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group className="col-4 mt-1">
-                                <Form.Label>L (Large)</Form.Label>
+                                <Form.Label>L (in stock: {sizes.large})</Form.Label>
                                 <Form.Control
                                     type="number"
                                     min="0"

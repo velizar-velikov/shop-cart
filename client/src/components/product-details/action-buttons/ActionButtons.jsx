@@ -6,7 +6,6 @@ export default function ActionButtons({ product, sizes, handleShowAddStock, hand
     const { userId } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
-    // sizes.small = 4;
     return (
         <>
             {isOwner ? (
@@ -37,9 +36,9 @@ export default function ActionButtons({ product, sizes, handleShowAddStock, hand
                         <Form.Group className="col-4 mt-1">
                             <Form.Label>Size</Form.Label>
                             <Form.Select size="sm">
-                                <option>Small{sizes.small <= 3 && <p> ({sizes.small} left)</p>}</option>
-                                <option>Medium {sizes.medium <= 3 && <p> ({sizes.medium} left)</p>}</option>
-                                <option>Large {sizes.large <= 3 && <p> ({sizes.large} left)</p>}</option>
+                                <option value="small">S{sizes.small <= 3 && <p> ({sizes.small} left)</p>}</option>
+                                <option value="medium">M{sizes.medium <= 3 && <p> ({sizes.medium} left)</p>}</option>
+                                <option value="large">L{sizes.large <= 3 && <p> ({sizes.large} left)</p>}</option>
                             </Form.Select>
                         </Form.Group>
                     </div>

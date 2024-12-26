@@ -23,7 +23,6 @@ export default function ProductDetails() {
     const { averageRating, ratingsCount, isLoading: isRatingInfoLoading } = useGetRatingInfo(productId, hasAddedNewReview);
 
     const { sizes } = useGetSizesForProduct(productId);
-    console.log(sizes);
     const isOutOfStock = Object.entries(sizes).every(([key, value]) => value == 0);
 
     const { userId, isAuthenticated } = useAuthContext();
@@ -65,7 +64,12 @@ export default function ProductDetails() {
                         />
                     )}
                     {showAddStockModal && (
-                        <AddStockModal show={handleShowAddStock} handleClose={handleCloseAddStock} product={product} />
+                        <AddStockModal
+                            show={handleShowAddStock}
+                            handleClose={handleCloseAddStock}
+                            product={product}
+                            sizes={sizes}
+                        />
                     )}
                     {showDeleteModal && (
                         <DeleteProductModal show={handleShowDelete} handleClose={handleCloseDelete} {...product} />
