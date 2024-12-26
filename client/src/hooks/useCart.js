@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import cartAPI from '../api/cart-api.js';
 import stockAPI from '../api/stock-api.js';
 
@@ -12,4 +13,21 @@ export function useAddToUserCart() {
     };
 
     return addToUserCartHandler;
+}
+
+export function useGetUserCart(userId) {
+    const [userCartProducts, setUserCartProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        async function loadUserCart() {
+            setIsLoading(true);
+            const result = await cartAPI.getCartForUser(userId);
+            setUserCartProducts(result);
+            setIsLoading(false);
+        }
+        loadUserCart();
+    }, []);
+
+    return { userCartProducts, isLoading };
 }

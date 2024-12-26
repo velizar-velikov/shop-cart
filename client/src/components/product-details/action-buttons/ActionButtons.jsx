@@ -2,7 +2,6 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useForm } from '../../../hooks/useForm.js';
-import { useState } from 'react';
 import { useAddToUserCart } from '../../../hooks/useCart.js';
 
 const initialValues = {

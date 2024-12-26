@@ -9,9 +9,15 @@ const endpoints = {
 
 function getCartForUser(userId) {
     const urlParams = new URLSearchParams({
-        where: `_ownerId=${userId}`,
+        where: `_ownerId="${userId}"`,
+        load: `productInfo=productId:products`,
     });
-    const url = `${host}${endpoints.all}?${urlParams.toString()}`;
+
+    const urlParamSort = new URLSearchParams({
+        sortBy: '_createdOn%20desc',
+    });
+
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
 
     return requester.get(url);
 }
