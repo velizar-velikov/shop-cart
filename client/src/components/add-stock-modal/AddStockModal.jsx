@@ -33,7 +33,6 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
                 throw new Error('At least one size quantity must be greater than zero.');
             }
             const updatedStock = await addStock(productId, sizesValues);
-            console.log(updatedStock);
             updateSizes(updatedStock.sizes);
         } catch (error) {
             console.log(error.message);

@@ -109,6 +109,7 @@ export default function ProductDetails() {
                                         <ActionButtons
                                             product={product}
                                             sizes={sizes}
+                                            updateSizes={(newSizes) => setSizes(newSizes)}
                                             handleShowAddStock={handleShowAddStock}
                                             handleShowDelete={handleShowDelete}
                                         />

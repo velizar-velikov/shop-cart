@@ -1503,9 +1503,9 @@
                 _ownerId: '35c62d76-8152-4626-8712-eeb96381bea8',
                 productId: '52789d06-0e19-4b9d-9d51-63e2f051bc07',
                 sizes: {
-                    small: 1,
-                    medium: 1,
-                    large: 1,
+                    small: 20,
+                    medium: 25,
+                    large: 3,
                 },
                 _createdOn: 1735110697634,
                 _id: '12b1784c-9657-4cd7-a28c-478c69079415',
