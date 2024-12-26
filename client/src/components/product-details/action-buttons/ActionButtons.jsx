@@ -7,7 +7,7 @@ import { useAddToUserCart } from '../../../hooks/useCart.js';
 
 const initialValues = {
     quantity: '1',
-    size: 'small',
+    size: '---',
 };
 
 export default function ActionButtons({ product, sizes, updateSizes, handleShowAddStock, handleShowDelete }) {
@@ -23,6 +23,10 @@ export default function ActionButtons({ product, sizes, updateSizes, handleShowA
 
             if (!values.quantity || !values.size) {
                 throw new Error('All field are required.');
+            }
+
+            if (values.size == '---') {
+                throw new Error('Please specify a size first.');
             }
 
             const updatedStock = await addToUserCart(product._id, userId, values.size, values.quantity);
@@ -71,10 +75,22 @@ export default function ActionButtons({ product, sizes, updateSizes, handleShowA
                         </Form.Group>
                         <Form.Group className="col-4 mt-1">
                             <Form.Label>Size</Form.Label>
-                            <Form.Select size="sm" name="size" value={values.size} onChange={changeHandler}>
-                                <option value="small">S{sizes.small <= 3 && <p> ({sizes.small} left)</p>}</option>
-                                <option value="medium">M{sizes.medium <= 3 && <p> ({sizes.medium} left)</p>}</option>
-                                <option value="large">L{sizes.large <= 3 && <p> ({sizes.large} left)</p>}</option>
+                            <Form.Select
+                                size="sm"
+                                name="size"
+                                value={sizes[values.size] !== 0 ? values.size : '---'}
+                                onChange={changeHandler}
+                            >
+                                <option value="---">---</option>
+                                <option disabled={sizes.small == 0} value="small">
+                                    S{sizes.small <= 3 && <p> ({sizes.small} left)</p>}
+                                </option>
+                                <option disabled={sizes.medium == 0} value="medium">
+                                    M{sizes.medium <= 3 && <p> ({sizes.medium} left)</p>}
+                                </option>
+                                <option disabled={sizes.large == 0} value="large">
+                                    L{sizes.large <= 3 && <p> ({sizes.large} left)</p>}
+                                </option>
                             </Form.Select>
                         </Form.Group>
                     </div>

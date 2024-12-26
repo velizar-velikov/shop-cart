@@ -28,6 +28,10 @@ function getProductSizeRecordInUserCart(productId, userId, size) {
 async function addToUserCart(productId, userId, size, quantity) {
     let productSizeRecord = [];
 
+    if (!['small', 'medium', 'large'].includes(size)) {
+        return;
+    }
+
     try {
         productSizeRecord = await getProductSizeRecordInUserCart(productId, userId, size);
     } catch (error) {
