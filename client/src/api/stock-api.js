@@ -55,19 +55,17 @@ async function addStockForProduct(productId, sizesToAdd) {
     return requester.put(host + endpoints.byId(stock._id), { productId, sizes });
 }
 
-// currently not possible because the server lets only the owners of the item to edit it
-// when adding to cart the user is not the owner
-// TODO: shady fix: add X-Admin header to go around that
 async function removeSizeOfProduct(productId, sizeToRemove) {
     const sizes = await getSizesForProduct(productId);
 
-    sizes.small = sizes.small - (sizeToRemove.small || 0);
-    sizes.medium = sizes.medium - (sizeToRemove.medium || 0);
-    sizes.large = sizes.large - (sizeToRemove.large || 0);
+    sizes.small = Number(sizes.small) - Number(sizeToRemove.small || 0);
+    sizes.medium = Number(sizes.medium) - Number(sizeToRemove.medium || 0);
+    sizes.large = Number(sizes.large) - Number(sizeToRemove.large || 0);
 
-    const url = buildUrlForProduct(productId);
+    const stockForProduct = (await getStockForProduct(productId))[0];
 
-    return requester.put(url, { productId, sizes });
+    // add X-Admin header to update record that is not current user's
+    return requester.put(host + endpoints.byId(stockForProduct._id), { productId, sizes }, true);
 }
 
 const stockAPI = {
