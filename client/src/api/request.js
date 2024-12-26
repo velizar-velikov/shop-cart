@@ -1,6 +1,6 @@
 import { getAccessToken } from '../util/localStorageUtil.js';
 
-function createOptions(method, data) {
+function createOptions(method, data, isAdmin) {
     const options = {
         method,
         headers: {},
@@ -11,6 +11,10 @@ function createOptions(method, data) {
         options.headers['X-Authorization'] = accessToken;
     }
 
+    if (isAdmin) {
+        options.headers['X-Admin'] = 'X-Admin';
+    }
+
     if (data) {
         options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(data);
@@ -19,8 +23,8 @@ function createOptions(method, data) {
     return options;
 }
 
-async function request(method, url, data) {
-    const options = createOptions(method, data);
+async function request(method, url, data, isAdmin = false) {
+    const options = createOptions(method, data, isAdmin);
 
     try {
         const response = await fetch(url, options);
@@ -49,7 +53,7 @@ async function request(method, url, data) {
 const requester = {
     get: (url) => request('GET', url),
     post: (url, data) => request('POST', url, data),
-    put: (url, data) => request('PUT', url, data),
+    put: (url, data, isAdmin) => request('PUT', url, data, isAdmin),
     delete: (url) => request('DELETE', url),
 };
 
