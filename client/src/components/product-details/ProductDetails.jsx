@@ -110,6 +110,7 @@ export default function ProductDetails() {
                                             product={product}
                                             sizes={sizes}
                                             updateSizes={(newSizes) => setSizes(newSizes)}
+                                            isOutOfStock={isOutOfStock}
                                             handleShowAddStock={handleShowAddStock}
                                             handleShowDelete={handleShowDelete}
                                         />

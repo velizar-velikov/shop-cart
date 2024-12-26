@@ -10,7 +10,7 @@ const initialValues = {
     size: '---',
 };
 
-export default function ActionButtons({ product, sizes, updateSizes, handleShowAddStock, handleShowDelete }) {
+export default function ActionButtons({ product, sizes, updateSizes, isOutOfStock, handleShowAddStock, handleShowDelete }) {
     const { userId } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
@@ -94,7 +94,7 @@ export default function ActionButtons({ product, sizes, updateSizes, handleShowA
                             </Form.Select>
                         </Form.Group>
                     </div>
-                    <Button type="submit" className="col-6 mt-4 m-sm-2 m-lg-4">
+                    <Button type="submit" disabled={isOutOfStock} className="col-6 mt-4 m-sm-2 m-lg-4">
                         Add to cart
                     </Button>
                 </Form>
