@@ -4,12 +4,9 @@ import stockAPI from '../api/stock-api.js';
 
 export function useAddToUserCart() {
     const addToUserCartHandler = async (productId, userId, size, quantity) => {
-        const [cartResult, stockResult] = await Promise.all([
-            cartAPI.addToUserCart(productId, userId, size, quantity),
-            stockAPI.removeSizeOfProduct(productId, { [size]: quantity }),
-        ]);
-
-        return stockResult;
+        const cartResult = await cartAPI.addToUserCart(productId, userId, size, quantity);
+        // stockAPI.removeSizeOfProduct(productId, { [size]: quantity })
+        return cartResult;
     };
 
     return addToUserCartHandler;

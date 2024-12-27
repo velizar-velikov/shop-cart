@@ -91,7 +91,8 @@ export default function EditProduct() {
                                     <Form.Label>Price</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        min="0"
+                                        min="0.01"
+                                        step="0.01"
                                         name="price"
                                         value={values.price}
                                         onChange={changeHandler}

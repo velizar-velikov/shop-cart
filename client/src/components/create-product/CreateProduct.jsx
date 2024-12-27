@@ -90,7 +90,14 @@ export default function CreateProduct() {
                     <Col>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Price</Form.Label>
-                            <Form.Control value={values.price} onChange={changeHandler} name="price" type="number" min="0" />
+                            <Form.Control
+                                value={values.price}
+                                onChange={changeHandler}
+                                name="price"
+                                type="number"
+                                min="0.01"
+                                step="0.01"
+                            />
                         </Form.Group>
                     </Col>
                 </Row>

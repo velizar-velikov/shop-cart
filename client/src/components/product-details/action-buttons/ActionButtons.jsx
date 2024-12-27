@@ -9,12 +9,13 @@ const initialValues = {
     size: '---',
 };
 
-export default function ActionButtons({ product, sizes, updateSizes, isOutOfStock, handleShowAddStock, handleShowDelete }) {
+export default function ActionButtons({ product, sizes, isOutOfStock, handleShowAddStock, handleShowDelete }) {
     const { userId } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
     const addToUserCart = useAddToUserCart();
 
+    // TODO: show user feedback that he has successfully added this item to the cart
     const addtoCartHandler = async (values) => {
         try {
             values.quantity = values.quantity.trim();
@@ -28,8 +29,7 @@ export default function ActionButtons({ product, sizes, updateSizes, isOutOfStoc
                 throw new Error('Please specify a size first.');
             }
 
-            const updatedStock = await addToUserCart(product._id, userId, values.size, values.quantity);
-            updateSizes(updatedStock.sizes);
+            const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);
         } catch (error) {
             console.log(error.message);
         }

@@ -15,8 +15,16 @@ export default function Cart() {
             {isLoading ? (
                 <LoadingSpinner />
             ) : (
-                <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
-                    <h2>Your cart</h2>
+                <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 mb-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h2>Cart</h2>
+                        <div className="d-flex align-items-center gap-4">
+                            <h4 className="pt-2 fw-bold">
+                                <span className="fs-5 fw-normal">Total:</span> $99.00
+                            </h4>
+                            <Button className="h-25 btn-dark">Next step</Button>
+                        </div>
+                    </div>
                     {userCartProducts.map((product) => (
                         <CartItem
                             key={product._id}

@@ -69,7 +69,6 @@ export default function ProductDetails() {
                             handleClose={handleCloseAddStock}
                             product={product}
                             sizes={sizes}
-                            updateSizes={(newSizes) => setSizes(newSizes)}
                         />
                     )}
                     {showDeleteModal && (
