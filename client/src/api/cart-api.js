@@ -64,9 +64,15 @@ async function addToUserCart(productId, userId, size, quantity) {
     }
 }
 
+async function removeFromUserCart(productId, userId, size) {
+    const productSizeRecord = await getProductSizeRecordInUserCart(productId, userId, size);
+    return requester.delete(host + endpoints.byId(productSizeRecord[0]._id));
+}
+
 const cartAPI = {
     getCartForUser,
     addToUserCart,
+    removeFromUserCart,
 };
 
 export default cartAPI;

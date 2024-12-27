@@ -26,5 +26,14 @@ export function useGetUserCart(userId) {
         loadUserCart();
     }, []);
 
-    return { userCartProducts, isLoading };
+    return { userCartProducts, setUserCartProducts, isLoading };
+}
+
+export function useRemoveFromUserCart() {
+    const removeFromCartHandler = async(productId, userId, size) => {
+        const removedProduct = await cartAPI.removeFromUserCart(productId, userId, size);
+        return removedProduct;
+    };
+
+    return removeFromCartHandler;
 }

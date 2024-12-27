@@ -1,0 +1,6 @@
+@media (min-width: 1024px) {
+    .img-fixed-height {
+        height: 11rem;
+        object-fit: cover;
+    }
+}

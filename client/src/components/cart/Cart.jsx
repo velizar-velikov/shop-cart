@@ -7,8 +7,8 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 export default function Cart() {
     const { userId } = useAuthContext();
 
-    const { userCartProducts, isLoading } = useGetUserCart(userId);
-    console.log(userCartProducts);
+    const { userCartProducts, setUserCartProducts, isLoading } = useGetUserCart(userId);
+    const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price), 0);
 
     return (
         <>
@@ -20,7 +20,7 @@ export default function Cart() {
                         <h2>Cart</h2>
                         <div className="d-flex align-items-center gap-4">
                             <h4 className="pt-2 fw-bold">
-                                <span className="fs-5 fw-normal">Total:</span> $99.00
+                                <span className="fs-5 fw-normal">Total:</span> {`$${totalPrice.toFixed(2)}`}
                             </h4>
                             <Button className="h-25 btn-dark">Next step</Button>
                         </div>
@@ -31,6 +31,7 @@ export default function Cart() {
                             size={product.size}
                             quantity={product.quantity}
                             productInfo={product.productInfo}
+                            setUserCartProducts={setUserCartProducts}
                         />
                     ))}
                 </Container>
