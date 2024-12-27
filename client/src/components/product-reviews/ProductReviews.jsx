@@ -12,6 +12,7 @@ export default function ProductReviews() {
     const { userId } = useAuthContext();
     const { product, isLoading: isLoadingProduct } = useGetOneProduct(productId);
     const { reviews, isLoading: isLoadingReviews } = useAGetAllReviewsForProduct(productId, userId);
+
     return (
         <>
             {isLoadingProduct || isLoadingReviews ? (
