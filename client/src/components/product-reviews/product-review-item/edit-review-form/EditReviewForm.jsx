@@ -4,10 +4,7 @@ import { useEditReviewForProduct } from '../../../../hooks/useReviews.js';
 import { useAuthContext } from '../../../../contexts/AuthContext.jsx';
 import { useParams } from 'react-router-dom';
 
-export default function EditReviewForm({ textState, setTextState, setIsEditing }) {
-    const { userId } = useAuthContext();
-    const { productId } = useParams();
-
+export default function EditReviewForm({ reviewId, textState, setTextState, setIsEditing }) {
     const editReview = useEditReviewForProduct();
 
     const onSaveEdittedReview = async (values) => {
@@ -18,8 +15,7 @@ export default function EditReviewForm({ textState, setTextState, setIsEditing }
                 throw new Error('You need to write at least one character to review product.');
             }
 
-            const result = await editReview(userId, productId, values.text);
-            console.log(result);
+            const result = await editReview(reviewId, values.text);
 
             setTextState((oldState) => ({ ...oldState, text: values.text }));
             setIsEditing(false);

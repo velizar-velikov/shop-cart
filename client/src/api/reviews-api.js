@@ -46,10 +46,8 @@ function createReviewForProduct(productId, rating, text, reviewerFullName) {
     return requester.post(host + endpoints.all, { productId, rating, text, reviewerFullName });
 }
 
-async function editReviewForProduct(userId, productId, text) {
-    const reviewResult = await getUserReviewsForProduct(productId, userId);
-
-    return requester.patch(host + endpoints.byId(reviewResult[0]._id), { text });
+async function editReviewForProduct(reviewId, text) {
+    return requester.patch(host + endpoints.byId(reviewId), { text });
 }
 
 async function getRatingInfo(productId) {

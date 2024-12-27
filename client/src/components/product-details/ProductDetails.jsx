@@ -94,11 +94,8 @@ export default function ProductDetails() {
                                             </p>
                                         </div>
 
-                                        {canUserReview ? (
-                                            <Link onClick={handleShowAddReview}>Add review</Link>
-                                        ) : (
-                                            <p className="small col-7">You reviewed this product.</p>
-                                        )}
+                                        {canUserReview && <Link onClick={handleShowAddReview}>Add review</Link>}
+                                        {hasUserReviewed && <p className="small col-7">You reviewed this product.</p>}
                                     </div>
                                     <p className="small">{product.description}</p>
                                     <p className="h4 font-weight-bold">

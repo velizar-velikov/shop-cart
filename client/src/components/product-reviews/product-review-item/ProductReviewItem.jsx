@@ -5,7 +5,7 @@ import ReviewControlButtons from './review-control-buttons/ReviewControlButtons.
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import EditReviewForm from './edit-review-form/EditReviewForm.jsx';
 
-export default function ProductReviewItem({ index, text, rating, reviewerFullName, _ownerId }) {
+export default function ProductReviewItem({ index, text, rating, reviewerFullName, _id: reviewId, _ownerId }) {
     const [textState, setTextState] = useState({ text: text });
     const [isEditing, setIsEditing] = useState(false);
     const { userId } = useAuthContext();
@@ -25,7 +25,12 @@ export default function ProductReviewItem({ index, text, rating, reviewerFullNam
             </Accordion.Header>
             <Accordion.Body>
                 {isEditing ? (
-                    <EditReviewForm textState={textState} setTextState={setTextState} setIsEditing={setIsEditing} />
+                    <EditReviewForm
+                        reviewId={reviewId}
+                        textState={textState}
+                        setTextState={setTextState}
+                        setIsEditing={setIsEditing}
+                    />
                 ) : (
                     <p>{textState.text}</p>
                 )}

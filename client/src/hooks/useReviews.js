@@ -66,8 +66,8 @@ export function useAddReviewForProduct() {
 }
 
 export function useEditReviewForProduct() {
-    const editReviewHandler = async (userId, productId, text) => {
-        const result = await reviewsAPI.editReviewForProduct(userId, productId, text);
+    const editReviewHandler = async (reviewId, text) => {
+        const result = await reviewsAPI.editReviewForProduct(reviewId, text);
         return result;
     };
 
