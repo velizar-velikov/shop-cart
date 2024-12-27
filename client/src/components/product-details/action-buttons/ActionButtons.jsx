@@ -16,6 +16,8 @@ export default function ActionButtons({ product, sizes, isOutOfStock, handleShow
     const addToUserCart = useAddToUserCart();
 
     // TODO: show user feedback that he has successfully added this item to the cart
+    // TODO: fix: look first in user cart and limit the total quantity that he can add in his cart
+    // to be no more than the available quantity of said product and size in stock
     const addtoCartHandler = async (values) => {
         try {
             values.quantity = values.quantity.trim();
