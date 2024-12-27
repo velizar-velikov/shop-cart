@@ -1,19 +1,16 @@
 import Accordion from 'react-bootstrap/Accordion';
 import RatingStars from '../../rating-stars/RatingStars.jsx';
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import ReviewControlButtons from './review-control-buttons/ReviewControlButtons.jsx';
+import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+import EditReviewForm from './edit-review-form/EditReviewForm.jsx';
 
-export default function ProductReviewItem({ index, text, rating, reviewerFullName }) {
-    const [textState, setTextState] = useState(text);
-    const editHandler = (e) => {
-        e.stopPropagation();
-        console.log('editing');
-    };
+export default function ProductReviewItem({ index, text, rating, reviewerFullName, _ownerId }) {
+    const [textState, setTextState] = useState({ text: text });
+    const [isEditing, setIsEditing] = useState(false);
+    const { userId } = useAuthContext();
+    const isOwnerOfReview = userId == _ownerId;
 
-    const deleteHandler = (e) => {
-        e.stopPropagation();
-        console.log('deleting');
-    };
     return (
         <Accordion.Item eventKey={index.toString()}>
             <Accordion.Header>
@@ -22,17 +19,17 @@ export default function ProductReviewItem({ index, text, rating, reviewerFullNam
                         <RatingStars rating={rating} />
                         <p>{reviewerFullName}</p>
                     </div>
-                    <div className="buttons d-flex gap-1">
-                        <Button className="border btn-light rounded px-2 py-1 shadow" onClick={editHandler}>
-                            Edit
-                        </Button>
-                        <Button className="border btn-light rounded px-2 py-1 shadow" onClick={deleteHandler}>
-                            Delete
-                        </Button>
-                    </div>
+
+                    {isOwnerOfReview && <ReviewControlButtons setIsEditing={setIsEditing} />}
                 </div>
             </Accordion.Header>
-            <Accordion.Body>{text}</Accordion.Body>
+            <Accordion.Body>
+                {isEditing ? (
+                    <EditReviewForm textState={textState} setTextState={setTextState} setIsEditing={setIsEditing} />
+                ) : (
+                    <p>{textState.text}</p>
+                )}
+            </Accordion.Body>
         </Accordion.Item>
     );
 }
