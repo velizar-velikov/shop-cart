@@ -57,15 +57,21 @@ export function useGetUserReviewsForProduct(productId, userId, hasAddedNewReview
 }
 
 export function useAddReviewForProduct() {
-    const [review, setReview] = useState({});
-
     const addReviewHandler = async (productId, rating, text, reviewerFullName) => {
         const result = await reviewsAPI.createReviewForProduct(productId, rating, text, reviewerFullName);
-        setReview(result);
         return result;
     };
 
     return addReviewHandler;
+}
+
+export function useEditReviewForProduct() {
+    const editReviewHandler = async (userId, productId, text) => {
+        const result = await reviewsAPI.editReviewForProduct(userId, productId, text);
+        return result;
+    };
+
+    return editReviewHandler;
 }
 
 export function useGetRatingInfo(productId, hasAddedNewReview) {

@@ -4,6 +4,7 @@ const host = 'http://localhost:3030';
 
 const endpoints = {
     all: '/data/reviews',
+    byId: (id) => `/data/reviews/${id}`,
 };
 
 async function getReviewsForProduct(productId) {
@@ -45,6 +46,12 @@ function createReviewForProduct(productId, rating, text, reviewerFullName) {
     return requester.post(host + endpoints.all, { productId, rating, text, reviewerFullName });
 }
 
+async function editReviewForProduct(userId, productId, text) {
+    const reviewResult = await getUserReviewsForProduct(productId, userId);
+
+    return requester.patch(host + endpoints.byId(reviewResult[0]._id), { text });
+}
+
 async function getRatingInfo(productId) {
     const urlParams = new URLSearchParams({
         where: `productId="${productId}"`,
@@ -69,6 +76,7 @@ const reviewsAPI = {
     getReviewsForProduct,
     getUserReviewsForProduct,
     createReviewForProduct,
+    editReviewForProduct,
     getRatingInfo,
 };
 
