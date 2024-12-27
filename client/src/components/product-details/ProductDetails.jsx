@@ -84,8 +84,8 @@ export default function ProductDetails() {
                                 <div className="d-flex flex-column justify-content-between">
                                     <h6 className="text-secondary">{product.brand}</h6>
                                     <h1>{product.name}</h1>
-                                    <div className="d-flex gap-3">
-                                        <div className="rating">
+                                    <div className="d-flex">
+                                        <div className="rating col-5">
                                             <RatingStars rating={averageRating} />
 
                                             <p className="small fst-italic">
@@ -94,7 +94,11 @@ export default function ProductDetails() {
                                             </p>
                                         </div>
 
-                                        {canUserReview && <Link onClick={handleShowAddReview}>Add review</Link>}
+                                        {canUserReview ? (
+                                            <Link onClick={handleShowAddReview}>Add review</Link>
+                                        ) : (
+                                            <p className="small col-7">You reviewed this product.</p>
+                                        )}
                                     </div>
                                     <p className="small">{product.description}</p>
                                     <p className="h4 font-weight-bold">
