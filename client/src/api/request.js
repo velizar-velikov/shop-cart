@@ -54,6 +54,7 @@ const requester = {
     get: (url) => request('GET', url),
     post: (url, data) => request('POST', url, data),
     put: (url, data, isAdmin) => request('PUT', url, data, isAdmin),
+    patch: (url, data) => request('PATCH', url, data),
     delete: (url) => request('DELETE', url),
 };
 
