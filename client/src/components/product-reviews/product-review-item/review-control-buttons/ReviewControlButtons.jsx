@@ -1,14 +1,27 @@
 import { Button } from 'react-bootstrap';
+import { useDeleteReviewForProduct } from '../../../../hooks/useReviews.js';
 
-export default function ReviewControlButtons({ setIsEditing }) {
+export default function ReviewControlButtons({ reviewId, setReviews, setIsEditing }) {
+    const deleteReview = useDeleteReviewForProduct();
+
     const editHandler = (e) => {
         e.stopPropagation();
         setIsEditing(true);
     };
 
-    const deleteHandler = (e) => {
+    // TODO: show user feedback that he has successfully deleted his review
+    const deleteHandler = async (e) => {
         e.stopPropagation();
-        console.log('deleting');
+
+        try {
+            await deleteReview(reviewId);
+            setReviews((currentReviews) => {
+                const index = currentReviews.findIndex((review) => review._id == reviewId);
+                return currentReviews.toSpliced(index, 1);
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     return (

@@ -30,7 +30,7 @@ export function useAGetAllReviewsForProduct(productId, userId) {
         loadReviews();
     }, []);
 
-    return { reviews, isLoading };
+    return { reviews, setReviews, isLoading };
 }
 
 export function useGetUserReviewsForProduct(productId, userId, hasAddedNewReview) {
@@ -72,6 +72,15 @@ export function useEditReviewForProduct() {
     };
 
     return editReviewHandler;
+}
+
+export function useDeleteReviewForProduct() {
+    const deleteReviewHandler = async (reviewId) => {
+        const result = await reviewsAPI.deleteReviewForProduct(reviewId);
+        return result;
+    };
+
+    return deleteReviewHandler;
 }
 
 export function useGetRatingInfo(productId, hasAddedNewReview) {

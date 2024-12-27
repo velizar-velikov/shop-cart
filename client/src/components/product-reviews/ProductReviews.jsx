@@ -11,7 +11,7 @@ export default function ProductReviews() {
     const { productId } = useParams();
     const { userId } = useAuthContext();
     const { product, isLoading: isLoadingProduct } = useGetOneProduct(productId);
-    const { reviews, isLoading: isLoadingReviews } = useAGetAllReviewsForProduct(productId, userId);
+    const { reviews, setReviews, isLoading: isLoadingReviews } = useAGetAllReviewsForProduct(productId, userId);
 
     return (
         <>
@@ -34,7 +34,7 @@ export default function ProductReviews() {
                     ) : (
                         <Accordion defaultActiveKey="0">
                             {reviews.map((review, index) => (
-                                <ProductReviewItem key={review._id} index={index} {...review} />
+                                <ProductReviewItem key={review._id} index={index} setReviews={setReviews} {...review} />
                             ))}
                         </Accordion>
                     )}

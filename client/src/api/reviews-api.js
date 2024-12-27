@@ -46,8 +46,12 @@ function createReviewForProduct(productId, rating, text, reviewerFullName) {
     return requester.post(host + endpoints.all, { productId, rating, text, reviewerFullName });
 }
 
-async function editReviewForProduct(reviewId, text) {
+function editReviewForProduct(reviewId, text) {
     return requester.patch(host + endpoints.byId(reviewId), { text });
+}
+
+function deleteReviewForProduct(reviewId) {
+    return requester.delete(host + endpoints.byId(reviewId));
 }
 
 async function getRatingInfo(productId) {
@@ -75,6 +79,7 @@ const reviewsAPI = {
     getUserReviewsForProduct,
     createReviewForProduct,
     editReviewForProduct,
+    deleteReviewForProduct,
     getRatingInfo,
 };
 
