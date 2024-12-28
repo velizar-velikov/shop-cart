@@ -4,9 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useCartContext } from '../../contexts/CartContext.jsx';
 
 export default function Header() {
     const { isAuthenticated } = useAuthContext();
+    const { cartItemsCount } = useCartContext();
+
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
             <Container>
@@ -35,7 +38,7 @@ export default function Header() {
                                     style={{ fontSize: '0.85rem', padding: '0.04rem 0.25rem 0.15rem 0.25rem' }}
                                     className="position-absolute top-25 start-75 translate-middle badge rounded-circle bg-danger py-0.125 px-0.25"
                                 >
-                                    3
+                                    {cartItemsCount}
                                 </span>
                             </Nav.Link>
                         </>

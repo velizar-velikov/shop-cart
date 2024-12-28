@@ -27,6 +27,22 @@ export function useGetUserCart(userId) {
     return { userCartProducts, setUserCartProducts, isLoading };
 }
 
+export function useGetUserCartCount(userId) {
+    const [cartItemsCount, setCartItemsCount] = useState(0);
+
+    useEffect(() => {
+        async function loadUserCartCount() {
+            const result = await cartAPI.getUserCartItemsCount(userId);
+            console.log(result);
+
+            setCartItemsCount(result);
+        }
+        loadUserCartCount();
+    }, []);
+
+    return { cartItemsCount, setCartItemsCount };
+}
+
 export function useEditQuantityInUserCart() {
     const editQuantityHandler = async (cartItemId, quantity) => {
         const edittedCartItem = await cartAPI.editCartItemQuantity(cartItemId, quantity);

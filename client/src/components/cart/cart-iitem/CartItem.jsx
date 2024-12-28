@@ -6,6 +6,7 @@ import { useQuantityForm } from '../../../hooks/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/useStock.js';
 import { useRef } from 'react';
 import styles from './cartItem.module.css';
+import { useCartContext } from '../../../contexts/CartContext.jsx';
 
 const sizesOptions = {
     small: 'S',
@@ -19,6 +20,8 @@ const sizesOptions = {
 // 2) if item is out of stock of said size, display message to user and do not add item for the next step
 export default function CartItem({ cartProduct, setUserCartProducts }) {
     const { userId } = useAuthContext();
+    const { setCartItemsCount } = useCartContext();
+
     const removeFromCart = useRemoveFromUserCart();
     const editQuantity = useEditQuantityInUserCart();
 
@@ -31,9 +34,9 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
 
             setUserCartProducts((cartProducts) => {
                 const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);
-
                 return cartProducts.toSpliced(index, 1);
             });
+            setCartItemsCount((oldCount) => oldCount - cartProduct.quantity);
         } catch (error) {
             console.log(error.message);
         }
@@ -54,6 +57,16 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
             }
 
             await editQuantity(cartProduct._id, Number(values.quantity));
+
+            // TODO: fix state update as it is not working somehow
+            setUserCartProducts((cartProducts) => {
+                const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);
+                const copiedCartProducts = cartProducts.slice();
+                copiedCartProducts[index].quantity = Number(values.quantity);
+                return copiedCartProducts;
+            });
+
+            setCartItemsCount((oldCount) => oldCount - cartProduct.quantity + Number(values.quantity));
         } catch (error) {
             console.log(error.message);
         }

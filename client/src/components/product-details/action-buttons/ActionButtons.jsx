@@ -5,6 +5,7 @@ import { useForm } from '../../../hooks/useForm.js';
 import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/useCart.js';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+import { useCartContext } from '../../../contexts/CartContext.jsx';
 
 const initialValues = {
     quantity: '1',
@@ -20,6 +21,7 @@ export default function ActionButtons({
     handleShowDelete,
 }) {
     const { userId } = useAuthContext();
+    const { setCartItemsCount } = useCartContext();
     const isOwner = userId == product._ownerId;
 
     const addToUserCart = useAddToUserCart();
@@ -49,6 +51,7 @@ export default function ActionButtons({
                 ...oldSizes,
                 [values.size]: oldSizes[values.size] - values.quantity,
             }));
+            setCartItemsCount((oldCount) => oldCount + Number(values.quantity));
         } catch (error) {
             console.log(error.message);
         }

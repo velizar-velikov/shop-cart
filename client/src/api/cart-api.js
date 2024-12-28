@@ -23,6 +23,11 @@ function getCartForUser(userId) {
     return requester.get(url);
 }
 
+async function getUserCartItemsCount(userId) {
+    const cartItems = await getCartForUser(userId);
+    return cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
+}
+
 function getProductSizeRecordInUserCart(productId, userId, size) {
     const urlParams = new URLSearchParams({
         where: `productId="${productId}" AND size="${size}" AND _ownerId="${userId}"`,
@@ -91,6 +96,7 @@ async function removeFromUserCart(productId, userId, size) {
 
 const cartAPI = {
     getCartForUser,
+    getUserCartItemsCount,
     addToUserCart,
     editCartItemQuantity,
     removeFromUserCart,
