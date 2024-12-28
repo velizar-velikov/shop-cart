@@ -5,7 +5,6 @@ import stockAPI from '../api/stock-api.js';
 export function useAddToUserCart() {
     const addToUserCartHandler = async (productId, userId, size, quantity) => {
         const cartResult = await cartAPI.addToUserCart(productId, userId, size, quantity);
-        // stockAPI.removeSizeOfProduct(productId, { [size]: quantity })
         return cartResult;
     };
 
@@ -30,7 +29,7 @@ export function useGetUserCart(userId) {
 }
 
 export function useRemoveFromUserCart() {
-    const removeFromCartHandler = async(productId, userId, size) => {
+    const removeFromCartHandler = async (productId, userId, size) => {
         const removedProduct = await cartAPI.removeFromUserCart(productId, userId, size);
         return removedProduct;
     };

@@ -1,4 +1,5 @@
 import requester from './request.js';
+import stockAPI from './stock-api.js';
 
 const host = 'http://localhost:3030';
 
@@ -52,14 +53,29 @@ async function addToUserCart(productId, userId, size, quantity) {
         }
     }
 
+    // no product with said size is added to cart yet
     if (productSizeRecord.length == 0) {
         const newProductSizeRecord = await requester.post(host + endpoints.all, { productId, size, quantity: Number(quantity) });
         return newProductSizeRecord;
     } else {
+        // product with said size is already added to cart
+
+        // we check if quantity in cart + new quantity is more than quantity in stock
+        // if it is we abort the add to cart action
+        const sizesInStock = await stockAPI.getSizesForProduct(productId);
+        console.log({ sizesInStock, productSizeRecord: productSizeRecord[0] });
+
+        const newQuantity = Number(productSizeRecord[0].quantity) + Number(quantity);
+
+        if (newQuantity > sizesInStock[size]) {
+            throw new Error('We do not have any more items in stock of this product and size.');
+        }
+
+        // if it is not, we add the quantity to the cart
         return requester.put(host + endpoints.byId(productSizeRecord[0]._id), {
             productId,
             size,
-            quantity: Number(productSizeRecord[0].quantity) + Number(quantity),
+            quantity: newQuantity,
         });
     }
 }
