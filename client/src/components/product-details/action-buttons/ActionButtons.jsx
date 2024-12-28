@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useForm } from '../../../hooks/useForm.js';
 import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/useCart.js';
-import stockAPI from '../../../api/stock-api.js';
 
 const initialValues = {
     quantity: '1',
@@ -24,7 +23,6 @@ export default function ActionButtons({
     const addToUserCart = useAddToUserCart();
 
     let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(product._id, userId, inStockSizes);
-    console.log({ maxQuantities });
 
     // TODO: show user feedback that he has successfully added this item to the cart
     const addtoCartHandler = async (values) => {
@@ -41,11 +39,10 @@ export default function ActionButtons({
             }
 
             const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);
-            setMaxQuantities((oldSizes) => {
-                console.log({ oldSizes });
-
-                return { ...oldSizes, [values.size]: oldSizes[values.size] - values.quantity };
-            });
+            setMaxQuantities((oldSizes) => ({
+                ...oldSizes,
+                [values.size]: oldSizes[values.size] - values.quantity,
+            }));
         } catch (error) {
             console.log(error.message);
         }
@@ -82,7 +79,7 @@ export default function ActionButtons({
                             <Form.Control
                                 type="number"
                                 min="1"
-                                max={maxQuantities[values.size]}
+                                max={maxQuantities[values.size] || 1}
                                 name="quantity"
                                 value={values.quantity}
                                 onChange={changeHandler}
