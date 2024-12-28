@@ -2,9 +2,16 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useEditQuantityInUserCart, useGetMaxQuantitiesToAddToCart, useRemoveFromUserCart } from '../../../hooks/useCart.js';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
-import styles from './cartItem.module.css';
 import { useQuantityForm } from '../../../hooks/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/useStock.js';
+import { useRef } from 'react';
+import styles from './cartItem.module.css';
+
+const sizesOptions = {
+    small: 'S',
+    medium: 'M',
+    large: 'L',
+};
 
 // TODO: when listing cart items, look in stock for said size,
 // 1) if quantity is less than chosen amount, display message that the max amount available is: ___
@@ -13,6 +20,7 @@ import { useGetSizesForProduct } from '../../../hooks/useStock.js';
 export default function CartItem({ cartProduct, setUserCartProducts }) {
     const { userId } = useAuthContext();
     const removeFromCart = useRemoveFromUserCart();
+    const editQuantity = useEditQuantityInUserCart();
 
     const deleteCartItemHandler = async () => {
         try {
@@ -28,29 +36,23 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
         }
     };
 
-    // const { sizes: inStockSizes } = useGetSizesForProduct(cartProduct.productInfo._id);
-    // const { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(cartProduct.productInfo._id, userId, inStockSizes);
+    const formRef = useRef();
 
-    // const editCartItemQuantity = useEditQuantityInUserCart();
+    const quantityHandler = async (values) => {
+        values.quantity = values.quantity.toString().trim();
 
-    // const editQuantityHandler = async (values) => {
-    //     console.log(values);
-    //     if (maxQuantities[cartProduct.size] <= 0) {
-    //         return;
-    //     }
+        try {
+            if (!values.quantity || Number(values.quantity) < 0) {
+                throw new Error('Quantity must be greater than 0');
+            }
 
-    //     try {
-    //         await editCartItemQuantity(cartProduct._id, values.quantity);
-    //         setMaxQuantities((oldSizes) => ({
-    //             ...oldSizes,
-    //             [cartProduct.size]: oldSizes[cartProduct.size] - values.quantity,
-    //         }));
-    //     } catch (error) {
-    //         console.log(error.messge);
-    //     }
-    // };
+            await editQuantity(cartProduct._id, Number(values.quantity));
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
-    // const { values, changeHandler } = useQuantityForm(cartProduct.quantity, editQuantityHandler);
+    const { values, changeHandler, submitHandler } = useQuantityForm(cartProduct.quantity, quantityHandler, formRef);
 
     return (
         <Row className="d-flex flex-column flex-xs-row flex-sm-row flex-md-row flex-lg-row mt-4 bg-light border rounded shadow">
@@ -69,17 +71,17 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                 </Link>
                 <div className="d-flex gap-3 align-items-center">
                     <p>
-                        Size: <span>{cartProduct.size}</span>
+                        Size: <span>{sizesOptions[cartProduct.size]}</span>
                     </p>
-                    <Form>
+                    <Form ref={formRef} onSubmit={submitHandler} className="col-4 col-lg-3 mb-3">
                         <Form.Group className="">
                             <Form.Control
                                 type="number"
                                 min="1"
                                 max=""
                                 name="quantity"
-                                disabled
-                                defaultValue={cartProduct.quantity}
+                                value={values.quantity}
+                                onChange={changeHandler}
                             />
                         </Form.Group>
                     </Form>
