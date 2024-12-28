@@ -26,13 +26,7 @@ export default function Cart() {
                         </div>
                     </div>
                     {userCartProducts.map((product) => (
-                        <CartItem
-                            key={product._id}
-                            size={product.size}
-                            quantity={product.quantity}
-                            productInfo={product.productInfo}
-                            setUserCartProducts={setUserCartProducts}
-                        />
+                        <CartItem key={product._id} cartProduct={product} setUserCartProducts={setUserCartProducts} />
                     ))}
                 </Container>
             )}

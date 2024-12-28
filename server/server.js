@@ -1627,6 +1627,7 @@
                 _id: '756b0b43-fe72-495d-a749-3a8a8dc1e209',
             },
         },
+        cart: {},
     };
     var rules$1 = {
         users: {

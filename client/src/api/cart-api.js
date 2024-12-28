@@ -80,6 +80,10 @@ async function addToUserCart(productId, userId, size, quantity) {
     }
 }
 
+function editCartItemQuantity(cartItemId, quantity) {
+    return requester.patch(host + endpoints.byId(cartItemId), { quantity });
+}
+
 async function removeFromUserCart(productId, userId, size) {
     const productSizeRecord = await getProductSizeRecordInUserCart(productId, userId, size);
     return requester.delete(host + endpoints.byId(productSizeRecord[0]._id));
@@ -88,6 +92,7 @@ async function removeFromUserCart(productId, userId, size) {
 const cartAPI = {
     getCartForUser,
     addToUserCart,
+    editCartItemQuantity,
     removeFromUserCart,
     getProductSizeRecordInUserCart,
 };

@@ -1,8 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from '../../../../hooks/useForm.js';
 import { useEditReviewForProduct } from '../../../../hooks/useReviews.js';
-import { useAuthContext } from '../../../../contexts/AuthContext.jsx';
-import { useParams } from 'react-router-dom';
 
 export default function EditReviewForm({ reviewId, textState, setTextState, setIsEditing }) {
     const editReview = useEditReviewForProduct();

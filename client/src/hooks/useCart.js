@@ -27,6 +27,15 @@ export function useGetUserCart(userId) {
     return { userCartProducts, setUserCartProducts, isLoading };
 }
 
+export function useEditQuantityInUserCart() {
+    const editQuantityHandler = async (cartItemId, quantity) => {
+        const edittedCartItem = await cartAPI.editCartItemQuantity(cartItemId, quantity);
+        return edittedCartItem;
+    };
+
+    return editQuantityHandler;
+}
+
 export function useRemoveFromUserCart() {
     const removeFromCartHandler = async (productId, userId, size) => {
         const removedProduct = await cartAPI.removeFromUserCart(productId, userId, size);
@@ -49,12 +58,16 @@ export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) 
                 let inCartSizeQuantity = 0;
                 try {
                     const result = await cartAPI.getProductSizeRecordInUserCart(productId, userId, size);
-                    inCartSizeQuantity = result[0].quantity;
+
+                    inCartSizeQuantity = result[0]?.quantity || 0;
                 } catch (error) {
+                    console.log(error.message);
+
                     if (error.message == 'Resource not found') {
                         inCartSizeQuantity = 0;
                     }
                 }
+
                 setMaxQuantities((quantities) => ({
                     ...quantities,
                     [size]: inStockSizes[size] - inCartSizeQuantity,
@@ -62,7 +75,7 @@ export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) 
             }
         }
         loadInCart();
-    }, []);
+    }, [inStockSizes]);
 
     return { maxQuantities, setMaxQuantities };
 }

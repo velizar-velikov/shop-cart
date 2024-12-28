@@ -23,7 +23,6 @@ export default function ActionButtons({
     const addToUserCart = useAddToUserCart();
 
     let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(product._id, userId, inStockSizes);
-    console.log(maxQuantities);
 
     // TODO: show user feedback that he has successfully added this item to the cart
     const addtoCartHandler = async (values) => {
@@ -39,7 +38,7 @@ export default function ActionButtons({
                 throw new Error('Please specify a size first.');
             }
 
-            if (maxQuantities[size] <= 0) {
+            if (maxQuantities[values.size] <= 0) {
                 return;
             }
 
