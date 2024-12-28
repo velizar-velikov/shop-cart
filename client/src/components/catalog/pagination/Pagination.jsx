@@ -1,5 +1,4 @@
 import Pagination from 'react-bootstrap/Pagination';
-import { Link } from 'react-router-dom';
 
 export default function Paginator({ currentPage, setCurrentPage }) {
     return (

@@ -1,10 +1,12 @@
-import CatalogCard from '../catalog-card/CatalogCard.jsx';
 import { Row } from 'react-bootstrap';
+
+import CatalogCard from '../catalog-card/CatalogCard.jsx';
 import CatalogSearch from './catalog-search/CatalogSearch.jsx';
 import Paginator from './pagination/Pagination.jsx';
-import { useGetCatalogProducts } from '../../hooks/useProducts.js';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+
 import { useState } from 'react';
+import { useGetCatalogProducts } from '../../hooks/useProducts.js';
 
 export default function Catalog() {
     const [currentPage, setCurrentPage] = useState(1);

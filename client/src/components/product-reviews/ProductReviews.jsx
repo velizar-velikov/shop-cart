@@ -1,9 +1,11 @@
 import { Button, Container } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { Link, useParams } from 'react-router-dom';
+
 import ProductReviewItem from './product-review-item/ProductReviewItem.jsx';
-import { useAGetAllReviewsForProduct } from '../../hooks/useReviews.js';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+
+import { useAGetAllReviewsForProduct } from '../../hooks/useReviews.js';
 import { useGetOneProduct } from '../../hooks/useProducts.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 

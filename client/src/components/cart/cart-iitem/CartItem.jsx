@@ -1,12 +1,11 @@
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useEditQuantityInUserCart, useGetMaxQuantitiesToAddToCart, useRemoveFromUserCart } from '../../../hooks/useCart.js';
+import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks/useCart.js';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useQuantityForm } from '../../../hooks/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/useStock.js';
 import { useRef } from 'react';
 import styles from './cartItem.module.css';
-import stockAPI from '../../../api/stock-api.js';
 
 const sizesOptions = {
     small: 'S',
@@ -25,7 +24,6 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
 
     const { sizes: inStockSizes } = useGetSizesForProduct(cartProduct.productInfo._id);
     const maxQuantity = inStockSizes[cartProduct.size];
-    console.log({ maxQuantity });
 
     const deleteCartItemHandler = async () => {
         try {

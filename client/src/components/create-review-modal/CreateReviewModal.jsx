@@ -1,10 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+
 import { useAddReviewForProduct } from '../../hooks/useReviews.js';
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm.js';
+
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
 
 const initialValues = {
     rating: '5',

@@ -1,18 +1,22 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react';
+
 import { Link, useParams } from 'react-router-dom';
+
 import CreateReviewModal from '../create-review-modal/CreateReviewModal.jsx';
 import AddStockModal from '../add-stock-modal/AddStockModal.jsx';
 import DeleteProductModal from '../delete-product-modal/DeleteProductModal.jsx';
-import { useGetOneProduct } from '../../hooks/useProducts.js';
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
-import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/useReviews.js';
 import RatingStars from '../rating-stars/RatingStars.jsx';
+
+import { useState } from 'react';
+import { useGetOneProduct } from '../../hooks/useProducts.js';
+import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/useReviews.js';
 import { useGetSizesForProduct } from '../../hooks/useStock.js';
+
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
 
 export default function ProductDetails() {
     const { productId } = useParams();

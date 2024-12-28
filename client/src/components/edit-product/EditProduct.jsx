@@ -3,10 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEditProduct, useGetOneProduct } from '../../hooks/useProducts.js';
-import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+
 import { useForm } from '../../hooks/useForm.js';
 import { useState } from 'react';
+import { useEditProduct, useGetOneProduct } from '../../hooks/useProducts.js';
+
+import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 
 export default function EditProduct() {
     const { productId } = useParams();

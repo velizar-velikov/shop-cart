@@ -2,10 +2,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
-import { useForm } from '../../hooks/useForm.js';
-import productsAPI from '../../api/products-api.js';
-import { useNavigate } from 'react-router-dom';
+
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm.js';
 import { useCreateProduct } from '../../hooks/useProducts.js';
 
 const initialValues = {

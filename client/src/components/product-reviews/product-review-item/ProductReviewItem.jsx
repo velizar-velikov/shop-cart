@@ -1,9 +1,10 @@
 import Accordion from 'react-bootstrap/Accordion';
 import RatingStars from '../../rating-stars/RatingStars.jsx';
-import { useState } from 'react';
-import ReviewControlButtons from './review-control-buttons/ReviewControlButtons.jsx';
-import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import EditReviewForm from './edit-review-form/EditReviewForm.jsx';
+import ReviewControlButtons from './review-control-buttons/ReviewControlButtons.jsx';
+
+import { useState } from 'react';
+import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 
 export default function ProductReviewItem({ index, setReviews, text, rating, reviewerFullName, _id: reviewId, _ownerId }) {
     const [textState, setTextState] = useState({ text: text });

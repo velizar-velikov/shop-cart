@@ -1,8 +1,10 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+
 import { useForm } from '../../../hooks/useForm.js';
 import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/useCart.js';
+
+import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 
 const initialValues = {
     quantity: '1',

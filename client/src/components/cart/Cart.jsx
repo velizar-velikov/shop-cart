@@ -1,4 +1,4 @@
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { useGetUserCart } from '../../hooks/useCart.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import CartItem from './cart-iitem/CartItem.jsx';

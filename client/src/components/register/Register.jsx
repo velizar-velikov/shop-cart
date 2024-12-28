@@ -2,8 +2,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
-import { useState } from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
+
+import { useState } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { useRegister } from '../../hooks/useAuth.js';
 

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { Card, CardBody, CardTitle, CardText } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styles from './catalogCard.module.css';
 
 export default function CatalogCard({ _id, name, category, summary, imageUrl }) {
