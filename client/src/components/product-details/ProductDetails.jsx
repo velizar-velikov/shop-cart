@@ -108,8 +108,8 @@ export default function ProductDetails() {
                                     {isAuthenticated && (
                                         <ActionButtons
                                             product={product}
-                                            sizes={sizes}
-                                            updateSizes={(newSizes) => setSizes(newSizes)}
+                                            inStockSizes={sizes}
+                                            setInStockSizes={setSizes}
                                             isOutOfStock={isOutOfStock}
                                             handleShowAddStock={handleShowAddStock}
                                             handleShowDelete={handleShowDelete}

@@ -2,22 +2,31 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useForm } from '../../../hooks/useForm.js';
-import { useAddToUserCart } from '../../../hooks/useCart.js';
+import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/useCart.js';
+import stockAPI from '../../../api/stock-api.js';
 
 const initialValues = {
     quantity: '1',
     size: '---',
 };
 
-export default function ActionButtons({ product, sizes, isOutOfStock, handleShowAddStock, handleShowDelete }) {
+export default function ActionButtons({
+    product,
+    inStockSizes,
+    setInStockSizes,
+    isOutOfStock,
+    handleShowAddStock,
+    handleShowDelete,
+}) {
     const { userId } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
     const addToUserCart = useAddToUserCart();
 
+    let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(product._id, userId, inStockSizes);
+    console.log({ maxQuantities });
+
     // TODO: show user feedback that he has successfully added this item to the cart
-    // TODO: fix: look first in user cart and limit the total quantity that he can add in his cart
-    // to be no more than the available quantity of said product and size in stock
     const addtoCartHandler = async (values) => {
         try {
             values.quantity = values.quantity.trim();
@@ -32,6 +41,11 @@ export default function ActionButtons({ product, sizes, isOutOfStock, handleShow
             }
 
             const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);
+            setMaxQuantities((oldSizes) => {
+                console.log({ oldSizes });
+
+                return { ...oldSizes, [values.size]: oldSizes[values.size] - values.quantity };
+            });
         } catch (error) {
             console.log(error.message);
         }
@@ -68,7 +82,7 @@ export default function ActionButtons({ product, sizes, isOutOfStock, handleShow
                             <Form.Control
                                 type="number"
                                 min="1"
-                                max={sizes[values.size]}
+                                max={maxQuantities[values.size]}
                                 name="quantity"
                                 value={values.quantity}
                                 onChange={changeHandler}
@@ -79,18 +93,18 @@ export default function ActionButtons({ product, sizes, isOutOfStock, handleShow
                             <Form.Select
                                 size="sm"
                                 name="size"
-                                value={sizes[values.size] !== 0 ? values.size : '---'}
+                                value={inStockSizes[values.size] !== 0 ? values.size : '---'}
                                 onChange={changeHandler}
                             >
                                 <option value="---">---</option>
-                                <option disabled={sizes.small == 0} value="small">
-                                    S{sizes.small <= 3 && <p> ({sizes.small} left)</p>}
+                                <option disabled={maxQuantities.small == 0} value="small">
+                                    S{maxQuantities.small <= 3 && <p> ({maxQuantities.small} left)</p>}
                                 </option>
-                                <option disabled={sizes.medium == 0} value="medium">
-                                    M{sizes.medium <= 3 && <p> ({sizes.medium} left)</p>}
+                                <option disabled={maxQuantities.medium == 0} value="medium">
+                                    M{maxQuantities.medium <= 3 && <p> ({maxQuantities.medium} left)</p>}
                                 </option>
-                                <option disabled={sizes.large == 0} value="large">
-                                    L{sizes.large <= 3 && <p> ({sizes.large} left)</p>}
+                                <option disabled={maxQuantities.large == 0} value="large">
+                                    L{maxQuantities.large <= 3 && <p> ({maxQuantities.large} left)</p>}
                                 </option>
                             </Form.Select>
                         </Form.Group>

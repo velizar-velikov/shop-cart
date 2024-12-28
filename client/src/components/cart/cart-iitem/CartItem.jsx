@@ -4,6 +4,10 @@ import styles from './cartItem.module.css';
 import { useRemoveFromUserCart } from '../../../hooks/useCart.js';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 
+// TODO: when listing cart items, look in stock for said size,
+// 1) if quantity is less than chosen amount, display message that the max amount available is: ___
+// and do not add item for the next step until the amount is less or equal to the in stock amount
+// 2) if item is out of stock of said size, display message to user and do not add item for the next step
 export default function CartItem({ size, quantity, productInfo, setUserCartProducts }) {
     const { userId } = useAuthContext();
     const removeFromCart = useRemoveFromUserCart();

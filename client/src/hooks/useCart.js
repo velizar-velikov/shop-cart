@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import cartAPI from '../api/cart-api.js';
-import stockAPI from '../api/stock-api.js';
 
 export function useAddToUserCart() {
     const addToUserCartHandler = async (productId, userId, size, quantity) => {
@@ -35,4 +34,35 @@ export function useRemoveFromUserCart() {
     };
 
     return removeFromCartHandler;
+}
+
+export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) {
+    const [maxQuantities, setMaxQuantities] = useState({
+        small: 0,
+        medium: 0,
+        large: 0,
+    });
+
+    useEffect(() => {
+        async function loadInCart() {
+            for (const [size, quantity] of Object.entries(inStockSizes)) {
+                let inCartSizeQuantity = 0;
+                try {
+                    const result = await cartAPI.getProductSizeRecordInUserCart(productId, userId, size);
+                    inCartSizeQuantity = result[0].quantity;
+                } catch (error) {
+                    if (error.message == 'Resource not found') {
+                        inCartSizeQuantity = 0;
+                    }
+                }
+                setMaxQuantities((quantities) => ({
+                    ...quantities,
+                    [size]: inStockSizes[size] - inCartSizeQuantity,
+                }));
+            }
+        }
+        loadInCart();
+    }, []);
+
+    return { maxQuantities, setMaxQuantities };
 }

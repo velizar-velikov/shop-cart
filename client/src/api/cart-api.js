@@ -89,6 +89,7 @@ const cartAPI = {
     getCartForUser,
     addToUserCart,
     removeFromUserCart,
+    getProductSizeRecordInUserCart,
 };
 
 export default cartAPI;
