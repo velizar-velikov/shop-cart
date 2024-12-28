@@ -6,6 +6,7 @@ import { useQuantityForm } from '../../../hooks/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/useStock.js';
 import { useRef } from 'react';
 import styles from './cartItem.module.css';
+import stockAPI from '../../../api/stock-api.js';
 
 const sizesOptions = {
     small: 'S',
@@ -21,6 +22,10 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
     const { userId } = useAuthContext();
     const removeFromCart = useRemoveFromUserCart();
     const editQuantity = useEditQuantityInUserCart();
+
+    const { sizes: inStockSizes } = useGetSizesForProduct(cartProduct.productInfo._id);
+    const maxQuantity = inStockSizes[cartProduct.size];
+    console.log({ maxQuantity });
 
     const deleteCartItemHandler = async () => {
         try {
@@ -44,6 +49,10 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
         try {
             if (!values.quantity || Number(values.quantity) < 0) {
                 throw new Error('Quantity must be greater than 0');
+            }
+
+            if (values.quantity > maxQuantity) {
+                throw new Error(`We only have ${maxQuantity} in stock from this product.`);
             }
 
             await editQuantity(cartProduct._id, Number(values.quantity));
@@ -78,7 +87,7 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                             <Form.Control
                                 type="number"
                                 min="1"
-                                max=""
+                                max={maxQuantity}
                                 name="quantity"
                                 value={values.quantity}
                                 onChange={changeHandler}
