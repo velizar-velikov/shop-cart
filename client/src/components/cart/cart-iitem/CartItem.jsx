@@ -67,8 +67,6 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                 copiedCartProducts[index].quantity = Number(values.quantity);
                 return copiedCartProducts;
             });
-
-            console.log({ cartProduct });
         } catch (error) {
             console.log(error.message);
         }

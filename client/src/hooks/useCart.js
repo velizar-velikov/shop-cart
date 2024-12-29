@@ -33,7 +33,6 @@ export function useGetUserCartCount(userId) {
     useEffect(() => {
         async function loadUserCartCount() {
             const result = await cartAPI.getUserCartItemsCount(userId);
-            console.log(result);
 
             setCartItemsCount(result);
         }
