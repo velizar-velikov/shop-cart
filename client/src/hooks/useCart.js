@@ -38,7 +38,7 @@ export function useGetUserCartCount(userId) {
             setCartItemsCount(result);
         }
         loadUserCartCount();
-    }, []);
+    }, [userId]);
 
     return { cartItemsCount, setCartItemsCount };
 }

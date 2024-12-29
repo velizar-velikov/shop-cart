@@ -68,7 +68,6 @@ async function addToUserCart(productId, userId, size, quantity) {
         // we check if quantity in cart + new quantity is more than quantity in stock
         // if it is we abort the add to cart action
         const sizesInStock = await stockAPI.getSizesForProduct(productId);
-        console.log({ sizesInStock, productSizeRecord: productSizeRecord[0] });
 
         const newQuantity = Number(productSizeRecord[0].quantity) + Number(quantity);
 

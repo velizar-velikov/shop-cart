@@ -7,7 +7,7 @@ import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
 
 const singleDigitStyle = { fontSize: '0.85rem', padding: '0.04rem 0.25rem 0.15rem 0.25rem' };
-const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.1rem 0.18rem 0.18rem 0.10rem' };
+const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.09rem 0.15rem 0.2rem 0.12rem' };
 
 export default function Header() {
     const { isAuthenticated } = useAuthContext();

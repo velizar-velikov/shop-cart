@@ -36,6 +36,7 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                 const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);
                 return cartProducts.toSpliced(index, 1);
             });
+
             setCartItemsCount((oldCount) => oldCount - cartProduct.quantity);
         } catch (error) {
             console.log(error.message);
@@ -58,7 +59,8 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
 
             await editQuantity(cartProduct._id, Number(values.quantity));
 
-            // TODO: fix state update as it is not working somehow
+            setCartItemsCount((oldCount) => oldCount - cartProduct.quantity + Number(values.quantity));
+
             setUserCartProducts((cartProducts) => {
                 const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);
                 const copiedCartProducts = cartProducts.slice();
@@ -66,7 +68,7 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                 return copiedCartProducts;
             });
 
-            setCartItemsCount((oldCount) => oldCount - cartProduct.quantity + Number(values.quantity));
+            console.log({ cartProduct });
         } catch (error) {
             console.log(error.message);
         }
