@@ -8,7 +8,7 @@ export default function Cart() {
     const { userId } = useAuthContext();
 
     const { userCartProducts, setUserCartProducts, isLoading } = useGetUserCart(userId);
-    const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price), 0);
+    const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price) * Number(val.quantity), 0);
 
     return (
         <>
