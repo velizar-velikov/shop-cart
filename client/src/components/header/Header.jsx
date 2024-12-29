@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
+import { NavDropdown } from 'react-bootstrap';
 
 const singleDigitStyle = { fontSize: '0.85rem', padding: '0.03rem 0.28rem 0.12rem 0.28rem' };
 const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.09rem 0.13rem 0.2rem 0.12rem' };
@@ -31,9 +32,23 @@ export default function Header() {
                             <Nav.Link as={Link} to="/create">
                                 Create product
                             </Nav.Link>
-                            <Nav.Link as={Link} to="/logout">
-                                Logout
-                            </Nav.Link>
+
+                            <NavDropdown title="Profile" id="basic-nav-dropdown">
+                                <NavDropdown.Item as={Link} to={''}>
+                                    Settings
+                                </NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to={''}>
+                                    Stock
+                                </NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to={''}>
+                                    Olders
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item as={Link} to="/logout">
+                                    Sign out
+                                </NavDropdown.Item>
+                            </NavDropdown>
+
                             <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">
                                 <i className="fa-solid fa-cart-shopping fa-xl"></i>
                                 {cartItemsCount > 0 && <CartBubble cartItemsCount={cartItemsCount} />}
