@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
 
+const singleDigitStyle = { fontSize: '0.85rem', padding: '0.04rem 0.25rem 0.15rem 0.25rem' };
+const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.1rem 0.18rem 0.18rem 0.10rem' };
+
 export default function Header() {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = useCartContext();
@@ -35,7 +38,7 @@ export default function Header() {
                                 <i className="fa-solid fa-cart-shopping fa-xl"></i>
                                 {/* overide boostrap styles with inline css */}
                                 <span
-                                    style={{ fontSize: '0.85rem', padding: '0.04rem 0.25rem 0.15rem 0.25rem' }}
+                                    style={cartItemsCount < 10 ? singleDigitStyle : doubleDigitStyle}
                                     className="position-absolute top-25 start-75 translate-middle badge rounded-circle bg-danger py-0.125 px-0.25"
                                 >
                                     {cartItemsCount}
