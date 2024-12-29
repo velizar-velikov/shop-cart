@@ -3,13 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 
 import { useNavigate } from 'react-router-dom';
 import productsAPI from '../../api/products-api.js';
+import paths from '../../config/paths.js';
 
 export default function DeleteProductModal({ show, handleClose, _id, name, brand }) {
     const navigate = useNavigate();
     const deleteHandler = async () => {
         try {
             await productsAPI.deleteById(_id);
-            navigate('/catalog');
+            navigate(paths.catalog.path);
         } catch (error) {
             console.log(error.message);
             handleClose();

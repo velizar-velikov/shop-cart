@@ -6,6 +6,7 @@ import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
+import paths from '../../../config/paths.js';
 
 const initialValues = {
     quantity: '1',
@@ -70,7 +71,7 @@ export default function ActionButtons({
                         </Button>
                     </Col>
                     <Col sm={2} className="">
-                        <Button as={Link} to={`/catalog/${product._id}/edit`} className="mb-1">
+                        <Button as={Link} to={paths.editProduct.getHref(product._id)} className="mb-1">
                             Edit
                         </Button>
                     </Col>

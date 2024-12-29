@@ -15,6 +15,8 @@ import Logout from './components/logout/Logout.jsx';
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
 
+import paths from './config/paths.js';
+
 function App() {
     return (
         <div className="d-flex flex-column min-vh-100">
@@ -23,16 +25,16 @@ function App() {
                     <Header />
                     <main>
                         <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/catalog" element={<Catalog />} />
-                            <Route path="/catalog/:productId/details" element={<ProductDetails />} />
-                            <Route path="/catalog/:productId/edit" element={<EditProduct />} />
-                            <Route path="/catalog/:productId/reviews" element={<ProductReviews />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/logout" element={<Logout />} />
-                            <Route path="/create" element={<CreateProduct />} />
-                            <Route path="/cart" element={<Cart />} />
+                            <Route path={paths.home.path} element={<Home />} />
+                            <Route path={paths.catalog.path} element={<Catalog />} />
+                            <Route path={paths.details.path} element={<ProductDetails />} />
+                            <Route path={paths.editProduct.path} element={<EditProduct />} />
+                            <Route path={paths.reviews.path} element={<ProductReviews />} />
+                            <Route path={paths.login.path} element={<Login />} />
+                            <Route path={paths.register.path} element={<Register />} />
+                            <Route path={paths.logout.path} element={<Logout />} />
+                            <Route path={paths.createProduct.path} element={<CreateProduct />} />
+                            <Route path={paths.cart.path} element={<Cart />} />
                         </Routes>
                     </main>
                 </CartContextProvider>

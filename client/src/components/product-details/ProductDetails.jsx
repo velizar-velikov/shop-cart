@@ -17,6 +17,7 @@ import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/useRe
 import { useGetSizesForProduct } from '../../hooks/useStock.js';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import paths from '../../config/paths.js';
 
 export default function ProductDetails() {
     const { productId } = useParams();
@@ -94,7 +95,7 @@ export default function ProductDetails() {
 
                                             <p className="small fst-italic">
                                                 {averageRating.toFixed(1)}/{' '}
-                                                <Link to={`/catalog/${product._id}/reviews`}>{ratingsCount} reviews</Link>
+                                                <Link to={paths.reviews.getHref(product._id)}>{ratingsCount} reviews</Link>
                                             </p>
                                         </div>
 

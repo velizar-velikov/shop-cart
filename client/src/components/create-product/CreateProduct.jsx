@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm.js';
 import { useCreateProduct } from '../../hooks/useProducts.js';
+import paths from '../../config/paths.js';
 
 const initialValues = {
     name: '',
@@ -35,7 +36,7 @@ export default function CreateProduct() {
             }
 
             const product = await createProduct(values);
-            navigate(`/catalog/${product._id}/details`);
+            navigate(paths.details.getHref(product._id));
         } catch (error) {
             console.log(error.message);
             setErrorMessage(error.message);

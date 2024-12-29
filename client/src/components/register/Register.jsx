@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { useRegister } from '../../hooks/useAuth.js';
+import paths from '../../config/paths.js';
 
 const initialValues = {
     firstName: '',
@@ -38,7 +39,7 @@ export default function Register() {
             await register(firstName, lastName, email, password);
             console.log('successful registration with:', email);
 
-            navigate('/');
+            navigate(paths.home.path);
         } catch (error) {
             console.log(error.message);
             setErrorMessage(error.message);
@@ -105,7 +106,7 @@ export default function Register() {
                     Register
                 </Button>
                 <p className="mt-3 text-end">
-                    Already have an account? click <Link to="/login">here</Link>
+                    Already have an account? click <Link to={paths.login.path}>here</Link>
                 </p>
             </Form>
         </Container>

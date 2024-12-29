@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from '../../hooks/useForm.js';
 import { useLogin } from '../../hooks/useAuth.js';
+import paths from '../../config/paths.js';
 
 const initialValues = {
     email: '',
@@ -29,7 +30,7 @@ export default function Login() {
             await login(email, password);
             console.log('successful login with:', email);
 
-            navigate('/');
+            navigate(paths.home.path);
         } catch (error) {
             console.log(error.message);
             setErrorMessage(error.message);
@@ -66,7 +67,7 @@ export default function Login() {
                     Login
                 </Button>
                 <p className="mt-3 text-end">
-                    Dont't have an account? click <Link to="/register">here</Link>
+                    Dont't have an account? click <Link to={paths.register.path}>here</Link>
                 </p>
             </Form>
         </Container>

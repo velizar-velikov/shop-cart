@@ -5,6 +5,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import CatalogCard from '../catalog-card/CatalogCard.jsx';
 
 import { useGetLatestProducts } from '../../hooks/useProducts.js';
+import paths from '../../config/paths.js';
 
 export default function Home() {
     const { products, isLoading } = useGetLatestProducts();
@@ -18,7 +19,7 @@ export default function Home() {
                     <h1 className="mt-4 text-center">
                         Your newest clothing store is here! <br></br>{' '}
                         <span className="fs-3">
-                            Start your shopping therapy <Link to="/catalog">now!</Link>
+                            Start your shopping therapy <Link to={paths.catalog.path}>now!</Link>
                         </span>
                     </h1>
                     {products.length == 0 ? (

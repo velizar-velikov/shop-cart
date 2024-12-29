@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
 import { NavDropdown } from 'react-bootstrap';
+import paths from '../../config/paths.js';
 
 const singleDigitStyle = { fontSize: '0.85rem', padding: '0.03rem 0.28rem 0.12rem 0.28rem' };
 const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.09rem 0.13rem 0.2rem 0.12rem' };
@@ -17,19 +18,19 @@ export default function Header() {
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
             <Container>
-                <Navbar.Brand as={Link} to="/">
+                <Navbar.Brand as={Link} to={paths.home.path}>
                     Velizar fashion
                 </Navbar.Brand>
                 <Nav className="ml-auto navbar navbar-expand-sm justify-content-end">
-                    <Nav.Link as={Link} to="/">
+                    <Nav.Link as={Link} to={paths.home.path}>
                         Home
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/catalog">
+                    <Nav.Link as={Link} to={paths.catalog.path}>
                         Catalog
                     </Nav.Link>
                     {isAuthenticated ? (
                         <>
-                            <Nav.Link as={Link} to="/create">
+                            <Nav.Link as={Link} to={paths.createProduct.path}>
                                 Create product
                             </Nav.Link>
 
@@ -44,7 +45,7 @@ export default function Header() {
                                     Olders
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item as={Link} to="/logout">
+                                <NavDropdown.Item as={Link} to={paths.logout.path}>
                                     Sign out
                                 </NavDropdown.Item>
                             </NavDropdown>
@@ -56,10 +57,10 @@ export default function Header() {
                         </>
                     ) : (
                         <>
-                            <Nav.Link as={Link} to="/login">
+                            <Nav.Link as={Link} to={paths.login.path}>
                                 Login
                             </Nav.Link>
-                            <Nav.Link as={Link} to="/register">
+                            <Nav.Link as={Link} to={paths.register.path}>
                                 Register
                             </Nav.Link>
                         </>

@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useEditProduct, useGetOneProduct } from '../../hooks/useProducts.js';
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+import paths from '../../config/paths.js';
 
 export default function EditProduct() {
     const { productId } = useParams();
@@ -29,7 +30,7 @@ export default function EditProduct() {
             }
 
             await editProduct(productId, values);
-            navigate(`/catalog/${productId}/details`);
+            navigate(paths.details.getHref(productId));
         } catch (error) {
             console.log(error.message);
             setErrorMessage(error.message);
@@ -45,7 +46,7 @@ export default function EditProduct() {
             ) : (
                 <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
                     <Form onSubmit={submitHandler}>
-                        <Link to={`/catalog/${productId}/details`}>
+                        <Link to={paths.details.getHref(productId)}>
                             <i className="fa-solid fa-arrow-left fa-lg mb-3 text-dark"></i>
                         </Link>
                         <h2>Edit product</h2>

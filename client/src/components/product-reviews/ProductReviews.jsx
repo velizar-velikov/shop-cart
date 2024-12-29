@@ -8,6 +8,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { useAGetAllReviewsForProduct } from '../../hooks/useReviews.js';
 import { useGetOneProduct } from '../../hooks/useProducts.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import paths from '../../config/paths.js';
 
 export default function ProductReviews() {
     const { productId } = useParams();
@@ -22,7 +23,7 @@ export default function ProductReviews() {
             ) : (
                 <Container className="container-sm col-8 col-md-7 col-lg-6 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
                     <div className="d-flex mb-3 gap-5">
-                        <Button as={Link} to={`/catalog/${productId}/details`} className="col-2 h-50">
+                        <Button as={Link} to={paths.details.getHref(productId)} className="col-2 h-50">
                             Back
                         </Button>
                         <h3 className="text-center d-flex flex-wrap justify-content-center align-items-center gap-2">
