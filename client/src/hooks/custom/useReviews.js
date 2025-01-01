@@ -1,5 +1,6 @@
 import reviewsAPI from '../../api/reviews-api.js';
 import { useEffect, useState } from 'react';
+import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useAGetAllReviewsForProduct(productId, userId) {
     const [reviews, setReviews] = useState([]);
@@ -84,21 +85,14 @@ export function useDeleteReviewForProduct() {
 }
 
 export function useGetRatingInfo(productId, hasAddedNewReview) {
-    const [isLoading, setIsLoading] = useState(false);
-
-    const [ratingInfo, setRatingInfo] = useState({
+    const initialState = {
         averageRating: 0,
         ratingsCount: 0,
-    });
-    useEffect(() => {
-        async function loadRatingInfo() {
-            setIsLoading(true);
-            const result = await reviewsAPI.getRatingInfo(productId);
-            setRatingInfo(result);
-            setIsLoading(false);
-        }
-        loadRatingInfo();
-    }, [hasAddedNewReview]);
+    };
+
+    const { data: ratingInfo, isLoading } = useLoadData(initialState, reviewsAPI.getRatingInfo, { productId }, [
+        hasAddedNewReview,
+    ]);
 
     return { ...ratingInfo, isLoading };
 }
