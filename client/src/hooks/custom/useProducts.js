@@ -12,7 +12,7 @@ export function useGetCatalogProducts(currentPage, search) {
 }
 
 export function useGetCatalogLength(search) {
-    const { data: length, isLoading } = useLoadData([], productsAPI.getCalatogLength, { search }, [search]);
+    const { data: length, isLoading } = useLoadData(0, productsAPI.getCalatogLength, { search }, [search]);
 
     return { length, isLoading };
 }
