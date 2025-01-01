@@ -1,60 +1,44 @@
 import reviewsAPI from '../../api/reviews-api.js';
-import { useEffect, useState } from 'react';
 import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useAGetAllReviewsForProduct(productId, userId) {
-    const [reviews, setReviews] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const {
+        data: reviews,
+        setData: setReviews,
+        isLoading,
+        hasError,
+    } = useLoadData([], reviewsAPI.getReviewsForProduct, { productId });
 
-    useEffect(() => {
-        async function loadReviews() {
-            setIsLoading(true);
-            try {
-                let result = await reviewsAPI.getReviewsForProduct(productId);
-                if (userId) {
-                    // moving the user review to the beginning so he can see his own review at the top
-                    const userReviewIndex = result.findIndex((review) => review._ownerId == userId);
-                    if (userReviewIndex !== -1) {
-                        const userReview = result.splice(userReviewIndex, 1)[0];
-                        userReview.reviewerFullName = userReview.reviewerFullName + ' (you)';
-                        result.unshift(userReview);
-                    }
-                }
-                setReviews(result);
-            } catch (error) {
-                console.log(error.message);
-                setReviews([]);
-            } finally {
-                setIsLoading(false);
-            }
+    if (hasError) {
+        setReviews([]);
+    }
+
+    if (userId) {
+        // moving the user review to the beginning so he can see his own review at the top
+        const userReviewIndex = reviews.findIndex((review) => review._ownerId == userId);
+        if (userReviewIndex !== -1) {
+            const userReview = reviews.splice(userReviewIndex, 1)[0];
+            userReview.reviewerFullName = userReview.reviewerFullName + ' (you)';
+            reviews.unshift(userReview);
         }
-        loadReviews();
-    }, []);
+    }
 
     return { reviews, setReviews, isLoading };
 }
 
 export function useGetUserReviewsForProduct(productId, userId, hasAddedNewReview) {
-    const [reviews, setReviews] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const {
+        data: userReviews,
+        setData: setReviews,
+        isLoading,
+        hasError,
+    } = useLoadData([], reviewsAPI.getUserReviewsForProduct, { productId, userId }, [hasAddedNewReview]);
 
-    useEffect(() => {
-        async function loadUserReviews() {
-            setIsLoading(true);
-            try {
-                const result = await reviewsAPI.getUserReviewsForProduct(productId, userId);
-                setReviews(result);
-            } catch (error) {
-                console.log(error.message);
-                setReviews([]);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        loadUserReviews();
-    }, [hasAddedNewReview]);
+    if (hasError) {
+        setReviews([]);
+    }
 
-    return { userReviews: reviews, hasUserReviewed: reviews.length > 0, isLoading };
+    return { userReviews, hasUserReviewed: userReviews.length > 0, isLoading };
 }
 
 export function useAddReviewForProduct() {
