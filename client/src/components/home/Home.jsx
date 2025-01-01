@@ -19,7 +19,7 @@ export default function Home() {
                     <h1 className="mt-4 text-center">
                         Your newest clothing store is here! <br></br>{' '}
                         <span className="fs-3">
-                            Start your shopping therapy <Link to={paths.catalog.path}>now!</Link>
+                            Start your shopping therapy <Link to={paths.catalog.basePath}>now!</Link>
                         </span>
                     </h1>
                     {products.length == 0 ? (

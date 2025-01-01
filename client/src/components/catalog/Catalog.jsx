@@ -6,25 +6,27 @@ import Paginator from './pagination/Pagination.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 
 import { useState } from 'react';
-import { useGetCatalogProducts } from '../../hooks/useProducts.js';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/useProducts.js';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Catalog() {
-    const [currentPage, setCurrentPage] = useState(1);
-
     const [searchParams, setSearchParams] = useSearchParams();
-    const { category } = useParams();
 
     const [search, setSearch] = useState({
         category: searchParams.get('category') || 'All categories',
         name: searchParams.get('name') || '',
     });
 
+    let currentPage = Number(searchParams.get('page') || 1);
+
     const { products, isLoading } = useGetCatalogProducts(currentPage, search);
+    const { length: catalogLength } = useGetCatalogLength(search);
+
+    const maxPage = Math.ceil(catalogLength / 4);
 
     const updateSearch = (newSearch) => {
         setSearch((oldSearchState) => newSearch);
-        setCurrentPage(1);
+        currentPage = 1;
     };
 
     return (
@@ -46,7 +48,7 @@ export default function Catalog() {
                                     <CatalogCard key={product._id} {...product} />
                                 ))}
                             </Row>
-                            <Paginator currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                            <Paginator currentPage={currentPage} maxPage={maxPage} setSearchParams={setSearchParams} />
                         </div>
                     )}
                 </section>

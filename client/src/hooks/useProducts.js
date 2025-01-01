@@ -19,6 +19,23 @@ export function useGetCatalogProducts(currentPage, search) {
     return { products, isLoading };
 }
 
+export function useGetCatalogLength(search) {
+    const [length, setLength] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function loadProducts() {
+            setIsLoading(true);
+            const length = await productsAPI.getCalatogLength(search);
+            setLength(length);
+            setIsLoading(false);
+        }
+        loadProducts();
+    }, [search]);
+
+    return { length, isLoading };
+}
+
 export function useGetLatestProducts() {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
