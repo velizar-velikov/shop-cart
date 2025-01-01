@@ -1,12 +1,13 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
 import { NavDropdown } from 'react-bootstrap';
 import paths from '../../config/paths.js';
+import { useLogout } from '../../hooks/custom/useAuth.js';
 
 const singleDigitStyle = { fontSize: '0.85rem', padding: '0.03rem 0.28rem 0.12rem 0.28rem' };
 const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.09rem 0.13rem 0.2rem 0.12rem' };
@@ -14,6 +15,14 @@ const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.09rem 0.13rem 0.2rem 
 export default function Header() {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = useCartContext();
+
+    const navigate = useNavigate();
+    const logout = useLogout();
+
+    const logoutHandler = async () => {
+        await logout();
+        navigate(paths.home.path);
+    };
 
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
@@ -45,9 +54,7 @@ export default function Header() {
                                     Olders
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item as={Link} to={paths.logout.path}>
-                                    Sign out
-                                </NavDropdown.Item>
+                                <NavDropdown.Item onClick={logoutHandler}>Sign out</NavDropdown.Item>
                             </NavDropdown>
 
                             <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">

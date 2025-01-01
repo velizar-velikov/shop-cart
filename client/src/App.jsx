@@ -11,7 +11,6 @@ import ProductDetails from './components/product-details/ProductDetails.jsx';
 import ProductReviews from './components/product-reviews/ProductReviews.jsx';
 import Cart from './components/cart/Cart.jsx';
 import EditProduct from './components/edit-product/EditProduct.jsx';
-import Logout from './components/logout/Logout.jsx';
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
 
@@ -46,7 +45,6 @@ function App() {
                                 <Route path={paths.createProduct.path} element={<CreateProduct />} />
                                 <Route path={paths.editProduct.path} element={<EditProduct />} />
                                 <Route path={paths.cart.path} element={<Cart />} />
-                                <Route path={paths.logout.path} element={<Logout />} />
                             </Route>
                         </Routes>
                     </main>
