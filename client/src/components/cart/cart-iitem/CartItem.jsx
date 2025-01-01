@@ -7,6 +7,7 @@ import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
 import { useRef } from 'react';
 import styles from './cartItem.module.css';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
+import paths from '../../../config/paths.js';
 
 const sizesOptions = {
     small: 'S',
@@ -77,14 +78,14 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
     return (
         <Row className="d-flex flex-column flex-xs-row flex-sm-row flex-md-row flex-lg-row mt-4 bg-light border rounded shadow">
             <Col sm={2} className="p-3 p-sm-0 d-flex justify-content-center align-items-center">
-                <Card as={Link} to={`/catalog/${cartProduct.productInfo._id}/details`}>
+                <Card as={Link} to={paths.details.getHref(cartProduct.productInfo._id)}>
                     <img src={cartProduct.productInfo.imageUrl} className={styles['img-fixed-height']} />
                 </Card>
             </Col>
             <Col sm={8} className="col-7 col-md-8 col-lg-8 col-xl-8 col-xxl-8 d-flex flex-column justify-content-around">
                 <Link
                     className="d-flex align-items-center gap-4 text-decoration-none text-dark"
-                    to={`/catalog/${cartProduct.productInfo._id}/details`}
+                    to={paths.details.getHref(cartProduct.productInfo._id)}
                 >
                     <h5 className="text-secondary">{cartProduct.productInfo.brand}</h5>
                     <h4 className="">{cartProduct.productInfo.name}</h4>
