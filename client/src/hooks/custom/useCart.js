@@ -12,19 +12,6 @@ export function useAddToUserCart() {
 }
 
 export function useGetUserCart(userId) {
-    // const [userCartProducts, setUserCartProducts] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
-
-    // useEffect(() => {
-    //     async function loadUserCart() {
-    //         setIsLoading(true);
-    //         const result = await cartAPI.getCartForUser(userId);
-    //         setUserCartProducts(result);
-    //         setIsLoading(false);
-    //     }
-    //     loadUserCart();
-    // }, []);
-
     const {
         data: userCartProducts,
         setData: setUserCartProducts,
@@ -35,16 +22,9 @@ export function useGetUserCart(userId) {
 }
 
 export function useGetUserCartCount(userId) {
-    const [cartItemsCount, setCartItemsCount] = useState(0);
-
-    useEffect(() => {
-        async function loadUserCartCount() {
-            const result = await cartAPI.getUserCartItemsCount(userId);
-
-            setCartItemsCount(result);
-        }
-        loadUserCartCount();
-    }, [userId]);
+    const { data: cartItemsCount, setData: setCartItemsCount } = useLoadData(0, cartAPI.getUserCartItemsCount, { userId }, [
+        userId,
+    ]);
 
     return { cartItemsCount, setCartItemsCount };
 }
