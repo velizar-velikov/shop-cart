@@ -6,21 +6,27 @@ import { useEffect, useState } from 'react';
  * @param {function} asyncCallback the api function to call
  * @param {object} params the params to call the function with
  * @param {array} dependencies the dependencies on which the useEffect to retrigger
- * @returns {{data: any, setData: function, isLoading: boolean}}
+ * @returns {{data: any, setData: function, isLoading: boolean, hasError: boolean}}
  */
 export function useLoadData(initialState, asyncCallback, params = {}, dependencies = []) {
     const [data, setData] = useState(initialState);
     const [isLoading, setIsLoading] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
         async function loadProduct() {
             setIsLoading(true);
-            const result = await asyncCallback(...Object.values(params));
-            setData(result);
-            setIsLoading(false);
+            try {
+                const result = await asyncCallback(...Object.values(params));
+                setData(result);
+            } catch (error) {
+                setHasError(true);
+            } finally {
+                setIsLoading(false);
+            }
         }
         loadProduct();
     }, [...dependencies]);
 
-    return { data, setData, isLoading };
+    return { data, setData, isLoading, hasError };
 }
