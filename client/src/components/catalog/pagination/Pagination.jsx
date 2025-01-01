@@ -1,5 +1,5 @@
 import Pagination from 'react-bootstrap/Pagination';
-import { usePaginator } from '../../../hooks/usePaginator.js';
+import { usePaginator } from '../../../hooks/custom/usePaginator.js';
 
 export default function Paginator({ currentPage, maxPage, setSearchParams }) {
     const { onBackHandler, onForwardHandler, onFirstPageHandler, onLastPageHandler } = usePaginator(

@@ -2,9 +2,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-import { useAddReviewForProduct } from '../../hooks/useReviews.js';
+import { useAddReviewForProduct } from '../../hooks/custom/useReviews.js';
 import { useParams } from 'react-router-dom';
-import { useForm } from '../../hooks/useForm.js';
+import { useForm } from '../../hooks/abstracts/useForm.js';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 

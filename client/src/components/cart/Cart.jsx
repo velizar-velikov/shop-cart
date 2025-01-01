@@ -1,5 +1,5 @@
 import { Button, Container } from 'react-bootstrap';
-import { useGetUserCart } from '../../hooks/useCart.js';
+import { useGetUserCart } from '../../hooks/custom/useCart.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import CartItem from './cart-iitem/CartItem.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';

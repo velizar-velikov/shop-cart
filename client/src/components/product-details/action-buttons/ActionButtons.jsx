@@ -1,8 +1,8 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { useForm } from '../../../hooks/useForm.js';
-import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/useCart.js';
+import { useForm } from '../../../hooks/abstracts/useForm.js';
+import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/custom/useCart.js';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';

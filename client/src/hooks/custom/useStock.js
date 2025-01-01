@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import stockAPI from '../api/stock-api.js';
+import stockAPI from '../../api/stock-api.js';
 
 export function useAddStock() {
     const addStockHandler = async (productId, sizesToAdd) => {

@@ -1,4 +1,4 @@
-import reviewsAPI from '../api/reviews-api.js';
+import reviewsAPI from '../../api/reviews-api.js';
 import { useEffect, useState } from 'react';
 
 export function useAGetAllReviewsForProduct(productId, userId) {

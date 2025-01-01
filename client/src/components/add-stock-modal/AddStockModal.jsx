@@ -2,8 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useParams } from 'react-router-dom';
-import { useAddStock } from '../../hooks/useStock.js';
-import { useForm } from '../../hooks/useForm.js';
+import { useAddStock } from '../../hooks/custom/useStock.js';
+import { useForm } from '../../hooks/abstracts/useForm.js';
 
 const initialValues = {
     small: '0',

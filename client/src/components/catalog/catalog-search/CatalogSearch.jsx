@@ -1,5 +1,5 @@
 import { Button, Container, FormControl, FormSelect, Row } from 'react-bootstrap';
-import { useForm } from '../../../hooks/useForm.js';
+import { useForm } from '../../../hooks/abstracts/useForm.js';
 
 export default function CatalogSearch({ searchState, updateSearch, setSearchParams }) {
     const searchHandler = (values) => {

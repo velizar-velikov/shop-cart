@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import productsAPI from '../api/products-api.js';
-import stockAPI from '../api/stock-api.js';
+import productsAPI from '../../api/products-api.js';
+import stockAPI from '../../api/stock-api.js';
 
 export function useGetCatalogProducts(currentPage, search) {
     const [products, setProducts] = useState([]);

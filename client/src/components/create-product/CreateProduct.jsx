@@ -5,8 +5,8 @@ import { Col, Row } from 'react-bootstrap';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from '../../hooks/useForm.js';
-import { useCreateProduct } from '../../hooks/useProducts.js';
+import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useCreateProduct } from '../../hooks/custom/useProducts.js';
 import paths from '../../config/paths.js';
 
 const initialValues = {

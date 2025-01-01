@@ -5,8 +5,8 @@ import Container from 'react-bootstrap/Container';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
-import { useForm } from '../../hooks/useForm.js';
-import { useLogin } from '../../hooks/useAuth.js';
+import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useLogin } from '../../hooks/custom/useAuth.js';
 import paths from '../../config/paths.js';
 
 const initialValues = {

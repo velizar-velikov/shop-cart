@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import cartAPI from '../api/cart-api.js';
+import cartAPI from '../../api/cart-api.js';
+import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useAddToUserCart() {
     const addToUserCartHandler = async (productId, userId, size, quantity) => {
@@ -11,18 +12,24 @@ export function useAddToUserCart() {
 }
 
 export function useGetUserCart(userId) {
-    const [userCartProducts, setUserCartProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [userCartProducts, setUserCartProducts] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        async function loadUserCart() {
-            setIsLoading(true);
-            const result = await cartAPI.getCartForUser(userId);
-            setUserCartProducts(result);
-            setIsLoading(false);
-        }
-        loadUserCart();
-    }, []);
+    // useEffect(() => {
+    //     async function loadUserCart() {
+    //         setIsLoading(true);
+    //         const result = await cartAPI.getCartForUser(userId);
+    //         setUserCartProducts(result);
+    //         setIsLoading(false);
+    //     }
+    //     loadUserCart();
+    // }, []);
+
+    const {
+        data: userCartProducts,
+        setData: setUserCartProducts,
+        isLoading,
+    } = useLoadData([], cartAPI.getCartForUser, { userId });
 
     return { userCartProducts, setUserCartProducts, isLoading };
 }

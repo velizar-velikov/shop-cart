@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { usePersistedState } from '../hooks/usePersistedState.js';
+import { usePersistedState } from '../hooks/abstracts/usePersistedState.js';
 
 const AuthContext = createContext({
     userId: '',

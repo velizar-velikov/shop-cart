@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useLogout } from '../../hooks/useAuth.js';
+import { useLogout } from '../../hooks/custom/useAuth.js';
 import paths from '../../config/paths.js';
 
 export default function Logout() {

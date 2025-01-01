@@ -4,9 +4,9 @@ import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { useForm } from '../../hooks/useForm.js';
+import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useState } from 'react';
-import { useEditProduct, useGetOneProduct } from '../../hooks/useProducts.js';
+import { useEditProduct, useGetOneProduct } from '../../hooks/custom/useProducts.js';
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import paths from '../../config/paths.js';

@@ -1,5 +1,5 @@
-import authAPI from '../api/auth-api.js';
-import { useAuthContext } from '../contexts/AuthContext.jsx';
+import authAPI from '../../api/auth-api.js';
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
 
 export function useLogin() {
     const { changeAuthState } = useAuthContext();

@@ -6,7 +6,7 @@ import Paginator from './pagination/Pagination.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 
 import { useState } from 'react';
-import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/useProducts.js';
+import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/custom/useProducts.js';
 import { useSearchParams } from 'react-router-dom';
 import NoProducts from './no-products/NoProducts.jsx';
 

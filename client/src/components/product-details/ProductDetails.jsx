@@ -12,9 +12,9 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import RatingStars from '../rating-stars/RatingStars.jsx';
 
 import { useState } from 'react';
-import { useGetOneProduct } from '../../hooks/useProducts.js';
-import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/useReviews.js';
-import { useGetSizesForProduct } from '../../hooks/useStock.js';
+import { useGetOneProduct } from '../../hooks/custom/useProducts.js';
+import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/custom/useReviews.js';
+import { useGetSizesForProduct } from '../../hooks/custom/useStock.js';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import paths from '../../config/paths.js';

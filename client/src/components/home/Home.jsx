@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import CatalogCard from '../catalog-card/CatalogCard.jsx';
 
-import { useGetLatestProducts } from '../../hooks/useProducts.js';
+import { useGetLatestProducts } from '../../hooks/custom/useProducts.js';
 import paths from '../../config/paths.js';
 
 export default function Home() {
     const { products, isLoading } = useGetLatestProducts();
+    console.log({ products });
 
     return (
         <>

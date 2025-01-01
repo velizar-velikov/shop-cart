@@ -1,6 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
-import { useForm } from '../../../../hooks/useForm.js';
-import { useEditReviewForProduct } from '../../../../hooks/useReviews.js';
+import { useForm } from '../../../../hooks/abstracts/useForm.js';
+import { useEditReviewForProduct } from '../../../../hooks/custom/useReviews.js';
 
 export default function EditReviewForm({ reviewId, textState, setTextState, setIsEditing }) {
     const editReview = useEditReviewForProduct();

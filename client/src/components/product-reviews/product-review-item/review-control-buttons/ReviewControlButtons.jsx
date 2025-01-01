@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap';
-import { useDeleteReviewForProduct } from '../../../../hooks/useReviews.js';
+import { useDeleteReviewForProduct } from '../../../../hooks/custom/useReviews.js';
 
 export default function ReviewControlButtons({ reviewId, setReviews, setIsEditing }) {
     const deleteReview = useDeleteReviewForProduct();
