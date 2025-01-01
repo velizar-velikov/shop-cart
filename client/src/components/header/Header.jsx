@@ -25,7 +25,7 @@ export default function Header() {
                     <Nav.Link as={Link} to={paths.home.path}>
                         Home
                     </Nav.Link>
-                    <Nav.Link as={Link} to={paths.catalog.path}>
+                    <Nav.Link as={Link} to={paths.catalog.basePath}>
                         Catalog
                     </Nav.Link>
                     {isAuthenticated ? (

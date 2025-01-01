@@ -26,7 +26,10 @@ function App() {
                     <main>
                         <Routes>
                             <Route path={paths.home.path} element={<Home />} />
-                            <Route path={paths.catalog.path} element={<Catalog />} />
+                            {paths.catalog.paths.map((path) => (
+                                <Route key={path} path={path} element={<Catalog />} />
+                            ))}
+
                             <Route path={paths.details.path} element={<ProductDetails />} />
                             <Route path={paths.editProduct.path} element={<EditProduct />} />
                             <Route path={paths.reviews.path} element={<ProductReviews />} />

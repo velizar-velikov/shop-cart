@@ -1,18 +1,33 @@
 import { Button, Container, FormControl, FormSelect, Row } from 'react-bootstrap';
 import { useForm } from '../../../hooks/useForm.js';
+import { useNavigate } from 'react-router-dom';
 
-export default function CatalogSearch({ searchState, updateSearch }) {
+export default function CatalogSearch({ searchState, updateSearch, setSearchParams }) {
+    const navigate = useNavigate();
+
     const searchHandler = (values) => {
         values.category = values.category.trim();
         values.name = values.name.trim();
-
-        console.log({ values });
 
         try {
             if (!values.category) {
                 throw new Error('Please select a category first');
             }
+            const query = {};
+            let urlPath = '/catalog';
+
+            if (values.category !== 'All categories') {
+                query.category = values.category;
+                urlPath += '/' + values.category;
+            }
+            if (values.name) {
+                query.name = values.name;
+                urlPath += `?name=${values.name}`;
+            }
+            setSearchParams(query);
             updateSearch(values);
+
+            navigate(urlPath);
         } catch (error) {
             console.log(error.message);
         }

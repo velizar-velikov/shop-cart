@@ -3,7 +3,9 @@ const paths = {
         path: '/',
     },
     catalog: {
-        path: '/catalog',
+        basePath: '/catalog',
+        paths: ['/catalog', '/catalog/:category'],
+        getHrefBase: () => `/catalog`,
     },
     createProduct: {
         path: '/create',
@@ -22,8 +24,8 @@ const paths = {
         path: '/logout',
     },
     details: {
-        path: '/catalog/:productId/details',
-        getHref: (productId) => `/catalog/${productId}/details`,
+        path: '/details/:productId',
+        getHref: (productId) => `/details/${productId}`,
     },
     reviews: {
         path: '/catalog/:productId/reviews',
