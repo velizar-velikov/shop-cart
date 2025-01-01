@@ -55,13 +55,7 @@ export default function Login() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Pasword</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="123456789"
-                        name="password"
-                        value={values.password}
-                        onChange={changeHandler}
-                    />
+                    <Form.Control type="password" name="password" value={values.password} onChange={changeHandler} />
                 </Form.Group>
                 <Button variant="btn btn-dark mt-3 btn-outline-tertiary" type="submit">
                     Login

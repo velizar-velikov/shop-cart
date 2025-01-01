@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import stockAPI from '../../api/stock-api.js';
+import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useAddStock() {
     const addStockHandler = async (productId, sizesToAdd) => {
@@ -11,15 +11,7 @@ export function useAddStock() {
 }
 
 export function useGetSizesForProduct(productId) {
-    const [sizes, setSizes] = useState([]);
+    const { data: sizes, setData: setSizes, isLoading } = useLoadData([], stockAPI.getSizesForProduct, { productId });
 
-    useEffect(() => {
-        async function loadSizes() {
-            const result = await stockAPI.getSizesForProduct(productId);
-            setSizes(result);
-        }
-        loadSizes();
-    }, []);
-
-    return { sizes, setSizes };
+    return { sizes, setSizes, isLoading };
 }
