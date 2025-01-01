@@ -16,6 +16,8 @@ import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
 
 import paths from './config/paths.js';
+import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
+import GuestGuard from './components/route-guards/GuestGuard.jsx';
 
 function App() {
     return (
@@ -31,13 +33,21 @@ function App() {
                             ))}
 
                             <Route path={paths.details.path} element={<ProductDetails />} />
-                            <Route path={paths.editProduct.path} element={<EditProduct />} />
                             <Route path={paths.reviews.path} element={<ProductReviews />} />
-                            <Route path={paths.login.path} element={<Login />} />
-                            <Route path={paths.register.path} element={<Register />} />
-                            <Route path={paths.logout.path} element={<Logout />} />
-                            <Route path={paths.createProduct.path} element={<CreateProduct />} />
-                            <Route path={paths.cart.path} element={<Cart />} />
+
+                            {/* pages only for unauthenticated users */}
+                            <Route element={<GuestGuard />}>
+                                <Route path={paths.login.path} element={<Login />} />
+                                <Route path={paths.register.path} element={<Register />} />
+                            </Route>
+
+                            {/* private pages */}
+                            <Route element={<PrivateGuard />}>
+                                <Route path={paths.createProduct.path} element={<CreateProduct />} />
+                                <Route path={paths.editProduct.path} element={<EditProduct />} />
+                                <Route path={paths.cart.path} element={<Cart />} />
+                                <Route path={paths.logout.path} element={<Logout />} />
+                            </Route>
                         </Routes>
                     </main>
                 </CartContextProvider>
