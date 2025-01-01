@@ -1,60 +1,30 @@
-import { useEffect, useState } from 'react';
 import productsAPI from '../../api/products-api.js';
 import stockAPI from '../../api/stock-api.js';
+import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useGetCatalogProducts(currentPage, search) {
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function loadProducts() {
-            setIsLoading(true);
-            const products = await productsAPI.getCatalogProducts(currentPage, search);
-            setProducts(products);
-            setIsLoading(false);
-        }
-        loadProducts();
-    }, [currentPage, search]);
+    const { data: products, isLoading } = useLoadData([], productsAPI.getCatalogProducts, { currentPage, search }, [
+        currentPage,
+        search,
+    ]);
 
     return { products, isLoading };
 }
 
 export function useGetCatalogLength(search) {
-    const [length, setLength] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function loadProducts() {
-            setIsLoading(true);
-            const length = await productsAPI.getCalatogLength(search);
-            setLength(length);
-            setIsLoading(false);
-        }
-        loadProducts();
-    }, [search]);
+    const { data: length, isLoading } = useLoadData([], productsAPI.getCalatogLength, { search }, [search]);
 
     return { length, isLoading };
 }
 
 export function useGetLatestProducts() {
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function loadProducts() {
-            setIsLoading(true);
-            const products = await productsAPI.getLatest(3);
-            setProducts(products);
-            setIsLoading(false);
-        }
-        loadProducts();
-    }, []);
+    const { data: products, isLoading } = useLoadData([], productsAPI.getLatest, { pageSize: 3 }, []);
 
     return { products, isLoading };
 }
 
 export function useGetOneProduct(productId) {
-    const [product, setProduct] = useState({
+    const initialState = {
         name: '',
         brand: '',
         category: 'T-shirts',
@@ -62,18 +32,9 @@ export function useGetOneProduct(productId) {
         imageUrl: '',
         summary: '',
         description: '',
-    });
-    const [isLoading, setIsLoading] = useState(false);
+    };
 
-    useEffect(() => {
-        async function loadProduct() {
-            setIsLoading(true);
-            const product = await productsAPI.getOne(productId);
-            setProduct(product);
-            setIsLoading(false);
-        }
-        loadProduct();
-    }, []);
+    const { data: product, isLoading } = useLoadData(initialState, productsAPI.getOne, { productId }, []);
 
     return { product, isLoading };
 }

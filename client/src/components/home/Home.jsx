@@ -9,7 +9,6 @@ import paths from '../../config/paths.js';
 
 export default function Home() {
     const { products, isLoading } = useGetLatestProducts();
-    console.log({ products });
 
     return (
         <>
