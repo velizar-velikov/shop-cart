@@ -1,0 +1,6 @@
+#input-error-message {
+    padding-bottom: 0 !important;
+    margin-bottom: 3px !important;
+    font-size: smaller;
+    color: red;
+}
