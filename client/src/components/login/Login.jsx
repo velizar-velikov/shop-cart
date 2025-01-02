@@ -31,8 +31,10 @@ export default function Login() {
                 throw errors;
             }
 
-            await login(...data);
-            console.log('successful login with:', data.email);
+            const { email, password } = data;
+
+            await login(email, password);
+            console.log('successful login with:', email);
 
             navigate(paths.home.path);
         } catch (error) {
