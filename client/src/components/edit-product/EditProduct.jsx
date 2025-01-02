@@ -59,6 +59,7 @@ export default function EditProduct() {
                             <i className="fa-solid fa-arrow-left fa-lg mb-3 text-dark"></i>
                         </Link>
                         <h2>Edit product</h2>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Name</Form.Label>
                             {validationErrors.name && <InputErrorMessage text={validationErrors.name} />}
@@ -70,6 +71,7 @@ export default function EditProduct() {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Brand</Form.Label>
                             {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
@@ -81,6 +83,7 @@ export default function EditProduct() {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Category</Form.Label>
                             {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
@@ -97,6 +100,7 @@ export default function EditProduct() {
                                 <option>Pants</option>
                             </Form.Select>
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Price</Form.Label>
                             {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
@@ -109,6 +113,7 @@ export default function EditProduct() {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Image URL</Form.Label>
                             {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
@@ -120,6 +125,7 @@ export default function EditProduct() {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Summary (up to 40 characters)</Form.Label>
                             {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
@@ -131,6 +137,7 @@ export default function EditProduct() {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                             <Form.Label>Full description</Form.Label>
                             {validationErrors.description && <InputErrorMessage text={validationErrors.description} />}
@@ -143,6 +150,7 @@ export default function EditProduct() {
                                 onChange={changeHandler}
                             />
                         </Form.Group>
+
                         <Button variant="btn btn-dark mt-3 btn-outline-tertiary" type="submit">
                             Save
                         </Button>

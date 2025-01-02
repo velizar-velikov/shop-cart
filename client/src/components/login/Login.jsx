@@ -57,6 +57,7 @@ export default function Login() {
             {validationErrors && <p className="text-danger">{validationErrors}</p>}
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -67,10 +68,12 @@ export default function Login() {
                         onChange={changeHandler}
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Pasword</Form.Label>
                     <Form.Control type="password" name="password" value={values.password} onChange={changeHandler} />
                 </Form.Group>
+
                 <Button variant="btn btn-dark mt-3 btn-outline-tertiary" type="submit">
                     Login
                 </Button>

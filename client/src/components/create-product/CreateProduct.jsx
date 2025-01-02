@@ -58,6 +58,7 @@ export default function CreateProduct() {
             {serverError && <p className="text-danger">{serverError.message}</p>}
             <Form onSubmit={submitHandler}>
                 <h2>Add product</h2>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name</Form.Label>
                     {validationErrors.name && <InputErrorMessage text={validationErrors.name} />}
@@ -69,11 +70,13 @@ export default function CreateProduct() {
                         placeholder="Short sleeve t-shirt"
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Brand</Form.Label>
                     {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
                     <Form.Control value={values.brand} onChange={changeHandler} name="brand" type="text" placeholder="Nike" />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Category</Form.Label>
                     {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
@@ -90,6 +93,7 @@ export default function CreateProduct() {
                         <option>Pants</option>
                     </Form.Select>
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Price</Form.Label>
                     {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
@@ -102,6 +106,7 @@ export default function CreateProduct() {
                         step="0.01"
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Image URL</Form.Label>
                     {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
@@ -113,6 +118,7 @@ export default function CreateProduct() {
                         placeholder="https://..."
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Summary (up to 40 characters)</Form.Label>
                     {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
@@ -124,6 +130,7 @@ export default function CreateProduct() {
                         placeholder="comfortable cotton t-shirt"
                     />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Full description</Form.Label>
                     {validationErrors.description && <InputErrorMessage text={validationErrors.description} />}
@@ -136,6 +143,7 @@ export default function CreateProduct() {
                         placeholder="Great for summer and spring and also..."
                     />
                 </Form.Group>
+
                 <p className="small">
                     <span className="d-inline-block mr-3">Note:</span>
                     <span className="d-inline-block">

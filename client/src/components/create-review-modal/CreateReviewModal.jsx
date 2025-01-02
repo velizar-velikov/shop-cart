@@ -56,6 +56,7 @@ export default function CreateReviewModal({ show, handleClose, updateDetails }) 
                                 <option>1</option>
                             </Form.Select>
                         </Form.Group>
+
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Describe your experience</Form.Label>
                             <Form.Control
