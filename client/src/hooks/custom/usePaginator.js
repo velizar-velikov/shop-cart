@@ -39,5 +39,19 @@ export function usePaginator(currentPage, maxPage, setSearchParams) {
         });
     };
 
-    return { onBackHandler, onForwardHandler, onFirstPageHandler, onLastPageHandler };
+    const canGoFirst = maxPage > 1 && currentPage != 1;
+    const canGoBack = maxPage > 1 && currentPage != 1;
+    const canGoLast = maxPage > 1 && currentPage < maxPage;
+    const canGoForward = maxPage > 1 && currentPage < maxPage;
+
+    return {
+        onBackHandler,
+        onForwardHandler,
+        onFirstPageHandler,
+        onLastPageHandler,
+        canGoFirst,
+        canGoBack,
+        canGoLast,
+        canGoForward,
+    };
 }

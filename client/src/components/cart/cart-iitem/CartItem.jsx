@@ -1,13 +1,15 @@
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+
 import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks/custom/useCart.js';
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useQuantityForm } from '../../../hooks/custom/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
-import { useRef } from 'react';
-import styles from './cartItem.module.css';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
+
 import paths from '../../../config/paths.js';
+import styles from './cartItem.module.css';
 
 const sizesOptions = {
     small: 'S',
@@ -95,7 +97,7 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                         Size: <span>{sizesOptions[cartProduct.size]}</span>
                     </p>
                     <Form ref={formRef} onSubmit={submitHandler} className="col-4 col-lg-3 mb-3">
-                        <Form.Group className="">
+                        <Form.Group>
                             <Form.Control
                                 type="number"
                                 min="1"
