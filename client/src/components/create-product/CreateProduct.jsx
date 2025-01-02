@@ -1,7 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import { Col, Row } from 'react-bootstrap';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -23,8 +22,6 @@ const initialValues = {
 };
 
 export default function CreateProduct() {
-    const [errorMessage, setErrorMessage] = useState('');
-
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState({});
 
