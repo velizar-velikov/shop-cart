@@ -22,7 +22,6 @@ const initialValues = {
 };
 
 export default function Register() {
-    const [errorMessage, setErrorMessage] = useState('');
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState({});
     const navigate = useNavigate();
@@ -36,8 +35,10 @@ export default function Register() {
                 throw errors;
             }
 
-            await register(...data);
-            console.log('successful registration with:', data.email);
+            const { firstName, lastName, email, password } = data;
+
+            await register(firstName, lastName, email, password);
+            console.log('successful registration with:', email);
 
             navigate(paths.home.path);
         } catch (error) {
