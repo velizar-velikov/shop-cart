@@ -7,9 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useLogin } from '../../hooks/custom/useAuth.js';
-import paths from '../../config/paths.js';
-import { validateInputs } from '../../util/validateInputs.js';
 import { loginSchema } from '../../validation-schemas/auth.js';
+import { validateInputs } from '../../util/validateInputs.js';
+
+import paths from '../../config/paths.js';
 
 const initialValues = {
     email: '',

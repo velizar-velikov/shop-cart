@@ -1,17 +1,17 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import { Col, Row } from 'react-bootstrap';
 
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useRegister } from '../../hooks/custom/useAuth.js';
-import paths from '../../config/paths.js';
 import { registerSchema } from '../../validation-schemas/auth.js';
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 import { validateInputs } from '../../util/validateInputs.js';
+import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+
+import paths from '../../config/paths.js';
 
 const initialValues = {
     firstName: '',

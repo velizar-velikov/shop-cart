@@ -2,14 +2,16 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
+import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useCreateProduct } from '../../hooks/custom/useProducts.js';
-import paths from '../../config/paths.js';
-import { validateInputs } from '../../util/validateInputs.js';
 import { productSchema } from '../../validation-schemas/product.js';
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import { validateInputs } from '../../util/validateInputs.js';
+
+import paths from '../../config/paths.js';
 
 const initialValues = {
     name: '',

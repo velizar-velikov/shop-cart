@@ -3,15 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useState } from 'react';
+import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useEditProduct, useGetOneProduct } from '../../hooks/custom/useProducts.js';
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
-import paths from '../../config/paths.js';
+import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 import { validateInputs } from '../../util/validateInputs.js';
 import { productSchema } from '../../validation-schemas/product.js';
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+
+import paths from '../../config/paths.js';
 
 export default function EditProduct() {
     const [validationErrors, setValidationErrors] = useState({});
