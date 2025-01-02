@@ -5,18 +5,14 @@ import CatalogSearch from './catalog-search/CatalogSearch.jsx';
 import Paginator from './pagination/Pagination.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 
-import { useState } from 'react';
 import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/custom/useProducts.js';
 import { useSearchParams } from 'react-router-dom';
 import NoProducts from './no-products/NoProducts.jsx';
+import { useSearch } from '../../hooks/custom/useSearch.js';
 
 export default function Catalog() {
     const [searchParams, setSearchParams] = useSearchParams();
-
-    const [search, setSearch] = useState({
-        category: searchParams.get('category') || 'All categories',
-        name: searchParams.get('name') || '',
-    });
+    const { search, setSearch } = useSearch(searchParams);
 
     let currentPage = Number(searchParams.get('page') || 1);
 
@@ -26,7 +22,7 @@ export default function Catalog() {
     const maxPage = Math.ceil(catalogLength / 4);
 
     const updateSearch = (newSearch) => {
-        setSearch((oldSearchState) => newSearch);
+        setSearch(newSearch);
         currentPage = 1;
     };
 
