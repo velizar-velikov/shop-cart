@@ -17,6 +17,7 @@ import { CartContextProvider } from './contexts/CartContext.jsx';
 import paths from './config/paths.js';
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
+import NotFound from './components/not-found/NotFound.jsx';
 
 function App() {
     return (
@@ -46,6 +47,8 @@ function App() {
                                 <Route path={paths.editProduct.path} element={<EditProduct />} />
                                 <Route path={paths.cart.path} element={<Cart />} />
                             </Route>
+
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
                 </CartContextProvider>
