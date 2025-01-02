@@ -8,6 +8,8 @@ import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useLogin } from '../../hooks/custom/useAuth.js';
 import paths from '../../config/paths.js';
+import { validateInputs } from '../../util/validateInputs.js';
+import { loginSchema } from '../../validation-schemas/auth.js';
 
 const initialValues = {
     email: '',
@@ -15,7 +17,9 @@ const initialValues = {
 };
 
 export default function Login() {
-    const [errorMessage, setErrorMessage] = useState('');
+    const [validationErrors, setValidationErrors] = useState('');
+    const [serverError, setServerError] = useState({});
+
     const navigate = useNavigate();
     const login = useLogin();
 
@@ -23,8 +27,10 @@ export default function Login() {
         const { email, password } = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.trim()]));
 
         try {
-            if (!email || !password) {
-                throw new Error('All fields are required.');
+            const { data, errors, success } = validateInputs(loginSchema, { email, password });
+
+            if (!success) {
+                throw errors;
             }
 
             await login(email, password);
@@ -32,8 +38,13 @@ export default function Login() {
 
             navigate(paths.home.path);
         } catch (error) {
-            console.log(error.message);
-            setErrorMessage(error.message);
+            if (error.message) {
+                setServerError(error);
+                setValidationErrors('');
+            } else {
+                setValidationErrors('All fields are required.');
+                setServerError({});
+            }
         }
     };
 
@@ -41,6 +52,8 @@ export default function Login() {
 
     return (
         <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 p-4 p-lg-5 pb-1 pb-lg-2 bg-dark-subtle shadow rounded-3">
+            {serverError && <p className="text-danger">{serverError.message}</p>}
+            {validationErrors && <p className="text-danger">{validationErrors}</p>}
             <Form onSubmit={submitHandler}>
                 <h2>Login</h2>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
