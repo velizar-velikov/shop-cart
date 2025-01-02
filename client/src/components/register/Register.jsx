@@ -9,6 +9,9 @@ import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useRegister } from '../../hooks/custom/useAuth.js';
 import paths from '../../config/paths.js';
+import { registerSchema } from '../../validation-schemas/auth.js';
+import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import { validateInputs } from '../../util/validateInputs.js';
 
 const initialValues = {
     firstName: '',
@@ -20,66 +23,66 @@ const initialValues = {
 
 export default function Register() {
     const [errorMessage, setErrorMessage] = useState('');
+    const [validationErrors, setValidationErrors] = useState({});
+    const [serverError, setServerError] = useState({});
     const navigate = useNavigate();
     const register = useRegister();
 
     const registerHandler = async (values) => {
-        const { firstName, lastName, email, password, repass } = Object.fromEntries(
-            Object.entries(values).map(([key, value]) => [key, value.trim()])
-        );
-
         try {
-            if (!firstName || !lastName || !email || !password) {
-                throw new Error('All fields are required.');
-            }
-            if (password !== repass) {
-                throw new Error("Passwords don't match.");
+            const { data, errors, success } = validateInputs(registerSchema, values);
+
+            if (!success) {
+                throw errors;
             }
 
-            await register(firstName, lastName, email, password);
-            console.log('successful registration with:', email);
+            await register(...data);
+            console.log('successful registration with:', data.email);
 
             navigate(paths.home.path);
         } catch (error) {
-            console.log(error.message);
-            setErrorMessage(error.message);
+            if (error.message) {
+                setServerError(error);
+                setValidationErrors({});
+            } else {
+                setValidationErrors(error);
+                setServerError({});
+            }
         }
     };
 
     const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
 
     return (
-        <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 p-4 p-lg-5 pb-1 pb-lg-2 bg-dark-subtle shadow rounded-3">
+        <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 p-4 p-lg-5 pb-1 pb-lg-2 mb-4 bg-dark-subtle shadow rounded-3">
+            {serverError && <p className="text-danger">{serverError.message}</p>}
             <Form onSubmit={submitHandler}>
                 <h2>Register</h2>
-                <Row className="d-flex">
-                    <Col>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>First name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Peter"
-                                name="firstName"
-                                value={values.firstName}
-                                onChange={changeHandler}
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Last name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Petrov"
-                                name="lastName"
-                                value={values.lastName}
-                                onChange={changeHandler}
-                            />
-                        </Form.Group>
-                    </Col>
-                </Row>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>First name</Form.Label>
+                    {validationErrors.firstName && <InputErrorMessage text={validationErrors.firstName} />}
+                    <Form.Control
+                        type="text"
+                        placeholder="Peter"
+                        name="firstName"
+                        value={values.firstName}
+                        onChange={changeHandler}
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Last name</Form.Label>
+                    {validationErrors.lastName && <InputErrorMessage text={validationErrors.lastName} />}
+                    <Form.Control
+                        type="text"
+                        placeholder="Petrov"
+                        name="lastName"
+                        value={values.lastName}
+                        onChange={changeHandler}
+                    />
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Email address</Form.Label>
+                    {validationErrors.email && <InputErrorMessage text={validationErrors.email} />}
                     <Form.Control
                         type="email"
                         placeholder="name@example.com"
@@ -90,6 +93,7 @@ export default function Register() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Pasword</Form.Label>
+                    {validationErrors.password && <InputErrorMessage text={validationErrors.password} />}
                     <Form.Control
                         type="password"
                         placeholder=""
@@ -100,6 +104,7 @@ export default function Register() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Confirm password</Form.Label>
+                    {validationErrors.repass && <InputErrorMessage text={validationErrors.repass} />}
                     <Form.Control type="password" placeholder="" name="repass" value={values.repass} onChange={changeHandler} />
                 </Form.Group>
                 <Button variant="btn btn-dark mt-3 btn-outline-tertiary" type="submit">

@@ -24,17 +24,15 @@ export default function Login() {
     const login = useLogin();
 
     const loginHandler = async (values) => {
-        const { email, password } = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.trim()]));
-
         try {
-            const { data, errors, success } = validateInputs(loginSchema, { email, password });
+            const { data, errors, success } = validateInputs(loginSchema, values);
 
             if (!success) {
                 throw errors;
             }
 
-            await login(email, password);
-            console.log('successful login with:', email);
+            await login(...data);
+            console.log('successful login with:', data.email);
 
             navigate(paths.home.path);
         } catch (error) {
