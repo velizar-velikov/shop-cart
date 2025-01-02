@@ -50,60 +50,52 @@ export default function EditProduct() {
                             <i className="fa-solid fa-arrow-left fa-lg mb-3 text-dark"></i>
                         </Link>
                         <h2>Edit product</h2>
-
-                        <Row className="d-flex">
-                            <Col>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Name</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="name"
-                                        placeholder="Short sleeve t-shirt"
-                                        value={values.name}
-                                        onChange={changeHandler}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Brand</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="brand"
-                                        placeholder="Nike"
-                                        value={values.brand}
-                                        onChange={changeHandler}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="d-flex align-items-center">
-                            <Col>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                                    <Form.Label>Category</Form.Label>
-                                    <Form.Select size="sm" name="category" value={values.category} onChange={changeHandler}>
-                                        <option>T-shirts</option>
-                                        <option>Shorts</option>
-                                        <option>Sweatshirts</option>
-                                        <option>Pants</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                                    <Form.Label>Price</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        min="0.01"
-                                        step="0.01"
-                                        name="price"
-                                        value={values.price}
-                                        onChange={changeHandler}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Short sleeve t-shirt"
+                                value={values.name}
+                                onChange={changeHandler}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Brand</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="brand"
+                                placeholder="Nike"
+                                value={values.brand}
+                                onChange={changeHandler}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select
+                                size="sm"
+                                name="category"
+                                className="border rounded p-2"
+                                value={values.category}
+                                onChange={changeHandler}
+                            >
+                                <option>T-shirts</option>
+                                <option>Shorts</option>
+                                <option>Sweatshirts</option>
+                                <option>Pants</option>
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control
+                                type="number"
+                                min="0.01"
+                                step="0.01"
+                                name="price"
+                                value={values.price}
+                                onChange={changeHandler}
+                            />
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Image URL</Form.Label>
                             <Form.Control
