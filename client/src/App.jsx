@@ -14,10 +14,11 @@ import EditProduct from './components/edit-product/EditProduct.jsx';
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
 
-import paths from './config/paths.js';
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
 import NotFound from './components/not-found/NotFound.jsx';
+
+import paths from './config/paths.js';
 
 function App() {
     return (
