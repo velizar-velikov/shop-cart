@@ -2,11 +2,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-import { useAddReviewForProduct } from '../../hooks/custom/useReviews.js';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useAddReviewForProduct } from '../../hooks/custom/useReviews.js';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { validateInputs } from '../../util/validateInputs.js';
+import { reviewSchema } from '../../validation-schemas/review.js';
+import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 
 const initialValues = {
     rating: '5',
@@ -15,25 +19,33 @@ const initialValues = {
 
 // TODO: show feedback to user that he has successfully added his review
 export default function CreateReviewModal({ show, handleClose, updateDetails }) {
+    const [validationErrors, setValidationErrors] = useState({});
+    const [serverError, setServerError] = useState({});
+
     const { productId } = useParams();
     const { firstName, lastName } = useAuthContext();
     const userFullName = `${firstName} ${lastName}`;
     const addReview = useAddReviewForProduct();
 
-    const addReviewHandler = async ({ rating, text }) => {
-        const rating_sanitized = rating.trim();
-        const text_sanitized = text.trim();
-
+    const addReviewHandler = async (values) => {
         try {
-            if (!rating_sanitized || !text_sanitized) {
-                throw new Error('All fields are required.');
+            const { data, errors, success } = validateInputs(reviewSchema, values);
+
+            if (!success) {
+                throw errors;
             }
 
-            await addReview(productId, rating_sanitized, text_sanitized, userFullName);
+            await addReview(productId, data.rating, data.text, userFullName);
             handleClose();
             updateDetails();
         } catch (error) {
-            console.log(error.message);
+            if (error.message) {
+                setServerError(error);
+                setValidationErrors({});
+            } else {
+                setValidationErrors(error);
+                setServerError({});
+            }
         }
     };
     const { values, changeHandler, submitHandler } = useForm(initialValues, addReviewHandler);
@@ -46,8 +58,10 @@ export default function CreateReviewModal({ show, handleClose, updateDetails }) 
                 </Modal.Header>
                 <Form onSubmit={submitHandler}>
                     <Modal.Body>
+                        {serverError && <p className="text-danger">{serverError.message}</p>}
                         <Form.Group className="col-4 mt-1">
                             <Form.Label>Rating (out of 5)</Form.Label>
+                            {validationErrors.rating && <InputErrorMessage text={validationErrors.rating} />}
                             <Form.Select size="sm" name="rating" value={values.rating} onChange={changeHandler}>
                                 <option>5</option>
                                 <option>4</option>
@@ -59,9 +73,11 @@ export default function CreateReviewModal({ show, handleClose, updateDetails }) 
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Describe your experience</Form.Label>
+                            {validationErrors.text && <InputErrorMessage text={validationErrors.text} />}
                             <Form.Control
                                 as="textarea"
                                 rows={3}
+                                className={validationErrors.text ? 'input-error' : ''}
                                 name="text"
                                 placeholder="My opinion about this product is..."
                                 value={values.text}
