@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useCreateProduct } from '../../hooks/custom/useProducts.js';
 import paths from '../../config/paths.js';
+import { validateInputs } from '../../util/validateInputs.js';
+import { productSchema } from '../../validation-schemas/product.js';
+import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 
 const initialValues = {
     name: '',
@@ -20,26 +23,32 @@ const initialValues = {
 };
 
 export default function CreateProduct() {
-    const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
 
+    const [validationErrors, setValidationErrors] = useState({});
+    const [serverError, setServerError] = useState({});
+
+    const navigate = useNavigate();
     const createProduct = useCreateProduct();
 
     const createHandler = async (values) => {
-        const sanitizedValues = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value.toString().trim()]));
-
         try {
-            const hasEmptyField = Object.values(sanitizedValues).some((value) => !value);
+            const { data, errors, success } = validateInputs(productSchema, values);
 
-            if (hasEmptyField) {
-                throw new Error('All fields are required.');
+            if (!success) {
+                throw errors;
             }
 
-            const product = await createProduct(values);
+            const product = await createProduct(data);
             navigate(paths.details.getHref(product._id));
         } catch (error) {
-            console.log(error.message);
-            setErrorMessage(error.message);
+            if (error.message) {
+                setServerError(error);
+                setValidationErrors({});
+            } else {
+                setValidationErrors(error);
+                setServerError({});
+            }
         }
     };
 
@@ -47,64 +56,56 @@ export default function CreateProduct() {
 
     return (
         <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
+            {serverError && <p className="text-danger">{serverError.message}</p>}
             <Form onSubmit={submitHandler}>
                 <h2>Add product</h2>
-
-                <Row className="d-flex">
-                    <Col>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                value={values.name}
-                                onChange={changeHandler}
-                                name="name"
-                                type="text"
-                                placeholder="Short sleeve t-shirt"
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Brand</Form.Label>
-                            <Form.Control
-                                value={values.brand}
-                                onChange={changeHandler}
-                                name="brand"
-                                type="text"
-                                placeholder="Nike"
-                            />
-                        </Form.Group>
-                    </Col>
-                </Row>
-                <Row className="d-flex align-items-center">
-                    <Col>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                            <Form.Label>Category</Form.Label>
-                            <Form.Select value={values.category} onChange={changeHandler} name="category" size="sm">
-                                <option>T-shirts</option>
-                                <option>Shorts</option>
-                                <option>Sweatshirts</option>
-                                <option>Pants</option>
-                            </Form.Select>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control
-                                value={values.price}
-                                onChange={changeHandler}
-                                name="price"
-                                type="number"
-                                min="0.01"
-                                step="0.01"
-                            />
-                        </Form.Group>
-                    </Col>
-                </Row>
-
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Name</Form.Label>
+                    {validationErrors.name && <InputErrorMessage text={validationErrors.name} />}
+                    <Form.Control
+                        value={values.name}
+                        onChange={changeHandler}
+                        name="name"
+                        type="text"
+                        placeholder="Short sleeve t-shirt"
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Brand</Form.Label>
+                    {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
+                    <Form.Control value={values.brand} onChange={changeHandler} name="brand" type="text" placeholder="Nike" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                    <Form.Label>Category</Form.Label>
+                    {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
+                    <Form.Select
+                        value={values.category}
+                        onChange={changeHandler}
+                        className="border rounded p-2"
+                        name="category"
+                        size="sm"
+                    >
+                        <option>T-shirts</option>
+                        <option>Shorts</option>
+                        <option>Sweatshirts</option>
+                        <option>Pants</option>
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                    <Form.Label>Price</Form.Label>
+                    {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
+                    <Form.Control
+                        value={values.price}
+                        onChange={changeHandler}
+                        name="price"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                    />
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Image URL</Form.Label>
+                    {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
                     <Form.Control
                         value={values.imageUrl}
                         onChange={changeHandler}
@@ -115,6 +116,7 @@ export default function CreateProduct() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Summary (up to 40 characters)</Form.Label>
+                    {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
                     <Form.Control
                         value={values.summary}
                         onChange={changeHandler}
@@ -125,6 +127,7 @@ export default function CreateProduct() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Full description</Form.Label>
+                    {validationErrors.description && <InputErrorMessage text={validationErrors.description} />}
                     <Form.Control
                         value={values.description}
                         onChange={changeHandler}
