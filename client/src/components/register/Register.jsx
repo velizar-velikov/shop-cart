@@ -64,6 +64,7 @@ export default function Register() {
                     <Form.Label>First name</Form.Label>
                     {validationErrors.firstName && <InputErrorMessage text={validationErrors.firstName} />}
                     <Form.Control
+                        className={validationErrors.firstName ? 'input-error' : ''}
                         type="text"
                         placeholder="Peter"
                         name="firstName"
@@ -76,6 +77,7 @@ export default function Register() {
                     <Form.Label>Last name</Form.Label>
                     {validationErrors.lastName && <InputErrorMessage text={validationErrors.lastName} />}
                     <Form.Control
+                        className={validationErrors.lastName ? 'input-error' : ''}
                         type="text"
                         placeholder="Petrov"
                         name="lastName"
@@ -88,6 +90,7 @@ export default function Register() {
                     <Form.Label>Email address</Form.Label>
                     {validationErrors.email && <InputErrorMessage text={validationErrors.email} />}
                     <Form.Control
+                        className={validationErrors.email ? 'input-error' : ''}
                         type="email"
                         placeholder="name@example.com"
                         name="email"
@@ -100,6 +103,7 @@ export default function Register() {
                     <Form.Label>Pasword</Form.Label>
                     {validationErrors.password && <InputErrorMessage text={validationErrors.password} />}
                     <Form.Control
+                        className={validationErrors.password ? 'input-error' : ''}
                         type="password"
                         placeholder=""
                         name="password"
@@ -111,7 +115,14 @@ export default function Register() {
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Confirm password</Form.Label>
                     {validationErrors.repass && <InputErrorMessage text={validationErrors.repass} />}
-                    <Form.Control type="password" placeholder="" name="repass" value={values.repass} onChange={changeHandler} />
+                    <Form.Control
+                        className={validationErrors.repass ? 'input-error' : ''}
+                        type="password"
+                        placeholder=""
+                        name="repass"
+                        value={values.repass}
+                        onChange={changeHandler}
+                    />
                 </Form.Group>
 
                 <Button variant="btn btn-dark mt-3 btn-outline-tertiary" type="submit">

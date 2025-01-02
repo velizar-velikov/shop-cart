@@ -63,6 +63,7 @@ export default function CreateProduct() {
                     <Form.Label>Name</Form.Label>
                     {validationErrors.name && <InputErrorMessage text={validationErrors.name} />}
                     <Form.Control
+                        className={validationErrors.name ? 'input-error' : ''}
                         value={values.name}
                         onChange={changeHandler}
                         name="name"
@@ -74,16 +75,23 @@ export default function CreateProduct() {
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Brand</Form.Label>
                     {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
-                    <Form.Control value={values.brand} onChange={changeHandler} name="brand" type="text" placeholder="Nike" />
+                    <Form.Control
+                        className={validationErrors.brand ? 'input-error' : ''}
+                        value={values.brand}
+                        onChange={changeHandler}
+                        name="brand"
+                        type="text"
+                        placeholder="Nike"
+                    />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Category</Form.Label>
                     {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
                     <Form.Select
+                        className={validationErrors.category ? 'input-error border rounded p-2' : 'border rounded p-2'}
                         value={values.category}
                         onChange={changeHandler}
-                        className="border rounded p-2"
                         name="category"
                         size="sm"
                     >
@@ -98,6 +106,7 @@ export default function CreateProduct() {
                     <Form.Label>Price</Form.Label>
                     {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
                     <Form.Control
+                        className={validationErrors.price ? 'input-error' : ''}
                         value={values.price}
                         onChange={changeHandler}
                         name="price"
@@ -111,6 +120,7 @@ export default function CreateProduct() {
                     <Form.Label>Image URL</Form.Label>
                     {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
                     <Form.Control
+                        className={validationErrors.imageUrl ? 'input-error' : ''}
                         value={values.imageUrl}
                         onChange={changeHandler}
                         name="imageUrl"
@@ -123,6 +133,7 @@ export default function CreateProduct() {
                     <Form.Label>Summary (up to 40 characters)</Form.Label>
                     {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
                     <Form.Control
+                        className={validationErrors.summary ? 'input-error' : ''}
                         value={values.summary}
                         onChange={changeHandler}
                         name="summary"
@@ -135,11 +146,12 @@ export default function CreateProduct() {
                     <Form.Label>Full description</Form.Label>
                     {validationErrors.description && <InputErrorMessage text={validationErrors.description} />}
                     <Form.Control
+                        as="textarea"
+                        rows={3}
+                        className={validationErrors.description ? 'input-error' : ''}
                         value={values.description}
                         onChange={changeHandler}
                         name="description"
-                        as="textarea"
-                        rows={3}
                         placeholder="Great for summer and spring and also..."
                     />
                 </Form.Group>

@@ -1,3 +1,7 @@
+.input-error {
+    border: 1px solid red;
+}
+
 #input-error-message {
     padding-bottom: 0 !important;
     margin-bottom: 3px !important;

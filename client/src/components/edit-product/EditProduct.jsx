@@ -64,6 +64,7 @@ export default function EditProduct() {
                             <Form.Label>Name</Form.Label>
                             {validationErrors.name && <InputErrorMessage text={validationErrors.name} />}
                             <Form.Control
+                                className={validationErrors.name ? 'input-error' : ''}
                                 type="text"
                                 name="name"
                                 placeholder="Short sleeve t-shirt"
@@ -76,6 +77,7 @@ export default function EditProduct() {
                             <Form.Label>Brand</Form.Label>
                             {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
                             <Form.Control
+                                className={validationErrors.brand ? 'input-error' : ''}
                                 type="text"
                                 name="brand"
                                 placeholder="Nike"
@@ -88,9 +90,9 @@ export default function EditProduct() {
                             <Form.Label>Category</Form.Label>
                             {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
                             <Form.Select
+                                className={validationErrors.category ? 'input-error border rounded p-2' : 'border rounded p-2'}
                                 size="sm"
                                 name="category"
-                                className="border rounded p-2"
                                 value={values.category}
                                 onChange={changeHandler}
                             >
@@ -105,6 +107,7 @@ export default function EditProduct() {
                             <Form.Label>Price</Form.Label>
                             {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
                             <Form.Control
+                                className={validationErrors.price ? 'input-error' : ''}
                                 type="number"
                                 min="0.01"
                                 step="0.01"
@@ -118,6 +121,7 @@ export default function EditProduct() {
                             <Form.Label>Image URL</Form.Label>
                             {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
                             <Form.Control
+                                className={validationErrors.imageUrl ? 'input-error' : ''}
                                 type="text"
                                 name="imageUrl"
                                 placeholder="https://..."
@@ -130,6 +134,7 @@ export default function EditProduct() {
                             <Form.Label>Summary (up to 40 characters)</Form.Label>
                             {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
                             <Form.Control
+                                className={validationErrors.summary ? 'input-error' : ''}
                                 type="text"
                                 name="summary"
                                 placeholder="comfortable cotton t-shirt"
@@ -144,6 +149,7 @@ export default function EditProduct() {
                             <Form.Control
                                 as="textarea"
                                 rows={3}
+                                className={validationErrors.description ? 'input-error' : ''}
                                 name="description"
                                 placeholder="Great for summer and spring and also..."
                                 value={values.description}
