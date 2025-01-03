@@ -11,6 +11,7 @@ import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { validateInputs } from '../../util/validateInputs.js';
 import { reviewSchema } from '../../validation-schemas/review.js';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import { toast } from 'react-toastify';
 
 const initialValues = {
     rating: '5',
@@ -18,7 +19,7 @@ const initialValues = {
 };
 
 // TODO: show feedback to user that he has successfully added his review
-export default function CreateReviewModal({ show, handleClose, updateDetails }) {
+export default function CreateReviewModal({ show, handleClose, updateDetails, productName }) {
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState({});
 
@@ -35,9 +36,15 @@ export default function CreateReviewModal({ show, handleClose, updateDetails }) 
                 throw errors;
             }
 
+            const notify = () => {
+                toast.success(`Review added for ${productName}`, { autoClose: 3000 });
+            };
+
             await addReview(productId, data.rating, data.text, userFullName);
             handleClose();
             updateDetails();
+
+            notify();
         } catch (error) {
             if (error.message) {
                 setServerError(error);

@@ -1,14 +1,15 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { useState } from 'react';
 import { useForm } from '../../../hooks/abstracts/useForm.js';
 import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/custom/useCart.js';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
-import paths from '../../../config/paths.js';
-import { useState } from 'react';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
+import { toast } from 'react-toastify';
+import paths from '../../../config/paths.js';
 
 const initialValues = {
     quantity: '1',
@@ -50,6 +51,10 @@ export default function ActionButtons({
                 return;
             }
 
+            const notify = () => {
+                toast.success(`${product.name} added to cart.`, { autoClose: 3000 });
+            };
+
             const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);
             setMaxQuantities((oldSizes) => ({
                 ...oldSizes,
@@ -58,6 +63,8 @@ export default function ActionButtons({
             setCartItemsCount((oldCount) => oldCount + Number(values.quantity));
 
             setErrorMessage('');
+
+            notify();
         } catch (error) {
             setErrorMessage(error.message);
         }

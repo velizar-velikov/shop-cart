@@ -66,6 +66,7 @@ export default function ProductDetails() {
                             show={handleShowAddReview}
                             handleClose={handleCloseAddReview}
                             updateDetails={() => setHasAddedNewReview(true)}
+                            productName={product.name}
                         />
                     )}
                     {showAddStockModal && (
