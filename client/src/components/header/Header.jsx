@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
-import { NavDropdown } from 'react-bootstrap';
+import { Card, NavDropdown } from 'react-bootstrap';
 import paths from '../../config/paths.js';
 import { useLogout } from '../../hooks/custom/useAuth.js';
+
+import styles from './header.module.css';
 
 const singleDigitStyle = { fontSize: '0.85rem', padding: '0.03rem 0.28rem 0.12rem 0.28rem' };
 const doubleDigitStyle = { fontSize: '0.8rem', padding: '0.09rem 0.13rem 0.2rem 0.12rem' };
@@ -27,8 +29,11 @@ export default function Header() {
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
             <Container>
-                <Navbar.Brand as={Link} to={paths.home.path}>
-                    Velizar fashion
+                <Navbar.Brand className="d-flex flex-wrap flex-sm-nowrap gap-3 align-items-center" as={Link} to={paths.home.path}>
+                    <Card className={styles.logo}>
+                        <img src="/src/assets/img/shopping-cart.webp" alt="logo" className="img-fluid" />
+                    </Card>
+                    <span className={styles['semi-bold']}>ShopCart</span>
                 </Navbar.Brand>
                 <Nav className="ml-auto navbar navbar-expand-sm justify-content-end">
                     <Nav.Link as={Link} to={paths.home.path}>

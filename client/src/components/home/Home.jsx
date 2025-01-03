@@ -16,7 +16,7 @@ export default function Home() {
                 <LoadingSpinner />
             ) : (
                 <section id="catalog" className="container-fluid overflow-hidden mb-4">
-                    <h1 className="mt-4 text-center">
+                    <h1 className="mt-5 text-center">
                         Your newest clothing store is here! <br></br>{' '}
                         <span className="fs-3">
                             Start your shopping therapy <Link to={paths.catalog.basePath}>now!</Link>

@@ -36,7 +36,7 @@ export default function CreateReviewModal({ show, handleClose, updateDetails, pr
             }
 
             const notify = () => {
-                toast.success(`Review added for ${productName}`, { autoClose: 2000 });
+                toast.success(`Review added successfully.`, { autoClose: 2000 });
             };
 
             await addReview(productId, data.rating, data.text, userFullName);

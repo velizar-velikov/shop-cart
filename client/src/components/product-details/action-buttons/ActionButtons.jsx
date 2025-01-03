@@ -51,7 +51,7 @@ export default function ActionButtons({
             }
 
             const notify = () => {
-                toast.success(`${product.name} added to cart.`, { autoClose: 2000 });
+                toast.success(`Product added to cart.`, { autoClose: 2000 });
             };
 
             const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);

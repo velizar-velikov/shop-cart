@@ -31,7 +31,7 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
 
         const notify = () => {
             const total = Object.values(sizesValues).reduce((acc, curr) => acc + Number(curr), 0);
-            toast.success(`${total} items added in stock for ${product.name}`, { autoClose: 2000 });
+            toast.success(`${total} items added in stock.`, { autoClose: 2000 });
         };
 
         try {
