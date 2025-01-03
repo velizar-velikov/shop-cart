@@ -18,7 +18,6 @@ const initialValues = {
     text: '',
 };
 
-// TODO: show feedback to user that he has successfully added his review
 export default function CreateReviewModal({ show, handleClose, updateDetails, productName }) {
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState({});
@@ -37,7 +36,7 @@ export default function CreateReviewModal({ show, handleClose, updateDetails, pr
             }
 
             const notify = () => {
-                toast.success(`Review added for ${productName}`, { autoClose: 3000 });
+                toast.success(`Review added for ${productName}`, { autoClose: 2000 });
             };
 
             await addReview(productId, data.rating, data.text, userFullName);

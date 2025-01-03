@@ -9,7 +9,6 @@ export default function ReviewControlButtons({ reviewId, setReviews, setIsEditin
         setIsEditing(true);
     };
 
-    // TODO: show user feedback that he has successfully deleted his review
     const deleteHandler = async (e) => {
         e.stopPropagation();
 

@@ -15,7 +15,6 @@ const initialValues = {
     large: '0',
 };
 
-// TODO: show user feedback on successfull add in stock operation
 export default function AddStockModal({ show, handleClose, product, sizes, updateSizes }) {
     const [errorMessage, setErrorMessage] = useState('');
     const { productId } = useParams();
@@ -32,7 +31,7 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
 
         const notify = () => {
             const total = Object.values(sizesValues).reduce((acc, curr) => acc + Number(curr), 0);
-            toast.success(`${total} items added in stock for ${product.name}`, { autoClose: 3000 });
+            toast.success(`${total} items added in stock for ${product.name}`, { autoClose: 2000 });
         };
 
         try {

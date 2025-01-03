@@ -33,7 +33,6 @@ export default function ActionButtons({
 
     let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(product._id, userId, inStockSizes);
 
-    // TODO: show user feedback that he has successfully added this item to the cart
     const addtoCartHandler = async (values) => {
         try {
             values.quantity = values.quantity.trim();
@@ -52,7 +51,7 @@ export default function ActionButtons({
             }
 
             const notify = () => {
-                toast.success(`${product.name} added to cart.`, { autoClose: 3000 });
+                toast.success(`${product.name} added to cart.`, { autoClose: 2000 });
             };
 
             const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);

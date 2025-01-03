@@ -3,14 +3,22 @@ import Modal from 'react-bootstrap/Modal';
 
 import { useNavigate } from 'react-router-dom';
 import productsAPI from '../../api/products-api.js';
+import { toast } from 'react-toastify';
 import paths from '../../config/paths.js';
 
 export default function DeleteProductModal({ show, handleClose, _id, name, brand }) {
     const navigate = useNavigate();
+
+    const notify = () => {
+        toast.success(`${name} deleted`, { autoClose: 2000 });
+    };
+
     const deleteHandler = async () => {
         try {
             await productsAPI.deleteById(_id);
-            navigate(paths.catalog.path);
+            navigate(paths.catalog.basePath);
+
+            notify();
         } catch (error) {
             console.log(error.message);
             handleClose();
