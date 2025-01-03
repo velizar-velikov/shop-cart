@@ -21,6 +21,7 @@ import paths from '../../config/paths.js';
 
 export default function ProductDetails() {
     const { productId } = useParams();
+    const { userId, isAuthenticated } = useAuthContext();
 
     const [hasAddedNewReview, setHasAddedNewReview] = useState(false);
 
@@ -30,7 +31,6 @@ export default function ProductDetails() {
     const { sizes, setSizes } = useGetSizesForProduct(productId);
     const isOutOfStock = Object.entries(sizes).every(([key, value]) => value == 0);
 
-    const { userId, isAuthenticated } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
     // only make request to see if the user has left a review if the user is authenticated

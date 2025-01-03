@@ -7,6 +7,8 @@ import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
 import paths from '../../../config/paths.js';
+import { useState } from 'react';
+import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
 
 const initialValues = {
     quantity: '1',
@@ -21,6 +23,7 @@ export default function ActionButtons({
     handleShowAddStock,
     handleShowDelete,
 }) {
+    const [errorMessage, setErrorMessage] = useState('');
     const { userId } = useAuthContext();
     const { setCartItemsCount } = useCartContext();
     const isOwner = userId == product._ownerId;
@@ -53,8 +56,10 @@ export default function ActionButtons({
                 [values.size]: oldSizes[values.size] - values.quantity,
             }));
             setCartItemsCount((oldCount) => oldCount + Number(values.quantity));
+
+            setErrorMessage('');
         } catch (error) {
-            console.log(error.message);
+            setErrorMessage(error.message);
         }
     };
 
@@ -83,6 +88,7 @@ export default function ActionButtons({
                 </Row>
             ) : (
                 <Form onSubmit={submitHandler}>
+                    {errorMessage && <InputErrorMessage text={errorMessage} />}
                     <div className="d-flex gap-3">
                         <Form.Group className="col-4">
                             <Form.Label>Quantity</Form.Label>

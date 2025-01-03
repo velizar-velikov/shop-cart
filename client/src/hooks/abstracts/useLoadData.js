@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
  * Abstract hook to load data from an api
  * @param {string} initialState the initial state of the data
  * @param {function} asyncCallback the api function to call
- * @param {object} params the params to call the function with
+ * @param {object} params the params to call the function with ([key]:[value] pairs)
  * @param {array} dependencies the dependencies on which the useEffect to retrigger
  * @returns {{data: any, setData: function, isLoading: boolean, hasError: boolean}}
  */
