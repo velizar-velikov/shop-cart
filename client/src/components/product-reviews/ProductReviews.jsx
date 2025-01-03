@@ -22,8 +22,8 @@ export default function ProductReviews() {
                 <LoadingSpinner />
             ) : (
                 <Container className="container-sm col-8 col-md-7 col-lg-6 mt-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
-                    <div className="d-flex mb-3 gap-5">
-                        <Button as={Link} to={paths.details.getHref(productId)} className="col-2 h-50">
+                    <div className="d-flex flex-wrap mb-3 gap-5">
+                        <Button as={Link} to={paths.details.getHref(productId)} className="col-3 col-sm-2 col-lg-2 h-50">
                             Back
                         </Button>
                         <h3 className="text-center d-flex flex-wrap justify-content-center align-items-center gap-2">

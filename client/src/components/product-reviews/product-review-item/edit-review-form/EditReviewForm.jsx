@@ -4,6 +4,8 @@ import { useForm } from '../../../../hooks/abstracts/useForm.js';
 import { useEditReviewForProduct } from '../../../../hooks/custom/useReviews.js';
 import InputErrorMessage from '../../../error-messages/InputErrorMessage.jsx';
 
+import styles from './editReviewForm.module.css';
+
 export default function EditReviewForm({ reviewId, textState, setTextState, setIsEditing }) {
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState({});
@@ -34,18 +36,27 @@ export default function EditReviewForm({ reviewId, textState, setTextState, setI
 
     const { values, changeHandler, submitHandler } = useForm(textState, onSaveEdittedReview);
 
+    const autosizeFunction = (event) => {
+        event.target.parentNode.dataset.replicatedValue = event.target.value;
+    };
+
     return (
-        <Form className="d-flex gap-4 align-items-center" onSubmit={submitHandler}>
-            <div className="w-75">
+        <Form className="d-flex flex-wrap gap-4 align-items-center" onSubmit={submitHandler}>
+            <div className="col-12 col-md-8 col-lg-9">
                 {serverError && <p className="text-danger mb-1">{serverError.message}</p>}
                 {validationErrors.message && <InputErrorMessage text={validationErrors.message} />}
-                <Form.Control
-                    as="textarea"
-                    className={validationErrors.message ? 'input-error' : ''}
-                    name="text"
-                    value={values.text}
-                    onChange={changeHandler}
-                />
+                <div className={styles['grow-wrap']}>
+                    <Form.Control
+                        as="textarea"
+                        id="autosizing"
+                        onInput={autosizeFunction}
+                        rows="3"
+                        className={validationErrors.message ? 'input-error' : ''}
+                        name="text"
+                        value={values.text}
+                        onChange={changeHandler}
+                    />
+                </div>
             </div>
             <Button type="submit" className="border btn-light rounded px-2 py-1 shadow h-25">
                 Save

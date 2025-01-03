@@ -15,8 +15,8 @@ export default function ProductReviewItem({ index, setReviews, text, rating, rev
     return (
         <Accordion.Item eventKey={index.toString()}>
             <Accordion.Header>
-                <div className="d-flex justify-content-between col-10">
-                    <div className="rating d-flex gap-3">
+                <div className="d-flex flex-wrap justify-content-between col-10">
+                    <div className="rating d-flex flex-wrap gap-3">
                         <RatingStars rating={rating} />
                         <p>{reviewerFullName}</p>
                     </div>
