@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useAddStock } from '../../hooks/custom/useStock.js';
 import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useState } from 'react';
+import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 
 const initialValues = {
     small: '0',
@@ -15,6 +17,7 @@ const initialValues = {
 
 // TODO: show user feedback on successfull add in stock operation
 export default function AddStockModal({ show, handleClose, product, sizes, updateSizes }) {
+    const [errorMessage, setErrorMessage] = useState('');
     const { productId } = useParams();
     const addStock = useAddStock();
 
@@ -41,11 +44,14 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
             }
             const updatedStock = await addStock(productId, sizesValues);
             updateSizes(updatedStock.sizes);
+            setErrorMessage('');
+            handleClose();
+
             notify();
         } catch (error) {
             console.log(error.message);
+            setErrorMessage(error.message);
         } finally {
-            handleClose();
         }
     };
 
@@ -62,6 +68,7 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
                 </Modal.Header>
                 <Form onSubmit={submitHandler}>
                     <Modal.Body>
+                        {errorMessage && <InputErrorMessage text={errorMessage} />}
                         <div className="d-flex gap-1">
                             <Form.Group className="col-4 mt-1">
                                 <Form.Label>S (in stock: {sizes.small})</Form.Label>
