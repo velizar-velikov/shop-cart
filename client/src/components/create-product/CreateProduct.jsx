@@ -54,7 +54,7 @@ export default function CreateProduct() {
     const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler);
 
     return (
-        <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
+        <Container className="container-sm col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
             {serverError && <p className="text-danger">{serverError.message}</p>}
             <Form onSubmit={submitHandler}>
                 <h2>Add product</h2>

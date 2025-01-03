@@ -52,7 +52,7 @@ export default function Login() {
     const { values, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
 
     return (
-        <Container className="container-sm col-8 col-md-7 col-lg-5 mt-5 p-4 p-lg-5 pb-1 pb-lg-2 bg-dark-subtle shadow rounded-3">
+        <Container className="container-sm col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mt-5 p-4 p-lg-5 pb-1 pb-lg-2 bg-dark-subtle shadow rounded-3">
             {serverError && <p className="text-danger">{serverError.message}</p>}
             {validationErrors.message && <p className="text-danger">{validationErrors.message}</p>}
             <Form onSubmit={submitHandler}>

@@ -84,7 +84,10 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                     <img src={cartProduct.productInfo.imageUrl} className={styles['img-fixed-height']} />
                 </Card>
             </Col>
-            <Col sm={8} className="col-7 col-md-8 col-lg-8 col-xl-8 col-xxl-8 d-flex flex-column justify-content-around">
+            <Col
+                sm={8}
+                className="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 col-xxl-8 d-flex flex-column justify-content-around"
+            >
                 <Link
                     className="d-flex align-items-center gap-4 text-decoration-none text-dark"
                     to={paths.details.getHref(cartProduct.productInfo._id)}

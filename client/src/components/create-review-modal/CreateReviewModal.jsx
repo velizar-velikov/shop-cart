@@ -65,7 +65,7 @@ export default function CreateReviewModal({ show, handleClose, updateDetails, pr
                 <Form onSubmit={submitHandler}>
                     <Modal.Body>
                         {serverError && <p className="text-danger">{serverError.message}</p>}
-                        <Form.Group className="col-4 mt-1">
+                        <Form.Group className="col-5 col-xs-4 mt-1">
                             <Form.Label>Rating (out of 5)</Form.Label>
                             {validationErrors.rating && <InputErrorMessage text={validationErrors.rating} />}
                             <Form.Select size="sm" name="rating" value={values.rating} onChange={changeHandler}>
