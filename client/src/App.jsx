@@ -19,6 +19,7 @@ import GuestGuard from './components/route-guards/GuestGuard.jsx';
 import NotFound from './components/not-found/NotFound.jsx';
 
 import paths from './config/paths.js';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
             <AuthContextProvider>
                 <CartContextProvider>
                     <Header />
+                    <ToastContainer />
                     <main>
                         <Routes>
                             <Route path={paths.home.path} element={<Home />} />

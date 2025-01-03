@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { toast } from 'react-toastify';
+
 import { useParams } from 'react-router-dom';
 import { useAddStock } from '../../hooks/custom/useStock.js';
 import { useForm } from '../../hooks/abstracts/useForm.js';
@@ -25,6 +27,11 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
         const hasInvalidField = Object.entries(sizesValues).some(([key, value]) => value == null || value < 0);
         const areAllSizesZeroes = Object.entries(sizesValues).every(([key, value]) => value == 0);
 
+        const notify = () => {
+            const total = Object.values(sizesValues).reduce((acc, curr) => acc + Number(curr), 0);
+            toast.success(`${total} items added in stock for ${product.name}`, { autoClose: 3000 });
+        };
+
         try {
             if (hasInvalidField) {
                 throw new Error('Sizes must be non-negative');
@@ -34,6 +41,7 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
             }
             const updatedStock = await addStock(productId, sizesValues);
             updateSizes(updatedStock.sizes);
+            notify();
         } catch (error) {
             console.log(error.message);
         } finally {
