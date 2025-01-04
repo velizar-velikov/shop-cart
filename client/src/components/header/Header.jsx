@@ -49,7 +49,7 @@ export default function Header() {
                                 Create product
                             </Nav.Link>
 
-                            <NavDropdown title="Profile" id="basic-nav-dropdown">
+                            <NavDropdown title="Profile" align={{ sm: 'start' }} id="basic-nav-dropdown">
                                 <NavDropdown.Item as={Link} to={''}>
                                     Settings
                                 </NavDropdown.Item>
