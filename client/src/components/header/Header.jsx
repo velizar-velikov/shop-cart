@@ -1,14 +1,15 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Card, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
-import { Card, NavDropdown } from 'react-bootstrap';
-import paths from '../../config/paths.js';
 import { useLogout } from '../../hooks/custom/useAuth.js';
+import paths from '../../config/paths.js';
 
+import Logo from '../../assets/img/shopping-cart.webp';
 import styles from './header.module.css';
 
 const singleDigitStyle = { fontSize: '0.85rem', padding: '0.03rem 0.28rem 0.12rem 0.28rem' };
@@ -31,7 +32,7 @@ export default function Header() {
             <Container>
                 <Navbar.Brand className="d-flex flex-wrap flex-sm-nowrap gap-3 align-items-center" as={Link} to={paths.home.path}>
                     <Card className={styles.logo}>
-                        <img src="/src/assets/img/shopping-cart.webp" alt="logo" className="img-fluid" />
+                        <img src={Logo} alt="logo" className="img-fluid" />
                     </Card>
                     <span className={styles['semi-bold']}>ShopCart</span>
                 </Navbar.Brand>
