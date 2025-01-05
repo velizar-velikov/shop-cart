@@ -1,12 +1,14 @@
 import { Button, Container, Form } from 'react-bootstrap';
-import PurchaseItem from './purchase-item/PurchaseItem.jsx';
-import { useCartContext } from '../../contexts/CartContext.jsx';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useCartContext } from '../../contexts/CartContext.jsx';
+import { useMakeOrder } from '../../hooks/custom/useOrders.js';
 import { validateInputs } from '../../util/validateInputs.js';
 import { orderSchema } from '../../validation-schemas/order.js';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
-import { useState } from 'react';
-import { useMakeOrder } from '../../hooks/custom/useOrders.js';
+import PurchaseItem from './purchase-item/PurchaseItem.jsx';
+import { toast } from 'react-toastify';
 
 const initialValues = {
     address: '',
@@ -17,12 +19,15 @@ export default function PurchaseSection() {
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState({});
 
-    const { userCartProducts, totalPrice } = useCartContext();
+    const { userCartProducts, setUserCartProducts, totalPrice } = useCartContext();
 
+    const navigate = useNavigate();
     const makeOrder = useMakeOrder();
 
     const orderHandler = async (values) => {
         values.payment = values.payment.trim();
+
+        const notify = () => toast.success('Your order has successfully been made.', { autoClose: 3500 });
 
         try {
             const { data, errors, success } = validateInputs(orderSchema, values);
@@ -34,8 +39,12 @@ export default function PurchaseSection() {
 
                 throw errors;
             }
-            console.log(values);
-            const order = await makeOrder();
+
+            const order = await makeOrder(data.address, data.payment);
+
+            setUserCartProducts([]);
+            notify();
+            navigate('/catalog');
         } catch (error) {
             if (error.message) {
                 setServerError(error);

@@ -1,5 +1,4 @@
 import { Button, Container } from 'react-bootstrap';
-import { useGetUserCart } from '../../hooks/custom/useCart.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import CartItem from './cart-iitem/CartItem.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
@@ -7,6 +6,7 @@ import { Link } from 'react-router-dom';
 import paths from '../../config/paths.js';
 import { useCartContext } from '../../contexts/CartContext.jsx';
 
+// TODO: before "next step" is enabled, check if all items in cart are in stock and if not inform user
 export default function Cart() {
     const { userId } = useAuthContext();
 

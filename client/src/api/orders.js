@@ -7,8 +7,19 @@ const endpoints = {
     byId: (id) => `/data/orders/${id}`,
 };
 
-function createOrder(productIds, address, paymentType) {
-    return requester.post(host + endpoints.all, { products: productIds, address, paymentType });
+/**
+ * @typedef {{productId: string, size: string, quantity: number}} orderedProduct
+ */
+
+/**
+ * Creates an order with all products in it
+ * @param {[orderedProduct]} products
+ * @param {string} address
+ * @param {string} paymentType
+ * @returns
+ */
+function createOrder(products, address, paymentType) {
+    return requester.post(host + endpoints.all, { products, address, paymentType });
 }
 
 const ordersAPI = {
