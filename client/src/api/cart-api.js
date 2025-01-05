@@ -99,6 +99,20 @@ async function removeFromUserCart(productId, userId, size) {
     return requester.delete(host + endpoints.byId(productSizeRecord[0]._id));
 }
 
+// These requests in a loop are needed because server can delete only one record at a time
+/**
+ * Deletes multiple records from cart collection by given array of ids
+ * @param {[string]} cartProductsIds the ids of cart products to delete
+ * @returns
+ */
+function clearCartRecords(cartProductsIds) {
+    return Promise.all(
+        cartProductsIds.map((id) => {
+            requester.delete(host + endpoints.byId(id));
+        })
+    );
+}
+
 const cartAPI = {
     getCartForUser,
     getUserCartItemsCount,
@@ -106,6 +120,7 @@ const cartAPI = {
     editCartItemQuantity,
     removeFromUserCart,
     getProductSizeRecordInUserCart,
+    clearCartRecords,
 };
 
 export default cartAPI;
