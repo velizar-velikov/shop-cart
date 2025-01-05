@@ -21,9 +21,9 @@ const sizesOptions = {
 // 1) if quantity is less than chosen amount, display message that the max amount available is: ___
 // and do not add item for the next step until the amount is less or equal to the in stock amount
 // 2) if item is out of stock of said size, display message to user and do not add item for the next step
-export default function CartItem({ cartProduct, setUserCartProducts }) {
+export default function CartItem({ cartProduct }) {
     const { userId } = useAuthContext();
-    const { setCartItemsCount } = useCartContext();
+    const { setUserCartProducts } = useCartContext();
 
     const removeFromCart = useRemoveFromUserCart();
     const editQuantity = useEditQuantityInUserCart();
@@ -39,8 +39,6 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
                 const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);
                 return cartProducts.toSpliced(index, 1);
             });
-
-            setCartItemsCount((oldCount) => oldCount - cartProduct.quantity);
         } catch (error) {
             console.log(error.message);
         }
@@ -61,8 +59,6 @@ export default function CartItem({ cartProduct, setUserCartProducts }) {
             }
 
             await editQuantity(cartProduct._id, Number(values.quantity));
-
-            setCartItemsCount((oldCount) => oldCount - cartProduct.quantity + Number(values.quantity));
 
             setUserCartProducts((cartProducts) => {
                 const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);

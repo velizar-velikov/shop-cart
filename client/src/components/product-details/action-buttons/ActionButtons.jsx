@@ -26,7 +26,7 @@ export default function ActionButtons({
 }) {
     const [errorMessage, setErrorMessage] = useState('');
     const { userId } = useAuthContext();
-    const { setCartItemsCount } = useCartContext();
+    const { setUserCartProducts } = useCartContext();
     const isOwner = userId == product._ownerId;
 
     const addToUserCart = useAddToUserCart();
@@ -55,11 +55,25 @@ export default function ActionButtons({
             };
 
             const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);
+            console.log({ cartItemResponse });
+
             setMaxQuantities((oldSizes) => ({
                 ...oldSizes,
                 [values.size]: oldSizes[values.size] - values.quantity,
             }));
-            setCartItemsCount((oldCount) => oldCount + Number(values.quantity));
+
+            setUserCartProducts((oldProducts) => {
+                const newProducts = oldProducts.slice();
+                const productInCart = newProducts.find((p) => p.productId === product._id && p.size === values.size);
+
+                if (!productInCart) {
+                    newProducts.push(cartItemResponse);
+                } else {
+                    productInCart.quantity = productInCart.quantity + Number(values.quantity);
+                }
+
+                return newProducts;
+            });
 
             setErrorMessage('');
 

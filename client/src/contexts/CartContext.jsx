@@ -1,19 +1,27 @@
 import { createContext, useContext } from 'react';
-import { useGetUserCartCount } from '../hooks/custom/useCart.js';
 import { useAuthContext } from './AuthContext.jsx';
+import { useGetUserCart } from '../hooks/custom/useCart.js';
 
 const CartContext = createContext({
+    userCartProducts: [],
+    setUserCartProducts: () => null,
     cartItemsCount: 0,
-    setCartItemsCount: () => null,
+    totalPrice: 0,
 });
 
 export function CartContextProvider({ children }) {
     const { userId } = useAuthContext();
-    const { cartItemsCount, setCartItemsCount } = useGetUserCartCount(userId);
+
+    const { userCartProducts, setUserCartProducts, isLoading } = useGetUserCart(userId);
+
+    const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price) * Number(val.quantity), 0);
 
     const contextData = {
-        cartItemsCount: cartItemsCount,
-        setCartItemsCount: setCartItemsCount,
+        userCartProducts,
+        setUserCartProducts,
+        cartItemsCount: userCartProducts.reduce((acc, val) => acc + Number(val.quantity), 0),
+        totalPrice,
+        isLoading,
     };
 
     return (

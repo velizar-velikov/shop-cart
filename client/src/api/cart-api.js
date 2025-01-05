@@ -1,3 +1,4 @@
+import productsAPI from './products-api.js';
 import requester from './request.js';
 import stockAPI from './stock-api.js';
 
@@ -44,24 +45,24 @@ async function addToUserCart(productId, userId, size, quantity) {
         return;
     }
 
+    let newProductSizeRecord = {};
+
     try {
         productSizeRecord = await getProductSizeRecordInUserCart(productId, userId, size);
     } catch (error) {
         console.log(error.message);
         if (error.message == 'Resource not found') {
-            const newProductSizeRecord = await requester.post(host + endpoints.all, {
+            newProductSizeRecord = await requester.post(host + endpoints.all, {
                 productId,
                 size,
                 quantity: Number(quantity),
             });
-            return newProductSizeRecord;
         }
     }
 
     // no product with said size is added to cart yet
     if (productSizeRecord.length == 0) {
-        const newProductSizeRecord = await requester.post(host + endpoints.all, { productId, size, quantity: Number(quantity) });
-        return newProductSizeRecord;
+        newProductSizeRecord = await requester.post(host + endpoints.all, { productId, size, quantity: Number(quantity) });
     } else {
         // product with said size is already added to cart
 
@@ -76,12 +77,17 @@ async function addToUserCart(productId, userId, size, quantity) {
         }
 
         // if it is not, we add the quantity to the cart
-        return requester.put(host + endpoints.byId(productSizeRecord[0]._id), {
+        newProductSizeRecord = await requester.put(host + endpoints.byId(productSizeRecord[0]._id), {
             productId,
             size,
             quantity: newQuantity,
         });
     }
+
+    const productInfo = await productsAPI.getOne(productId);
+    newProductSizeRecord.productInfo = productInfo;
+
+    return newProductSizeRecord;
 }
 
 function editCartItemQuantity(cartItemId, quantity) {

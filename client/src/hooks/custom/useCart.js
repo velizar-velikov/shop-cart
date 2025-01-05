@@ -16,7 +16,7 @@ export function useGetUserCart(userId) {
         data: userCartProducts,
         setData: setUserCartProducts,
         isLoading,
-    } = useLoadData([], cartAPI.getCartForUser, { userId });
+    } = useLoadData([], cartAPI.getCartForUser, { userId }, [userId]);
 
     return { userCartProducts, setUserCartProducts, isLoading };
 }

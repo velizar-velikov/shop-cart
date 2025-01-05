@@ -5,11 +5,12 @@ import CartItem from './cart-iitem/CartItem.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { Link } from 'react-router-dom';
 import paths from '../../config/paths.js';
+import { useCartContext } from '../../contexts/CartContext.jsx';
 
 export default function Cart() {
     const { userId } = useAuthContext();
 
-    const { userCartProducts, setUserCartProducts, isLoading } = useGetUserCart(userId);
+    const { userCartProducts, setUserCartProducts, isLoading } = useCartContext();
     const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price) * Number(val.quantity), 0);
 
     return (
@@ -30,7 +31,7 @@ export default function Cart() {
                         </div>
                     </div>
                     {userCartProducts.map((product) => (
-                        <CartItem key={product._id} cartProduct={product} setUserCartProducts={setUserCartProducts} />
+                        <CartItem key={product._id} cartProduct={product} />
                     ))}
                 </Container>
             )}
