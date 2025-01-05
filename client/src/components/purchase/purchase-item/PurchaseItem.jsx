@@ -1,18 +1,23 @@
 import styles from './purchaseItem.module.css';
 
-export default function PurchaseItem() {
+const sizes = {
+    small: 'S',
+    medium: 'M',
+    large: 'L',
+};
+
+export default function PurchaseItem({ size, quantity, productInfo }) {
     return (
         <article className={styles.card}>
             <div className={styles['img-wrapper']}>
-                <img
-                    className={styles.img}
-                    src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/26028706/2023/12/4/9a8020ac-daa8-4274-97a8-2bdd07d6589c1701681057551SlyckOffWhiteFloralPrintTop1.jpg"
-                    alt="clothing"
-                />
+                <img className={styles.img} src={productInfo.imageUrl} alt={productInfo.name} />
             </div>
             <div className={styles.description}>
-                <p className={styles.p1}>Size: M</p>
-                <p className={styles.p2}>$29</p>
+                <div className="d-flex gap-3">
+                    <p className={styles.p1}>Size: {sizes[size]}</p>
+                    <p className={styles.p2}>Qty: {quantity}</p>
+                </div>
+                <p className={styles.p3}>{`$${productInfo.price}`}</p>
             </div>
         </article>
     );
