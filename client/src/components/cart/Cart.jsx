@@ -13,6 +13,8 @@ export default function Cart() {
     const { userCartProducts, setUserCartProducts, isLoading } = useCartContext();
     const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price) * Number(val.quantity), 0);
 
+    const canProceed = userCartProducts.length > 0;
+
     return (
         <>
             {isLoading ? (
@@ -25,7 +27,12 @@ export default function Cart() {
                             <h4 className="pt-2 fw-bold">
                                 <span className="fs-5 fw-normal">Total:</span> {`$${totalPrice.toFixed(2)}`}
                             </h4>
-                            <Button as={Link} to={paths.purchase.path} className="h-25 btn-dark">
+                            <Button
+                                as={Link}
+                                to={paths.purchase.path}
+                                disabled={!canProceed}
+                                className={`h-25 btn-dark${!canProceed ? ' disabled' : ''}`}
+                            >
                                 Next step
                             </Button>
                         </div>
