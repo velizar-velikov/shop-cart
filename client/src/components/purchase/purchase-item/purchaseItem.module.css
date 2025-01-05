@@ -1,0 +1,33 @@
+.card {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 4px 6px 0px;
+    /* border: 1px solid rgb(231, 226, 226); */
+    border-radius: 4px;
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.img-wrapper {
+    width: 6rem;
+    height: auto;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.description {
+    padding-left: 0.5rem;
+}
+
+.p1 {
+    font-size: small;
+    margin-bottom: 0rem;
+}
+
+.p2 {
+    margin-bottom: 0rem;
+    font-weight: 600;
+}

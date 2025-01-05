@@ -3,6 +3,8 @@ import { useGetUserCart } from '../../hooks/custom/useCart.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import CartItem from './cart-iitem/CartItem.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+import { Link } from 'react-router-dom';
+import paths from '../../config/paths.js';
 
 export default function Cart() {
     const { userId } = useAuthContext();
@@ -22,7 +24,9 @@ export default function Cart() {
                             <h4 className="pt-2 fw-bold">
                                 <span className="fs-5 fw-normal">Total:</span> {`$${totalPrice.toFixed(2)}`}
                             </h4>
-                            <Button className="h-25 btn-dark">Next step</Button>
+                            <Button as={Link} to={paths.purchase.path} className="h-25 btn-dark">
+                                Next step
+                            </Button>
                         </div>
                     </div>
                     {userCartProducts.map((product) => (

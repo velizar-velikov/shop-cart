@@ -1,25 +1,27 @@
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Header from './components/header/Header.jsx';
+import Footer from './components/footer/Footer.jsx';
+import NotFound from './components/not-found/NotFound.jsx';
 import Login from './components/login/Login.jsx';
 import Register from './components/register/Register.jsx';
-import Footer from './components/footer/Footer.jsx';
-import CreateProduct from './components/create-product/CreateProduct.jsx';
-import Catalog from './components/catalog/Catalog.jsx';
 import Home from './components/home/Home.jsx';
+import Catalog from './components/catalog/Catalog.jsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
+import CreateProduct from './components/create-product/CreateProduct.jsx';
+import EditProduct from './components/edit-product/EditProduct.jsx';
 import ProductReviews from './components/product-reviews/ProductReviews.jsx';
 import Cart from './components/cart/Cart.jsx';
-import EditProduct from './components/edit-product/EditProduct.jsx';
+import PurchaseSection from './components/purchase/PurshaseSection.jsx';
+
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
 
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
-import NotFound from './components/not-found/NotFound.jsx';
 
 import paths from './config/paths.js';
-import { ToastContainer } from 'react-toastify';
 
 function App() {
     return (
@@ -49,6 +51,7 @@ function App() {
                                 <Route path={paths.createProduct.path} element={<CreateProduct />} />
                                 <Route path={paths.editProduct.path} element={<EditProduct />} />
                                 <Route path={paths.cart.path} element={<Cart />} />
+                                <Route path={paths.purchase.path} element={<PurchaseSection />} />
                             </Route>
 
                             <Route path="*" element={<NotFound />} />

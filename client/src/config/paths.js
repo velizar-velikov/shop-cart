@@ -34,6 +34,9 @@ const paths = {
     cart: {
         path: '/cart',
     },
+    purchase: {
+        path: '/purchase',
+    },
 };
 
 export default paths;
