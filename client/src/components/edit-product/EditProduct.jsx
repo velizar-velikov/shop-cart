@@ -73,7 +73,7 @@ export default function EditProduct() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Brand</Form.Label>
                             {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
                             <Form.Control
@@ -86,7 +86,7 @@ export default function EditProduct() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                             <Form.Label>Category</Form.Label>
                             {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
                             <Form.Select
@@ -103,7 +103,7 @@ export default function EditProduct() {
                             </Form.Select>
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                             <Form.Label>Price</Form.Label>
                             {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
                             <Form.Control
@@ -117,7 +117,7 @@ export default function EditProduct() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
                             <Form.Label>Image URL</Form.Label>
                             {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
                             <Form.Control
@@ -130,7 +130,7 @@ export default function EditProduct() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput6">
                             <Form.Label>Summary (up to 40 characters)</Form.Label>
                             {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
                             <Form.Control
@@ -143,7 +143,7 @@ export default function EditProduct() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput7">
                             <Form.Label>Full description</Form.Label>
                             {validationErrors.description && <InputErrorMessage text={validationErrors.description} />}
                             <Form.Control

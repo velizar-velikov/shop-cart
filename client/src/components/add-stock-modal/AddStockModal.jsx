@@ -69,7 +69,7 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
                     <Modal.Body>
                         {errorMessage && <InputErrorMessage text={errorMessage} />}
                         <div className="d-flex gap-1">
-                            <Form.Group className="col-4 mt-1">
+                            <Form.Group className="col-4 mt-1" controlId="controlInput1">
                                 <Form.Label>S (in stock: {sizes.small})</Form.Label>
                                 <Form.Control
                                     type="number"
@@ -79,7 +79,7 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
                                     onChange={changeHandler}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group className="col-4 mt-1">
+                            <Form.Group className="col-4 mt-1" controlId="controlInput2">
                                 <Form.Label>M (in stock: {sizes.medium})</Form.Label>
                                 <Form.Control
                                     type="number"
@@ -89,7 +89,7 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
                                     onChange={changeHandler}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group className="col-4 mt-1">
+                            <Form.Group className="col-4 mt-1" controlId="controlInput3">
                                 <Form.Label>L (in stock: {sizes.large})</Form.Label>
                                 <Form.Control
                                     type="number"

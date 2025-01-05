@@ -73,7 +73,7 @@ export default function Register() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Last name</Form.Label>
                     {validationErrors.lastName && <InputErrorMessage text={validationErrors.lastName} />}
                     <Form.Control
@@ -86,7 +86,7 @@ export default function Register() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Email address</Form.Label>
                     {validationErrors.email && <InputErrorMessage text={validationErrors.email} />}
                     <Form.Control
@@ -99,7 +99,7 @@ export default function Register() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                     <Form.Label>Pasword</Form.Label>
                     {validationErrors.password && <InputErrorMessage text={validationErrors.password} />}
                     <Form.Control
@@ -112,7 +112,7 @@ export default function Register() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
                     <Form.Label>Confirm password</Form.Label>
                     {validationErrors.repass && <InputErrorMessage text={validationErrors.repass} />}
                     <Form.Control
