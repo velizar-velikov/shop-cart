@@ -1,6 +1,5 @@
 import requester from './request.js';
 
-// const host = 'http://localhost:3030';
 const host = import.meta.env.VITE_API_URL;
 
 const endpoints = {
