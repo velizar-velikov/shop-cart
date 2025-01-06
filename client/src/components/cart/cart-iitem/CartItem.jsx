@@ -23,7 +23,7 @@ const sizesOptions = {
 // 2) if item is out of stock of said size, display message to user and do not add item for the next step
 export default function CartItem({ cartProduct }) {
     const { userId } = useAuthContext();
-    const { setUserCartProducts } = useCartContext();
+    const { setUserCartProducts, cartReducer } = useCartContext();
 
     const removeFromCart = useRemoveFromUserCart();
     const editQuantity = useEditQuantityInUserCart();
@@ -35,10 +35,11 @@ export default function CartItem({ cartProduct }) {
         try {
             await removeFromCart(cartProduct.productInfo._id, userId, cartProduct.size);
 
-            setUserCartProducts((cartProducts) => {
-                const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);
-                return cartProducts.toSpliced(index, 1);
-            });
+            const action = {
+                type: 'remove_product',
+                payload: { _id: cartProduct._id },
+            };
+            setUserCartProducts((state) => cartReducer(state, action));
         } catch (error) {
             console.log(error.message);
         }
@@ -60,12 +61,14 @@ export default function CartItem({ cartProduct }) {
 
             await editQuantity(cartProduct._id, Number(values.quantity));
 
-            setUserCartProducts((cartProducts) => {
-                const index = cartProducts.findIndex((cartItem) => cartItem._id == cartProduct._id);
-                const copiedCartProducts = cartProducts.slice();
-                copiedCartProducts[index].quantity = Number(values.quantity);
-                return copiedCartProducts;
-            });
+            const action = {
+                type: 'edit_quantity',
+                payload: {
+                    _id: cartProduct._id,
+                    quantity: values.quantity,
+                },
+            };
+            setUserCartProducts((state) => cartReducer(state, action));
         } catch (error) {
             console.log(error.message);
         }

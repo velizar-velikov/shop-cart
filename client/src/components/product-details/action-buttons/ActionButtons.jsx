@@ -26,7 +26,7 @@ export default function ActionButtons({
 }) {
     const [errorMessage, setErrorMessage] = useState('');
     const { userId } = useAuthContext();
-    const { setUserCartProducts } = useCartContext();
+    const { setUserCartProducts, cartReducer } = useCartContext();
     const isOwner = userId == product._ownerId;
 
     const addToUserCart = useAddToUserCart();
@@ -61,18 +61,16 @@ export default function ActionButtons({
                 [values.size]: oldSizes[values.size] - values.quantity,
             }));
 
-            setUserCartProducts((oldProducts) => {
-                const newProducts = oldProducts.slice();
-                const productInCart = newProducts.find((p) => p.productId === product._id && p.size === values.size);
-
-                if (!productInCart) {
-                    newProducts.unshift(cartItemResponse);
-                } else {
-                    productInCart.quantity = productInCart.quantity + Number(values.quantity);
-                }
-
-                return newProducts;
-            });
+            const action = {
+                type: 'add_cart_product',
+                payload: {
+                    productId: product._id,
+                    qunatity: values.quantity,
+                    size: values.size,
+                    cartItemResponse,
+                },
+            };
+            setUserCartProducts((state) => cartReducer(state, action));
 
             setErrorMessage('');
 

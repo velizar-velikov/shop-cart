@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { useAuthContext } from './AuthContext.jsx';
 import { useGetUserCart } from '../hooks/custom/useCart.js';
 
@@ -7,7 +7,39 @@ const CartContext = createContext({
     setUserCartProducts: () => null,
     cartItemsCount: 0,
     totalPrice: 0,
+    cartReducer: (state, action) => null,
 });
+
+function cartReducer(state, action) {
+    switch (action.type) {
+        case 'add_cart_product': {
+            const newProducts = state.slice();
+            const productInCart = newProducts.find(
+                (p) => p.productId === action.payload.productId && p.size === action.payload.size
+            );
+
+            if (!productInCart) {
+                newProducts.unshift(action.payload.cartItemResponse);
+            } else {
+                productInCart.quantity = productInCart.quantity + Number(action.payload.quantity);
+            }
+
+            return newProducts;
+        }
+        case 'edit_quantity': {
+            const index = state.findIndex((cartItem) => cartItem._id == action.payload._id);
+            const copiedCartProducts = state.slice();
+            copiedCartProducts[index].quantity = Number(action.payload.quantity);
+            return copiedCartProducts;
+        }
+        case 'remove_product': {
+            const index = state.findIndex((cartItem) => cartItem._id == action.payload._id);
+            return state.toSpliced(index, 1);
+        }
+        default:
+            return state;
+    }
+}
 
 export function CartContextProvider({ children }) {
     const { userId } = useAuthContext();
@@ -22,6 +54,7 @@ export function CartContextProvider({ children }) {
         cartItemsCount: userCartProducts.reduce((acc, val) => acc + Number(val.quantity), 0),
         totalPrice,
         isLoading,
+        cartReducer,
     };
 
     return (
