@@ -56,16 +56,33 @@ async function addStockForProduct(productId, sizesToAdd) {
 }
 
 async function removeSizeOfProduct(productId, sizeToRemove) {
-    const sizes = await getSizesForProduct(productId);
+    const response = await getStockForProduct(productId);
+    const stockForProduct = response[0];
+
+    const sizes = stockForProduct.sizes;
 
     sizes.small = Number(sizes.small) - Number(sizeToRemove.small || 0);
     sizes.medium = Number(sizes.medium) - Number(sizeToRemove.medium || 0);
     sizes.large = Number(sizes.large) - Number(sizeToRemove.large || 0);
 
-    const stockForProduct = (await getStockForProduct(productId))[0];
-
     // add X-Admin header to update record that is not current user's
     return requester.put(host + endpoints.byId(stockForProduct._id), { productId, sizes }, true);
+}
+
+/**
+ * @typedef {{productId: string, size: string, quantity: number}} orderedProduct
+ */
+
+/**
+ * Removes multiple products with said size and quantity from stock
+ * @param {[orderedProduct]} orderedProducts all the ordered products to remove from the stock
+ */
+function removeMultiple(orderedProducts) {
+    return Promise.all(
+        orderedProducts.map((product) => {
+            return removeSizeOfProduct(product.productId, { [product.size]: product.quantity });
+        })
+    );
 }
 
 const stockAPI = {
@@ -74,6 +91,7 @@ const stockAPI = {
     initializeStockForProduct,
     addStockForProduct,
     removeSizeOfProduct,
+    removeMultiple,
 };
 
 export default stockAPI;

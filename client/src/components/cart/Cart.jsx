@@ -8,9 +8,7 @@ import { useCartContext } from '../../contexts/CartContext.jsx';
 
 // TODO: before "next step" is enabled, check if all items in cart are in stock and if not inform user
 export default function Cart() {
-    const { userId } = useAuthContext();
-
-    const { userCartProducts, setUserCartProducts, isLoading } = useCartContext();
+    const { userCartProducts, isLoading } = useCartContext();
     const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price) * Number(val.quantity), 0);
 
     const canProceed = userCartProducts.length > 0;

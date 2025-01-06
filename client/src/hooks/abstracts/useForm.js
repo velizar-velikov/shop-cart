@@ -14,8 +14,6 @@ export function useForm(initialValues, submitCallback) {
     }, [initialValues]);
 
     const changeHandler = (event) => {
-        console.log('change handler activated');
-
         setValues((oldValues) => ({
             ...oldValues,
             [event.target.name]: event.target.value,

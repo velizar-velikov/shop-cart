@@ -106,10 +106,12 @@ async function removeFromUserCart(productId, userId, size) {
  * @returns
  */
 function clearCartRecords(cartProductsIds) {
+    //prettier-ignore
     return Promise.all(
-        cartProductsIds.map((id) => {
-            requester.delete(host + endpoints.byId(id));
-        })
+        cartProductsIds.map((id) => (
+            requester.delete(host + endpoints.byId(id))
+            )
+        )
     );
 }
 

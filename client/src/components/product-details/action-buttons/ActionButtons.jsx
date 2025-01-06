@@ -55,7 +55,6 @@ export default function ActionButtons({
             };
 
             const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);
-            console.log({ cartItemResponse });
 
             setMaxQuantities((oldSizes) => ({
                 ...oldSizes,
