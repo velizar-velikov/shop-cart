@@ -66,7 +66,7 @@ export default function ActionButtons({
                 const productInCart = newProducts.find((p) => p.productId === product._id && p.size === values.size);
 
                 if (!productInCart) {
-                    newProducts.push(cartItemResponse);
+                    newProducts.unshift(cartItemResponse);
                 } else {
                     productInCart.quantity = productInCart.quantity + Number(values.quantity);
                 }

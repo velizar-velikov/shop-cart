@@ -76,7 +76,7 @@ export default function CartItem({ cartProduct }) {
     return (
         <Row className="d-flex flex-column flex-xs-row flex-sm-row flex-md-row flex-lg-row mt-4 bg-light border rounded shadow">
             <Col sm={2} className="p-3 p-sm-0 d-flex justify-content-center align-items-center">
-                <Card as={Link} to={paths.details.getHref(cartProduct.productInfo._id)}>
+                <Card className="border-none rounded-0" as={Link} to={paths.details.getHref(cartProduct.productInfo._id)}>
                     <img src={cartProduct.productInfo.imageUrl} className={styles['img-fixed-height']} />
                 </Card>
             </Col>

@@ -1,6 +1,20 @@
+@media (min-width: 576px) {
+    .img-fixed-height {
+        height: 9rem;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 768px) {
+    .img-fixed-height {
+        height: 10rem;
+        object-fit: cover;
+    }
+}
+
 @media (min-width: 1024px) {
     .img-fixed-height {
-        height: 11rem;
+        height: 12rem;
         object-fit: cover;
     }
 }
