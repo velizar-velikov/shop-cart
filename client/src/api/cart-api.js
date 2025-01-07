@@ -9,7 +9,7 @@ const endpoints = {
     byId: (id) => `/data/cart/${id}`,
 };
 
-function getCartForUser(userId) {
+async function getCartForUser(userId) {
     const urlParams = new URLSearchParams({
         where: `_ownerId="${userId}"`,
         load: `productInfo=productId:products`,
@@ -21,7 +21,16 @@ function getCartForUser(userId) {
 
     const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
 
-    return requester.get(url);
+    const userCartProducts = await requester.get(url);
+
+    // load sizes in stock
+    for (const product of userCartProducts) {
+        const sizes = await stockAPI.getSizesForProduct(product.productInfo._id);
+
+        product.sizes = sizes;
+    }
+
+    return userCartProducts;
 }
 
 async function getUserCartItemsCount(userId) {

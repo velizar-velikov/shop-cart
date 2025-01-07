@@ -70,9 +70,10 @@ export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) 
                     }
                 }
 
+                const sizeQuantity = inStockSizes[size] - inCartSizeQuantity;
                 setMaxQuantities((quantities) => ({
                     ...quantities,
-                    [size]: inStockSizes[size] - inCartSizeQuantity,
+                    [size]: sizeQuantity >= 0 ? sizeQuantity : 0,
                 }));
             }
         }

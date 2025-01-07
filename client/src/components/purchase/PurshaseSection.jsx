@@ -21,6 +21,8 @@ export default function PurchaseSection() {
 
     const { userCartProducts, setUserCartProducts, totalPrice } = useCartContext();
 
+    const filteredProducts = userCartProducts.filter((product) => product.sizes[product.size] >= product.quantity);
+
     const navigate = useNavigate();
     const makeOrder = useMakeOrder();
 
@@ -95,7 +97,7 @@ export default function PurchaseSection() {
                     <Container className="px-0 pt-3 border rounded-1">
                         <h4 className="m-0 pb-2 px-3 pt-2 border-bottom">Order review</h4>
                         <Container className="d-flex gap-2 flex-wrap p-3 pt-4">
-                            {userCartProducts.map((product) => (
+                            {filteredProducts.map((product) => (
                                 <PurchaseItem key={product._id} {...product} />
                             ))}
                         </Container>

@@ -61,6 +61,8 @@ export default function ActionButtons({
                 [values.size]: oldSizes[values.size] - values.quantity,
             }));
 
+            cartItemResponse.sizes = inStockSizes;
+
             const action = {
                 type: 'add_cart_product',
                 payload: {

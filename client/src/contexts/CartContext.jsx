@@ -46,7 +46,9 @@ export function CartContextProvider({ children }) {
 
     const { userCartProducts, setUserCartProducts, isLoading } = useGetUserCart(userId);
 
-    const totalPrice = userCartProducts.reduce((acc, val) => acc + Number(val.productInfo.price) * Number(val.quantity), 0);
+    const totalPrice = userCartProducts
+        .filter((product) => product.sizes[product.size] >= product.quantity)
+        .reduce((acc, val) => acc + Number(val.productInfo.price) * Number(val.quantity), 0);
 
     const contextData = {
         userCartProducts,
