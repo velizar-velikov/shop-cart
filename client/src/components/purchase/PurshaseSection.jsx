@@ -46,7 +46,7 @@ export default function PurchaseSection() {
 
             setUserCartProducts([]);
             notify();
-            navigate('/catalog');
+            navigate('/purchase-success');
         } catch (error) {
             if (error.message) {
                 setServerError(error);

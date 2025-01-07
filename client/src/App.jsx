@@ -22,6 +22,7 @@ import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
 
 import paths from './config/paths.js';
+import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.jsx';
 
 function App() {
     return (
@@ -52,6 +53,7 @@ function App() {
                                 <Route path={paths.editProduct.path} element={<EditProduct />} />
                                 <Route path={paths.cart.path} element={<Cart />} />
                                 <Route path={paths.purchase.path} element={<PurchaseSection />} />
+                                <Route path={paths.purchaseSuccess.path} element={<PurchaseSuccess />} />
                             </Route>
 
                             <Route path="*" element={<NotFound />} />

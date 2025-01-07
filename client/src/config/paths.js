@@ -37,6 +37,9 @@ const paths = {
     purchase: {
         path: '/purchase',
     },
+    purchaseSuccess: {
+        path: 'purchase-success',
+    },
 };
 
 export default paths;
