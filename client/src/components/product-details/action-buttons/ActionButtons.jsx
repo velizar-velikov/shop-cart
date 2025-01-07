@@ -88,22 +88,20 @@ export default function ActionButtons({
     return (
         <>
             {isOwner ? (
-                <Row className="d-flex align-items-center">
-                    <Col sm={5}>
+                <Row className="d-flex flex-wrap align-items-center">
+                    <Col className="col-7 col-sm-5">
                         <Button as={Link} onClick={handleShowAddStock} className="btn-dark mb-1">
                             Add in stock
                         </Button>
                     </Col>
-                    <Col sm={2} className="">
+                    <div className="col-7 d-flex flex-wrap justify-content-start gap-2">
                         <Button as={Link} to={paths.editProduct.getHref(product._id)} className="mb-1">
                             Edit
                         </Button>
-                    </Col>
-                    <Col sm={3}>
                         <Button as={Link} onClick={handleShowDelete} className="btn-danger mb-1">
                             Delete
                         </Button>
-                    </Col>
+                    </div>
                 </Row>
             ) : (
                 <Form onSubmit={submitHandler}>

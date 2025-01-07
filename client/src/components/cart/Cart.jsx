@@ -4,7 +4,6 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { Link } from 'react-router-dom';
 import paths from '../../config/paths.js';
 import { useCartContext } from '../../contexts/CartContext.jsx';
-import { useGetSizesForProduct } from '../../hooks/custom/useStock.js';
 
 export default function Cart() {
     let { userCartProducts, isLoading, totalPrice } = useCartContext();
@@ -13,7 +12,7 @@ export default function Cart() {
         return product;
     });
 
-    const canProceed = userCartProducts.length > 0;
+    const canProceed = userCartProducts.length > 0 && userCartProducts.some((product) => product.maxQuantity >= product.quantity);
 
     return (
         <>
