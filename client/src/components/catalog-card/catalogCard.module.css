@@ -9,3 +9,33 @@
         height: 50vh;
     }
 }
+
+@media (max-width: 1280px) {
+    .card-img-top {
+        height: 47vh;
+    }
+}
+
+@media (max-width: 992px) {
+    .card-img-top {
+        height: 40vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 48vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-img-top {
+        height: 35vh;
+    }
+}
+
+@media (max-width: 420px) {
+    .card-img-top {
+        height: 28vh;
+    }
+}
