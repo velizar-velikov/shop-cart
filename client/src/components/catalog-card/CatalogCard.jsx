@@ -23,7 +23,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
     const [text, setText] = useState(summary);
 
     const showSizes = () => {
-        setText(Object.values(sizes).some((q) => q > 0) ? `Available in: ${sizesText}` : 'Out of stock');
+        setText(Object.values(sizes).some((q) => q > 0) ? `Available sizes: ${sizesText}` : 'Out of stock');
     };
 
     const showSummary = () => {

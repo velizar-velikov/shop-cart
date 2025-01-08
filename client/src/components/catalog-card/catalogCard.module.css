@@ -87,6 +87,10 @@
 }
 
 @media (max-width: 576px) {
+    .card:hover {
+        border: 1px solid transparent;
+    }
+
     .card-img-top {
         height: 35vh !important;
     }

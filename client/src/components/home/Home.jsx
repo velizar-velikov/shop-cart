@@ -31,7 +31,7 @@ export default function Home() {
                             <div className="d-flex flex-column align-items-center mt-5">
                                 <h3>Latest clothes:</h3>
                             </div>
-                            <Row className="d-flex justify-content-center row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
+                            <Row className="d-flex justify-content-center row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-1 g-sm-2 g-xl-3">
                                 {products.map((product) => (
                                     <CatalogCard key={product._id} {...product} isHome={true} />
                                 ))}
