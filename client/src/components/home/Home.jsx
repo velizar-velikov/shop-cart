@@ -33,7 +33,7 @@ export default function Home() {
                             </div>
                             <Row className="d-flex justify-content-center row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 g-lg-4">
                                 {products.map((product) => (
-                                    <CatalogCard key={product._id} {...product} />
+                                    <CatalogCard key={product._id} {...product} isHome={true} />
                                 ))}
                             </Row>
                         </div>

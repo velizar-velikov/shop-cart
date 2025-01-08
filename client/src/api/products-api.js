@@ -1,4 +1,5 @@
 import requester from './request.js';
+import stockAPI from './stock-api.js';
 
 const host = import.meta.env.VITE_API_URL;
 
@@ -34,7 +35,13 @@ async function getCatalogProducts(currentPage, search) {
 
     const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
 
-    return requester.get(url);
+    const response = await requester.get(url);
+
+    for (const product of response) {
+        product.sizes = await stockAPI.getSizesForProduct(product._id);
+    }
+
+    return response;
 }
 
 async function getCalatogLength(search) {
