@@ -1,7 +1,33 @@
+.card {
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.card:hover {
+    border: 1px solid rgb(174, 173, 173);
+}
+
 .card-img-top {
     width: 100%;
     height: 60vh;
     object-fit: cover;
+}
+
+.body {
+    border: none;
+    padding-block: 0.8rem;
+    padding-inline: 0.5rem;
+}
+
+.title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.20rem;
+}
+
+.text {
+    font-size: 0.98rem;
+    color: rgb(102, 102, 102);
 }
 
 @media (max-width: 1280px) {
@@ -14,11 +40,29 @@
     .card-img-top {
         height: 47vh;
     }
+
+    .title {
+        font-size: 0.98rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .text {
+        font-size: 0.92rem;
+    }
 }
 
 @media (max-width: 992px) {
     .card-img-top {
         height: 40vh;
+    }
+
+    .title {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .text {
+        font-size: 0.90rem;
     }
 }
 
@@ -26,16 +70,52 @@
     .card-img-top {
         height: 48vh;
     }
+
+    .title {
+        font-size: 1.1rem;
+    }
+
+    .text {
+        font-size: 0.92rem;
+    }
 }
 
 @media (max-width: 576px) {
     .card-img-top {
         height: 35vh;
     }
+
+    .body {
+        padding-block: 0.9rem;
+        padding-inline: 0.65rem;
+    }
+
+    .title {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .text {
+        font-size: 0.90rem;
+    }
 }
 
 @media (max-width: 420px) {
     .card-img-top {
         height: 28vh;
+    }
+
+    .body {
+        padding-block: 0.7rem;
+        padding-inline: 0.5rem;
+    }
+
+    .title {
+        font-size: 0.90rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .text {
+        font-size: 0.78rem;
     }
 }
