@@ -10,6 +10,8 @@ import { useSearchParams } from 'react-router-dom';
 import NoProducts from './no-products/NoProducts.jsx';
 import { useSearch } from '../../hooks/custom/useSearch.js';
 
+import styles from './catalog.module.css';
+
 export default function Catalog() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { search, setSearch } = useSearch(searchParams);
@@ -38,11 +40,15 @@ export default function Catalog() {
                         <NoProducts search={search} />
                     ) : (
                         <div>
-                            <Row className="row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 g-1 g-sm-2 g-xl-3 m-auto">
-                                {products.map((product) => (
-                                    <CatalogCard key={product._id} {...product} />
-                                ))}
-                            </Row>
+                            <div className="d-flex justify-content-center">
+                                <Row
+                                    className={`w-100 row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 g-1 g-sm-2 g-xl-3 m-auto ${styles.row}`}
+                                >
+                                    {products.map((product) => (
+                                        <CatalogCard key={product._id} {...product} />
+                                    ))}
+                                </Row>
+                            </div>
                             <Paginator currentPage={currentPage} maxPage={maxPage} setSearchParams={setSearchParams} />
                         </div>
                     )}

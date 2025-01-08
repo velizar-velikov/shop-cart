@@ -8,10 +8,11 @@ export default function CatalogCard({ _id, name, category, summary, imageUrl }) 
         <div>
             <Link to={paths.details.getHref(_id)} className="text-decoration-none">
                 <Card className={styles.card}>
-                    <img src={imageUrl} alt={category} className={styles['card-img-top']} />
+                    <img src={imageUrl} alt={category} className={`card-img-catalog ${styles['card-img-top']}`} />
                     <CardBody className={styles.body}>
                         <CardTitle className={styles.title}>{name}</CardTitle>
                         <CardText className={styles.text}>{summary}</CardText>
+                        <p>$49</p>
                     </CardBody>
                 </Card>
             </Link>

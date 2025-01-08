@@ -1,16 +1,21 @@
 .card {
     border: 1px solid transparent;
-    border-radius: 2px;
+    border-radius: 1px;
+    padding-bottom: 0.15rem;
 }
 
 .card:hover {
-    border: 1px solid rgb(174, 173, 173);
+    border: 1px solid rgb(77, 76, 76);
 }
 
 .card-img-top {
     width: 100%;
     height: 60vh;
     object-fit: cover;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .body {
@@ -20,7 +25,7 @@
 }
 
 .title {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 600;
     margin-bottom: 0.20rem;
 }
@@ -30,15 +35,11 @@
     color: rgb(102, 102, 102);
 }
 
-@media (max-width: 1280px) {
-    .card-img-top {
-        height: 50vh;
-    }
-}
+
 
 @media (max-width: 1280px) {
     .card-img-top {
-        height: 47vh;
+        height: 50vh !important;
     }
 
     .title {
@@ -53,7 +54,7 @@
 
 @media (max-width: 992px) {
     .card-img-top {
-        height: 40vh;
+        height: 40vh !important;
     }
 
     .title {
@@ -68,7 +69,7 @@
 
 @media (max-width: 768px) {
     .card-img-top {
-        height: 48vh;
+        height: 48vh !important;
     }
 
     .title {
@@ -82,7 +83,7 @@
 
 @media (max-width: 576px) {
     .card-img-top {
-        height: 35vh;
+        height: 35vh !important;
     }
 
     .body {
@@ -102,7 +103,7 @@
 
 @media (max-width: 420px) {
     .card-img-top {
-        height: 28vh;
+        height: 28vh !important;
     }
 
     .body {

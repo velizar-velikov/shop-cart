@@ -1,6 +1,8 @@
 import { Button, Container, FormControl, FormSelect, Row } from 'react-bootstrap';
 import { useForm } from '../../../hooks/abstracts/useForm.js';
 
+import styles from './search.module.css';
+
 export default function CatalogSearch({ searchState, updateSearch, setSearchParams }) {
     const searchHandler = (values) => {
         values.category = values.category.trim();
@@ -28,12 +30,12 @@ export default function CatalogSearch({ searchState, updateSearch, setSearchPara
     const { values, changeHandler, submitHandler } = useForm(searchState, searchHandler);
     return (
         <Container>
-            <Row className="justify-content-center">
-                <div className="col-md-6">
-                    <form onSubmit={submitHandler}>
+            <div className="d-flex justify-content-center align-items-center">
+                <div className="col-lg-5">
+                    <form onSubmit={submitHandler} style={{ maxWidth: 550 }}>
                         <div className="input-group mb-3">
                             <FormSelect
-                                className="form-select"
+                                className={styles.dropdown}
                                 style={{ maxWidth: 150 }}
                                 name="category"
                                 value={values.category}
@@ -46,6 +48,7 @@ export default function CatalogSearch({ searchState, updateSearch, setSearchPara
                                 <option>Pants</option>
                             </FormSelect>
                             <FormControl
+                                className={styles.search}
                                 type="text"
                                 placeholder="Product name"
                                 name="name"
@@ -58,7 +61,7 @@ export default function CatalogSearch({ searchState, updateSearch, setSearchPara
                         </div>
                     </form>
                 </div>
-            </Row>
+            </div>
         </Container>
     );
 }
