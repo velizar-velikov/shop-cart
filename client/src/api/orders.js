@@ -1,3 +1,4 @@
+import productsAPI from './products-api.js';
 import requester from './request.js';
 
 const host = import.meta.env.VITE_API_URL;
@@ -22,8 +23,35 @@ function createOrder(products, address, paymentType) {
     return requester.post(host + endpoints.all, { products, address, paymentType });
 }
 
+async function getUserOrders(userId) {
+    const urlParams = new URLSearchParams({
+        where: `_ownerId="${userId}"`,
+    });
+
+    const sortParams = new URLSearchParams({
+        sortBy: '_createdOn%20desc',
+    });
+
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(sortParams)}`;
+
+    const orders = await requester.get(url);
+
+    // populating products as products are a reference to the products collection
+    // but the server does not support a populating a collection of references (only a single reference)
+    for (const order of orders) {
+        for (let product of order.products) {
+            const productResponse = await productsAPI.getOne(product.productId);
+
+            product = Object.assign(product, productResponse);
+        }
+    }
+
+    return orders;
+}
+
 const ordersAPI = {
     createOrder,
+    getUserOrders,
 };
 
 export default ordersAPI;

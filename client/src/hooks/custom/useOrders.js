@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import cartAPI from '../../api/cart-api.js';
 import ordersAPI from '../../api/orders.js';
 import stockAPI from '../../api/stock-api.js';
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../contexts/CartContext.jsx';
+import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useMakeOrder() {
     const { userCartProducts } = useCartContext();
@@ -25,4 +28,16 @@ export function useMakeOrder() {
     };
 
     return makeOrder;
+}
+
+export function useGetUserOrders() {
+    const { userId } = useAuthContext();
+
+    const { data: orders, setData: setOrders, isLoading } = useLoadData([], ordersAPI.getUserOrders, { userId }, []);
+
+    return {
+        orders,
+        setOrders,
+        isLoading,
+    };
 }
