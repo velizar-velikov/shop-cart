@@ -1,0 +1,11 @@
+@media (max-width: 576px) {
+    .para {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .para {
+        font-size: 0.8rem;
+    }
+}
