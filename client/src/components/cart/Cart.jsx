@@ -4,6 +4,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { Link } from 'react-router-dom';
 import paths from '../../config/paths.js';
 import { useCartContext } from '../../contexts/CartContext.jsx';
+import EmptyCart from './empty-cart/EmptyCart.jsx';
 
 export default function Cart() {
     let { userCartProducts, isLoading, totalPrice } = useCartContext();
@@ -36,9 +37,11 @@ export default function Cart() {
                             </Button>
                         </div>
                     </div>
-                    {userCartProducts.map((product) => (
-                        <CartItem key={product._id} cartProduct={product} />
-                    ))}
+                    {userCartProducts.length > 0 ? (
+                        userCartProducts.map((product) => <CartItem key={product._id} cartProduct={product} />)
+                    ) : (
+                        <EmptyCart />
+                    )}
                 </Container>
             )}
         </>
