@@ -1,0 +1,43 @@
+.card {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 4px 6px 0px;
+    /* border: 1px solid rgb(231, 226, 226); */
+    border-radius: 4px;
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+}
+
+.img-wrapper {
+    height: 8.5rem;
+    width: 6.3rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.description {
+    padding-left: 0.5rem;
+}
+
+.p1,
+.p2 {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.p3 {
+    margin-top: 0.3rem;
+    margin-bottom: 0rem;
+    font-weight: 600;
+}
