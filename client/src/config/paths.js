@@ -38,7 +38,10 @@ const paths = {
         path: '/purchase',
     },
     purchaseSuccess: {
-        path: 'purchase-success',
+        path: '/purchase-success',
+    },
+    orders: {
+        path: '/user/orders',
     },
 };
 

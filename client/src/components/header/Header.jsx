@@ -56,7 +56,7 @@ export default function Header() {
                                 <NavDropdown.Item as={Link} to={''}>
                                     Stock
                                 </NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to={''}>
+                                <NavDropdown.Item as={Link} to={paths.orders.path}>
                                     Olders
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
