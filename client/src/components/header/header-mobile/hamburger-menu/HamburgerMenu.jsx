@@ -7,7 +7,7 @@ import paths from '../../../../config/paths.js';
 
 const categories = ['All products', 'T-shirts', 'Shorts', 'Sweatshirts', 'Pants'];
 
-export default function HamburgerMenu() {
+export default function HamburgerMenu({ logoutHandler }) {
     const { closeMenu } = useMenuContext();
 
     const menuRef = useRef();
@@ -24,19 +24,46 @@ export default function HamburgerMenu() {
         return () => clearTimeout(timeoutRef);
     }, []);
 
+    const logoutAction = () => {
+        logoutHandler();
+        closeMenuHandler();
+    };
+
     return (
-        <section className={styles['menu-wrapper']}>
-            <div ref={menuRef} className={styles.menu}>
+        <section onClick={closeMenuHandler} className={styles['menu-wrapper']}>
+            <div ref={menuRef} className={styles.menu} onClick={(e) => e.stopPropagation()}>
                 <div className={styles['btn-wrapper']}>
                     <button onClick={closeMenuHandler} className={`${styles['btn-close']} fa-lg`}>
                         <i className="fa-solid fa-xmark fa-2x"></i>
                     </button>
                 </div>
                 <nav>
-                    <ul className={styles.list}>
+                    <ul className={styles['category-list']}>
                         {categories.map((category) => (
                             <CategoryLink key={category} closeMenuHandler={closeMenuHandler} category={category} />
                         ))}
+                    </ul>
+                    <ul className={styles['account-list']}>
+                        <li className={styles['account-list-item']}>
+                            <Link className={styles.link} onClick={closeMenuHandler}>
+                                Account
+                            </Link>
+                        </li>
+                        <li className={styles['account-list-item']}>
+                            <Link className={styles.link} onClick={closeMenuHandler} to={paths.createProduct.path}>
+                                Create product
+                            </Link>
+                        </li>
+                        <li className={styles['account-list-item']}>
+                            <Link className={styles.link} onClick={closeMenuHandler} to={paths.orders.path}>
+                                Orders
+                            </Link>
+                        </li>
+                        <li className={styles['account-list-item']}>
+                            <Link className={styles.link} onClick={logoutAction}>
+                                Sign out
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -45,10 +72,14 @@ export default function HamburgerMenu() {
 }
 
 function CategoryLink({ category, closeMenuHandler }) {
-    const path = category == 'All products' ? paths.catalog.basePath : `${paths.catalog.basePath}?category=${category}`;
+    let path = paths.catalog.basePath;
+
+    if (category !== 'All categories') {
+        path = path + `?category=${category}`;
+    }
 
     return (
-        <li className={styles['list-item']}>
+        <li className={styles['category-list-item']}>
             <Link className={styles.link} onClick={closeMenuHandler} to={path}>
                 {category}
             </Link>

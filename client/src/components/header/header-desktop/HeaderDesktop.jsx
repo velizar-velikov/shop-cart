@@ -49,7 +49,9 @@ export default function HeaderDesktop({ logoutHandler }) {
                                     Olders
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={logoutHandler}>Sign out</NavDropdown.Item>
+                                <NavDropdown.Item onClick={logoutHandler} as={Link} to="">
+                                    Sign out
+                                </NavDropdown.Item>
                             </NavDropdown>
 
                             <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">
