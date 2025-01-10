@@ -12,7 +12,7 @@ export function useDynamicNav() {
             timeout = setTimeout(() => {
                 console.log('resizing');
                 setDeviceWidth(window.innerWidth);
-            }, 300);
+            }, 100);
         };
 
         window.addEventListener('resize', handleResize);

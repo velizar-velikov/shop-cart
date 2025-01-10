@@ -4,14 +4,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Card, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
-import { useCartContext } from '../../contexts/CartContext.jsx';
-import { useLogout } from '../../hooks/custom/useAuth.js';
-import paths from '../../config/paths.js';
+import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+import { useCartContext } from '../../../contexts/CartContext.jsx';
+import { useLogout } from '../../../hooks/custom/useAuth.js';
+import paths from '../../../config/paths.js';
 
-import CartBubble from './cart-bubble/CartBubble.jsx';
-import Logo from '../../assets/img/shopping-cart.webp';
-import styles from './header.module.css';
+import CartBubble from '../cart-bubble/CartBubble.jsx';
+import Logo from '../../../assets/img/shopping-cart.webp';
+import styles from '../header.module.css';
 
 export default function HeaderDesktop() {
     const { isAuthenticated } = useAuthContext();
