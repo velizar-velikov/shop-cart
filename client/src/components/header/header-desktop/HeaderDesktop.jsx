@@ -6,24 +6,15 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
-import { useLogout } from '../../../hooks/custom/useAuth.js';
 import paths from '../../../config/paths.js';
 
 import CartBubble from '../cart-bubble/CartBubble.jsx';
 import Logo from '../../../assets/img/shopping-cart.webp';
 import styles from '../header.module.css';
 
-export default function HeaderDesktop() {
+export default function HeaderDesktop({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = useCartContext();
-
-    const navigate = useNavigate();
-    const logout = useLogout();
-
-    const logoutHandler = async () => {
-        await logout();
-        navigate(paths.home.path);
-    };
 
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">

@@ -2,13 +2,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Card, NavDropdown } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
 import { useMenuContext } from '../../../contexts/MenuContext.jsx';
 
-import { useLogout } from '../../../hooks/custom/useAuth.js';
 import paths from '../../../config/paths.js';
 
 import CartBubble from '../cart-bubble/CartBubble.jsx';
@@ -17,23 +16,15 @@ import styles from '../header.module.css';
 
 import HamburgerMenu from './hamburger-menu/HamburgerMenu.jsx';
 
-export default function HeaderMobile() {
+export default function HeaderMobile({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = useCartContext();
     const { isMenuOpened, openMenu } = useMenuContext();
 
-    const navigate = useNavigate();
-    const logout = useLogout();
-
-    const logoutHandler = async () => {
-        await logout();
-        navigate(paths.home.path);
-    };
-
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
             <Container className="d-flex justify-content-between">
-                <button onClick={openMenu} className="p-1 border-0">
+                <button onClick={openMenu} className={`p-1 border-0 ${styles['btn-menu']}`}>
                     <i className="fa-solid fa-bars fa-xl text-light"></i>
                 </button>
                 {isMenuOpened && <HamburgerMenu />}
