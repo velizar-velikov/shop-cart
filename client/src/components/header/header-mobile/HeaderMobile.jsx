@@ -30,7 +30,9 @@ export default function HeaderMobile() {
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
             <Container className="d-flex justify-content-between">
-                <i className="fa-solid fa-bars fa-xl text-light"></i>
+                <button className="p-1 border-0">
+                    <i className="fa-solid fa-bars fa-xl text-light"></i>
+                </button>
                 {/* <HamburgerMenu /> */}
 
                 <Navbar.Brand className="d-flex flex-wrap flex-sm-nowrap align-items-center" as={Link} to={paths.home.path}>
