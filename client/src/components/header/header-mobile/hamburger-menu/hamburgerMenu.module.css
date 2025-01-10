@@ -1,0 +1,89 @@
+.menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background-color: black;
+}
+
+@keyframes menu {
+    from {
+        left: -15rem;
+    }
+
+    to {
+        left: 0;
+    }
+}
+
+@keyframes remove {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: -22rem;
+    }
+}
+
+.removeMenu {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    z-index: 1001;
+    background-color: white;
+    animation-name: remove;
+    animation-duration: 0.4s;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    z-index: 1001;
+    background-color: white;
+    animation-name: menu;
+    animation-duration: 0.4s;
+}
+
+.list {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.list-item {
+    margin-bottom: 0.3rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.btn-wrapper {
+    display: flex;
+    justify-content: end;
+    border-bottom: 1px solid rgb(191, 188, 188);
+    padding-bottom: 0.2rem;
+    margin-top: 0.3rem;
+}
+
+.btn-close {
+    align-self: end;
+    margin-right: 0.3rem;
+    color: rgb(88, 87, 87);
+    background-color: transparent;
+    border: none;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}

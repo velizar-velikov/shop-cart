@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
+import { useMenuContext } from '../../../contexts/MenuContext.jsx';
+
 import { useLogout } from '../../../hooks/custom/useAuth.js';
 import paths from '../../../config/paths.js';
 
@@ -18,6 +20,7 @@ import HamburgerMenu from './hamburger-menu/HamburgerMenu.jsx';
 export default function HeaderMobile() {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = useCartContext();
+    const { isMenuOpened, openMenu } = useMenuContext();
 
     const navigate = useNavigate();
     const logout = useLogout();
@@ -30,10 +33,10 @@ export default function HeaderMobile() {
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
             <Container className="d-flex justify-content-between">
-                <button className="p-1 border-0">
+                <button onClick={openMenu} className="p-1 border-0">
                     <i className="fa-solid fa-bars fa-xl text-light"></i>
                 </button>
-                {/* <HamburgerMenu /> */}
+                {isMenuOpened && <HamburgerMenu />}
 
                 <Navbar.Brand className="d-flex flex-wrap flex-sm-nowrap align-items-center" as={Link} to={paths.home.path}>
                     <Card className={`${styles.logo} mx-0`}>

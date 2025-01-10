@@ -19,7 +19,7 @@ import MyOrders from './components/my-orders/MyOrders.jsx';
 
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
-import { MenuContextProvider } from './contexts/MenuContext.jsx';
+import { MenuContextProvider, useMenuContext } from './contexts/MenuContext.jsx';
 
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
