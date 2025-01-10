@@ -19,12 +19,12 @@
     z-index: 1001;
     background-color: white;
     animation-name: menu;
-    animation-duration: 0.4s;
+    animation-duration: 0.6s;
 }
 
 @keyframes menu {
     from {
-        left: -15rem;
+        left: -30rem;
     }
 
     to {
@@ -43,7 +43,7 @@
     z-index: 1001;
     background-color: white;
     animation-name: remove;
-    animation-duration: 0.4s;
+    animation-duration: 0.6s;
 }
 
 @keyframes remove {
@@ -52,7 +52,7 @@
     }
 
     to {
-        left: -22rem;
+        left: -30rem;
     }
 }
 
