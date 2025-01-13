@@ -1,4 +1,4 @@
-import { Card, CardBody, CardTitle, CardText, Container } from 'react-bootstrap';
+import { Card, CardBody, CardTitle } from 'react-bootstrap';
 
 import styles from './wishlistItem.module.css';
 import { Link } from 'react-router-dom';
