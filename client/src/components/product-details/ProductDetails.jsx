@@ -19,6 +19,8 @@ import { useGetSizesForProduct } from '../../hooks/custom/useStock.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import paths from '../../config/paths.js';
 
+import styles from './productDetails.module.css';
+
 export default function ProductDetails() {
     const { productId } = useParams();
     const { userId, isAuthenticated } = useAuthContext();
@@ -82,12 +84,14 @@ export default function ProductDetails() {
                         <DeleteProductModal show={handleShowDelete} handleClose={handleCloseDelete} {...product} />
                     )}
 
-                    <Container className="container-sm col-12 col-md-10 col-lg-7 mt-3 mb-3 p-4 bg-dark-subtle shadow rounded-3">
+                    <Container
+                        className={`container-sm col-12 col-md-9 col-lg-8 col-xl-7 mt-3 mb-3 rounded-3 ${styles.container}`}
+                    >
                         <Row className="d-flex flex-column flex-sm-row flex-md-row flex-lg-row">
-                            <Col className="d-flex justify-content-center align-items-center">
-                                <img className="card-img" src={product.imageUrl} />
+                            <Col className={styles['img-wrapper']}>
+                                <img className={styles['card-img']} src={product.imageUrl} />
                             </Col>
-                            <Col className="d-flex align-items-center">
+                            <Col className="d-flex align-items-center px-3 px-md-4 py-3">
                                 <div className="d-flex flex-column justify-content-between">
                                     <h6 className="text-secondary">{product.brand}</h6>
                                     <h1>{product.name}</h1>
