@@ -74,7 +74,7 @@ export default function HamburgerMenu({ logoutHandler }) {
 function CategoryLink({ category, closeMenuHandler }) {
     let path = paths.catalog.basePath;
 
-    if (category !== 'All categories') {
+    if (category !== 'All products') {
         path = path + `?category=${category}`;
     }
 

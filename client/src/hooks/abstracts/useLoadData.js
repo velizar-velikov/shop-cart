@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
  */
 export function useLoadData(initialState, asyncCallback, params = {}, dependencies = []) {
     const [data, setData] = useState(initialState);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
