@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useCartContext } from '../../../contexts/CartContext.jsx';
+import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
 import { useMenuContext } from '../../../contexts/MenuContext.jsx';
 
 import paths from '../../../config/paths.js';
@@ -19,6 +20,7 @@ import HamburgerMenu from './hamburger-menu/HamburgerMenu.jsx';
 export default function HeaderMobile({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = useCartContext();
+    const { wishlist } = useWishlistContext();
     const { isMenuOpened, openMenu } = useMenuContext();
 
     return (
@@ -37,6 +39,11 @@ export default function HeaderMobile({ logoutHandler }) {
                 <Nav className="ml-auto navbar navbar-expand-sm justify-content-end">
                     {isAuthenticated ? (
                         <>
+                            <Nav.Link as={Link} to="/wishlist" className="position-relative  mx-2 mt-1 px-1">
+                                <i className="fa-regular fa-heart fa-xl"></i>
+                                {wishlist.length > 0 && <CartBubble cartItemsCount={wishlist.length} />}
+                            </Nav.Link>
+
                             <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">
                                 <i className="fa-solid fa-bag-shopping fa-xl"></i>
                                 {cartItemsCount > 0 && <CartBubble cartItemsCount={cartItemsCount} />}

@@ -18,11 +18,6 @@ import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.jsx';
 import MyOrders from './components/my-orders/MyOrders.jsx';
 import Wishlist from './components/wishlist/Wishlist.jsx';
 
-import { AuthContextProvider } from './contexts/AuthContext.jsx';
-import { CartContextProvider } from './contexts/CartContext.jsx';
-import { MenuContextProvider } from './contexts/MenuContext.jsx';
-import { WishlistContextProvider } from './contexts/WishlistContext.jsx';
-
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
 import { ContextWrapperProvider } from './contexts/ContextWrapper.jsx';
