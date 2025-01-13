@@ -54,6 +54,10 @@ export default function HeaderDesktop({ logoutHandler }) {
                                 </NavDropdown.Item>
                             </NavDropdown>
 
+                            <Nav.Link as={Link} to="/wishlist" className="position-relative  mx-2 mt-1 px-1">
+                                <i className="fa-regular fa-heart fa-xl"></i>
+                                {cartItemsCount > 0 && <CartBubble cartItemsCount={cartItemsCount} />}
+                            </Nav.Link>
                             <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">
                                 <i className="fa-solid fa-bag-shopping fa-xl"></i>
                                 {cartItemsCount > 0 && <CartBubble cartItemsCount={cartItemsCount} />}

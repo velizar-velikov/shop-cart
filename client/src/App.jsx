@@ -16,10 +16,11 @@ import Cart from './components/cart/Cart.jsx';
 import PurchaseSection from './components/purchase/PurshaseSection.jsx';
 import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.jsx';
 import MyOrders from './components/my-orders/MyOrders.jsx';
+import Wishlist from './components/wishlist/Wishlist.jsx';
 
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
-import { MenuContextProvider, useMenuContext } from './contexts/MenuContext.jsx';
+import { MenuContextProvider } from './contexts/MenuContext.jsx';
 
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
@@ -55,6 +56,7 @@ function App() {
                                 <Route element={<PrivateGuard />}>
                                     <Route path={paths.createProduct.path} element={<CreateProduct />} />
                                     <Route path={paths.editProduct.path} element={<EditProduct />} />
+                                    <Route path={paths.wishlist.path} element={<Wishlist />} />
                                     <Route path={paths.cart.path} element={<Cart />} />
                                     <Route path={paths.purchase.path} element={<PurchaseSection />} />
                                     <Route path={paths.purchaseSuccess.path} element={<PurchaseSuccess />} />

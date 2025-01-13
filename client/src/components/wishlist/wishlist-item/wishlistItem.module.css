@@ -1,0 +1,148 @@
+.card {
+    border: 1px solid transparent;
+    border-radius: 1px;
+    padding-bottom: 0.15rem;
+}
+
+.card:hover {
+    border: 1px solid rgb(77, 76, 76);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.body {
+    border: none;
+    padding-block: 0.8rem;
+    padding-inline: 0.5rem;
+}
+
+.title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.20rem;
+}
+
+.text {
+    font-size: 0.98rem;
+    color: rgb(102, 102, 102);
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+@media (max-width: 1400px) {
+    .card-img-top {
+        height: 37vh !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .card-img-top {
+        height: 33vh !important;
+    }
+
+    .title {
+        font-size: 0.98rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .text {
+        font-size: 0.92rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .card-img-top {
+        height: 29vh !important;
+    }
+
+    .title {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .text {
+        font-size: 0.90rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 33vh !important;
+    }
+
+    .title {
+        font-size: 1.1rem;
+    }
+
+    .text {
+        font-size: 0.92rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card:hover {
+        border: 1px solid transparent;
+    }
+
+    .card-img-top {
+        height: 35vh !important;
+    }
+
+    .body {
+        padding-block: 0.9rem;
+        padding-inline: 0.65rem;
+    }
+
+    .title {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .text {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .price {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .card-img-top {
+        height: 28vh !important;
+    }
+
+    .body {
+        padding-block: 0.7rem;
+        padding-inline: 0.5rem;
+    }
+
+    .title {
+        font-size: 0.90rem;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+
+    .text {
+        font-size: 0.78rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .price {
+        font-size: 1.05rem;
+    }
+}

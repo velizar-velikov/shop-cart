@@ -31,6 +31,9 @@ const paths = {
         path: '/catalog/:productId/reviews',
         getHref: (productId) => `/catalog/${productId}/reviews`,
     },
+    wishlist: {
+        path: '/wishlist',
+    },
     cart: {
         path: '/cart',
     },

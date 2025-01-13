@@ -94,7 +94,7 @@ export default function ProductDetails() {
                             <Col className="d-flex align-items-center px-3 px-md-4 py-3">
                                 <div className="d-flex flex-column justify-content-between">
                                     <h6 className="text-secondary">{product.brand}</h6>
-                                    <h1>{product.name}</h1>
+                                    <h2 className="pb-1">{product.name}</h2>
                                     <div className="d-flex">
                                         <div className="rating col-5">
                                             <RatingStars rating={averageRating} />
