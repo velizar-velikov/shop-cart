@@ -21,6 +21,7 @@ import Wishlist from './components/wishlist/Wishlist.jsx';
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CartContextProvider } from './contexts/CartContext.jsx';
 import { MenuContextProvider } from './contexts/MenuContext.jsx';
+import { WishlistContextProvider } from './contexts/WishlistContext.jsx';
 
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
@@ -31,43 +32,45 @@ function App() {
     return (
         <div className="d-flex flex-column min-vh-100">
             <AuthContextProvider>
-                <CartContextProvider>
-                    {/* menu only for small devices */}
-                    <MenuContextProvider>
-                        <Header />
-                        <ToastContainer />
-                        <main>
-                            <Routes>
-                                <Route path={paths.home.path} element={<Home />} />
-                                {paths.catalog.paths.map((path) => (
-                                    <Route key={path} path={path} element={<Catalog />} />
-                                ))}
+                <WishlistContextProvider>
+                    <CartContextProvider>
+                        {/* menu only for small devices */}
+                        <MenuContextProvider>
+                            <Header />
+                            <ToastContainer />
+                            <main>
+                                <Routes>
+                                    <Route path={paths.home.path} element={<Home />} />
+                                    {paths.catalog.paths.map((path) => (
+                                        <Route key={path} path={path} element={<Catalog />} />
+                                    ))}
 
-                                <Route path={paths.details.path} element={<ProductDetails />} />
-                                <Route path={paths.reviews.path} element={<ProductReviews />} />
+                                    <Route path={paths.details.path} element={<ProductDetails />} />
+                                    <Route path={paths.reviews.path} element={<ProductReviews />} />
 
-                                {/* pages only for unauthenticated users */}
-                                <Route element={<GuestGuard />}>
-                                    <Route path={paths.login.path} element={<Login />} />
-                                    <Route path={paths.register.path} element={<Register />} />
-                                </Route>
+                                    {/* pages only for unauthenticated users */}
+                                    <Route element={<GuestGuard />}>
+                                        <Route path={paths.login.path} element={<Login />} />
+                                        <Route path={paths.register.path} element={<Register />} />
+                                    </Route>
 
-                                {/* private pages */}
-                                <Route element={<PrivateGuard />}>
-                                    <Route path={paths.createProduct.path} element={<CreateProduct />} />
-                                    <Route path={paths.editProduct.path} element={<EditProduct />} />
-                                    <Route path={paths.wishlist.path} element={<Wishlist />} />
-                                    <Route path={paths.cart.path} element={<Cart />} />
-                                    <Route path={paths.purchase.path} element={<PurchaseSection />} />
-                                    <Route path={paths.purchaseSuccess.path} element={<PurchaseSuccess />} />
-                                    <Route path={paths.orders.path} element={<MyOrders />} />
-                                </Route>
+                                    {/* private pages */}
+                                    <Route element={<PrivateGuard />}>
+                                        <Route path={paths.createProduct.path} element={<CreateProduct />} />
+                                        <Route path={paths.editProduct.path} element={<EditProduct />} />
+                                        <Route path={paths.wishlist.path} element={<Wishlist />} />
+                                        <Route path={paths.cart.path} element={<Cart />} />
+                                        <Route path={paths.purchase.path} element={<PurchaseSection />} />
+                                        <Route path={paths.purchaseSuccess.path} element={<PurchaseSuccess />} />
+                                        <Route path={paths.orders.path} element={<MyOrders />} />
+                                    </Route>
 
-                                <Route path="*" element={<NotFound />} />
-                            </Routes>
-                        </main>
-                    </MenuContextProvider>
-                </CartContextProvider>
+                                    <Route path="*" element={<NotFound />} />
+                                </Routes>
+                            </main>
+                        </MenuContextProvider>
+                    </CartContextProvider>
+                </WishlistContextProvider>
             </AuthContextProvider>
             <Footer />
         </div>

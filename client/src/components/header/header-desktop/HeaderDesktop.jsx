@@ -11,10 +11,12 @@ import paths from '../../../config/paths.js';
 import CartBubble from '../cart-bubble/CartBubble.jsx';
 import Logo from '../../../assets/img/shopping-cart.webp';
 import styles from '../header.module.css';
+import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
 
 export default function HeaderDesktop({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = useCartContext();
+    const { wishlist } = useWishlistContext();
 
     return (
         <Navbar className="p-0" bg="dark" data-bs-theme="dark">
@@ -56,7 +58,7 @@ export default function HeaderDesktop({ logoutHandler }) {
 
                             <Nav.Link as={Link} to="/wishlist" className="position-relative  mx-2 mt-1 px-1">
                                 <i className="fa-regular fa-heart fa-xl"></i>
-                                {cartItemsCount > 0 && <CartBubble cartItemsCount={cartItemsCount} />}
+                                {wishlist.length > 0 && <CartBubble cartItemsCount={wishlist.length} />}
                             </Nav.Link>
                             <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">
                                 <i className="fa-solid fa-bag-shopping fa-xl"></i>

@@ -20,7 +20,7 @@ export function usePersistedState(key, initialState) {
     const [state, setState] = useState(() => createInitialState(key, initialState));
 
     const updateState = (updaterState) => {
-        const newState = typeof updaterState == 'function' ? updaterState() : updaterState;
+        const newState = typeof updaterState == 'function' ? updaterState(state) : updaterState;
 
         if (newState == null) {
             localStorage.removeItem(key);
