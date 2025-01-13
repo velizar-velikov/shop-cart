@@ -10,6 +10,11 @@ const sizesReference = {
     large: 'L',
 };
 
+const iconClassName = {
+    empty: 'fa-regular fa-heart fa-lg',
+    filled: 'fa-solid fa-heart fa-lg',
+};
+
 export default function CatalogCard({ _id, name, category, price, summary, imageUrl, sizes, isHome = false }) {
     if (!sizes) {
         sizes = {};
@@ -30,8 +35,24 @@ export default function CatalogCard({ _id, name, category, price, summary, image
         setText(summary);
     };
 
+    const addToWishlist = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    const fillHeart = (e) => {
+        e.currentTarget.children[0].className = iconClassName.filled;
+    };
+
+    const emptyHeart = (e) => {
+        e.currentTarget.children[0].className = iconClassName.empty;
+    };
+
     return (
-        <div>
+        <div className={styles.container}>
+            <button onMouseEnter={fillHeart} onMouseLeave={emptyHeart} className={styles.icon} onClick={addToWishlist}>
+                <i className={iconClassName.empty}></i>
+            </button>
             <Link to={paths.details.getHref(_id)} className="text-decoration-none">
                 <Card onMouseEnter={showSizes} onMouseLeave={showSummary} className={styles.card}>
                     <img src={imageUrl} alt={category} className={`card-img-catalog ${styles['card-img-top']}`} />

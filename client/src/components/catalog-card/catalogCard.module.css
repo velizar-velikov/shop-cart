@@ -1,3 +1,7 @@
+.container {
+    position: relative;
+}
+
 .card {
     border: 1px solid transparent;
     border-radius: 1px;
@@ -16,6 +20,15 @@
     border-top-right-radius: 1px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+
+.icon {
+    position: absolute;
+    top: 0.7rem;
+    right: 1.17rem;
+    z-index: 100;
+    border: none;
+    background-color: transparent;
 }
 
 .body {
@@ -54,6 +67,13 @@
 
     .text {
         font-size: 0.92rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .icon {
+        top: 0.5rem;
+        right: 0.8rem;
     }
 }
 
