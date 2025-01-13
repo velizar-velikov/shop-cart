@@ -1,10 +1,12 @@
 import { Card, CardBody, CardTitle, CardText } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import styles from './catalogCard.module.css';
-import paths from '../../config/paths.js';
 import { useRef, useState } from 'react';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useWishlist } from '../../hooks/custom/useWishlist.js';
+import paths from '../../config/paths.js';
+
+import styles from './catalogCard.module.css';
 
 const sizesReference = {
     small: 'S',
@@ -12,13 +14,11 @@ const sizesReference = {
     large: 'L',
 };
 
-const iconClassName = {
-    empty: 'fa-regular fa-heart fa-lg',
-    filled: 'fa-solid fa-heart fa-lg',
-};
-
 export default function CatalogCard({ _id, name, category, price, summary, imageUrl, _ownerId, sizes, isHome = false }) {
     const { isAuthenticated, userId } = useAuthContext();
+    const { wishlist } = useWishlistContext();
+
+    const heartedProduct = wishlist.find((p) => p._id === _id);
     const canHeart = isAuthenticated && userId == _ownerId;
 
     if (!sizes) {
@@ -40,26 +40,12 @@ export default function CatalogCard({ _id, name, category, price, summary, image
         setText(summary);
     };
 
-    const { wishlist, updateWishlist } = useWishlistContext();
-
     const iconButtonRef = useRef();
 
-    const fillHeart = () => {
-        iconButtonRef.current.children[0].className = iconClassName.filled;
-    };
-
-    const emptyHeart = () => {
-        iconButtonRef.current.children[0].className = iconClassName.empty;
-    };
-
-    const addToWishlist = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        console.log(wishlist);
-
-        updateWishlist((oldWishlist) => [...oldWishlist, _id]);
-        fillHeart();
-    };
+    const { iconClassName, fillHeart, emptyHeart, addToWishlist, removeFromWishlist } = useWishlist(
+        { _id, name, category, price, imageUrl },
+        iconButtonRef
+    );
 
     return (
         <div className={styles.container}>
@@ -69,9 +55,9 @@ export default function CatalogCard({ _id, name, category, price, summary, image
                     onMouseEnter={fillHeart}
                     onMouseLeave={emptyHeart}
                     className={styles.icon}
-                    onClick={addToWishlist}
+                    onClick={!heartedProduct ? addToWishlist : removeFromWishlist}
                 >
-                    <i className={iconClassName.empty}></i>
+                    <i className={!heartedProduct ? iconClassName.empty : iconClassName.filled}></i>
                 </button>
             )}
 

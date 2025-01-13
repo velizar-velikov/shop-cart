@@ -1,22 +1,15 @@
 import { Card, CardBody, CardTitle } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useWishlist } from '../../../hooks/custom/useWishlist.js';
 
 import styles from './wishlistItem.module.css';
-import { Link } from 'react-router-dom';
 
-const iconClassName = {
-    empty: 'fa-regular fa-heart fa-lg',
-    filled: 'fa-solid fa-heart fa-lg',
-};
-
-export default function WishlistItem({ imageUrl, category, name, price }) {
-    const addToWishlist = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-    };
+export default function WishlistItem({ _id, imageUrl, category, name, price }) {
+    const { iconClassName, removeFromWishlist } = useWishlist({ _id, imageUrl, category, name, price });
 
     return (
         <div className={styles.container}>
-            <button className={styles.icon} onClick={addToWishlist}>
+            <button className={styles.icon} onClick={removeFromWishlist}>
                 <i className={iconClassName.filled}></i>
             </button>
             <Link className="text-decoration-none">

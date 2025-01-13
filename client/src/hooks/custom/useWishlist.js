@@ -1,34 +1,55 @@
-import { useEffect, useState } from 'react';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
-import productsAPI from '../../api/products-api.js';
 
-export function useLoadWishlist() {
+export function useWishlist(productData, iconButtonRef) {
     const { wishlist, updateWishlist } = useWishlistContext();
 
-    const [wishlistData, setWishlistData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const heartedProduct = wishlist.find((p) => p._id === productData._id);
 
-    useEffect(() => {
-        async function loadWishlist() {
-            try {
-                setIsLoading(true);
+    const iconClassName = {
+        empty: 'fa-regular fa-heart fa-lg',
+        filled: 'fa-solid fa-heart fa-lg',
+    };
 
-                const data = [];
+    const fillHeart = () => {
+        iconButtonRef.current.children[0].className = iconClassName.filled;
+    };
 
-                for (const productId of wishlist) {
-                    const product = await productsAPI.getOne(productId);
-                    data.push(product);
-                }
-
-                setWishlistData(data);
-            } catch (error) {
-                console.log(error.mesage);
-            } finally {
-                setIsLoading(false);
-            }
+    const emptyHeart = () => {
+        if (heartedProduct) {
+            return;
         }
-        loadWishlist();
-    }, []);
+        iconButtonRef.current.children[0].className = iconClassName.empty;
+    };
 
-    return { wishlistData, isLoading };
+    const addToWishlist = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (heartedProduct) {
+            return;
+        }
+
+        updateWishlist((oldWishlist) => [...oldWishlist, productData]);
+        fillHeart();
+    };
+
+    const removeFromWishlist = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        updateWishlist((oldWishlist) => {
+            const productIndex = oldWishlist.findIndex((p) => p._id === productData._id);
+            return oldWishlist.toSpliced(productIndex, 1);
+        });
+
+        emptyHeart();
+    };
+
+    return {
+        iconClassName,
+        fillHeart,
+        emptyHeart,
+        addToWishlist,
+        removeFromWishlist,
+    };
 }
