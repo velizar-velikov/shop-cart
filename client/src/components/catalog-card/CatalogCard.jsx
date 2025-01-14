@@ -19,7 +19,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
     const { wishlist } = useWishlistContext();
 
     const heartedProduct = wishlist.find((p) => p._id === _id);
-    const canHeart = isAuthenticated && userId == _ownerId;
+    const canHeart = isAuthenticated && userId !== _ownerId;
 
     if (!sizes) {
         sizes = {};

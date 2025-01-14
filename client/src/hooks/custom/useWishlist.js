@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
 
 export function useWishlist(productData, iconButtonRef) {
@@ -21,6 +22,10 @@ export function useWishlist(productData, iconButtonRef) {
         iconButtonRef.current.children[0].className = iconClassName.empty;
     };
 
+    const notify = () => {
+        toast.success(`Product added to wishlist.`, { autoClose: 2000 });
+    };
+
     const addToWishlist = (e) => {
         e.stopPropagation();
         e.preventDefault();
@@ -31,6 +36,7 @@ export function useWishlist(productData, iconButtonRef) {
 
         updateWishlist((oldWishlist) => [...oldWishlist, productData]);
         fillHeart();
+        notify();
     };
 
     const removeFromWishlist = (e) => {
