@@ -4,6 +4,7 @@ import { useWishlist } from '../../../hooks/custom/useWishlist.js';
 
 import styles from './wishlistItem.module.css';
 import paths from '../../../config/paths.js';
+import { useRef } from 'react';
 
 export default function WishlistItem({ _id, imageUrl, category, name, price }) {
     const { iconClassName, removeFromWishlist } = useWishlist({ _id, imageUrl, category, name, price });
@@ -20,6 +21,9 @@ export default function WishlistItem({ _id, imageUrl, category, name, price }) {
                         <CardBody className={styles.body}>
                             <CardTitle className={styles.title}>{name}</CardTitle>
                             <p className={styles.price}>{`$${price}`}</p>
+                            <div className={styles['add-wrapper']}>
+                                <button className={styles.add}>Add to cart</button>
+                            </div>
                         </CardBody>
                     </Card>
                 </Link>
