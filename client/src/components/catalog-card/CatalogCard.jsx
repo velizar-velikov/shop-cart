@@ -52,7 +52,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
 
     return (
         <div>
-            <div className={styles.container}>
+            <div onMouseEnter={showSizes} onMouseLeave={showSummary} className={styles.container}>
                 {canHeart && (
                     <button
                         ref={iconButtonRef}
@@ -66,7 +66,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
                 )}
 
                 <Link to={paths.details.getHref(_id)} className="text-decoration-none">
-                    <Card onMouseEnter={showSizes} onMouseLeave={showSummary} className={styles.card}>
+                    <Card className={styles.card}>
                         <img src={imageUrl} alt={category} className={`card-img-catalog ${styles['card-img-top']}`} />
                         <CardBody className={styles.body}>
                             <CardTitle className={styles.title}>{name}</CardTitle>

@@ -13,7 +13,7 @@ export default function Wishlist() {
                 <div className="mx-3">
                     <h2 className={styles.heading}>My wishlist</h2>
                     <p className="fs-5">
-                        {wishlist.length} {wishlist.length > 1 ? 'items' : 'item'}
+                        {wishlist.length} {wishlist.length !== 1 ? 'items' : 'item'}
                     </p>
                 </div>
                 <Row className=" d-flex flex-wrap w-100 row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 g-1 g-sm-2 g-xl-3 m-auto">

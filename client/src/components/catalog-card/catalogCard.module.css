@@ -27,7 +27,7 @@
 .icon {
     position: absolute;
     top: 0.7rem;
-    right: 1.17rem;
+    right: 0.8rem;
     z-index: 100;
     border: none;
     background-color: transparent;
@@ -75,7 +75,7 @@
 @media (max-width: 1200px) {
     .icon {
         top: 0.5rem;
-        right: 0.8rem;
+        right: 0.6rem;
     }
 }
 
@@ -109,10 +109,6 @@
 }
 
 @media (max-width: 576px) {
-    .card:hover {
-        border: 1px solid transparent;
-    }
-
     .card-img-top {
         height: 35vh !important;
     }
