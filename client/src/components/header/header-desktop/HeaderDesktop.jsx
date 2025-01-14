@@ -34,7 +34,8 @@ export default function HeaderDesktop({ logoutHandler }) {
                     <Nav.Link as={Link} to={paths.catalog.basePath}>
                         Catalog
                     </Nav.Link>
-                    {isAuthenticated ? (
+
+                    {isAuthenticated && (
                         <>
                             <Nav.Link as={Link} to={paths.createProduct.path}>
                                 Create product
@@ -51,27 +52,33 @@ export default function HeaderDesktop({ logoutHandler }) {
                                     Olders
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={logoutHandler} as={Link} to="">
+                                <NavDropdown.Item onClick={logoutHandler} as={Link}>
                                     Sign out
                                 </NavDropdown.Item>
                             </NavDropdown>
-
-                            <Nav.Link as={Link} to="/wishlist" className="position-relative  mx-2 mt-1 px-1">
-                                <i className="fa-regular fa-heart fa-xl"></i>
-                                {wishlist.length > 0 && <CartBubble cartItemsCount={wishlist.length} />}
-                            </Nav.Link>
-                            <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">
-                                <i className="fa-solid fa-bag-shopping fa-xl"></i>
-                                {cartItemsCount > 0 && <CartBubble cartItemsCount={cartItemsCount} />}
-                            </Nav.Link>
                         </>
-                    ) : (
+                    )}
+
+                    {!isAuthenticated && (
                         <>
                             <Nav.Link as={Link} to={paths.login.path}>
                                 Login
                             </Nav.Link>
                             <Nav.Link as={Link} to={paths.register.path}>
                                 Register
+                            </Nav.Link>
+                        </>
+                    )}
+
+                    <Nav.Link as={Link} to="/wishlist" className="position-relative  mx-2 mt-1 px-1">
+                        <i className="fa-regular fa-heart fa-xl"></i>
+                        {wishlist.length > 0 && <CartBubble cartItemsCount={wishlist.length} />}
+                    </Nav.Link>
+                    {isAuthenticated && (
+                        <>
+                            <Nav.Link as={Link} to="/cart" className="position-relative  mx-2 mt-1 px-1">
+                                <i className="fa-solid fa-bag-shopping fa-xl"></i>
+                                {cartItemsCount > 0 && <CartBubble cartItemsCount={cartItemsCount} />}
                             </Nav.Link>
                         </>
                     )}

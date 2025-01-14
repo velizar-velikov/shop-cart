@@ -19,7 +19,10 @@ export default function CatalogCard({ _id, name, category, price, summary, image
     const { wishlist } = useWishlistContext();
 
     const heartedProduct = wishlist.find((p) => p._id === _id);
-    const canHeart = isAuthenticated && userId !== _ownerId;
+    let canHeart = true;
+    if (isAuthenticated) {
+        canHeart = isAuthenticated && userId !== _ownerId;
+    }
 
     if (!sizes) {
         sizes = {};
@@ -43,7 +46,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
     const iconButtonRef = useRef();
 
     const { iconClassName, fillHeart, emptyHeart, addToWishlist, removeFromWishlist } = useWishlist(
-        { _id, name, category, price, imageUrl },
+        { _id, name, category, price, imageUrl, _ownerId },
         iconButtonRef
     );
 

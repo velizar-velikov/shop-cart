@@ -39,6 +39,7 @@ function App() {
 
                         <Route path={paths.details.path} element={<ProductDetails />} />
                         <Route path={paths.reviews.path} element={<ProductReviews />} />
+                        <Route path={paths.wishlist.path} element={<Wishlist />} />
 
                         {/* pages only for unauthenticated users */}
                         <Route element={<GuestGuard />}>
@@ -50,7 +51,6 @@ function App() {
                         <Route element={<PrivateGuard />}>
                             <Route path={paths.createProduct.path} element={<CreateProduct />} />
                             <Route path={paths.editProduct.path} element={<EditProduct />} />
-                            <Route path={paths.wishlist.path} element={<Wishlist />} />
                             <Route path={paths.cart.path} element={<Cart />} />
                             <Route path={paths.purchase.path} element={<PurchaseSection />} />
                             <Route path={paths.purchaseSuccess.path} element={<PurchaseSuccess />} />
