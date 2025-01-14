@@ -48,29 +48,31 @@ export default function CatalogCard({ _id, name, category, price, summary, image
     );
 
     return (
-        <div className={styles.container}>
-            {canHeart && (
-                <button
-                    ref={iconButtonRef}
-                    onMouseEnter={fillHeart}
-                    onMouseLeave={emptyHeart}
-                    className={styles.icon}
-                    onClick={!heartedProduct ? addToWishlist : removeFromWishlist}
-                >
-                    <i className={!heartedProduct ? iconClassName.empty : iconClassName.filled}></i>
-                </button>
-            )}
+        <div>
+            <div className={styles.container}>
+                {canHeart && (
+                    <button
+                        ref={iconButtonRef}
+                        onMouseEnter={fillHeart}
+                        onMouseLeave={emptyHeart}
+                        className={styles.icon}
+                        onClick={!heartedProduct ? addToWishlist : removeFromWishlist}
+                    >
+                        <i className={!heartedProduct ? iconClassName.empty : iconClassName.filled}></i>
+                    </button>
+                )}
 
-            <Link to={paths.details.getHref(_id)} className="text-decoration-none">
-                <Card onMouseEnter={showSizes} onMouseLeave={showSummary} className={styles.card}>
-                    <img src={imageUrl} alt={category} className={`card-img-catalog ${styles['card-img-top']}`} />
-                    <CardBody className={styles.body}>
-                        <CardTitle className={styles.title}>{name}</CardTitle>
-                        <CardText className={styles.text}>{!isHome ? text : summary}</CardText>
-                        <p className={styles.price}>{`$${price}`}</p>
-                    </CardBody>
-                </Card>
-            </Link>
+                <Link to={paths.details.getHref(_id)} className="text-decoration-none">
+                    <Card onMouseEnter={showSizes} onMouseLeave={showSummary} className={styles.card}>
+                        <img src={imageUrl} alt={category} className={`card-img-catalog ${styles['card-img-top']}`} />
+                        <CardBody className={styles.body}>
+                            <CardTitle className={styles.title}>{name}</CardTitle>
+                            <CardText className={styles.text}>{!isHome ? text : summary}</CardText>
+                            <p className={styles.price}>{`$${price}`}</p>
+                        </CardBody>
+                    </Card>
+                </Link>
+            </div>
         </div>
     );
 }
