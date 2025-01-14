@@ -12,6 +12,7 @@
     border: none;
     border-radius: 1px;
     padding-bottom: 0.15rem;
+    min-height: 52.5vh;
 }
 
 .card-img-top {
@@ -64,6 +65,12 @@
     display: flex;
     justify-content: center;
     margin-top: 0.6rem;
+    margin-inline: auto;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
 }
 
 .add {
@@ -95,6 +102,10 @@
 }
 
 @media (max-width: 1400px) {
+    .card {
+        min-height: 49vh;
+    }
+
     .card-img-top {
         height: 37vh !important;
     }
@@ -104,6 +115,10 @@
     .icon {
         top: 0.5rem;
         right: 0.8rem;
+    }
+
+    .card {
+        min-height: 45vh;
     }
 
     .card-img-top {
@@ -121,6 +136,10 @@
 }
 
 @media (max-width: 992px) {
+    .card {
+        min-height: 41vh;
+    }
+
     .card-img-top {
         height: 29vh !important;
     }
@@ -136,6 +155,10 @@
 }
 
 @media (max-width: 768px) {
+    .card {
+        min-height: 45.5vh;
+    }
+
     .card-img-top {
         height: 33vh !important;
     }
@@ -153,6 +176,10 @@
     .icon {
         top: 0.4rem;
         right: 0.4rem;
+    }
+
+    .card {
+        min-height: 47.5vh;
     }
 
     .card-img-top {
@@ -180,6 +207,10 @@
 }
 
 @media (max-width: 420px) {
+    .card {
+        min-height: 39.5vh;
+    }
+
     .card-img-top {
         height: 28vh !important;
     }
