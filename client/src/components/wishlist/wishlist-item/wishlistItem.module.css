@@ -92,6 +92,10 @@
     transform: translateY(-2px);
 }
 
+.add:active {
+    transform: translateY(0px);
+}
+
 /* showing addToCart and removing price when hovering over the card */
 .container:hover .add {
     display: block;
@@ -137,7 +141,7 @@
 
 @media (max-width: 992px) {
     .card {
-        min-height: 41vh;
+        min-height: 42vh;
     }
 
     .card-img-top {
@@ -208,7 +212,7 @@
 
 @media (max-width: 420px) {
     .card {
-        min-height: 39.5vh;
+        min-height: 40.5vh;
     }
 
     .card-img-top {
