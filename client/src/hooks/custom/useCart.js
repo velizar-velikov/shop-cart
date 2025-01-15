@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import cartAPI from '../../api/cart-api.js';
 import { useLoadData } from '../abstracts/useLoadData.js';
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useCartContext } from '../../contexts/CartContext.jsx';
+import { toast } from 'react-toastify';
 
 export function useAddToUserCart() {
     const addToUserCartHandler = async (productId, userId, size, quantity) => {
@@ -81,4 +84,68 @@ export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) 
     }, [inStockSizes]);
 
     return { maxQuantities, setMaxQuantities };
+}
+
+export function useAddToUserCartHandler(productId, inStockSizes, closeModal = false) {
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const { userId } = useAuthContext();
+    const { setUserCartProducts, cartReducer } = useCartContext();
+    const addToUserCart = useAddToUserCart();
+
+    let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes);
+
+    const addToCartHandler = async (values) => {
+        try {
+            values.quantity = values.quantity.trim();
+            values.size = values.size.trim();
+
+            if (!values.quantity || !values.size) {
+                throw new Error('All field are required.');
+            }
+
+            if (values.size == '---') {
+                throw new Error('Please specify a size first.');
+            }
+
+            if (maxQuantities[values.size] <= 0) {
+                return;
+            }
+
+            const notify = () => {
+                toast.success(`Product added to cart.`, { autoClose: 2000 });
+            };
+
+            const cartItemResponse = await addToUserCart(productId, userId, values.size, values.quantity);
+
+            setMaxQuantities((oldSizes) => ({
+                ...oldSizes,
+                [values.size]: oldSizes[values.size] - values.quantity,
+            }));
+
+            cartItemResponse.sizes = inStockSizes;
+
+            const action = {
+                type: 'add_cart_product',
+                payload: {
+                    productId,
+                    quantity: values.quantity,
+                    size: values.size,
+                    cartItemResponse,
+                },
+            };
+            setUserCartProducts((state) => cartReducer(state, action));
+
+            setErrorMessage('');
+
+            if (typeof closeModal == 'function') {
+                closeModal();
+            }
+            notify();
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
+    };
+
+    return { addToCartHandler, maxQuantities, errorMessage };
 }

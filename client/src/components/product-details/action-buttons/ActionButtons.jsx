@@ -1,14 +1,11 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { useState } from 'react';
 import { useForm } from '../../../hooks/abstracts/useForm.js';
-import { useAddToUserCart, useGetMaxQuantitiesToAddToCart } from '../../../hooks/custom/useCart.js';
+import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.js';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
-import { useCartContext } from '../../../contexts/CartContext.jsx';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
-import { toast } from 'react-toastify';
 import paths from '../../../config/paths.js';
 
 const initialValues = {
@@ -24,66 +21,12 @@ export default function ActionButtons({
     handleShowAddStock,
     handleShowDelete,
 }) {
-    const [errorMessage, setErrorMessage] = useState('');
     const { userId } = useAuthContext();
-    const { setUserCartProducts, cartReducer } = useCartContext();
     const isOwner = userId == product._ownerId;
 
-    const addToUserCart = useAddToUserCart();
+    const { addToCartHandler, maxQuantities, errorMessage } = useAddToUserCartHandler(product._id, inStockSizes);
 
-    let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(product._id, userId, inStockSizes);
-
-    const addtoCartHandler = async (values) => {
-        try {
-            values.quantity = values.quantity.trim();
-            values.size = values.size.trim();
-
-            if (!values.quantity || !values.size) {
-                throw new Error('All field are required.');
-            }
-
-            if (values.size == '---') {
-                throw new Error('Please specify a size first.');
-            }
-
-            if (maxQuantities[values.size] <= 0) {
-                return;
-            }
-
-            const notify = () => {
-                toast.success(`Product added to cart.`, { autoClose: 2000 });
-            };
-
-            const cartItemResponse = await addToUserCart(product._id, userId, values.size, values.quantity);
-
-            setMaxQuantities((oldSizes) => ({
-                ...oldSizes,
-                [values.size]: oldSizes[values.size] - values.quantity,
-            }));
-
-            cartItemResponse.sizes = inStockSizes;
-
-            const action = {
-                type: 'add_cart_product',
-                payload: {
-                    productId: product._id,
-                    quantity: values.quantity,
-                    size: values.size,
-                    cartItemResponse,
-                },
-            };
-            setUserCartProducts((state) => cartReducer(state, action));
-
-            setErrorMessage('');
-
-            notify();
-        } catch (error) {
-            setErrorMessage(error.message);
-        }
-    };
-
-    // for add to cart operation
-    const { values, changeHandler, submitHandler } = useForm(initialValues, addtoCartHandler);
+    const { values, changeHandler, submitHandler } = useForm(initialValues, addToCartHandler);
 
     return (
         <>
