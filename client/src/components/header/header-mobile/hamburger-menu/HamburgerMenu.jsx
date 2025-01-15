@@ -4,10 +4,12 @@ import { useMenuContext } from '../../../../contexts/MenuContext.jsx';
 import styles from './hamburgerMenu.module.css';
 import { useEffect, useRef } from 'react';
 import paths from '../../../../config/paths.js';
+import { useAuthContext } from '../../../../contexts/AuthContext.jsx';
 
 const categories = ['All products', 'T-shirts', 'Shorts', 'Sweatshirts', 'Pants'];
 
 export default function HamburgerMenu({ logoutHandler }) {
+    const { isAuthenticated } = useAuthContext();
     const { closeMenu } = useMenuContext();
 
     const menuRef = useRef();
@@ -43,28 +45,30 @@ export default function HamburgerMenu({ logoutHandler }) {
                             <CategoryLink key={category} closeMenuHandler={closeMenuHandler} category={category} />
                         ))}
                     </ul>
-                    <ul className={styles['account-list']}>
-                        <li className={styles['account-list-item']}>
-                            <Link className={styles.link} onClick={closeMenuHandler}>
-                                Account
-                            </Link>
-                        </li>
-                        <li className={styles['account-list-item']}>
-                            <Link className={styles.link} onClick={closeMenuHandler} to={paths.createProduct.path}>
-                                Create product
-                            </Link>
-                        </li>
-                        <li className={styles['account-list-item']}>
-                            <Link className={styles.link} onClick={closeMenuHandler} to={paths.orders.path}>
-                                Orders
-                            </Link>
-                        </li>
-                        <li className={styles['account-list-item']}>
-                            <Link className={styles.link} onClick={logoutAction}>
-                                Sign out
-                            </Link>
-                        </li>
-                    </ul>
+                    {isAuthenticated && (
+                        <ul className={styles['account-list']}>
+                            <li className={styles['account-list-item']}>
+                                <Link className={styles.link} onClick={closeMenuHandler}>
+                                    Account
+                                </Link>
+                            </li>
+                            <li className={styles['account-list-item']}>
+                                <Link className={styles.link} onClick={closeMenuHandler} to={paths.createProduct.path}>
+                                    Create product
+                                </Link>
+                            </li>
+                            <li className={styles['account-list-item']}>
+                                <Link className={styles.link} onClick={closeMenuHandler} to={paths.orders.path}>
+                                    Orders
+                                </Link>
+                            </li>
+                            <li className={styles['account-list-item']}>
+                                <Link className={styles.link} onClick={logoutAction}>
+                                    Sign out
+                                </Link>
+                            </li>
+                        </ul>
+                    )}
                 </nav>
             </div>
         </section>

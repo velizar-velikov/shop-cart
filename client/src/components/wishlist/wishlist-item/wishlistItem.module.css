@@ -141,11 +141,15 @@
 
 @media (max-width: 992px) {
     .card {
-        min-height: 42vh;
+        min-height: 39vh;
     }
 
     .card-img-top {
         height: 29vh !important;
+    }
+
+    .body {
+        padding-block: 0.8rem 0rem;
     }
 
     .title {
@@ -156,11 +160,27 @@
     .text {
         font-size: 0.90rem;
     }
+
+    .add-wrapper {
+        margin-top: 0rem;
+    }
+
+    .container:hover {
+        border: 1px solid transparent;
+    }
+
+    .container:hover .add {
+        display: none;
+    }
+
+    .container:hover .price {
+        display: block;
+    }
 }
 
 @media (max-width: 768px) {
     .card {
-        min-height: 45.5vh;
+        min-height: 43.5vh;
     }
 
     .card-img-top {
@@ -183,7 +203,7 @@
     }
 
     .card {
-        min-height: 47.5vh;
+        min-height: 45.5vh;
     }
 
     .card-img-top {
@@ -191,7 +211,7 @@
     }
 
     .body {
-        padding-block: 0.9rem;
+        padding-block: 0.7rem 0rem;
         padding-inline: 0.65rem;
     }
 
@@ -212,7 +232,7 @@
 
 @media (max-width: 420px) {
     .card {
-        min-height: 40.5vh;
+        min-height: 37vh;
     }
 
     .card-img-top {
@@ -220,7 +240,7 @@
     }
 
     .body {
-        padding-block: 0.7rem;
+        padding-block: 0.5rem 0rem;
         padding-inline: 0.5rem;
     }
 

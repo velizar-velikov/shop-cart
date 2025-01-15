@@ -1,12 +1,12 @@
 import { Card, CardBody, CardTitle } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useWishlist } from '../../../hooks/custom/useWishlist.js';
+import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
+import ChooseSizeModal from '../choose-size-modal/ChooseSizeModal.jsx';
+import paths from '../../../config/paths.js';
 
 import styles from './wishlistItem.module.css';
-import paths from '../../../config/paths.js';
-import { useRef, useState } from 'react';
-import ChooseSizeModal from '../choose-size-modal/ChooseSizeModal.jsx';
-import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
 
 export default function WishlistItem({ _id, imageUrl, category, name, price }) {
     const { iconClassName, removeFromWishlist } = useWishlist({ _id, imageUrl, category, name, price });
@@ -20,7 +20,7 @@ export default function WishlistItem({ _id, imageUrl, category, name, price }) {
         setShowChooseSize(true);
     };
 
-    const { sizes, setSizes } = useGetSizesForProduct(_id);
+    const { sizes } = useGetSizesForProduct(_id);
 
     return (
         <>
