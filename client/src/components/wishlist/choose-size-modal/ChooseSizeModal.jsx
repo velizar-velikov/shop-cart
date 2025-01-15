@@ -56,7 +56,7 @@ export default function ChooseSizeModal({ show, handleClose, productId, name, in
                 type: 'add_cart_product',
                 payload: {
                     productId,
-                    qunatity: values.quantity,
+                    quantity: values.quantity,
                     size: values.size,
                     cartItemResponse,
                 },

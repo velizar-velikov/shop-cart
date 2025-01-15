@@ -67,7 +67,7 @@ export default function ActionButtons({
                 type: 'add_cart_product',
                 payload: {
                     productId: product._id,
-                    qunatity: values.quantity,
+                    quantity: values.quantity,
                     size: values.size,
                     cartItemResponse,
                 },
