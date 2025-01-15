@@ -4,9 +4,11 @@ import WishlistItem from './wishlist-item/WishlistItem.jsx';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
 import paths from '../../config/paths.js';
 
+import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import styles from './wishlist.module.css';
 
 export default function Wishlist() {
+    const { isAuthenticated } = useAuthContext();
     const { wishlist } = useWishlistContext();
 
     return (
@@ -18,8 +20,13 @@ export default function Wishlist() {
                         {wishlist.length} {wishlist.length !== 1 ? 'items' : 'item'}
                     </p>
                 </div>
+                {!isAuthenticated && wishlist.length !== 0 && (
+                    <p className={`mx-3 ${styles.para}`}>
+                        To add item to cart, please <Link to={paths.login.path}>login.</Link>
+                    </p>
+                )}
                 {wishlist.length == 0 && (
-                    <p className="mx-3 fs-5">
+                    <p className={`mx-3 ${styles.para}`}>
                         Your wishlist is empty. Start shopping <Link to={paths.catalog.basePath}>now.</Link>
                     </p>
                 )}
