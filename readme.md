@@ -37,6 +37,14 @@ OR
 
 https://shop-cart-21.web.app/
 
+## Authentication
+
+The project has 3 preinitialized users for easier testing:
+
+-   peter@abv.bg : 123456
+-   george@abv.bg : 123456
+-   admin@abv.bg : admin
+
 ## Features
 
 [See detailed list of the project features](https://github.com/velizar-velikov/shop-cart/blob/main/FEATURES.md)
