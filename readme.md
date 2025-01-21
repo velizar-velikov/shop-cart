@@ -67,4 +67,4 @@ The project has 3 preinitialized users for easier testing:
 
 ## File structure:
 
-[See detailed file structure](https://github.com/velizar-velikov/shop-cart/blob/main/client/STRUCTURE.md)
+[See detailed client file structure](https://github.com/velizar-velikov/shop-cart/blob/main/client/structure.md)

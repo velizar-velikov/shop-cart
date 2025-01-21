@@ -46,7 +46,7 @@
 -   All products that are in cart and are not out of stock are forwarded to making an order with "next step" button
 -   User enters his info and confirms an order
 -   Confirmation page is shown
--   My orders section - users can see their order from newest to oldest
+-   My orders section - users can see their orders from newest to oldest
 
 ## Dynamic navigation
 
