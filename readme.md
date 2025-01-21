@@ -64,3 +64,7 @@ The project has 3 preinitialized users for easier testing:
 ### Server:
 
 -   Node.js ( [softuni-practice-server](https://github.com/softuni-practice-server/softuni-practice-server/tree/master) )
+
+## File structure:
+
+[See detailed file structure](https://github.com/velizar-velikov/shop-cart/blob/main/client/STRUCTURE.md)
