@@ -7,8 +7,10 @@ import ChooseSizeModal from '../choose-size-modal/ChooseSizeModal.jsx';
 import paths from '../../../config/paths.js';
 
 import styles from './wishlistItem.module.css';
+import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 
 export default function WishlistItem({ _id, imageUrl, category, name, price }) {
+    const { isAuthenticated } = useAuthContext();
     const { iconClassName, removeFromWishlist } = useWishlist({ _id, imageUrl, category, name, price });
 
     const [showChooseSize, setShowChooseSize] = useState(false);
@@ -44,11 +46,13 @@ export default function WishlistItem({ _id, imageUrl, category, name, price }) {
                             <CardBody className={styles.body}>
                                 <CardTitle className={styles.title}>{name}</CardTitle>
                                 <p className={styles.price}>{`$${price}`}</p>
-                                <div className={styles['add-wrapper']}>
-                                    <button onClick={onShowChooseSize} className={styles.add}>
-                                        Add to cart
-                                    </button>
-                                </div>
+                                {isAuthenticated && (
+                                    <div className={styles['add-wrapper']}>
+                                        <button onClick={onShowChooseSize} className={styles.add}>
+                                            Add to cart
+                                        </button>
+                                    </div>
+                                )}
                             </CardBody>
                         </Card>
                     </Link>
