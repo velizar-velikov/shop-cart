@@ -125,7 +125,12 @@ export default function CartItem({ cartProduct }) {
                 </div>
             </Col>
             <Col sm={1} className="d-flex flex-column justify-content-between py-3">
-                <i onClick={deleteCartItemHandler} role="button" className="fa-solid fa-trash fa fa-2x text-danger mx-3"></i>
+                <i
+                    title="Delete"
+                    onClick={deleteCartItemHandler}
+                    role="button"
+                    className="fa-solid fa-trash fa fa-2x text-danger mx-3"
+                ></i>
                 <h4>${Number(cartProduct.productInfo.price).toFixed(2)}</h4>
             </Col>
         </Row>
