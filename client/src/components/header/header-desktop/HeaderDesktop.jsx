@@ -42,12 +42,12 @@ export default function HeaderDesktop({ logoutHandler }) {
                             </Nav.Link>
 
                             <NavDropdown title="Profile" align={{ sm: 'start' }} id="basic-nav-dropdown">
-                                <NavDropdown.Item as={Link} to={''}>
+                                {/* <NavDropdown.Item as={Link} to={''}>
                                     Settings
                                 </NavDropdown.Item>
                                 <NavDropdown.Item as={Link} to={''}>
                                     Stock
-                                </NavDropdown.Item>
+                                </NavDropdown.Item> */}
                                 <NavDropdown.Item as={Link} to={paths.orders.path}>
                                     Olders
                                 </NavDropdown.Item>
