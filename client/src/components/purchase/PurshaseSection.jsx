@@ -2,7 +2,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
-import { useCartContext } from '../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { useMakeOrder } from '../../hooks/custom/useOrders.js';
 import { validateInputs } from '../../util/validateInputs.js';
 import { orderSchema } from '../../validation-schemas/order.js';
@@ -19,7 +19,7 @@ export default function PurchaseSection() {
     const [validationErrors, setValidationErrors] = useState({});
     const [serverError, setServerError] = useState({});
 
-    const { userCartProducts, setUserCartProducts, totalPrice } = useCartContext();
+    const { userCartProducts, setUserCartProducts, totalPrice } = UseCartContext();
 
     const filteredProducts = userCartProducts.filter((product) => product.sizes[product.size] >= product.quantity);
 

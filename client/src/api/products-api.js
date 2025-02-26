@@ -1,4 +1,4 @@
-import requester from './request.js';
+import requester from './request.ts';
 import stockAPI from './stock-api.js';
 
 const host = import.meta.env.VITE_API_URL;

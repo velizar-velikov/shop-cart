@@ -5,7 +5,7 @@ import { Card, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
-import { useCartContext } from '../../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../../contexts/CartContext.jsx';
 import paths from '../../../config/paths.js';
 
 import CartBubble from '../cart-bubble/CartBubble.jsx';
@@ -15,7 +15,7 @@ import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
 
 export default function HeaderDesktop({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();
-    const { cartItemsCount } = useCartContext();
+    const { cartItemsCount } = UseCartContext();
     const { wishlist } = useWishlistContext();
 
     return (

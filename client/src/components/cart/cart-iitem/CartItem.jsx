@@ -6,7 +6,7 @@ import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { useQuantityForm } from '../../../hooks/custom/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
-import { useCartContext } from '../../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../../contexts/CartContext.jsx';
 
 import paths from '../../../config/paths.js';
 import styles from './cartItem.module.css';
@@ -21,7 +21,7 @@ export default function CartItem({ cartProduct }) {
     const [errorMessage, setErrorMessage] = useState('');
 
     const { userId } = useAuthContext();
-    const { setUserCartProducts, cartReducer } = useCartContext();
+    const { setUserCartProducts, cartReducer } = UseCartContext();
 
     const removeFromCart = useRemoveFromUserCart();
     const editQuantity = useEditQuantityInUserCart();

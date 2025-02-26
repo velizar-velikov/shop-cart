@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import cartAPI from '../../api/cart-api.js';
 import { useLoadData } from '../abstracts/useLoadData.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
-import { useCartContext } from '../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { toast } from 'react-toastify';
 
 export function useAddToUserCart() {
@@ -90,7 +90,7 @@ export function useAddToUserCartHandler(productId, inStockSizes, closeModal = fa
     const [errorMessage, setErrorMessage] = useState('');
 
     const { userId } = useAuthContext();
-    const { setUserCartProducts, cartReducer } = useCartContext();
+    const { setUserCartProducts, cartReducer } = UseCartContext();
     const addToUserCart = useAddToUserCart();
 
     let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes);

@@ -5,7 +5,7 @@ import { Card, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
-import { useCartContext } from '../../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../../contexts/CartContext.jsx';
 import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
 import { useMenuContext } from '../../../contexts/MenuContext.jsx';
 
@@ -19,7 +19,7 @@ import HamburgerMenu from './hamburger-menu/HamburgerMenu.jsx';
 
 export default function HeaderMobile({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();
-    const { cartItemsCount } = useCartContext();
+    const { cartItemsCount } = UseCartContext();
     const { wishlist } = useWishlistContext();
     const { isMenuOpened, openMenu } = useMenuContext();
 

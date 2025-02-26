@@ -1,7 +1,17 @@
 import { getAccessToken } from '../util/localStorageUtil.js';
 
-function createOptions(method, data, isAdmin) {
-    const options = {
+type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+type Options = {
+    method: Method;
+    headers: {
+        [key: string]: string;
+    };
+    body?: string;
+};
+
+function createOptions(method: Method, data?: object, isAdmin?: boolean): Options {
+    const options: Options = {
         method,
         headers: {},
     };
@@ -23,7 +33,7 @@ function createOptions(method, data, isAdmin) {
     return options;
 }
 
-async function request(method, url, data, isAdmin = false) {
+async function request(method: Method, url: string, data?: object, isAdmin?: boolean) {
     const options = createOptions(method, data, isAdmin);
 
     try {
@@ -56,7 +66,7 @@ const requester = {
      * @param {string} url the url to which the request is sent
      * @returns
      */
-    get: (url) => request('GET', url),
+    get: (url: string) => request('GET', url),
 
     /**
      * Sends a POST request using fetchAPI
@@ -64,7 +74,7 @@ const requester = {
      * @param {object} data the data to send in the request body
      * @returns
      */
-    post: (url, data) => request('POST', url, data),
+    post: (url: string, data: object) => request('POST', url, data),
 
     /**
      * Sends a PUT request using fetchAPI
@@ -73,7 +83,7 @@ const requester = {
      * @param {boolean} isAdmin sends an admin request if set to true
      * @returns
      */
-    put: (url, data, isAdmin) => request('PUT', url, data, isAdmin),
+    put: (url: string, data: object, isAdmin: boolean) => request('PUT', url, data, isAdmin),
 
     /**
      * Sends a PATCH request using fetchAPI
@@ -81,14 +91,14 @@ const requester = {
      * @param {object} data the data to send in the request body
      * @returns
      */
-    patch: (url, data) => request('PATCH', url, data),
+    patch: (url: string, data: object) => request('PATCH', url, data),
 
     /**
      * Sends a DELETE request using fetchAPI
      * @param {string} url the url to which the request is sent
      * @returns
      */
-    delete: (url) => request('DELETE', url),
+    delete: (url: string) => request('DELETE', url),
 };
 
 export default requester;

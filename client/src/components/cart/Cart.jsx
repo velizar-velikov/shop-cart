@@ -3,11 +3,11 @@ import CartItem from './cart-iitem/CartItem.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { Link } from 'react-router-dom';
 import paths from '../../config/paths.js';
-import { useCartContext } from '../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../contexts/CartContext.jsx';
 import EmptyCart from './empty-cart/EmptyCart.jsx';
 
 export default function Cart() {
-    let { userCartProducts, isLoading, totalPrice } = useCartContext();
+    let { userCartProducts, isLoading, totalPrice } = UseCartContext();
     userCartProducts.map((product) => {
         product.maxQuantity = product.sizes[product.size];
         return product;
