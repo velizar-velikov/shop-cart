@@ -4,10 +4,10 @@ const host = import.meta.env.VITE_API_URL;
 
 const endpoints = {
     all: '/data/stock',
-    byId: (id) => `/data/stock/${id}`,
+    byId: (id: string) => `/data/stock/${id}`,
 };
 
-function buildUrlForProduct(productId) {
+function buildUrlForProduct(productId: string) {
     const urlParams = new URLSearchParams({
         where: `productId="${productId}"`,
     });
@@ -16,13 +16,13 @@ function buildUrlForProduct(productId) {
     return url;
 }
 
-function getStockForProduct(productId) {
+function getStockForProduct(productId: string) {
     const url = buildUrlForProduct(productId);
 
     return requester.get(url);
 }
 
-function initializeStockForProduct(productId) {
+function initializeStockForProduct(productId: string) {
     const sizes = {
         small: 1,
         medium: 1,
@@ -31,7 +31,7 @@ function initializeStockForProduct(productId) {
     return requester.post(host + endpoints.all, { productId, sizes });
 }
 
-async function getSizesForProduct(productId) {
+async function getSizesForProduct(productId: string) {
     const urlParams = new URLSearchParams({
         where: `productId="${productId}"`,
         select: 'sizes',
@@ -43,7 +43,13 @@ async function getSizesForProduct(productId) {
     return sizesResponse[0]?.sizes;
 }
 
-async function addStockForProduct(productId, sizesToAdd) {
+interface Sizes {
+    small: number;
+    medium: number;
+    large: number;
+}
+
+async function addStockForProduct(productId: string, sizesToAdd: Sizes) {
     // request matches only one stock, but we receive it in an array
     const stock = (await getStockForProduct(productId))[0];
     const sizes = stock.sizes;
@@ -55,7 +61,7 @@ async function addStockForProduct(productId, sizesToAdd) {
     return requester.put(host + endpoints.byId(stock._id), { productId, sizes });
 }
 
-async function removeSizeOfProduct(productId, sizeToRemove) {
+async function removeSizeOfProduct(productId: string, sizeToRemove: Partial<Sizes>) {
     const response = await getStockForProduct(productId);
     const stockForProduct = response[0];
 
@@ -69,6 +75,12 @@ async function removeSizeOfProduct(productId, sizeToRemove) {
     return requester.put(host + endpoints.byId(stockForProduct._id), { productId, sizes }, true);
 }
 
+interface OrderedProduct {
+    productId: string;
+    size: 'small' | 'medium' | 'large';
+    quantity: number;
+}
+
 /**
  * @typedef {{productId: string, size: string, quantity: number}} orderedProduct
  */
@@ -77,7 +89,7 @@ async function removeSizeOfProduct(productId, sizeToRemove) {
  * Removes multiple products with said size and quantity from stock
  * @param {[orderedProduct]} orderedProducts all the ordered products to remove from the stock
  */
-function removeMultiple(orderedProducts) {
+function removeMultiple(orderedProducts: OrderedProduct[]) {
     return Promise.all(
         orderedProducts.map((product) => {
             return removeSizeOfProduct(product.productId, { [product.size]: product.quantity });

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import cartAPI from '../../api/cart-api.js';
 import ordersAPI from '../../api/orders.js';
-import stockAPI from '../../api/stock-api.js';
+import stockAPI from '../../api/stock-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { useLoadData } from '../abstracts/useLoadData.js';

@@ -1,5 +1,5 @@
 import productsAPI from '../../api/products-api.ts';
-import stockAPI from '../../api/stock-api.js';
+import stockAPI from '../../api/stock-api.ts';
 import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useGetCatalogProducts(currentPage, search) {

@@ -1,4 +1,4 @@
-import stockAPI from '../../api/stock-api.js';
+import stockAPI from '../../api/stock-api.ts';
 import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useAddStock() {

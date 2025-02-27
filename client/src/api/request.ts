@@ -83,7 +83,7 @@ const requester = {
      * @param {boolean} isAdmin sends an admin request if set to true
      * @returns
      */
-    put: (url: string, data: object, isAdmin: boolean) => request('PUT', url, data, isAdmin),
+    put: (url: string, data: object, isAdmin?: boolean) => request('PUT', url, data, isAdmin),
 
     /**
      * Sends a PATCH request using fetchAPI
