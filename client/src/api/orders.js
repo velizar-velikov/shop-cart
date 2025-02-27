@@ -1,4 +1,4 @@
-import productsAPI from './products-api.js';
+import productsAPI from './products-api.ts';
 import requester from './request.ts';
 
 const host = import.meta.env.VITE_API_URL;

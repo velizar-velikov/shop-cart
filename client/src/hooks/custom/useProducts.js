@@ -1,4 +1,4 @@
-import productsAPI from '../../api/products-api.js';
+import productsAPI from '../../api/products-api.ts';
 import stockAPI from '../../api/stock-api.js';
 import { useLoadData } from '../abstracts/useLoadData.js';
 

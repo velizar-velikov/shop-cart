@@ -1,4 +1,4 @@
-import productsAPI from './products-api.js';
+import productsAPI from './products-api.ts';
 import requester from './request.ts';
 import stockAPI from './stock-api.js';
 

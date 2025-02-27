@@ -1,4 +1,4 @@
-import { getAccessToken } from '../util/localStorageUtil.js';
+import { getAccessToken } from '../util/localStorageUtil.ts';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
@@ -37,7 +37,7 @@ async function request(method: Method, url: string, data?: object, isAdmin?: boo
     const options = createOptions(method, data, isAdmin);
 
     try {
-        const response = await fetch(url, options);
+        const response: Response = await fetch(url, options);
 
         if (!response.ok) {
             if (response.status == 403) {

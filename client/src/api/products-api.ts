@@ -5,7 +5,7 @@ const host = import.meta.env.VITE_API_URL;
 
 const endpoints = {
     all: '/data/products',
-    byId: (id) => `/data/products/${id}`,
+    byId: (id: string) => `/data/products/${id}`,
 };
 
 async function getAll() {
@@ -14,12 +14,18 @@ async function getAll() {
         sortBy: `_createdOn%20desc`,
     });
     const url = new URL(host + endpoints.all);
-    url.search = decodeURIComponent(urlParams);
+    url.search = decodeURIComponent(urlParams.toString());
 
-    return requester.get(url);
+    return requester.get(url.toString());
 }
 
-async function getCatalogProducts(currentPage, search) {
+type Category = 'T-shirts' | 'Pants' | 'Sweatshirts' | 'Shorts';
+
+interface SearchOfUser {
+    category: Category | 'All categories';
+    name: string;
+}
+async function getCatalogProducts(currentPage: number, search: SearchOfUser) {
     const pageSize = 4;
     const category_search_string = search.category == 'All categories' ? '' : search.category;
 
@@ -33,7 +39,7 @@ async function getCatalogProducts(currentPage, search) {
         sortBy: '_createdOn%20desc',
     });
 
-    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort.toString())}`;
 
     const response = await requester.get(url);
 
@@ -44,7 +50,7 @@ async function getCatalogProducts(currentPage, search) {
     return response;
 }
 
-async function getCalatogLength(search) {
+async function getCalatogLength(search: SearchOfUser) {
     const category_search_string = search.category == 'All categories' ? '' : search.category;
 
     const urlParams = new URLSearchParams({
@@ -57,31 +63,41 @@ async function getCalatogLength(search) {
     return requester.get(url);
 }
 
-function getLatest(productsCount) {
+function getLatest(productsCount: number) {
     const urlParams = new URLSearchParams({
         where: 'inactive=false',
         offset: '0',
-        pageSize: productsCount,
+        pageSize: productsCount.toString(),
     });
 
     const urlParamSort = new URLSearchParams({
         sortBy: '_createdOn%20desc',
     });
 
-    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort.toString())}`;
 
     return requester.get(url);
 }
 
-function getOne(productId) {
+function getOne(productId: string) {
     return requester.get(host + endpoints.byId(productId));
 }
 
-function create(data) {
+interface Product {
+    name: string;
+    brand: string;
+    category: Category;
+    price: number;
+    imageUrl: string;
+    summary: string;
+    description: string;
+}
+
+function create(data: Product) {
     return requester.post(host + endpoints.all, { ...data, inactive: false });
 }
 
-function editById(productId, data) {
+function editById(productId: string, data: Product) {
     return requester.patch(host + endpoints.byId(productId), data);
 }
 
@@ -91,7 +107,7 @@ function editById(productId, data) {
  * @param {string} productId
  * @returns
  */
-function deleteById(productId) {
+function deleteById(productId: string) {
     return requester.patch(host + endpoints.byId(productId), { inactive: true });
 }
 
