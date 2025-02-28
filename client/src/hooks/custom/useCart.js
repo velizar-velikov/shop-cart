@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import cartAPI from '../../api/cart-api.ts';
 import { useLoadData } from '../abstracts/useLoadData.js';
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { toast } from 'react-toastify';
 

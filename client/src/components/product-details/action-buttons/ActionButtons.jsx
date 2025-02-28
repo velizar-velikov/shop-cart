@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from '../../../hooks/abstracts/useForm.js';
 import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.js';
 
-import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
 import paths from '../../../config/paths.ts';
 

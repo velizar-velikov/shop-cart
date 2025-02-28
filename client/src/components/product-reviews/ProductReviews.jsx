@@ -7,7 +7,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 
 import { useAGetAllReviewsForProduct } from '../../hooks/custom/useReviews.js';
 import { useGetOneProduct } from '../../hooks/custom/useProducts.js';
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../contexts/AuthContext.tsx';
 
 import paths from '../../config/paths.ts';
 

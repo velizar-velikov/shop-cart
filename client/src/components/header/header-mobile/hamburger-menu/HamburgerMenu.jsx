@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useMenuContext } from '../../../../contexts/MenuContext.jsx';
 import { useEffect, useRef } from 'react';
-import { useAuthContext } from '../../../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../../../contexts/AuthContext.tsx';
 
 import styles from './hamburgerMenu.module.css';
 import paths from '../../../../config/paths.ts';

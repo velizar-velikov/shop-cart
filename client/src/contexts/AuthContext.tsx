@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 import { usePersistedState } from '../hooks/abstracts/usePersistedState.js';
 
 const AuthContext = createContext({
@@ -8,10 +8,14 @@ const AuthContext = createContext({
     email: '',
     accessToken: '',
     isAuthenticated: false,
-    changeAuthState: () => null,
+    changeAuthState: (state: any) => null,
 });
 
-export function AuthContextProvider(props) {
+interface AuthContextProviderProps {
+    children: ReactNode[];
+}
+
+export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const [persistedState, setPersistedState] = usePersistedState('auth', {});
 
     const contextData = {
@@ -21,13 +25,13 @@ export function AuthContextProvider(props) {
         email: persistedState?.email,
         accessToken: persistedState?.accessToken,
         isAuthenticated: Boolean(persistedState?.email),
-        changeAuthState: (state) => setPersistedState(state),
+        changeAuthState: (state: any) => setPersistedState(state),
     };
 
     return (
         //prettier-ignore
         <AuthContext.Provider value={contextData}>
-            {props.children}
+            {children}
         </AuthContext.Provider>
     );
 }

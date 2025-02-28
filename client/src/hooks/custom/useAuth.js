@@ -1,5 +1,5 @@
 import authAPI from '../../api/auth-api.ts';
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
 
 export function useLogin() {

@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useAddReviewForProduct } from '../../hooks/custom/useReviews.js';
 
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { validateInputs } from '../../util/validateInputs.ts';
 import { reviewSchema } from '../../validation-schemas/review.ts';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';

@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Card, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../../contexts/CartContext.jsx';
 import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
 

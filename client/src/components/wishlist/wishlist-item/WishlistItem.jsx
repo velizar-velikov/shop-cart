@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useWishlist } from '../../../hooks/custom/useWishlist.js';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
-import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 
 import ChooseSizeModal from '../choose-size-modal/ChooseSizeModal.jsx';
 

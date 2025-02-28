@@ -1,4 +1,4 @@
-import { AuthContextProvider } from './AuthContext.jsx';
+import { AuthContextProvider } from './AuthContext.tsx';
 import { WishlistContextProvider } from './WishlistContext.jsx';
 import { CartContextProvider } from './CartContext.jsx';
 import { MenuContextProvider } from './MenuContext.jsx';

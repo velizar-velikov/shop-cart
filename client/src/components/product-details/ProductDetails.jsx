@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { useGetOneProduct } from '../../hooks/custom/useProducts.js';
 import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/custom/useReviews.js';
 import { useGetSizesForProduct } from '../../hooks/custom/useStock.js';
-import { useAuthContext } from '../../contexts/AuthContext.jsx';
+import { useAuthContext } from '../../contexts/AuthContext.tsx';
 
 import styles from './productDetails.module.css';
 import paths from '../../config/paths.ts';

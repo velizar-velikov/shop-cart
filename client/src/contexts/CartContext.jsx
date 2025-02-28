@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
-import { useAuthContext } from './AuthContext.jsx';
+import { useAuthContext } from './AuthContext.tsx';
 import { useGetUserCart } from '../hooks/custom/useCart.js';
 
 const CartContext = createContext({
