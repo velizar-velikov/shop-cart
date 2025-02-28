@@ -1,4 +1,4 @@
-import reviewsAPI from '../../api/reviews-api.js';
+import reviewsAPI from '../../api/reviews-api.ts';
 import { useLoadData } from '../abstracts/useLoadData.js';
 
 export function useAGetAllReviewsForProduct(productId, userId) {
