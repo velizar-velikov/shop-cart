@@ -11,7 +11,7 @@ import { registerSchema } from '../../validation-schemas/auth.js';
 import { validateInputs } from '../../util/validateInputs.js';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 const initialValues = {
     firstName: '',

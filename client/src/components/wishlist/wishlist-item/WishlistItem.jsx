@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useWishlist } from '../../../hooks/custom/useWishlist.js';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
+import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+
 import ChooseSizeModal from '../choose-size-modal/ChooseSizeModal.jsx';
-import paths from '../../../config/paths.js';
 
 import styles from './wishlistItem.module.css';
-import { useAuthContext } from '../../../contexts/AuthContext.jsx';
+import paths from '../../../config/paths.ts';
 
 export default function WishlistItem({ _id, imageUrl, category, name, price }) {
     const { isAuthenticated } = useAuthContext();

@@ -11,7 +11,7 @@ import { useCreateProduct } from '../../hooks/custom/useProducts.js';
 import { productSchema } from '../../validation-schemas/product.js';
 import { validateInputs } from '../../util/validateInputs.js';
 
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 const initialValues = {
     name: '',

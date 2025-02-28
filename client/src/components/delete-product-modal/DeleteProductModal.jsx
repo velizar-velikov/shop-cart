@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import productsAPI from '../../api/products-api.ts';
 import { toast } from 'react-toastify';
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 export default function DeleteProductModal({ show, handleClose, _id, name, brand }) {
     const navigate = useNavigate();

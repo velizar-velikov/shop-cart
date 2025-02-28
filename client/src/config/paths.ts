@@ -12,7 +12,7 @@ const paths = {
     },
     editProduct: {
         path: 'catalog/:productId/edit',
-        getHref: (productId) => `/catalog/${productId}/edit`,
+        getHref: (productId: string) => `/catalog/${productId}/edit`,
     },
     login: {
         path: '/login',
@@ -25,11 +25,11 @@ const paths = {
     },
     details: {
         path: '/details/:productId',
-        getHref: (productId) => `/details/${productId}`,
+        getHref: (productId: string) => `/details/${productId}`,
     },
     reviews: {
         path: '/catalog/:productId/reviews',
-        getHref: (productId) => `/catalog/${productId}/reviews`,
+        getHref: (productId: string) => `/catalog/${productId}/reviews`,
     },
     wishlist: {
         path: '/wishlist',

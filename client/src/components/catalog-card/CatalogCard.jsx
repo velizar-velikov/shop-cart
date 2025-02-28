@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useWishlist } from '../../hooks/custom/useWishlist.js';
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 import styles from './catalogCard.module.css';
 

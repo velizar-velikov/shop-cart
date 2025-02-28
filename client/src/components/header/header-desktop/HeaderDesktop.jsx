@@ -2,16 +2,17 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Card, NavDropdown } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import { UseCartContext } from '../../../contexts/CartContext.jsx';
-import paths from '../../../config/paths.js';
+import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
 
 import CartBubble from '../cart-bubble/CartBubble.jsx';
 import Logo from '../../../assets/img/shopping-cart.webp';
 import styles from '../header.module.css';
-import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
+
+import paths from '../../../config/paths.ts';
 
 export default function HeaderDesktop({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();

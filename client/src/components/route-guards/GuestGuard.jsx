@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 export default function GuestGuard() {
     const { isAuthenticated } = useAuthContext();

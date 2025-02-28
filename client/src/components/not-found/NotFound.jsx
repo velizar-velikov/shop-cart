@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 export default function NotFound() {
     return (

@@ -6,7 +6,7 @@ import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.js';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
-import paths from '../../../config/paths.js';
+import paths from '../../../config/paths.ts';
 
 const initialValues = {
     quantity: '1',

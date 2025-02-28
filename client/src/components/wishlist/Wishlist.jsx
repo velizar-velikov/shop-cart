@@ -1,11 +1,12 @@
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import WishlistItem from './wishlist-item/WishlistItem.jsx';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
-import paths from '../../config/paths.js';
-
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
+
 import styles from './wishlist.module.css';
+import paths from '../../config/paths.ts';
 
 export default function Wishlist() {
     const { isAuthenticated } = useAuthContext();

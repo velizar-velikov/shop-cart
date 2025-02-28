@@ -22,7 +22,7 @@ import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
 import { ContextWrapperProvider } from './contexts/ContextWrapper.jsx';
 
-import paths from './config/paths.js';
+import paths from './config/paths.ts';
 
 function App() {
     return (

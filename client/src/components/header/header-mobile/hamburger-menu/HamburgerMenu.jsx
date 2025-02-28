@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useMenuContext } from '../../../../contexts/MenuContext.jsx';
+import { useEffect, useRef } from 'react';
+import { useAuthContext } from '../../../../contexts/AuthContext.jsx';
 
 import styles from './hamburgerMenu.module.css';
-import { useEffect, useRef } from 'react';
-import paths from '../../../../config/paths.js';
-import { useAuthContext } from '../../../../contexts/AuthContext.jsx';
+import paths from '../../../../config/paths.ts';
 
 const categories = ['All products', 'T-shirts', 'Shorts', 'Sweatshirts', 'Pants'];
 

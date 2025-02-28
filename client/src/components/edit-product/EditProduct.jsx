@@ -12,7 +12,7 @@ import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 import { validateInputs } from '../../util/validateInputs.js';
 import { productSchema } from '../../validation-schemas/product.js';
 
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 export default function EditProduct() {
     const [validationErrors, setValidationErrors] = useState({});

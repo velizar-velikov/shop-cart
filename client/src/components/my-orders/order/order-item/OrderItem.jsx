@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './orderItem.module.css';
-import paths from '../../../../config/paths.js';
+import paths from '../../../../config/paths.ts';
 
 const sizes = {
     small: 'S',

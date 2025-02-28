@@ -4,7 +4,7 @@ import { useDynamicNav } from '../../hooks/custom/useDynamicNav.js';
 import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/custom/useAuth.js';
 import { useMenuContext } from '../../contexts/MenuContext.jsx';
-import paths from '../../config/paths.js';
+import paths from '../../config/paths.ts';
 
 export default function Header() {
     const { deviceWidth } = useDynamicNav();

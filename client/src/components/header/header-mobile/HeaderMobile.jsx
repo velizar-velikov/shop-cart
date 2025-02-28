@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Card, NavDropdown } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/AuthContext.jsx';
@@ -9,13 +9,12 @@ import { UseCartContext } from '../../../contexts/CartContext.jsx';
 import { useWishlistContext } from '../../../contexts/WishlistContext.jsx';
 import { useMenuContext } from '../../../contexts/MenuContext.jsx';
 
-import paths from '../../../config/paths.js';
-
 import CartBubble from '../cart-bubble/CartBubble.jsx';
 import Logo from '../../../assets/img/shopping-cart.webp';
-import styles from '../header.module.css';
-
 import HamburgerMenu from './hamburger-menu/HamburgerMenu.jsx';
+
+import styles from '../header.module.css';
+import paths from '../../../config/paths.ts';
 
 export default function HeaderMobile({ logoutHandler }) {
     const { isAuthenticated } = useAuthContext();

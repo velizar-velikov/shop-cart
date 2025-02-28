@@ -8,7 +8,8 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { useAGetAllReviewsForProduct } from '../../hooks/custom/useReviews.js';
 import { useGetOneProduct } from '../../hooks/custom/useProducts.js';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
-import paths from '../../config/paths.js';
+
+import paths from '../../config/paths.ts';
 
 export default function ProductReviews() {
     const { productId } = useParams();

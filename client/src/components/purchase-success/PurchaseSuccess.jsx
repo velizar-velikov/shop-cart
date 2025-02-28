@@ -1,12 +1,10 @@
 import { Button, Container } from 'react-bootstrap';
-import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import paths from '../../config/paths.js';
 
 import checkLogo from '../../assets/img/check.png';
 
 import styles from './purchaseSuccess.module.css';
-import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+import paths from '../../config/paths.ts';
 
 export default function PurchaseSuccess() {
     return (

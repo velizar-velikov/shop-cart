@@ -8,7 +8,7 @@ import { useQuantityForm } from '../../../hooks/custom/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
 import { UseCartContext } from '../../../contexts/CartContext.jsx';
 
-import paths from '../../../config/paths.js';
+import paths from '../../../config/paths.ts';
 import styles from './cartItem.module.css';
 
 const sizesOptions = {
