@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useCreateProduct } from '../../hooks/custom/useProducts.js';
-import { productSchema } from '../../validation-schemas/product.js';
+import { productSchema } from '../../validation-schemas/product.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 
 import paths from '../../config/paths.ts';

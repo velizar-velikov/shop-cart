@@ -5,7 +5,7 @@ import { useForm } from '../../hooks/abstracts/useForm.js';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { useMakeOrder } from '../../hooks/custom/useOrders.js';
 import { validateInputs } from '../../util/validateInputs.ts';
-import { orderSchema } from '../../validation-schemas/order.js';
+import { orderSchema } from '../../validation-schemas/order.ts';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 import PurchaseItem from './purchase-item/PurchaseItem.jsx';
 import { toast } from 'react-toastify';

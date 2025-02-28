@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useRegister } from '../../hooks/custom/useAuth.js';
-import { registerSchema } from '../../validation-schemas/auth.js';
+import { registerSchema } from '../../validation-schemas/auth.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 

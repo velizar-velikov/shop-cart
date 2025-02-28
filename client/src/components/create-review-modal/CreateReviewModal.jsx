@@ -9,7 +9,7 @@ import { useAddReviewForProduct } from '../../hooks/custom/useReviews.js';
 
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { validateInputs } from '../../util/validateInputs.ts';
-import { reviewSchema } from '../../validation-schemas/review.js';
+import { reviewSchema } from '../../validation-schemas/review.ts';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 import { toast } from 'react-toastify';
 
