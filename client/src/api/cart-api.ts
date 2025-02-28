@@ -1,3 +1,5 @@
+import { ProductResponse, SizeOption } from '../types/product.ts';
+import { Sizes } from '../types/stock.ts';
 import productsAPI from './products-api.ts';
 import requester from './request.ts';
 import stockAPI from './stock-api.ts';
@@ -6,10 +8,24 @@ const host = import.meta.env.VITE_API_URL;
 
 const endpoints = {
     all: '/data/cart',
-    byId: (id) => `/data/cart/${id}`,
+    byId: (id: string) => `/data/cart/${id}`,
 };
 
-async function getCartForUser(userId) {
+interface CartResponse {
+    _id: string;
+    _ownerId: string;
+    productId: string;
+    size: SizeOption;
+    quantity: number;
+    _createdOn: number;
+    _updatedOn?: number;
+}
+
+type CartResponseDetailed = CartResponse & { productInfo: ProductResponse };
+
+type UserCartResponse = CartResponseDetailed & { sizes: Sizes };
+
+async function getCartForUser(userId: string): Promise<UserCartResponse[]> {
     const urlParams = new URLSearchParams({
         where: `_ownerId="${userId}"`,
         load: `productInfo=productId:products`,
@@ -19,9 +35,9 @@ async function getCartForUser(userId) {
         sortBy: '_createdOn%20desc',
     });
 
-    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort)}`;
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort.toString())}`;
 
-    const userCartProducts = await requester.get(url);
+    const userCartProducts: UserCartResponse[] = await requester.get(url);
 
     // load sizes in stock
     for (const product of userCartProducts) {
@@ -33,34 +49,36 @@ async function getCartForUser(userId) {
     return userCartProducts;
 }
 
-async function getUserCartItemsCount(userId) {
+async function getUserCartItemsCount(userId: string): Promise<number> {
     const cartItems = await getCartForUser(userId);
     return cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
 }
 
-function getProductSizeRecordInUserCart(productId, userId, size) {
+async function getProductSizeRecordInUserCart(productId: string, userId: string, size: SizeOption): Promise<CartResponse[]> {
     const urlParams = new URLSearchParams({
         where: `productId="${productId}" AND size="${size}" AND _ownerId="${userId}"`,
     });
     const url = `${host}${endpoints.all}?${urlParams.toString()}`;
 
-    return requester.get(url);
+    const response = await requester.get(url);
+    return response;
 }
 
-async function addToUserCart(productId, userId, size, quantity) {
-    let productSizeRecord = [];
+async function addToUserCart(
+    productId: string,
+    userId: string,
+    size: SizeOption,
+    quantity: number
+): Promise<CartResponseDetailed> {
+    let productSizeRecord: CartResponse[] = [];
 
-    if (!['small', 'medium', 'large'].includes(size)) {
-        return;
-    }
-
-    let newProductSizeRecord = {};
+    let newProductSizeRecord: CartResponseDetailed = {} as CartResponseDetailed;
 
     try {
         productSizeRecord = await getProductSizeRecordInUserCart(productId, userId, size);
-    } catch (error) {
-        console.log(error.message);
+    } catch (error: any) {
         if (error.message == 'Resource not found') {
+            console.log(error.message);
             newProductSizeRecord = await requester.post(host + endpoints.all, {
                 productId,
                 size,
@@ -99,13 +117,15 @@ async function addToUserCart(productId, userId, size, quantity) {
     return newProductSizeRecord;
 }
 
-function editCartItemQuantity(cartItemId, quantity) {
+function editCartItemQuantity(cartItemId: string, quantity: number): Promise<CartResponse> {
     return requester.patch(host + endpoints.byId(cartItemId), { quantity });
 }
 
-async function removeFromUserCart(productId, userId, size) {
+async function removeFromUserCart(productId: string, userId: string, size: SizeOption) {
     const productSizeRecord = await getProductSizeRecordInUserCart(productId, userId, size);
-    return requester.delete(host + endpoints.byId(productSizeRecord[0]._id));
+    const removedRecord = await requester.delete(host + endpoints.byId(productSizeRecord[0]._id));
+
+    return removedRecord;
 }
 
 // These requests in a loop are needed because server can delete only one record at a time
@@ -114,7 +134,7 @@ async function removeFromUserCart(productId, userId, size) {
  * @param {[string]} cartProductsIds the ids of cart products to delete
  * @returns
  */
-function clearCartRecords(cartProductsIds) {
+function clearCartRecords(cartProductsIds: string[]) {
     //prettier-ignore
     return Promise.all(
         cartProductsIds.map((id) => (

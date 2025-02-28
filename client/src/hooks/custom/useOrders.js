@@ -1,4 +1,4 @@
-import cartAPI from '../../api/cart-api.js';
+import cartAPI from '../../api/cart-api.ts';
 import ordersAPI from '../../api/orders.ts';
 import stockAPI from '../../api/stock-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';

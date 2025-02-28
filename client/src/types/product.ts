@@ -1,6 +1,8 @@
+export type SizeOption = 'small' | 'medium' | 'large';
+
 export interface OrderedProduct {
     productId: string;
-    size: 'small' | 'medium' | 'large';
+    size: SizeOption;
     quantity: number;
     priceOfPurchase?: number;
 }

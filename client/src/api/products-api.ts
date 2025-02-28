@@ -1,4 +1,5 @@
 import { Category, ProductResponse } from '../types/product.ts';
+import { Sizes } from '../types/stock.ts';
 import requester from './request.ts';
 import stockAPI from './stock-api.ts';
 
@@ -23,12 +24,6 @@ async function getAll(): Promise<ProductResponse[]> {
 interface SearchOfUser {
     category: Category | 'All categories';
     name: string;
-}
-
-interface Sizes {
-    small: number;
-    medium: number;
-    large: number;
 }
 
 async function getCatalogProducts(currentPage: number, search: SearchOfUser): Promise<ProductResponse[]> {

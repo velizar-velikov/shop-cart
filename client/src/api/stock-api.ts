@@ -1,5 +1,6 @@
 import requester from './request.ts';
 import { OrderedProduct } from '../types/product.ts';
+import { Sizes } from '../types/stock.ts';
 
 const host = import.meta.env.VITE_API_URL;
 
@@ -7,12 +8,6 @@ const endpoints = {
     all: '/data/stock',
     byId: (id: string) => `/data/stock/${id}`,
 };
-
-interface Sizes {
-    small: number;
-    medium: number;
-    large: number;
-}
 
 interface Stock {
     _id: string;
