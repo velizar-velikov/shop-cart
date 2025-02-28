@@ -9,7 +9,7 @@ const endpoints = {
     byId: (id: string) => `/data/products/${id}`,
 };
 
-async function getAll() {
+async function getAll(): Promise<ProductResponse[]> {
     const urlParams = new URLSearchParams({
         where: 'inactive=false',
         sortBy: `_createdOn%20desc`,

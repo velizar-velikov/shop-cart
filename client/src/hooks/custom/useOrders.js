@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import cartAPI from '../../api/cart-api.js';
 import ordersAPI from '../../api/orders.ts';
 import stockAPI from '../../api/stock-api.ts';

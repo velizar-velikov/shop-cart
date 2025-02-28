@@ -1,4 +1,4 @@
-import authAPI from '../../api/auth-api.js';
+import authAPI from '../../api/auth-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
 
