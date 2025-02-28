@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import { parseDate } from '../../../util/parseDate.js';
+import { parseDate } from '../../../util/parseDate.ts';
 import OrderItem from './order-item/OrderItem.jsx';
 
 import styles from './order.module.css';

@@ -1,23 +1,28 @@
-import { ZodObject } from 'zod';
+import { ZodObject, ZodSchema } from 'zod';
+
+interface ValidationResultCustom {
+    data: object;
+    errors: object;
+    success: boolean;
+}
 
 /**
  * Validates an object based on a Zod schema
  * @param {ZodObject} schema the Zod schema based on which to validate
  * @param {object} object the object to validate
- * @returns {{data: object, errors: object, success: boolean}}
  */
-export function validateInputs(schema, object) {
+export function validateInputs(schema: ZodSchema, object: object): ValidationResultCustom {
     const result = schema.safeParse(object);
 
     let data = object;
-    const errors = {};
+    const errors: { [key: string]: string } = {};
 
     if (result.success) {
         data = result.data;
     } else {
         const errorsArr = Object.values(result.error)[0];
 
-        errorsArr.forEach((err) => {
+        errorsArr.forEach((err: any) => {
             errors[err.path[0]] = err.message;
         });
     }

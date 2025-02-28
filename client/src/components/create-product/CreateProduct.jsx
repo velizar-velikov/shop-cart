@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useCreateProduct } from '../../hooks/custom/useProducts.js';
 import { productSchema } from '../../validation-schemas/product.js';
-import { validateInputs } from '../../util/validateInputs.js';
+import { validateInputs } from '../../util/validateInputs.ts';
 
 import paths from '../../config/paths.ts';
 

@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useLogin } from '../../hooks/custom/useAuth.js';
 import { loginSchema } from '../../validation-schemas/auth.js';
-import { validateInputs } from '../../util/validateInputs.js';
+import { validateInputs } from '../../util/validateInputs.ts';
 
 import paths from '../../config/paths.ts';
 

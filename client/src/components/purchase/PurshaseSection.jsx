@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { useMakeOrder } from '../../hooks/custom/useOrders.js';
-import { validateInputs } from '../../util/validateInputs.js';
+import { validateInputs } from '../../util/validateInputs.ts';
 import { orderSchema } from '../../validation-schemas/order.js';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 import PurchaseItem from './purchase-item/PurchaseItem.jsx';

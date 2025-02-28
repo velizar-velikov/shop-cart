@@ -9,7 +9,7 @@ import { useEditProduct, useGetOneProduct } from '../../hooks/custom/useProducts
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
-import { validateInputs } from '../../util/validateInputs.js';
+import { validateInputs } from '../../util/validateInputs.ts';
 import { productSchema } from '../../validation-schemas/product.js';
 
 import paths from '../../config/paths.ts';
