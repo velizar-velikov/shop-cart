@@ -1,3 +1,4 @@
+import { Category, ProductResponse } from '../types/product.ts';
 import requester from './request.ts';
 import stockAPI from './stock-api.ts';
 
@@ -19,13 +20,18 @@ async function getAll() {
     return requester.get(url.toString());
 }
 
-type Category = 'T-shirts' | 'Pants' | 'Sweatshirts' | 'Shorts';
-
 interface SearchOfUser {
     category: Category | 'All categories';
     name: string;
 }
-async function getCatalogProducts(currentPage: number, search: SearchOfUser) {
+
+interface Sizes {
+    small: number;
+    medium: number;
+    large: number;
+}
+
+async function getCatalogProducts(currentPage: number, search: SearchOfUser): Promise<ProductResponse[]> {
     const pageSize = 4;
     const category_search_string = search.category == 'All categories' ? '' : search.category;
 
@@ -41,7 +47,7 @@ async function getCatalogProducts(currentPage: number, search: SearchOfUser) {
 
     const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort.toString())}`;
 
-    const response = await requester.get(url);
+    const response: ProductResponse[] & [{ sizes: Sizes }] = await requester.get(url);
 
     for (const product of response) {
         product.sizes = await stockAPI.getSizesForProduct(product._id);
@@ -50,7 +56,7 @@ async function getCatalogProducts(currentPage: number, search: SearchOfUser) {
     return response;
 }
 
-async function getCalatogLength(search: SearchOfUser) {
+async function getCalatogLength(search: SearchOfUser): Promise<number> {
     const category_search_string = search.category == 'All categories' ? '' : search.category;
 
     const urlParams = new URLSearchParams({
@@ -63,7 +69,7 @@ async function getCalatogLength(search: SearchOfUser) {
     return requester.get(url);
 }
 
-function getLatest(productsCount: number) {
+function getLatest(productsCount: number): Promise<ProductResponse[]> {
     const urlParams = new URLSearchParams({
         where: 'inactive=false',
         offset: '0',
@@ -79,7 +85,7 @@ function getLatest(productsCount: number) {
     return requester.get(url);
 }
 
-function getOne(productId: string) {
+function getOne(productId: string): Promise<ProductResponse> {
     return requester.get(host + endpoints.byId(productId));
 }
 
@@ -93,11 +99,11 @@ interface Product {
     description: string;
 }
 
-function create(data: Product) {
+function create(data: Product): Promise<ProductResponse> {
     return requester.post(host + endpoints.all, { ...data, inactive: false });
 }
 
-function editById(productId: string, data: Product) {
+function editById(productId: string, data: Product): Promise<ProductResponse> {
     return requester.patch(host + endpoints.byId(productId), data);
 }
 
@@ -107,7 +113,7 @@ function editById(productId: string, data: Product) {
  * @param {string} productId
  * @returns
  */
-function deleteById(productId: string) {
+function deleteById(productId: string): Promise<ProductResponse> {
     return requester.patch(host + endpoints.byId(productId), { inactive: true });
 }
 

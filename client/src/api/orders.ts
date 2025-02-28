@@ -1,3 +1,4 @@
+import { OrderedProduct } from '../types/product.ts';
 import productsAPI from './products-api.ts';
 import requester from './request.ts';
 
@@ -5,12 +6,19 @@ const host = import.meta.env.VITE_API_URL;
 
 const endpoints = {
     all: '/data/orders',
-    byId: (id) => `/data/orders/${id}`,
+    byId: (id: string) => `/data/orders/${id}`,
 };
 
-/**
- * @typedef {{productId: string, size: string, quantity: number}} orderedProduct
- */
+type PaymentType = 'visa' | 'mastercard' | 'cash';
+
+type Order = {
+    _ownerId: string;
+    _id: string;
+    _createdOn: string;
+    address: string;
+    paymentType: PaymentType;
+    products: [OrderedProduct];
+};
 
 /**
  * Creates an order with all products in it
@@ -19,11 +27,12 @@ const endpoints = {
  * @param {string} paymentType
  * @returns
  */
-function createOrder(products, address, paymentType) {
-    return requester.post(host + endpoints.all, { products, address, paymentType });
+async function createOrder(products: OrderedProduct[], address: string, paymentType: PaymentType): Promise<Order> {
+    const order = await requester.post(host + endpoints.all, { products, address, paymentType });
+    return order;
 }
 
-async function getUserOrders(userId) {
+async function getUserOrders(userId: string): Promise<Order[]> {
     const urlParams = new URLSearchParams({
         where: `_ownerId="${userId}"`,
     });
@@ -32,9 +41,9 @@ async function getUserOrders(userId) {
         sortBy: '_createdOn%20desc',
     });
 
-    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(sortParams)}`;
+    const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(sortParams.toString())}`;
 
-    const orders = await requester.get(url);
+    const orders: Order[] = await requester.get(url);
 
     // populating products as products are a reference to the products collection
     // but the server does not support a populating a collection of references (only a single reference)
