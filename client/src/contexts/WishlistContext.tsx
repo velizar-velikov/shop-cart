@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 import { usePersistedState } from '../hooks/abstracts/usePersistedState.js';
 
 const WishlistContext = createContext({
@@ -6,7 +6,11 @@ const WishlistContext = createContext({
     updateWishlist: () => null,
 });
 
-export function WishlistContextProvider(props) {
+interface WishlistContextProviderProps {
+    children: ReactNode[];
+}
+
+export function WishlistContextProvider({ children }: WishlistContextProviderProps) {
     const [persistedWishlistState, setPersistedWishlistState] = usePersistedState('wishlist', []);
 
     const contextData = {
@@ -16,7 +20,7 @@ export function WishlistContextProvider(props) {
     return (
         //prettier-ignore
         <WishlistContext.Provider value={contextData}>
-            {props.children}
+            {children}
         </WishlistContext.Provider>
     );
 }

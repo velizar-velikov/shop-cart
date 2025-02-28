@@ -1,6 +1,6 @@
 import authAPI from '../../api/auth-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
-import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
+import { useWishlistContext } from '../../contexts/WishlistContext.tsx';
 
 export function useLogin() {
     const { changeAuthState } = useAuthContext();

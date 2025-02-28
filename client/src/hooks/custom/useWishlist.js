@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { useWishlistContext } from '../../contexts/WishlistContext.jsx';
+import { useWishlistContext } from '../../contexts/WishlistContext.tsx';
 
 export function useWishlist(productData, iconButtonRef) {
     const { wishlist, updateWishlist } = useWishlistContext();
