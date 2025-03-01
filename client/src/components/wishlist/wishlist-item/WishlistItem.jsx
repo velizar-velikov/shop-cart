@@ -2,7 +2,7 @@ import { Card, CardBody, CardTitle } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useWishlist } from '../../../hooks/custom/useWishlist.js';
-import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
+import { useGetSizesForProduct } from '../../../hooks/custom/useStock.ts';
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 
 import ChooseSizeModal from '../choose-size-modal/ChooseSizeModal.jsx';

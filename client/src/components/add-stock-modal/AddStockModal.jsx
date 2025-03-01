@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { toast } from 'react-toastify';
 
 import { useParams } from 'react-router-dom';
-import { useAddStock } from '../../hooks/custom/useStock.js';
+import { useAddStock } from '../../hooks/custom/useStock.ts';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { useState } from 'react';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';

@@ -14,7 +14,7 @@ import RatingStars from '../rating-stars/RatingStars.jsx';
 import { useState } from 'react';
 import { useGetOneProduct } from '../../hooks/custom/useProducts.js';
 import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/custom/useReviews.js';
-import { useGetSizesForProduct } from '../../hooks/custom/useStock.js';
+import { useGetSizesForProduct } from '../../hooks/custom/useStock.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 
 import styles from './productDetails.module.css';

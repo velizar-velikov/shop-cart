@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks/custom/useCart.ts';
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import { useQuantityForm } from '../../../hooks/custom/useQuantityForm.js';
-import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';
+import { useGetSizesForProduct } from '../../../hooks/custom/useStock.ts';
 import { UseCartContext } from '../../../contexts/CartContext.jsx';
 
 import paths from '../../../config/paths.ts';
