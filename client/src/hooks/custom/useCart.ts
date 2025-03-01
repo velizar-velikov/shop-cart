@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import cartAPI, { CartResponseDetailed } from '../../api/cart-api.ts';
+import cartAPI from '../../api/cart-api.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { toast } from 'react-toastify';
 import { SizeOption } from '../../types/product.ts';
 import { Sizes } from '../../types/stock.ts';
+import { CartResponseDetailed, UserCartResponse } from '../../types/cart.ts';
 
 export function useAddToUserCart() {
     const addToUserCartHandler = async (productId: string, userId: string, size: SizeOption, quantity: number) => {
@@ -21,7 +22,7 @@ export function useGetUserCart(userId: string) {
         data: userCartProducts,
         setData: setUserCartProducts,
         isLoading,
-    } = useLoadData<Array<unknown>>([], cartAPI.getCartForUser, { userId }, [userId]);
+    } = useLoadData<Array<UserCartResponse>>([], cartAPI.getCartForUser, { userId }, [userId]);
 
     return { userCartProducts, setUserCartProducts, isLoading };
 }
@@ -132,7 +133,7 @@ export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes, 
                 Number(values.quantity)
             )) as CartResponseDetailed & { sizes: Sizes };
 
-            setMaxQuantities((oldSizes) => ({
+            setMaxQuantities((oldSizes: Sizes) => ({
                 ...oldSizes,
                 [values.size]: oldSizes[values.size] - Number(values.quantity),
             }));

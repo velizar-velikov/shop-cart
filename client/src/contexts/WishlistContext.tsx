@@ -1,19 +1,10 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { usePersistedState } from '../hooks/abstracts/usePersistedState.ts';
-import { Category } from '../types/product.ts';
-
-interface PersistedWishlistItem {
-    _id: string;
-    name: string;
-    category: Category;
-    price: number;
-    imageUrl: string;
-    _ownerId: string;
-}
+import { PersistedWishlistItem } from '../types/wishlist.ts';
 
 const WishlistContext = createContext({
     wishlist: [] as PersistedWishlistItem[],
-    updateWishlist: () => null,
+    updateWishlist: (state: PersistedWishlistItem[] | ((state: PersistedWishlistItem[]) => PersistedWishlistItem[])) => null,
 });
 
 interface WishlistContextProviderProps {

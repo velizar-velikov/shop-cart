@@ -1,5 +1,5 @@
-import { ProductResponse, SizeOption } from '../types/product.ts';
-import { Sizes } from '../types/stock.ts';
+import { CartResponse, CartResponseDetailed, UserCartResponse } from '../types/cart.ts';
+import { SizeOption } from '../types/product.ts';
 import productsAPI from './products-api.ts';
 import requester from './request.ts';
 import stockAPI from './stock-api.ts';

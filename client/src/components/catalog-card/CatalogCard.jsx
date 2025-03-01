@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { useWishlistContext } from '../../contexts/WishlistContext.tsx';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
-import { useWishlist } from '../../hooks/custom/useWishlist.js';
+import { useWishlist } from '../../hooks/custom/useWishlist.ts';
 import paths from '../../config/paths.ts';
 
 import styles from './catalogCard.module.css';

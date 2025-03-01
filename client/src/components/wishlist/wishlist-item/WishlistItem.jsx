@@ -1,7 +1,7 @@
 import { Card, CardBody, CardTitle } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useWishlist } from '../../../hooks/custom/useWishlist.js';
+import { useWishlist } from '../../../hooks/custom/useWishlist.ts';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.ts';
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 

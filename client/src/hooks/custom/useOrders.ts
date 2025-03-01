@@ -3,6 +3,7 @@ import ordersAPI from '../../api/orders.ts';
 import stockAPI from '../../api/stock-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
+import { UserCartResponse } from '../../types/cart.ts';
 import { Order, PaymentType } from '../../types/order.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';
 
@@ -10,7 +11,7 @@ export function useMakeOrder() {
     const { userCartProducts } = UseCartContext();
     const userCartProductIds = userCartProducts.map((p) => p._id);
 
-    const clean_userCartProducts = userCartProducts.map((product) => ({
+    const clean_userCartProducts = userCartProducts.map((product: UserCartResponse) => ({
         productId: product.productInfo._id,
         size: product.size,
         quantity: product.quantity,
