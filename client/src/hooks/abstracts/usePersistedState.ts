@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function createInitialState(key, initialState) {
+function createInitialState<T>(key: string, initialState: T) {
     const authData = localStorage.getItem(key);
 
     if (!authData) {
@@ -14,12 +14,11 @@ function createInitialState(key, initialState) {
  * Uses local storage and useState to create persisted state
  * @param {string} key the name of the local storage record
  * @param {any} initialState the initial state to set the persisted state to
- * @returns {[state: any, updateState: function]}
  */
-export function usePersistedState(key, initialState) {
-    const [state, setState] = useState(() => createInitialState(key, initialState));
+export function usePersistedState<T>(key: string, initialState: T) {
+    const [state, setState] = useState<T>(() => createInitialState<T>(key, initialState));
 
-    const updateState = (updaterState) => {
+    const updateState = (updaterState: T) => {
         const newState = typeof updaterState == 'function' ? updaterState(state) : updaterState;
 
         if (newState == null) {

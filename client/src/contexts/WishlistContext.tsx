@@ -1,8 +1,18 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { usePersistedState } from '../hooks/abstracts/usePersistedState.js';
+import { usePersistedState } from '../hooks/abstracts/usePersistedState.ts';
+import { Category } from '../types/product.ts';
+
+interface PersistedWishlistItem {
+    _id: string;
+    name: string;
+    category: Category;
+    price: number;
+    imageUrl: string;
+    _ownerId: string;
+}
 
 const WishlistContext = createContext({
-    wishlist: [],
+    wishlist: [] as PersistedWishlistItem[],
     updateWishlist: () => null,
 });
 
@@ -11,7 +21,7 @@ interface WishlistContextProviderProps {
 }
 
 export function WishlistContextProvider({ children }: WishlistContextProviderProps) {
-    const [persistedWishlistState, setPersistedWishlistState] = usePersistedState('wishlist', []);
+    const [persistedWishlistState, setPersistedWishlistState] = usePersistedState<PersistedWishlistItem[]>('wishlist', []);
 
     const contextData = {
         wishlist: persistedWishlistState,
@@ -19,7 +29,7 @@ export function WishlistContextProvider({ children }: WishlistContextProviderPro
     };
     return (
         //prettier-ignore
-        <WishlistContext.Provider value={contextData}>
+        <WishlistContext.Provider value={contextData as any}>
             {children}
         </WishlistContext.Provider>
     );

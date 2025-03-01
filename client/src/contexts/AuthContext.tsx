@@ -1,36 +1,44 @@
 import { createContext, ReactNode, useContext } from 'react';
-import { usePersistedState } from '../hooks/abstracts/usePersistedState.js';
+import { usePersistedState } from '../hooks/abstracts/usePersistedState.ts';
 
-const AuthContext = createContext({
+interface AuthContextType {
+    userId: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    accessToken: string;
+    isAuthenticated: boolean;
+    changeAuthState: (state: any) => void;
+}
+
+const defaultAuthState: AuthContextType = {
     userId: '',
     firstName: '',
     lastName: '',
     email: '',
     accessToken: '',
     isAuthenticated: false,
-    changeAuthState: (state: any) => null,
-});
+    changeAuthState: (state: any) => {},
+};
+
+const AuthContext = createContext<AuthContextType>(defaultAuthState);
 
 interface AuthContextProviderProps {
     children: ReactNode[];
 }
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-    const [persistedState, setPersistedState] = usePersistedState('auth', {});
+    const [persistedState, setPersistedState] = usePersistedState<AuthContextType>('auth', defaultAuthState);
 
     const contextData = {
-        userId: persistedState?.userId,
-        firstName: persistedState?.firstName,
-        lastName: persistedState?.lastName,
-        email: persistedState?.email,
-        accessToken: persistedState?.accessToken,
-        isAuthenticated: Boolean(persistedState?.email),
-        changeAuthState: (state: any) => setPersistedState(state),
+        ...defaultAuthState,
+        ...persistedState,
+        changeAuthState: setPersistedState,
     };
 
     return (
         //prettier-ignore
-        <AuthContext.Provider value={contextData}>
+        <AuthContext.Provider value={contextData as any}>
             {children}
         </AuthContext.Provider>
     );
