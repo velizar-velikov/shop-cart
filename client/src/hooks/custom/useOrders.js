@@ -3,7 +3,7 @@ import ordersAPI from '../../api/orders.ts';
 import stockAPI from '../../api/stock-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
-import { useLoadData } from '../abstracts/useLoadData.js';
+import { useLoadData } from '../abstracts/useLoadData.ts';
 
 export function useMakeOrder() {
     const { userCartProducts } = UseCartContext();
@@ -32,7 +32,7 @@ export function useMakeOrder() {
 export function useGetUserOrders() {
     const { userId } = useAuthContext();
 
-    const { data: orders, setData: setOrders, isLoading } = useLoadData([], ordersAPI.getUserOrders, { userId }, []);
+    const { data: orders, setData: setOrders, isLoading } = useLoadData < Array > ([], ordersAPI.getUserOrders, { userId }, []);
 
     return {
         orders,

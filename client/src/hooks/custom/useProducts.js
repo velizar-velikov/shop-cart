@@ -1,6 +1,6 @@
 import productsAPI from '../../api/products-api.ts';
 import stockAPI from '../../api/stock-api.ts';
-import { useLoadData } from '../abstracts/useLoadData.js';
+import { useLoadData } from '../abstracts/useLoadData.ts';
 
 export function useGetCatalogProducts(currentPage, search) {
     const { data: products, isLoading } = useLoadData([], productsAPI.getCatalogProducts, { currentPage, search }, [

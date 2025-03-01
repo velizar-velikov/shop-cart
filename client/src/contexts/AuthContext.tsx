@@ -11,28 +11,34 @@ interface AuthContextType {
     changeAuthState: (state: any) => void;
 }
 
-const defaultAuthState: AuthContextType = {
+const AuthContext = createContext<AuthContextType>({
     userId: '',
     firstName: '',
     lastName: '',
     email: '',
     accessToken: '',
     isAuthenticated: false,
-    changeAuthState: (state: any) => {},
-};
-
-const AuthContext = createContext<AuthContextType>(defaultAuthState);
+    changeAuthState: (state: any) => null,
+});
 
 interface AuthContextProviderProps {
     children: ReactNode[];
 }
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-    const [persistedState, setPersistedState] = usePersistedState<AuthContextType>('auth', defaultAuthState);
+    const [persistedState, setPersistedState] = usePersistedState<AuthContextType>('auth', {
+        userId: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        accessToken: '',
+        isAuthenticated: false,
+        changeAuthState: (state: any) => null,
+    });
 
     const contextData = {
-        ...defaultAuthState,
         ...persistedState,
+        isAuthenticated: Boolean(persistedState?.email),
         changeAuthState: setPersistedState,
     };
 

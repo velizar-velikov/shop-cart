@@ -2,7 +2,7 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
-import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks/custom/useCart.js';
+import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks/custom/useCart.ts';
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import { useQuantityForm } from '../../../hooks/custom/useQuantityForm.js';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.js';

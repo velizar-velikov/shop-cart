@@ -2,22 +2,26 @@ import { useEffect, useState } from 'react';
 
 /**
  * Abstract hook to load data from an api
- * @param {string} initialState the initial state of the data
+ * @param {unknown} initialState the initial state of the data
  * @param {function} asyncCallback the api function to call
  * @param {object} params the params to call the function with ([key]:[value] pairs)
  * @param {array} dependencies the dependencies on which the useEffect to retrigger
- * @returns {{data: any, setData: function, isLoading: boolean, hasError: boolean}}
  */
-export function useLoadData(initialState, asyncCallback, params = {}, dependencies = []) {
-    const [data, setData] = useState(initialState);
-    const [isLoading, setIsLoading] = useState(true);
-    const [hasError, setHasError] = useState(false);
+export function useLoadData<T>(
+    initialState: T,
+    asyncCallback: Function,
+    params: { [key: string]: unknown } = {},
+    dependencies: Array<unknown> = []
+) {
+    const [data, setData] = useState<T>(initialState);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [hasError, setHasError] = useState<boolean>(false);
 
     useEffect(() => {
         async function loadProduct() {
             setIsLoading(true);
             try {
-                const result = await asyncCallback(...Object.values(params));
+                const result: T = await asyncCallback(...Object.values(params));
                 setData(result);
             } catch (error) {
                 setHasError(true);

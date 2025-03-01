@@ -28,6 +28,7 @@ export function usePersistedState<T>(key: string, initialState: T) {
         }
 
         setState(newState);
+        return newState;
     };
 
     return [state, updateState];

@@ -1,5 +1,5 @@
 import stockAPI from '../../api/stock-api.ts';
-import { useLoadData } from '../abstracts/useLoadData.js';
+import { useLoadData } from '../abstracts/useLoadData.ts';
 
 export function useAddStock() {
     const addStockHandler = async (productId, sizesToAdd) => {

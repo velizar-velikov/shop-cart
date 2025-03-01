@@ -2,7 +2,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { useForm } from '../../../hooks/abstracts/useForm.js';
-import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.js';
+import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
 
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';

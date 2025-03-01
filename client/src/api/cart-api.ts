@@ -21,7 +21,7 @@ interface CartResponse {
     _updatedOn?: number;
 }
 
-type CartResponseDetailed = CartResponse & { productInfo: ProductResponse };
+export type CartResponseDetailed = CartResponse & { productInfo: ProductResponse };
 
 type UserCartResponse = CartResponseDetailed & { sizes: Sizes };
 

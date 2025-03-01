@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import cartAPI from '../../api/cart-api.ts';
-import { useLoadData } from '../abstracts/useLoadData.js';
+import cartAPI, { CartResponseDetailed } from '../../api/cart-api.ts';
+import { useLoadData } from '../abstracts/useLoadData.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { toast } from 'react-toastify';
+import { SizeOption } from '../../types/product.ts';
+import { Sizes } from '../../types/stock.ts';
 
 export function useAddToUserCart() {
-    const addToUserCartHandler = async (productId, userId, size, quantity) => {
+    const addToUserCartHandler = async (productId: string, userId: string, size: SizeOption, quantity: number) => {
         const cartResult = await cartAPI.addToUserCart(productId, userId, size, quantity);
         return cartResult;
     };
@@ -14,26 +16,29 @@ export function useAddToUserCart() {
     return addToUserCartHandler;
 }
 
-export function useGetUserCart(userId) {
+export function useGetUserCart(userId: string) {
     const {
         data: userCartProducts,
         setData: setUserCartProducts,
         isLoading,
-    } = useLoadData([], cartAPI.getCartForUser, { userId }, [userId]);
+    } = useLoadData<Array<unknown>>([], cartAPI.getCartForUser, { userId }, [userId]);
 
     return { userCartProducts, setUserCartProducts, isLoading };
 }
 
-export function useGetUserCartCount(userId) {
-    const { data: cartItemsCount, setData: setCartItemsCount } = useLoadData(0, cartAPI.getUserCartItemsCount, { userId }, [
-        userId,
-    ]);
+export function useGetUserCartCount(userId: string) {
+    const { data: cartItemsCount, setData: setCartItemsCount } = useLoadData<number>(
+        0,
+        cartAPI.getUserCartItemsCount,
+        { userId },
+        [userId]
+    );
 
     return { cartItemsCount, setCartItemsCount };
 }
 
 export function useEditQuantityInUserCart() {
-    const editQuantityHandler = async (cartItemId, quantity) => {
+    const editQuantityHandler = async (cartItemId: string, quantity: number) => {
         const edittedCartItem = await cartAPI.editCartItemQuantity(cartItemId, quantity);
         return edittedCartItem;
     };
@@ -42,7 +47,7 @@ export function useEditQuantityInUserCart() {
 }
 
 export function useRemoveFromUserCart() {
-    const removeFromCartHandler = async (productId, userId, size) => {
+    const removeFromCartHandler = async (productId: string, userId: string, size: SizeOption) => {
         const removedProduct = await cartAPI.removeFromUserCart(productId, userId, size);
         return removedProduct;
     };
@@ -50,8 +55,8 @@ export function useRemoveFromUserCart() {
     return removeFromCartHandler;
 }
 
-export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) {
-    const [maxQuantities, setMaxQuantities] = useState({
+export function useGetMaxQuantitiesToAddToCart(productId: string, userId: string, inStockSizes: Sizes) {
+    const [maxQuantities, setMaxQuantities] = useState<Sizes>({
         small: 0,
         medium: 0,
         large: 0,
@@ -62,18 +67,17 @@ export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) 
             for (const [size, quantity] of Object.entries(inStockSizes)) {
                 let inCartSizeQuantity = 0;
                 try {
-                    const result = await cartAPI.getProductSizeRecordInUserCart(productId, userId, size);
+                    const result = await cartAPI.getProductSizeRecordInUserCart(productId, userId, size as SizeOption);
 
                     inCartSizeQuantity = result[0]?.quantity || 0;
                 } catch (error) {
-                    console.log(error.message);
-
                     if (error.message == 'Resource not found') {
+                        console.log(error.message);
                         inCartSizeQuantity = 0;
                     }
                 }
 
-                const sizeQuantity = inStockSizes[size] - inCartSizeQuantity;
+                const sizeQuantity = inStockSizes[size as SizeOption] - inCartSizeQuantity;
                 setMaxQuantities((quantities) => ({
                     ...quantities,
                     [size]: sizeQuantity >= 0 ? sizeQuantity : 0,
@@ -86,7 +90,12 @@ export function useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes) 
     return { maxQuantities, setMaxQuantities };
 }
 
-export function useAddToUserCartHandler(productId, inStockSizes, closeModal = false) {
+type UserCartType = CartResponseDetailed & {
+    sizes: Sizes;
+    maxQuantity: number;
+};
+
+export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes, closeModal: Function | undefined) {
     const [errorMessage, setErrorMessage] = useState('');
 
     const { userId } = useAuthContext();
@@ -95,20 +104,20 @@ export function useAddToUserCartHandler(productId, inStockSizes, closeModal = fa
 
     let { maxQuantities, setMaxQuantities } = useGetMaxQuantitiesToAddToCart(productId, userId, inStockSizes);
 
-    const addToCartHandler = async (values) => {
+    const addToCartHandler = async (values: { quantity: string; size: SizeOption }) => {
         try {
             values.quantity = values.quantity.trim();
-            values.size = values.size.trim();
+            values.size = values.size.trim() as SizeOption;
 
             if (!values.quantity || !values.size) {
                 throw new Error('All field are required.');
             }
 
-            if (values.size == '---') {
+            if ((values.size as SizeOption & '---') == '---') {
                 throw new Error('Please specify a size first.');
             }
 
-            if (maxQuantities[values.size] <= 0) {
+            if (maxQuantities[values.size as SizeOption] <= 0) {
                 return;
             }
 
@@ -116,11 +125,16 @@ export function useAddToUserCartHandler(productId, inStockSizes, closeModal = fa
                 toast.success(`Product added to cart.`, { autoClose: 2000 });
             };
 
-            const cartItemResponse = await addToUserCart(productId, userId, values.size, values.quantity);
+            const cartItemResponse = (await addToUserCart(
+                productId,
+                userId,
+                values.size as SizeOption,
+                Number(values.quantity)
+            )) as CartResponseDetailed & { sizes: Sizes };
 
             setMaxQuantities((oldSizes) => ({
                 ...oldSizes,
-                [values.size]: oldSizes[values.size] - values.quantity,
+                [values.size]: oldSizes[values.size] - Number(values.quantity),
             }));
 
             cartItemResponse.sizes = inStockSizes;
@@ -129,12 +143,12 @@ export function useAddToUserCartHandler(productId, inStockSizes, closeModal = fa
                 type: 'add_cart_product',
                 payload: {
                     productId,
-                    quantity: values.quantity,
+                    quantity: Number(values.quantity),
                     size: values.size,
                     cartItemResponse,
                 },
             };
-            setUserCartProducts((state) => cartReducer(state, action));
+            setUserCartProducts((state: UserCartType[]) => cartReducer(state, action));
 
             setErrorMessage('');
 
@@ -143,7 +157,9 @@ export function useAddToUserCartHandler(productId, inStockSizes, closeModal = fa
             }
             notify();
         } catch (error) {
-            setErrorMessage(error.message);
+            if (error instanceof Error) {
+                setErrorMessage(error.message);
+            }
         }
     };
 

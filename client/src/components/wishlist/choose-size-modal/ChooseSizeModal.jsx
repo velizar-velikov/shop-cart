@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.js';
+import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
 import { useForm } from '../../../hooks/abstracts/useForm.js';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
 
