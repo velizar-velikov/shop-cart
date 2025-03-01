@@ -1,7 +1,7 @@
 import { Button, Container, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
 import { useMakeOrder } from '../../hooks/custom/useOrders.ts';
 import { validateInputs } from '../../util/validateInputs.ts';

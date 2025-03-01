@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { useState } from 'react';
-import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { useEditProduct, useGetOneProduct } from '../../hooks/custom/useProducts.ts';
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';

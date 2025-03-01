@@ -1,7 +1,7 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { useForm } from '../../../hooks/abstracts/useForm.js';
+import { useForm } from '../../../hooks/abstracts/useForm.ts';
 import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
 
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';

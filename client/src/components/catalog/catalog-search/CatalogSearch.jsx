@@ -1,5 +1,5 @@
 import { Button, Container, FormControl, FormSelect, Row } from 'react-bootstrap';
-import { useForm } from '../../../hooks/abstracts/useForm.js';
+import { useForm } from '../../../hooks/abstracts/useForm.ts';
 
 import styles from './search.module.css';
 

@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { useAddReviewForProduct } from '../../hooks/custom/useReviews.ts';
 
 import { useAuthContext } from '../../contexts/AuthContext.tsx';

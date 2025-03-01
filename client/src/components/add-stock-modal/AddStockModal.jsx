@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import { useParams } from 'react-router-dom';
 import { useAddStock } from '../../hooks/custom/useStock.ts';
-import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { useState } from 'react';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 

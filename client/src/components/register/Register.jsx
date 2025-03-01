@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
-import { useForm } from '../../hooks/abstracts/useForm.js';
+import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { useRegister } from '../../hooks/custom/useAuth.js';
 import { registerSchema } from '../../validation-schemas/auth.ts';
 import { validateInputs } from '../../util/validateInputs.ts';

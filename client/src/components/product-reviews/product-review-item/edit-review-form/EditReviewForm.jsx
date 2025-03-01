@@ -1,6 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
-import { useForm } from '../../../../hooks/abstracts/useForm.js';
+import { useForm } from '../../../../hooks/abstracts/useForm.ts';
 import { useEditReviewForProduct } from '../../../../hooks/custom/useReviews.ts';
 import InputErrorMessage from '../../../error-messages/InputErrorMessage.jsx';
 
