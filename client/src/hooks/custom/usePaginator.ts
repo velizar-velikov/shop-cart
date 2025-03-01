@@ -1,10 +1,12 @@
-export function usePaginator(currentPage, maxPage, setSearchParams) {
+import { SetURLSearchParams } from 'react-router-dom';
+
+export function usePaginator(currentPage: number, maxPage: number, setSearchParams: SetURLSearchParams) {
     const onBackHandler = () => {
         if (currentPage - 1 < 1) {
             return;
         }
         setSearchParams((params) => {
-            params.set('page', currentPage - 1);
+            params.set('page', (currentPage - 1).toString());
             return params;
         });
     };
@@ -14,7 +16,7 @@ export function usePaginator(currentPage, maxPage, setSearchParams) {
             return;
         }
         setSearchParams((params) => {
-            params.set('page', currentPage + 1);
+            params.set('page', (currentPage + 1).toString());
             return params;
         });
     };
@@ -24,7 +26,7 @@ export function usePaginator(currentPage, maxPage, setSearchParams) {
             return;
         }
         setSearchParams((params) => {
-            params.set('page', 1);
+            params.set('page', '1');
             return params;
         });
     };
@@ -34,7 +36,7 @@ export function usePaginator(currentPage, maxPage, setSearchParams) {
             return;
         }
         setSearchParams((params) => {
-            params.set('page', maxPage);
+            params.set('page', maxPage.toString());
             return params;
         });
     };

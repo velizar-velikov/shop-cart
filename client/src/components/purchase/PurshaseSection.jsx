@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
 import { UseCartContext } from '../../contexts/CartContext.jsx';
-import { useMakeOrder } from '../../hooks/custom/useOrders.js';
+import { useMakeOrder } from '../../hooks/custom/useOrders.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 import { orderSchema } from '../../validation-schemas/order.ts';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';

@@ -1,5 +1,5 @@
 import Pagination from 'react-bootstrap/Pagination';
-import { usePaginator } from '../../../hooks/custom/usePaginator.js';
+import { usePaginator } from '../../../hooks/custom/usePaginator.ts';
 
 import styles from './pagination.module.css';
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 export function useDynamicNav() {
-    const [deviceWidth, setDeviceWidth] = useState(window.innerWidth);
+    const [deviceWidth, setDeviceWidth] = useState<number>(window.innerWidth);
 
     useEffect(() => {
-        let timeout;
+        let timeout: number | undefined;
 
         const handleResize = () => {
             clearTimeout(timeout);

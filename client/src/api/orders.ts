@@ -1,3 +1,4 @@
+import { Order, PaymentType } from '../types/order.ts';
 import { OrderedProduct } from '../types/product.ts';
 import productsAPI from './products-api.ts';
 import requester from './request.ts';
@@ -7,17 +8,6 @@ const host = import.meta.env.VITE_API_URL;
 const endpoints = {
     all: '/data/orders',
     byId: (id: string) => `/data/orders/${id}`,
-};
-
-type PaymentType = 'visa' | 'mastercard' | 'cash';
-
-type Order = {
-    _ownerId: string;
-    _id: string;
-    _createdOn: string;
-    address: string;
-    paymentType: PaymentType;
-    products: [OrderedProduct];
 };
 
 /**
