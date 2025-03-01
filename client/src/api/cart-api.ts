@@ -11,20 +11,6 @@ const endpoints = {
     byId: (id: string) => `/data/cart/${id}`,
 };
 
-interface CartResponse {
-    _id: string;
-    _ownerId: string;
-    productId: string;
-    size: SizeOption;
-    quantity: number;
-    _createdOn: number;
-    _updatedOn?: number;
-}
-
-export type CartResponseDetailed = CartResponse & { productInfo: ProductResponse };
-
-type UserCartResponse = CartResponseDetailed & { sizes: Sizes };
-
 async function getCartForUser(userId: string): Promise<UserCartResponse[]> {
     const urlParams = new URLSearchParams({
         where: `_ownerId="${userId}"`,
