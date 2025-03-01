@@ -12,7 +12,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import RatingStars from '../rating-stars/RatingStars.jsx';
 
 import { useState } from 'react';
-import { useGetOneProduct } from '../../hooks/custom/useProducts.js';
+import { useGetOneProduct } from '../../hooks/custom/useProducts.ts';
 import { useGetRatingInfo, useGetUserReviewsForProduct } from '../../hooks/custom/useReviews.ts';
 import { useGetSizesForProduct } from '../../hooks/custom/useStock.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';

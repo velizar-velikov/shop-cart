@@ -5,7 +5,7 @@ import CatalogSearch from './catalog-search/CatalogSearch.jsx';
 import Paginator from './pagination/Pagination.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 
-import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/custom/useProducts.js';
+import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/custom/useProducts.ts';
 import { useSearchParams } from 'react-router-dom';
 import NoProducts from './no-products/NoProducts.jsx';
 import { useSearch } from '../../hooks/custom/useSearch.ts';

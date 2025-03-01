@@ -9,11 +9,7 @@ export interface OrderedProduct {
 
 export type Category = 'T-shirts' | 'Pants' | 'Sweatshirts' | 'Shorts';
 
-export interface ProductResponse {
-    _id: string;
-    _ownerId: string;
-    _createdOn: number;
-    _updatedOn?: number;
+export interface Product {
     name: string;
     brand: string;
     category: Category;
@@ -21,5 +17,12 @@ export interface ProductResponse {
     imageUrl: string;
     summary: string;
     description: string;
+}
+
+export interface ProductResponse extends Product {
+    _id: string;
+    _ownerId: string;
+    _createdOn: number;
+    _updatedOn?: number;
     inactive: boolean;
 }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import CatalogCard from '../catalog-card/CatalogCard.jsx';
 
-import { useGetLatestProducts } from '../../hooks/custom/useProducts.js';
+import { useGetLatestProducts } from '../../hooks/custom/useProducts.ts';
 import paths from '../../config/paths.ts';
 
 export default function Home() {

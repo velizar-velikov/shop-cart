@@ -1,4 +1,4 @@
-import { Category, ProductResponse } from '../types/product.ts';
+import { Category, Product, ProductResponse } from '../types/product.ts';
 import { Sizes } from '../types/stock.ts';
 import requester from './request.ts';
 import stockAPI from './stock-api.ts';
@@ -82,16 +82,6 @@ function getLatest(productsCount: number): Promise<ProductResponse[]> {
 
 function getOne(productId: string): Promise<ProductResponse> {
     return requester.get(host + endpoints.byId(productId));
-}
-
-interface Product {
-    name: string;
-    brand: string;
-    category: Category;
-    price: number;
-    imageUrl: string;
-    summary: string;
-    description: string;
 }
 
 function create(data: Product): Promise<ProductResponse> {

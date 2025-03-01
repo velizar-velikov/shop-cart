@@ -7,7 +7,7 @@ import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.js';
-import { useCreateProduct } from '../../hooks/custom/useProducts.js';
+import { useCreateProduct } from '../../hooks/custom/useProducts.ts';
 import { productSchema } from '../../validation-schemas/product.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 

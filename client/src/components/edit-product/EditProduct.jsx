@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.js';
-import { useEditProduct, useGetOneProduct } from '../../hooks/custom/useProducts.js';
+import { useEditProduct, useGetOneProduct } from '../../hooks/custom/useProducts.ts';
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
