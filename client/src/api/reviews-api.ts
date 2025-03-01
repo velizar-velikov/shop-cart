@@ -1,3 +1,4 @@
+import { ReviewResponse } from '../types/review.ts';
 import requester from './request.ts';
 
 const host = import.meta.env.VITE_API_URL;
@@ -6,17 +7,6 @@ const endpoints = {
     all: '/data/reviews',
     byId: (id: string) => `/data/reviews/${id}`,
 };
-
-interface ReviewResponse {
-    _ownerId: string;
-    _id: string;
-    productId: string;
-    _createdOn: number;
-    _updatedOn?: number;
-    rating: string;
-    text: string;
-    reviewerFullName: string;
-}
 
 async function getReviewsForProduct(productId: string): Promise<ReviewResponse[]> {
     const urlParams = new URLSearchParams({

@@ -1,13 +1,14 @@
 import reviewsAPI from '../../api/reviews-api.ts';
+import { ReviewResponse } from '../../types/review.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';
 
-export function useAGetAllReviewsForProduct(productId, userId) {
+export function useAGetAllReviewsForProduct(productId: string, userId: string) {
     const {
         data: reviews,
         setData: setReviews,
         isLoading,
         hasError,
-    } = useLoadData([], reviewsAPI.getReviewsForProduct, { productId });
+    } = useLoadData<Array<ReviewResponse>>([], reviewsAPI.getReviewsForProduct, { productId });
 
     if (hasError) {
         setReviews([]);
@@ -26,13 +27,13 @@ export function useAGetAllReviewsForProduct(productId, userId) {
     return { reviews, setReviews, isLoading };
 }
 
-export function useGetUserReviewsForProduct(productId, userId, hasAddedNewReview) {
+export function useGetUserReviewsForProduct(productId: string, userId: string, hasAddedNewReview: boolean) {
     const {
         data: userReviews,
         setData: setReviews,
         isLoading,
         hasError,
-    } = useLoadData([], reviewsAPI.getUserReviewsForProduct, { productId, userId }, [hasAddedNewReview]);
+    } = useLoadData<Array<ReviewResponse>>([], reviewsAPI.getUserReviewsForProduct, { productId, userId }, [hasAddedNewReview]);
 
     if (hasError) {
         setReviews([]);
@@ -42,7 +43,7 @@ export function useGetUserReviewsForProduct(productId, userId, hasAddedNewReview
 }
 
 export function useAddReviewForProduct() {
-    const addReviewHandler = async (productId, rating, text, reviewerFullName) => {
+    const addReviewHandler = async (productId: string, rating: number, text: string, reviewerFullName: string) => {
         const result = await reviewsAPI.createReviewForProduct(productId, rating, text, reviewerFullName);
         return result;
     };
@@ -51,7 +52,7 @@ export function useAddReviewForProduct() {
 }
 
 export function useEditReviewForProduct() {
-    const editReviewHandler = async (reviewId, text) => {
+    const editReviewHandler = async (reviewId: string, text: string) => {
         const result = await reviewsAPI.editReviewForProduct(reviewId, text);
         return result;
     };
@@ -60,7 +61,7 @@ export function useEditReviewForProduct() {
 }
 
 export function useDeleteReviewForProduct() {
-    const deleteReviewHandler = async (reviewId) => {
+    const deleteReviewHandler = async (reviewId: string) => {
         const result = await reviewsAPI.deleteReviewForProduct(reviewId);
         return result;
     };
@@ -68,7 +69,7 @@ export function useDeleteReviewForProduct() {
     return deleteReviewHandler;
 }
 
-export function useGetRatingInfo(productId, hasAddedNewReview) {
+export function useGetRatingInfo(productId: string, hasAddedNewReview: boolean) {
     const initialState = {
         averageRating: 0,
         ratingsCount: 0,

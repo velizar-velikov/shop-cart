@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import ProductReviewItem from './product-review-item/ProductReviewItem.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 
-import { useAGetAllReviewsForProduct } from '../../hooks/custom/useReviews.js';
+import { useAGetAllReviewsForProduct } from '../../hooks/custom/useReviews.ts';
 import { useGetOneProduct } from '../../hooks/custom/useProducts.js';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 
