@@ -8,7 +8,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/custom/useProducts.js';
 import { useSearchParams } from 'react-router-dom';
 import NoProducts from './no-products/NoProducts.jsx';
-import { useSearch } from '../../hooks/custom/useSearch.js';
+import { useSearch } from '../../hooks/custom/useSearch.ts';
 
 import styles from './catalog.module.css';
 
