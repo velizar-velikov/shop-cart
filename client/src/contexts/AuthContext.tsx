@@ -1,14 +1,17 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { usePersistedState } from '../hooks/abstracts/usePersistedState.ts';
 
-interface AuthContextType {
+interface AuthState {
     userId: string;
     firstName: string;
     lastName: string;
     email: string;
     accessToken: string;
+}
+
+interface AuthContextType extends AuthState {
     isAuthenticated: boolean;
-    changeAuthState: (state: any) => void;
+    changeAuthState: (state: AuthState | null) => void;
 }
 
 const AuthContext = createContext<AuthContextType>({

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 /**
  * Abstract hook to handle controlled forms
- * @param {any} initialValues the initial values of the form fields
+ * @param initialValues the initial values of the form fields
  * @param {Function} submitCallback the function to call on submit event
  */
 export function useForm<T extends { [key: string]: unknown }>(initialValues: T, submitCallback: Function) {

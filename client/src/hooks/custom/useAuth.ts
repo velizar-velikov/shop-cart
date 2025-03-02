@@ -6,7 +6,7 @@ export function useLogin() {
     const { changeAuthState } = useAuthContext();
     const { updateWishlist } = useWishlistContext();
 
-    const loginHandler = async (email, password) => {
+    const loginHandler = async (email: string, password: string) => {
         const result = await authAPI.login(email, password);
         changeAuthState({
             userId: result._id,
@@ -29,7 +29,7 @@ export function useRegister() {
     const { changeAuthState } = useAuthContext();
     const { updateWishlist } = useWishlistContext();
 
-    const registerHandler = async (firstName, lastName, email, password) => {
+    const registerHandler = async (firstName: string, lastName: string, email: string, password: string) => {
         const result = await authAPI.register(firstName, lastName, email, password);
         changeAuthState({
             userId: result._id,

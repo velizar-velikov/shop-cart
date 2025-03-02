@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
 import { useForm } from '../../hooks/abstracts/useForm.ts';
-import { useLogin } from '../../hooks/custom/useAuth.js';
+import { useLogin } from '../../hooks/custom/useAuth.ts';
 import { loginSchema } from '../../validation-schemas/auth.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 
