@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useMenuContext } from '../../../../contexts/MenuContext.jsx';
+import { useMenuContext } from '../../../../contexts/MenuContext.tsx';
 import { useEffect, useRef } from 'react';
 import { useAuthContext } from '../../../../contexts/AuthContext.tsx';
 

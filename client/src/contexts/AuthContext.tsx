@@ -21,7 +21,7 @@ const AuthContext = createContext<AuthContextType>({
     email: '',
     accessToken: '',
     isAuthenticated: false,
-    changeAuthState: (state: any) => null,
+    changeAuthState: (state: AuthState | null) => null,
 });
 
 interface AuthContextProviderProps {
@@ -36,7 +36,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         email: '',
         accessToken: '',
         isAuthenticated: false,
-        changeAuthState: (state: any) => null,
+        changeAuthState: (state: AuthState | null) => null,
     });
 
     const contextData = {

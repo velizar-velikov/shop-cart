@@ -3,7 +3,7 @@ import HeaderMobile from './header-mobile/HeaderMobile.jsx';
 import { useDynamicNav } from '../../hooks/custom/useDynamicNav.ts';
 import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/custom/useAuth.ts';
-import { useMenuContext } from '../../contexts/MenuContext.jsx';
+import { useMenuContext } from '../../contexts/MenuContext.tsx';
 import paths from '../../config/paths.ts';
 
 export default function Header() {

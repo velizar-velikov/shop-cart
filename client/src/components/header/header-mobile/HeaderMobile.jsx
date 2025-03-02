@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../../contexts/CartContext.jsx';
 import { useWishlistContext } from '../../../contexts/WishlistContext.tsx';
-import { useMenuContext } from '../../../contexts/MenuContext.jsx';
+import { useMenuContext } from '../../../contexts/MenuContext.tsx';
 
 import CartBubble from '../cart-bubble/CartBubble.jsx';
 import Logo from '../../../assets/img/shopping-cart.webp';
