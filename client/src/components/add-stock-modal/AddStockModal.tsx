@@ -6,28 +6,38 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { useAddStock } from '../../hooks/custom/useStock.ts';
 import { useForm } from '../../hooks/abstracts/useForm.ts';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { Sizes } from '../../types/stock.ts';
 import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import { ProductResponse } from '../../types/product.ts';
 
-const initialValues = {
+const initialValues: Sizes<string> = {
     small: '0',
     medium: '0',
     large: '0',
 };
 
-export default function AddStockModal({ show, handleClose, product, sizes, updateSizes }) {
-    const [errorMessage, setErrorMessage] = useState('');
-    const { productId } = useParams();
+interface AddStockModalProps {
+    show: () => void;
+    handleClose: () => void;
+    product: ProductResponse;
+    sizes: Sizes<number>;
+    updateSizes: Dispatch<SetStateAction<Sizes<number>>>;
+}
+
+export default function AddStockModal({ show, handleClose, product, sizes, updateSizes }: AddStockModalProps) {
+    const [errorMessage, setErrorMessage] = useState<string>('');
+    const { productId } = useParams<string>() as { productId: string };
     const addStock = useAddStock();
 
-    const addStockHandler = async (sizesValues) => {
+    const addStockHandler = async (sizesValues: Sizes<string>) => {
         sizesValues.small = sizesValues.small.trim();
         sizesValues.medium = sizesValues.medium.trim();
         sizesValues.large = sizesValues.large.trim();
 
         // form has default and min value, but user could inspect page and submit wrongfull values
-        const hasInvalidField = Object.entries(sizesValues).some(([key, value]) => value == null || value < 0);
-        const areAllSizesZeroes = Object.entries(sizesValues).every(([key, value]) => value == 0);
+        const hasInvalidField = Object.entries(sizesValues).some(([key, value]) => value == null || Number(value) < 0);
+        const areAllSizesZeroes = Object.entries(sizesValues).every(([key, value]) => Number(value) == 0);
 
         const notify = () => {
             const total = Object.values(sizesValues).reduce((acc, curr) => acc + Number(curr), 0);
@@ -48,17 +58,19 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
 
             notify();
         } catch (error) {
-            console.log(error.message);
-            setErrorMessage(error.message);
+            if (error instanceof Error) {
+                console.log(error.message);
+                setErrorMessage(error.message);
+            }
         } finally {
         }
     };
 
-    const { values, changeHandler, submitHandler } = useForm(initialValues, addStockHandler);
+    const { values, changeHandler, submitHandler } = useForm<Sizes<string>>(initialValues, addStockHandler);
 
     return (
         <>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show as unknown as boolean} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                         <span className="small">Add in stock: </span>

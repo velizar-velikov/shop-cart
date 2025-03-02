@@ -3,7 +3,7 @@ import { Sizes } from '../../types/stock.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';
 
 export function useAddStock() {
-    const addStockHandler = async (productId: string, sizesToAdd: Sizes) => {
+    const addStockHandler = async (productId: string, sizesToAdd: Sizes<string>) => {
         const result = await stockAPI.addStockForProduct(productId, sizesToAdd);
         return result;
     };
@@ -16,7 +16,7 @@ export function useGetSizesForProduct(productId: string) {
         data: sizes,
         setData: setSizes,
         isLoading,
-    } = useLoadData<Array<Sizes>>([], stockAPI.getSizesForProduct, { productId });
+    } = useLoadData<Array<Sizes<number>>>([], stockAPI.getSizesForProduct, { productId });
 
     return { sizes, setSizes, isLoading };
 }

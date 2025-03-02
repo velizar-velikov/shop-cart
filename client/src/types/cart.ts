@@ -13,4 +13,4 @@ export interface CartResponse {
 
 export type CartResponseDetailed = CartResponse & { productInfo: ProductResponse };
 
-export type UserCartResponse = CartResponseDetailed & { sizes: Sizes };
+export type UserCartResponse = CartResponseDetailed & { sizes: Sizes<number> };

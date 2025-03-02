@@ -1,5 +1,5 @@
-export interface Sizes {
-    small: number;
-    medium: number;
-    large: number;
-}
+export type Sizes<Т extends number | string> = {
+    small: Т;
+    medium: Т;
+    large: Т;
+};

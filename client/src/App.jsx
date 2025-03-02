@@ -20,7 +20,7 @@ import Wishlist from './components/wishlist/Wishlist.jsx';
 
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
 import GuestGuard from './components/route-guards/GuestGuard.jsx';
-import { ContextWrapperProvider } from './contexts/ContextWrapper.jsx';
+import { ContextWrapperProvider } from './contexts/ContextWrapper.tsx';
 
 import paths from './config/paths.ts';
 

@@ -15,7 +15,7 @@ interface Stock {
     _updatedOn?: number;
     _ownerId: string;
     productId: string;
-    sizes: Sizes;
+    sizes: Sizes<number>;
 }
 
 function buildUrlForProduct(productId: string) {
@@ -34,7 +34,7 @@ function getStockForProduct(productId: string): Promise<Stock[]> {
 }
 
 function initializeStockForProduct(productId: string): Promise<Stock> {
-    const sizes: Sizes = {
+    const sizes: Sizes<number> = {
         small: 1,
         medium: 1,
         large: 1,
@@ -42,19 +42,19 @@ function initializeStockForProduct(productId: string): Promise<Stock> {
     return requester.post(host + endpoints.all, { productId, sizes });
 }
 
-async function getSizesForProduct(productId: string): Promise<Sizes> {
+async function getSizesForProduct(productId: string): Promise<Sizes<number>> {
     const urlParams = new URLSearchParams({
         where: `productId="${productId}"`,
         select: 'sizes',
     });
     const url = `${host}${endpoints.all}?${urlParams.toString()}`;
 
-    const sizesResponse: { sizes: Sizes }[] = await requester.get(url);
+    const sizesResponse: { sizes: Sizes<number> }[] = await requester.get(url);
 
     return sizesResponse[0]?.sizes;
 }
 
-async function addStockForProduct(productId: string, sizesToAdd: Sizes): Promise<Stock> {
+async function addStockForProduct(productId: string, sizesToAdd: Sizes<string>): Promise<Stock> {
     // request matches only one stock, but we receive it in an array
     const stock = (await getStockForProduct(productId))[0];
     const sizes = stock.sizes;
@@ -66,7 +66,7 @@ async function addStockForProduct(productId: string, sizesToAdd: Sizes): Promise
     return requester.put(host + endpoints.byId(stock._id), { productId, sizes });
 }
 
-async function removeSizeOfProduct(productId: string, sizeToRemove: Partial<Sizes>): Promise<Stock> {
+async function removeSizeOfProduct(productId: string, sizeToRemove: Partial<Sizes<number>>): Promise<Stock> {
     const response = await getStockForProduct(productId);
     const stockForProduct = response[0];
 

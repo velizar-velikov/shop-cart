@@ -42,7 +42,7 @@ async function getCatalogProducts(currentPage: number, search: SearchOfUser): Pr
 
     const url = `${host}${endpoints.all}?${urlParams.toString()}&${decodeURIComponent(urlParamSort.toString())}`;
 
-    const response: ProductResponse[] & [{ sizes: Sizes }] = await requester.get(url);
+    const response: ProductResponse[] & [{ sizes: Sizes<number> }] = await requester.get(url);
 
     for (const product of response) {
         product.sizes = await stockAPI.getSizesForProduct(product._id);

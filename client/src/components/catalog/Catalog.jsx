@@ -1,7 +1,7 @@
 import { Row } from 'react-bootstrap';
 
 import CatalogCard from '../catalog-card/CatalogCard.jsx';
-import CatalogSearch from './catalog-search/CatalogSearch.jsx';
+import CatalogSearch from './catalog-search/CatalogSearch.tsx';
 import Paginator from './pagination/Pagination.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 

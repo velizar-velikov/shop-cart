@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import { Link, useParams } from 'react-router-dom';
 
 import CreateReviewModal from '../create-review-modal/CreateReviewModal.jsx';
-import AddStockModal from '../add-stock-modal/AddStockModal.jsx';
+import AddStockModal from '../add-stock-modal/AddStockModal.tsx';
 import DeleteProductModal from '../delete-product-modal/DeleteProductModal.jsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
