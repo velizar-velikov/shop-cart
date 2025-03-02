@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, PropsWithChildren, ReactNode, useContext } from 'react';
 import { usePersistedState } from '../hooks/abstracts/usePersistedState.ts';
 import { PersistedWishlistItem } from '../types/wishlist.ts';
 
@@ -7,11 +7,7 @@ const WishlistContext = createContext({
     updateWishlist: (state: PersistedWishlistItem[] | ((state: PersistedWishlistItem[]) => PersistedWishlistItem[])) => null,
 });
 
-interface WishlistContextProviderProps {
-    children: ReactNode[];
-}
-
-export function WishlistContextProvider({ children }: WishlistContextProviderProps) {
+export function WishlistContextProvider({ children }: PropsWithChildren) {
     const [persistedWishlistState, setPersistedWishlistState] = usePersistedState<PersistedWishlistItem[]>('wishlist', []);
 
     const contextData = {

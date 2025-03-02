@@ -2,7 +2,7 @@ import cartAPI from '../../api/cart-api.ts';
 import ordersAPI from '../../api/orders.ts';
 import stockAPI from '../../api/stock-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
-import { UseCartContext } from '../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../contexts/CartContext.tsx';
 import { UserCartResponse } from '../../types/cart.ts';
 import { Order, PaymentType } from '../../types/order.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';

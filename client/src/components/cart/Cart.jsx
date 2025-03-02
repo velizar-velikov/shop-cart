@@ -3,7 +3,7 @@ import CartItem from './cart-iitem/CartItem.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { Link } from 'react-router-dom';
 import paths from '../../config/paths.ts';
-import { UseCartContext } from '../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../contexts/CartContext.tsx';
 import EmptyCart from './empty-cart/EmptyCart.jsx';
 
 export default function Cart() {

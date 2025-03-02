@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import cartAPI from '../../api/cart-api.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
-import { UseCartContext } from '../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../contexts/CartContext.tsx';
 import { toast } from 'react-toastify';
 import { SizeOption } from '../../types/product.ts';
 import { Sizes } from '../../types/stock.ts';
@@ -72,9 +72,11 @@ export function useGetMaxQuantitiesToAddToCart(productId: string, userId: string
 
                     inCartSizeQuantity = result[0]?.quantity || 0;
                 } catch (error) {
-                    if (error.message == 'Resource not found') {
-                        console.log(error.message);
-                        inCartSizeQuantity = 0;
+                    if (error instanceof Error) {
+                        if (error.message == 'Resource not found') {
+                            console.log(error.message);
+                            inCartSizeQuantity = 0;
+                        }
                     }
                 }
 
@@ -93,7 +95,7 @@ export function useGetMaxQuantitiesToAddToCart(productId: string, userId: string
 
 type UserCartType = CartResponseDetailed & {
     sizes: Sizes;
-    maxQuantity: number;
+    maxQuantity?: number;
 };
 
 export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes, closeModal: Function | undefined) {
@@ -131,7 +133,7 @@ export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes, 
                 userId,
                 values.size as SizeOption,
                 Number(values.quantity)
-            )) as CartResponseDetailed & { sizes: Sizes };
+            )) as UserCartResponse;
 
             setMaxQuantities((oldSizes: Sizes) => ({
                 ...oldSizes,
@@ -143,7 +145,7 @@ export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes, 
             const action = {
                 type: 'add_cart_product',
                 payload: {
-                    productId,
+                    _id: productId,
                     quantity: Number(values.quantity),
                     size: values.size,
                     cartItemResponse,

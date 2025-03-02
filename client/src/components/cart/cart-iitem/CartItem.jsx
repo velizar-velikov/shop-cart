@@ -6,7 +6,7 @@ import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import { useQuantityForm } from '../../../hooks/custom/useQuantityForm.ts';
 import { useGetSizesForProduct } from '../../../hooks/custom/useStock.ts';
-import { UseCartContext } from '../../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../../contexts/CartContext.tsx';
 
 import paths from '../../../config/paths.ts';
 import styles from './cartItem.module.css';

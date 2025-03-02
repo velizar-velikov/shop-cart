@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, PropsWithChildren, ReactNode, useContext } from 'react';
 import { usePersistedState } from '../hooks/abstracts/usePersistedState.ts';
 
 interface AuthState {
@@ -24,11 +24,8 @@ const AuthContext = createContext<AuthContextType>({
     changeAuthState: (state: AuthState | null) => null,
 });
 
-interface AuthContextProviderProps {
-    children: ReactNode[];
-}
 
-export function AuthContextProvider({ children }: AuthContextProviderProps) {
+export function AuthContextProvider({ children }: PropsWithChildren) {
     const [persistedState, setPersistedState] = usePersistedState<AuthContextType>('auth', {
         userId: '',
         firstName: '',

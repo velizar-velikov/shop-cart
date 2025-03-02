@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState, Dispatch, SetStateAction } from 'react';
+import { createContext, ReactNode, useContext, useState, Dispatch, SetStateAction, PropsWithChildren } from 'react';
 
 interface MenuContextType {
     isMenuOpened: boolean;
@@ -16,11 +16,7 @@ const MenuContext = createContext<MenuContextType>({
     setIsMobile: () => null,
 });
 
-interface MenuContextProviderProps {
-    children: ReactNode[];
-}
-
-export function MenuContextProvider({ children }: MenuContextProviderProps) {
+export function MenuContextProvider({ children }: PropsWithChildren) {
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
 

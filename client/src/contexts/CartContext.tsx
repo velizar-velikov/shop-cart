@@ -1,25 +1,45 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext } from 'react';
 import { useAuthContext } from './AuthContext.tsx';
 import { useGetUserCart } from '../hooks/custom/useCart.ts';
+import { UserCartResponse } from '../types/cart.ts';
+import { SizeOption } from '../types/product.ts';
 
-const CartContext = createContext({
+interface CartAction {
+    type: string;
+    payload: {
+        _id: string;
+        quantity: number;
+        size?: SizeOption;
+        cartItemResponse?: UserCartResponse;
+    };
+}
+
+interface CartContext {
+    userCartProducts: UserCartResponse[];
+    setUserCartProducts: Dispatch<SetStateAction<UserCartResponse[]>>;
+    cartItemsCount: number;
+    totalPrice: number;
+    isLoading: boolean;
+    cartReducer: (state: UserCartResponse[], action: CartAction) => UserCartResponse[];
+}
+
+const CartContext = createContext<CartContext>({
     userCartProducts: [],
     setUserCartProducts: () => null,
     cartItemsCount: 0,
     totalPrice: 0,
-    cartReducer: (state, action) => null,
+    isLoading: false,
+    cartReducer: (state: UserCartResponse[], action) => [],
 });
 
-function cartReducer(state, action) {
+function cartReducer(state: UserCartResponse[], action: CartAction) {
     switch (action.type) {
         case 'add_cart_product': {
             const newProducts = state.slice();
-            const productInCart = newProducts.find(
-                (p) => p.productId === action.payload.productId && p.size === action.payload.size
-            );
+            const productInCart = newProducts.find((p) => p.productId === action.payload._id && p.size === action.payload.size);
 
             if (!productInCart) {
-                newProducts.unshift(action.payload.cartItemResponse);
+                newProducts.unshift(action.payload.cartItemResponse as UserCartResponse);
             } else {
                 productInCart.quantity = productInCart.quantity + Number(action.payload.quantity);
             }
@@ -41,7 +61,7 @@ function cartReducer(state, action) {
     }
 }
 
-export function CartContextProvider({ children }) {
+export function CartContextProvider({ children }: PropsWithChildren) {
     const { userId } = useAuthContext();
 
     const { userCartProducts, setUserCartProducts, isLoading } = useGetUserCart(userId);

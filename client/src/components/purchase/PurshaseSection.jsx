@@ -2,7 +2,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.ts';
-import { UseCartContext } from '../../contexts/CartContext.jsx';
+import { UseCartContext } from '../../contexts/CartContext.tsx';
 import { useMakeOrder } from '../../hooks/custom/useOrders.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 import { orderSchema } from '../../validation-schemas/order.ts';
