@@ -11,6 +11,7 @@ import NoProducts from './no-products/NoProducts.jsx';
 import { useSearch } from '../../hooks/custom/useSearch.ts';
 
 import styles from './catalog.module.css';
+import { Search } from '../../types/search.ts';
 
 export default function Catalog() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +24,7 @@ export default function Catalog() {
 
     const maxPage = Math.ceil(catalogLength / 4);
 
-    const updateSearch = (newSearch) => {
+    const updateSearch = (newSearch: Search) => {
         setSearch(newSearch);
         currentPage = 1;
     };

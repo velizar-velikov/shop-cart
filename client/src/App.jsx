@@ -7,7 +7,7 @@ import NotFound from './components/not-found/NotFound.jsx';
 import Login from './components/login/Login.jsx';
 import Register from './components/register/Register.jsx';
 import Home from './components/home/Home.jsx';
-import Catalog from './components/catalog/Catalog.jsx';
+import Catalog from './components/catalog/Catalog.tsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
 import CreateProduct from './components/create-product/CreateProduct.jsx';
 import EditProduct from './components/edit-product/EditProduct.jsx';

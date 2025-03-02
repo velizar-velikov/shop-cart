@@ -12,7 +12,7 @@ export function useForm<T extends { [key: string]: unknown }>(initialValues: T, 
         setValues(initialValues);
     }, [initialValues]);
 
-    const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setValues((oldValues: T) => ({
             ...oldValues,
             [event.target.name]: event.target.value,
