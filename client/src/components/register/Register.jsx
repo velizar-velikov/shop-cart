@@ -9,7 +9,7 @@ import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { useRegister } from '../../hooks/custom/useAuth.ts';
 import { registerSchema } from '../../validation-schemas/auth.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../error-messages/InputErrorMessage.tsx';
 
 import paths from '../../config/paths.ts';
 

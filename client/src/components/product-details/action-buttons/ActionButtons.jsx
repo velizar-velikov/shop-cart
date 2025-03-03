@@ -5,7 +5,7 @@ import { useForm } from '../../../hooks/abstracts/useForm.ts';
 import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
 
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
-import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../../error-messages/InputErrorMessage.tsx';
 import paths from '../../../config/paths.ts';
 
 const initialValues = {

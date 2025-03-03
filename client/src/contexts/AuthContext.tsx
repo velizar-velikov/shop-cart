@@ -24,7 +24,6 @@ const AuthContext = createContext<AuthContextType>({
     changeAuthState: (state: AuthState | null) => null,
 });
 
-
 export function AuthContextProvider({ children }: PropsWithChildren) {
     const [persistedState, setPersistedState] = usePersistedState<AuthContextType>('auth', {
         userId: '',

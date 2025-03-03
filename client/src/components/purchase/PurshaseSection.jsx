@@ -6,7 +6,7 @@ import { UseCartContext } from '../../contexts/CartContext.tsx';
 import { useMakeOrder } from '../../hooks/custom/useOrders.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 import { orderSchema } from '../../validation-schemas/order.ts';
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../error-messages/InputErrorMessage.tsx';
 import PurchaseItem from './purchase-item/PurchaseItem.jsx';
 import { toast } from 'react-toastify';
 

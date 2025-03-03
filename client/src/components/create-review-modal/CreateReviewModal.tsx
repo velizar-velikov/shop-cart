@@ -10,26 +10,33 @@ import { useAddReviewForProduct } from '../../hooks/custom/useReviews.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { validateInputs } from '../../util/validateInputs.ts';
 import { reviewSchema } from '../../validation-schemas/review.ts';
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../error-messages/InputErrorMessage.js';
 import { toast } from 'react-toastify';
+import { Review } from '../../types/review.ts';
 
-const initialValues = {
+const initialValues: Review = {
     rating: '5',
     text: '',
 };
 
-export default function CreateReviewModal({ show, handleClose, updateDetails, productName }) {
-    const [validationErrors, setValidationErrors] = useState({});
-    const [serverError, setServerError] = useState({});
+interface CreateReviewModalProps {
+    show: () => void;
+    handleClose: () => void;
+    updateDetails: () => void;
+}
 
-    const { productId } = useParams();
+export default function CreateReviewModal({ show, handleClose, updateDetails }: CreateReviewModalProps) {
+    const [validationErrors, setValidationErrors] = useState<Review | {}>({});
+    const [serverError, setServerError] = useState<{ message?: string }>({});
+
+    const { productId } = useParams<string>() as { productId: string };
     const { firstName, lastName } = useAuthContext();
     const userFullName = `${firstName} ${lastName}`;
     const addReview = useAddReviewForProduct();
 
-    const addReviewHandler = async (values) => {
+    const addReviewHandler = async (values: Review) => {
         try {
-            const { data, errors, success } = validateInputs(reviewSchema, values);
+            const { data, errors, success } = validateInputs<Review>(reviewSchema, values);
 
             if (!success) {
                 throw errors;
@@ -39,26 +46,28 @@ export default function CreateReviewModal({ show, handleClose, updateDetails, pr
                 toast.success(`Review added successfully.`, { autoClose: 2000 });
             };
 
-            await addReview(productId, data.rating, data.text, userFullName);
+            await addReview(productId, Number(data.rating), data.text, userFullName);
             handleClose();
             updateDetails();
 
             notify();
         } catch (error) {
-            if (error.message) {
-                setServerError(error);
-                setValidationErrors({});
-            } else {
-                setValidationErrors(error);
-                setServerError({});
+            if (error instanceof Error) {
+                if (error.message) {
+                    setServerError(error);
+                    setValidationErrors({});
+                } else {
+                    setValidationErrors(error);
+                    setServerError({});
+                }
             }
         }
     };
-    const { values, changeHandler, submitHandler } = useForm(initialValues, addReviewHandler);
+    const { values, changeHandler, submitHandler } = useForm<Review>(initialValues, addReviewHandler);
 
     return (
         <>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show as any} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add review</Modal.Title>
                 </Modal.Header>
@@ -67,7 +76,7 @@ export default function CreateReviewModal({ show, handleClose, updateDetails, pr
                         {serverError && <p className="text-danger">{serverError.message}</p>}
                         <Form.Group className="col-5 col-xs-4 mt-1" controlId="exampleForm.ControlInput1">
                             <Form.Label>Rating (out of 5)</Form.Label>
-                            {validationErrors.rating && <InputErrorMessage text={validationErrors.rating} />}
+                            {'rating' in validationErrors && <InputErrorMessage text={validationErrors.rating} />}
                             <Form.Select size="sm" name="rating" value={values.rating} onChange={changeHandler}>
                                 <option>5</option>
                                 <option>4</option>
@@ -79,11 +88,11 @@ export default function CreateReviewModal({ show, handleClose, updateDetails, pr
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
                             <Form.Label>Describe your experience</Form.Label>
-                            {validationErrors.text && <InputErrorMessage text={validationErrors.text} />}
+                            {'text' in validationErrors && <InputErrorMessage text={validationErrors.text} />}
                             <Form.Control
                                 as="textarea"
                                 rows={3}
-                                className={validationErrors.text ? 'input-error' : ''}
+                                className={'text' in validationErrors ? 'input-error' : ''}
                                 name="text"
                                 placeholder="My opinion about this product is..."
                                 value={values.text}

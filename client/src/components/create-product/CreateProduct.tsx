@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../error-messages/InputErrorMessage.js';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,7 @@ const initialValues: Product = {
 };
 
 export default function CreateProduct() {
-    const [validationErrors, setValidationErrors] = useState<Product>({} as Product);
+    const [validationErrors, setValidationErrors] = useState<Product | {}>({});
     const [serverError, setServerError] = useState<{ message?: string }>({});
 
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function CreateProduct() {
 
     const createHandler = async (values: Product) => {
         try {
-            const { data, errors, success } = validateInputs(productSchema, values);
+            const { data, errors, success } = validateInputs<Product>(productSchema, values);
 
             if (!success) {
                 throw errors;
@@ -45,7 +45,7 @@ export default function CreateProduct() {
             if (error instanceof Error) {
                 if (error.message) {
                     setServerError(error);
-                    setValidationErrors({} as Product);
+                    setValidationErrors({});
                 }
             } else {
                 setValidationErrors(error as Product);
@@ -64,9 +64,9 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name</Form.Label>
-                    {validationErrors.name && <InputErrorMessage text={validationErrors?.name} />}
+                    {'name' in validationErrors && <InputErrorMessage text={validationErrors?.name} />}
                     <Form.Control
-                        className={validationErrors.name ? 'input-error' : ''}
+                        className={'name' in validationErrors ? 'input-error' : ''}
                         value={values.name}
                         onChange={changeHandler}
                         name="name"
@@ -77,9 +77,9 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Brand</Form.Label>
-                    {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
+                    {'brand' in validationErrors && <InputErrorMessage text={validationErrors.brand} />}
                     <Form.Control
-                        className={validationErrors.brand ? 'input-error' : ''}
+                        className={'brand' in validationErrors ? 'input-error' : ''}
                         value={values.brand}
                         onChange={changeHandler}
                         name="brand"
@@ -90,9 +90,9 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Category</Form.Label>
-                    {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
+                    {'category' in validationErrors && <InputErrorMessage text={validationErrors.category} />}
                     <Form.Select
-                        className={validationErrors.category ? 'input-error border rounded p-2' : 'border rounded p-2'}
+                        className={'category' in validationErrors ? 'input-error border rounded p-2' : 'border rounded p-2'}
                         value={values.category}
                         onChange={changeHandler}
                         name="category"
@@ -107,9 +107,9 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                     <Form.Label>Price</Form.Label>
-                    {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
+                    {'price' in validationErrors && <InputErrorMessage text={validationErrors.price.toString()} />}
                     <Form.Control
-                        className={validationErrors.price ? 'input-error' : ''}
+                        className={'price' in validationErrors ? 'input-error' : ''}
                         value={values.price}
                         onChange={changeHandler}
                         name="price"
@@ -121,9 +121,9 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
                     <Form.Label>Image URL</Form.Label>
-                    {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
+                    {'imageUrl' in validationErrors && <InputErrorMessage text={validationErrors.imageUrl} />}
                     <Form.Control
-                        className={validationErrors.imageUrl ? 'input-error' : ''}
+                        className={'imageUrl' in validationErrors ? 'input-error' : ''}
                         value={values.imageUrl}
                         onChange={changeHandler}
                         name="imageUrl"
@@ -134,9 +134,9 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput6">
                     <Form.Label>Summary (up to 40 characters)</Form.Label>
-                    {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
+                    {'summary' in validationErrors && <InputErrorMessage text={validationErrors.summary} />}
                     <Form.Control
-                        className={validationErrors.summary ? 'input-error' : ''}
+                        className={'summary' in validationErrors ? 'input-error' : ''}
                         value={values.summary}
                         onChange={changeHandler}
                         name="summary"
@@ -147,11 +147,11 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput7">
                     <Form.Label>Full description</Form.Label>
-                    {validationErrors.description && <InputErrorMessage text={validationErrors.description} />}
+                    {'description' in validationErrors && <InputErrorMessage text={validationErrors.description} />}
                     <Form.Control
                         as="textarea"
                         rows={3}
-                        className={validationErrors.description ? 'input-error' : ''}
+                        className={'description' in validationErrors ? 'input-error' : ''}
                         value={values.description}
                         onChange={changeHandler}
                         name="description"

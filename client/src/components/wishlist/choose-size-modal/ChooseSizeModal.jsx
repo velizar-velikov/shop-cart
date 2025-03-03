@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
 import { useForm } from '../../../hooks/abstracts/useForm.ts';
-import InputErrorMessage from '../../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../../error-messages/InputErrorMessage.tsx';
 
 const initialValues = {
     size: '---',

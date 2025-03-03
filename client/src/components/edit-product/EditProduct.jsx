@@ -8,7 +8,7 @@ import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { useEditProduct, useGetOneProduct } from '../../hooks/custom/useProducts.ts';
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
-import InputErrorMessage from '../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../error-messages/InputErrorMessage.tsx';
 import { validateInputs } from '../../util/validateInputs.ts';
 import { productSchema } from '../../validation-schemas/product.ts';
 

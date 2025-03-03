@@ -2,7 +2,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useForm } from '../../../../hooks/abstracts/useForm.ts';
 import { useEditReviewForProduct } from '../../../../hooks/custom/useReviews.ts';
-import InputErrorMessage from '../../../error-messages/InputErrorMessage.jsx';
+import InputErrorMessage from '../../../error-messages/InputErrorMessage.tsx';
 
 import styles from './editReviewForm.module.css';
 
