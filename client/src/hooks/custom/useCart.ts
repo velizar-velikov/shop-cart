@@ -6,7 +6,7 @@ import { UseCartContext } from '../../contexts/CartContext.tsx';
 import { toast } from 'react-toastify';
 import { SizeOption } from '../../types/product.ts';
 import { Sizes } from '../../types/stock.ts';
-import { CartResponseDetailed, UserCartResponse } from '../../types/cart.ts';
+import { CartResponseDetailed, UserCartResponse, UserCartResponseDetailed } from '../../types/cart.ts';
 
 export function useAddToUserCart() {
     const addToUserCartHandler = async (productId: string, userId: string, size: SizeOption, quantity: number) => {
@@ -151,7 +151,7 @@ export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes<n
                     cartItemResponse,
                 },
             };
-            setUserCartProducts((state: UserCartType[]) => cartReducer(state, action));
+            setUserCartProducts((state: UserCartResponseDetailed[]) => cartReducer(state, action));
 
             setErrorMessage('');
 

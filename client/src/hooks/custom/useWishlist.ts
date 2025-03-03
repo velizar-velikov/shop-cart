@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { useWishlistContext } from '../../contexts/WishlistContext.tsx';
-import { ProductResponse } from '../../types/product.ts';
+import { Product, ProductResponse } from '../../types/product.ts';
 import React, { Ref, RefObject, SyntheticEvent } from 'react';
 import { PersistedWishlistItem } from '../../types/wishlist.ts';
 
@@ -42,7 +42,7 @@ export function useWishlist(productData: Partial<ProductResponse>, iconButtonRef
             return;
         }
 
-        updateWishlist((oldWishlist: PersistedWishlistItem[]) => [...oldWishlist, productData]);
+        updateWishlist((oldWishlist: PersistedWishlistItem[]) => [...oldWishlist, productData as PersistedWishlistItem]);
         fillHeart();
         notify();
     };

@@ -10,10 +10,11 @@ import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { useCreateProduct } from '../../hooks/custom/useProducts.ts';
 import { productSchema } from '../../validation-schemas/product.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
+import { Product } from '../../types/product.ts';
 
 import paths from '../../config/paths.ts';
 
-const initialValues = {
+const initialValues: Product = {
     name: '',
     brand: '',
     category: 'T-shirts',
@@ -24,13 +25,13 @@ const initialValues = {
 };
 
 export default function CreateProduct() {
-    const [validationErrors, setValidationErrors] = useState({});
-    const [serverError, setServerError] = useState({});
+    const [validationErrors, setValidationErrors] = useState<Product>({} as Product);
+    const [serverError, setServerError] = useState<{ message?: string }>({});
 
     const navigate = useNavigate();
     const createProduct = useCreateProduct();
 
-    const createHandler = async (values) => {
+    const createHandler = async (values: Product) => {
         try {
             const { data, errors, success } = validateInputs(productSchema, values);
 
@@ -38,20 +39,22 @@ export default function CreateProduct() {
                 throw errors;
             }
 
-            const product = await createProduct(data);
+            const product = await createProduct(data as Product);
             navigate(paths.details.getHref(product._id));
         } catch (error) {
-            if (error.message) {
-                setServerError(error);
-                setValidationErrors({});
+            if (error instanceof Error) {
+                if (error.message) {
+                    setServerError(error);
+                    setValidationErrors({} as Product);
+                }
             } else {
-                setValidationErrors(error);
+                setValidationErrors(error as Product);
                 setServerError({});
             }
         }
     };
 
-    const { values, changeHandler, submitHandler } = useForm(initialValues, createHandler);
+    const { values, changeHandler, submitHandler } = useForm<Product>(initialValues, createHandler);
 
     return (
         <Container className="container-sm col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mt-5 mb-4 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
@@ -61,7 +64,7 @@ export default function CreateProduct() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name</Form.Label>
-                    {validationErrors.name && <InputErrorMessage text={validationErrors.name} />}
+                    {validationErrors.name && <InputErrorMessage text={validationErrors?.name} />}
                     <Form.Control
                         className={validationErrors.name ? 'input-error' : ''}
                         value={values.name}
