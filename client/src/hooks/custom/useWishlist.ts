@@ -4,7 +4,7 @@ import { ProductResponse } from '../../types/product.ts';
 import React, { Ref, RefObject, SyntheticEvent } from 'react';
 import { PersistedWishlistItem } from '../../types/wishlist.ts';
 
-export function useWishlist(productData: ProductResponse, iconButtonRef: RefObject<HTMLButtonElement>) {
+export function useWishlist(productData: Partial<ProductResponse>, iconButtonRef: RefObject<HTMLButtonElement | undefined>) {
     const { wishlist, updateWishlist } = useWishlistContext();
 
     const heartedProduct = wishlist.find((p) => p._id === productData._id);

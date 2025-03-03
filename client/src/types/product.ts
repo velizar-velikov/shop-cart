@@ -1,3 +1,5 @@
+import { Sizes } from './stock';
+
 export type SizeOption = 'small' | 'medium' | 'large';
 
 export interface OrderedProduct {
@@ -25,4 +27,8 @@ export interface ProductResponse extends Product {
     _createdOn: number;
     _updatedOn?: number;
     inactive: boolean;
+}
+
+export interface ProductResponseDetailed extends ProductResponse {
+    sizes: Sizes<number>;
 }

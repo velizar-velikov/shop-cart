@@ -1,11 +1,11 @@
 import productsAPI from '../../api/products-api.ts';
 import stockAPI from '../../api/stock-api.ts';
-import { Product, ProductResponse } from '../../types/product.ts';
+import { Product, ProductResponse, ProductResponseDetailed } from '../../types/product.ts';
 import { Search } from '../../types/search.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';
 
 export function useGetCatalogProducts(currentPage: number, search: Search) {
-    const { data: products, isLoading } = useLoadData<Array<ProductResponse>>(
+    const { data: products, isLoading } = useLoadData<Array<ProductResponseDetailed>>(
         [],
         productsAPI.getCatalogProducts,
         { currentPage, search },

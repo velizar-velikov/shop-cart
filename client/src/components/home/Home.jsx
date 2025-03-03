@@ -2,7 +2,7 @@ import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
-import CatalogCard from '../catalog-card/CatalogCard.jsx';
+import CatalogCard from '../catalog-card/CatalogCard.tsx';
 
 import { useGetLatestProducts } from '../../hooks/custom/useProducts.ts';
 import paths from '../../config/paths.ts';

@@ -7,6 +7,8 @@ import { useWishlist } from '../../hooks/custom/useWishlist.ts';
 import paths from '../../config/paths.ts';
 
 import styles from './catalogCard.module.css';
+import { Sizes } from '../../types/stock.ts';
+import { Category, SizeOption } from '../../types/product.ts';
 
 const sizesReference = {
     small: 'S',
@@ -14,7 +16,29 @@ const sizesReference = {
     large: 'L',
 };
 
-export default function CatalogCard({ _id, name, category, price, summary, imageUrl, _ownerId, sizes, isHome = false }) {
+interface CatalogCardProps {
+    _id: string;
+    name: string;
+    category: Category;
+    price: number;
+    summary: string;
+    imageUrl: string;
+    _ownerId: string;
+    sizes?: Sizes<number> | {};
+    isHome?: boolean;
+}
+
+export default function CatalogCard({
+    _id,
+    name,
+    category,
+    price,
+    summary,
+    imageUrl,
+    _ownerId,
+    sizes,
+    isHome = false,
+}: CatalogCardProps) {
     const { isAuthenticated, userId } = useAuthContext();
     const { wishlist } = useWishlistContext();
 
@@ -30,7 +54,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
 
     const sizesText = Object.entries(sizes)
         .filter(([size, quantity]) => quantity > 0)
-        .map(([size, quantity]) => `${sizesReference[size]}`)
+        .map(([size, quantity]) => `${sizesReference[size as SizeOption]}`)
         .join(', ');
 
     const [text, setText] = useState(summary);
@@ -43,7 +67,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
         setText(summary);
     };
 
-    const iconButtonRef = useRef();
+    const iconButtonRef = useRef<HTMLButtonElement>();
 
     const { iconClassName, fillHeart, emptyHeart, addToWishlist, removeFromWishlist } = useWishlist(
         { _id, name, category, price, imageUrl, _ownerId },
@@ -55,7 +79,7 @@ export default function CatalogCard({ _id, name, category, price, summary, image
             <div onMouseEnter={showSizes} onMouseLeave={showSummary} className={styles.container}>
                 {canHeart && (
                     <button
-                        ref={iconButtonRef}
+                        ref={iconButtonRef as React.MutableRefObject<HTMLButtonElement | null>}
                         onMouseEnter={fillHeart}
                         onMouseLeave={emptyHeart}
                         className={styles.icon}

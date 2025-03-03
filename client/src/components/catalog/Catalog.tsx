@@ -1,6 +1,6 @@
 import { Row } from 'react-bootstrap';
 
-import CatalogCard from '../catalog-card/CatalogCard.jsx';
+import CatalogCard from '../catalog-card/CatalogCard.tsx';
 import CatalogSearch from './catalog-search/CatalogSearch.tsx';
 import Paginator from './pagination/Pagination.tsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
