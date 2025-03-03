@@ -14,13 +14,17 @@ interface CartAction {
     };
 }
 
+interface UserCartResponseDetailed extends UserCartResponse {
+    maxQuantity: number;
+}
+
 interface CartContext {
-    userCartProducts: UserCartResponse[];
-    setUserCartProducts: Dispatch<SetStateAction<UserCartResponse[]>>;
+    userCartProducts: UserCartResponseDetailed[];
+    setUserCartProducts: Dispatch<SetStateAction<UserCartResponseDetailed[]>>;
     cartItemsCount: number;
     totalPrice: number;
     isLoading: boolean;
-    cartReducer: (state: UserCartResponse[], action: CartAction) => UserCartResponse[];
+    cartReducer: (state: UserCartResponseDetailed[], action: CartAction) => UserCartResponseDetailed[];
 }
 
 const CartContext = createContext<CartContext>({
@@ -29,17 +33,17 @@ const CartContext = createContext<CartContext>({
     cartItemsCount: 0,
     totalPrice: 0,
     isLoading: false,
-    cartReducer: (state: UserCartResponse[], action) => [],
+    cartReducer: (state: UserCartResponseDetailed[], action) => [],
 });
 
-function cartReducer(state: UserCartResponse[], action: CartAction) {
+function cartReducer(state: UserCartResponseDetailed[], action: CartAction) {
     switch (action.type) {
         case 'add_cart_product': {
             const newProducts = state.slice();
             const productInCart = newProducts.find((p) => p.productId === action.payload._id && p.size === action.payload.size);
 
             if (!productInCart) {
-                newProducts.unshift(action.payload.cartItemResponse as UserCartResponse);
+                newProducts.unshift(action.payload.cartItemResponse as UserCartResponseDetailed);
             } else {
                 productInCart.quantity = productInCart.quantity + Number(action.payload.quantity);
             }

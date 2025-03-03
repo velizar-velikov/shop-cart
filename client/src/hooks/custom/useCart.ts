@@ -22,7 +22,7 @@ export function useGetUserCart(userId: string) {
         data: userCartProducts,
         setData: setUserCartProducts,
         isLoading,
-    } = useLoadData<Array<UserCartResponse>>([], cartAPI.getCartForUser, { userId }, [userId]);
+    } = useLoadData<Array<UserCartResponse & { maxQuantity: number }>>([], cartAPI.getCartForUser, { userId }, [userId]);
 
     return { userCartProducts, setUserCartProducts, isLoading };
 }
@@ -56,8 +56,8 @@ export function useRemoveFromUserCart() {
     return removeFromCartHandler;
 }
 
-export function useGetMaxQuantitiesToAddToCart(productId: string, userId: string, inStockSizes: Sizes) {
-    const [maxQuantities, setMaxQuantities] = useState<Sizes>({
+export function useGetMaxQuantitiesToAddToCart(productId: string, userId: string, inStockSizes: Sizes<number>) {
+    const [maxQuantities, setMaxQuantities] = useState<Sizes<number>>({
         small: 0,
         medium: 0,
         large: 0,
@@ -94,11 +94,11 @@ export function useGetMaxQuantitiesToAddToCart(productId: string, userId: string
 }
 
 type UserCartType = CartResponseDetailed & {
-    sizes: Sizes;
+    sizes: Sizes<number>;
     maxQuantity?: number;
 };
 
-export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes, closeModal: Function | undefined) {
+export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes<number>, closeModal: Function | undefined) {
     const [errorMessage, setErrorMessage] = useState('');
 
     const { userId } = useAuthContext();
@@ -135,7 +135,7 @@ export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes, 
                 Number(values.quantity)
             )) as UserCartResponse;
 
-            setMaxQuantities((oldSizes: Sizes) => ({
+            setMaxQuantities((oldSizes: Sizes<number>) => ({
                 ...oldSizes,
                 [values.size]: oldSizes[values.size] - Number(values.quantity),
             }));

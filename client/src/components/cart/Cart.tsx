@@ -4,7 +4,7 @@ import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { Link } from 'react-router-dom';
 import paths from '../../config/paths.ts';
 import { UseCartContext } from '../../contexts/CartContext.tsx';
-import EmptyCart from './empty-cart/EmptyCart.jsx';
+import EmptyCart from './empty-cart/EmptyCart.tsx';
 
 export default function Cart() {
     let { userCartProducts, isLoading, totalPrice } = UseCartContext();
@@ -13,7 +13,8 @@ export default function Cart() {
         return product;
     });
 
-    const canProceed = userCartProducts.length > 0 && userCartProducts.some((product) => product.maxQuantity >= product.quantity);
+    const canProceed: boolean =
+        userCartProducts.length > 0 && userCartProducts.some((product) => product.maxQuantity >= product.quantity);
 
     return (
         <>
@@ -28,7 +29,7 @@ export default function Cart() {
                                 <span className="fs-5 fw-normal">Total:</span> {`$${totalPrice.toFixed(2)}`}
                             </h4>
                             <Button
-                                as={Link}
+                                as={Link as any}
                                 to={paths.purchase.path}
                                 disabled={!canProceed}
                                 className={`h-25 btn-dark${!canProceed ? ' disabled' : ''}`}

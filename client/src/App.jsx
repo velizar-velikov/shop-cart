@@ -12,7 +12,7 @@ import ProductDetails from './components/product-details/ProductDetails.jsx';
 import CreateProduct from './components/create-product/CreateProduct.jsx';
 import EditProduct from './components/edit-product/EditProduct.jsx';
 import ProductReviews from './components/product-reviews/ProductReviews.jsx';
-import Cart from './components/cart/Cart.jsx';
+import Cart from './components/cart/Cart.tsx';
 import PurchaseSection from './components/purchase/PurshaseSection.jsx';
 import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.jsx';
 import MyOrders from './components/my-orders/MyOrders.jsx';
