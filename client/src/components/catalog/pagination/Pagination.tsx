@@ -2,8 +2,15 @@ import Pagination from 'react-bootstrap/Pagination';
 import { usePaginator } from '../../../hooks/custom/usePaginator.ts';
 
 import styles from './pagination.module.css';
+import { SetURLSearchParams } from 'react-router-dom';
 
-export default function Paginator({ currentPage, maxPage, setSearchParams }) {
+interface PaginatorProps {
+    currentPage: number;
+    maxPage: number;
+    setSearchParams: SetURLSearchParams;
+}
+
+export default function Paginator({ currentPage, maxPage, setSearchParams }: PaginatorProps) {
     const {
         onBackHandler,
         onForwardHandler,

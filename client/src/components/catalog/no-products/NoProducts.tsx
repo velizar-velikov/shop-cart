@@ -1,4 +1,10 @@
-export default function NoProducts({ search }) {
+import { Search } from '../../../types/search';
+
+interface NoProductsProps {
+    search: Search;
+}
+
+export default function NoProducts({ search }: NoProductsProps) {
     const areAll = search.category == 'All categories' && search.name == '';
 
     return (

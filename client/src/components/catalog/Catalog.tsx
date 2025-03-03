@@ -2,12 +2,12 @@ import { Row } from 'react-bootstrap';
 
 import CatalogCard from '../catalog-card/CatalogCard.jsx';
 import CatalogSearch from './catalog-search/CatalogSearch.tsx';
-import Paginator from './pagination/Pagination.jsx';
-import LoadingSpinner from '../loading-spinner/LoadingSpinner.js';
+import Paginator from './pagination/Pagination.tsx';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
 
 import { useGetCatalogLength, useGetCatalogProducts } from '../../hooks/custom/useProducts.ts';
 import { useSearchParams } from 'react-router-dom';
-import NoProducts from './no-products/NoProducts.jsx';
+import NoProducts from './no-products/NoProducts.tsx';
 import { useSearch } from '../../hooks/custom/useSearch.ts';
 
 import styles from './catalog.module.css';
