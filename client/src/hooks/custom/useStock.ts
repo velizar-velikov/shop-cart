@@ -16,7 +16,8 @@ export function useGetSizesForProduct(productId: string) {
         data: sizes,
         setData: setSizes,
         isLoading,
-    } = useLoadData<Array<Sizes<number>>>([], stockAPI.getSizesForProduct, { productId });
+    } = useLoadData<Sizes<number>>({} as Sizes<number>, stockAPI.getSizesForProduct, { productId });
+    console.log(sizes);
 
     return { sizes, setSizes, isLoading };
 }

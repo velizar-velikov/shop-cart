@@ -1,6 +1,6 @@
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import { useEditQuantityInUserCart, useRemoveFromUserCart } from '../../../hooks/custom/useCart.ts';
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
@@ -10,6 +10,7 @@ import { UseCartContext } from '../../../contexts/CartContext.tsx';
 
 import paths from '../../../config/paths.ts';
 import styles from './cartItem.module.css';
+import { UserCartResponseDetailed } from '../../../types/cart.ts';
 
 const sizesOptions = {
     small: 'S',
@@ -17,8 +18,12 @@ const sizesOptions = {
     large: 'L',
 };
 
-export default function CartItem({ cartProduct }) {
-    const [errorMessage, setErrorMessage] = useState('');
+interface CartItemProps {
+    cartProduct: UserCartResponseDetailed;
+}
+
+export default function CartItem({ cartProduct }: CartItemProps) {
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const { userId } = useAuthContext();
     const { setUserCartProducts, cartReducer } = UseCartContext();
@@ -49,13 +54,15 @@ export default function CartItem({ cartProduct }) {
             };
             setUserCartProducts((state) => cartReducer(state, action));
         } catch (error) {
-            console.log(error.message);
+            if (error instanceof Error) {
+                console.log(error.message);
+            }
         }
     };
 
-    const formRef = useRef();
+    const formRef = useRef<HTMLFormElement>();
 
-    const quantityHandler = async (values) => {
+    const quantityHandler = async (values: { quantity: string }) => {
         values.quantity = values.quantity.toString().trim();
 
         try {
@@ -69,13 +76,15 @@ export default function CartItem({ cartProduct }) {
                 type: 'edit_quantity',
                 payload: {
                     _id: cartProduct._id,
-                    quantity: values.quantity,
+                    quantity: Number(values.quantity),
                 },
             };
             setUserCartProducts((state) => cartReducer(state, action));
         } catch (error) {
-            console.log(error.message);
-            setErrorMessage(error.message);
+            if (error instanceof Error) {
+                console.log(error.message);
+                setErrorMessage(error.message);
+            }
         }
     };
 
@@ -110,7 +119,11 @@ export default function CartItem({ cartProduct }) {
                     <p>
                         Size: <span>{sizesOptions[cartProduct.size]}</span>
                     </p>
-                    <Form ref={formRef} onSubmit={submitHandler} className="col-4 col-lg-3 mb-3">
+                    <Form
+                        ref={formRef as MutableRefObject<HTMLFormElement | null>}
+                        onSubmit={submitHandler}
+                        className="col-4 col-lg-3 mb-3"
+                    >
                         <Form.Group>
                             <Form.Control
                                 type="number"

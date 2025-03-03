@@ -1,21 +1,17 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext } from 'react';
 import { useAuthContext } from './AuthContext.tsx';
 import { useGetUserCart } from '../hooks/custom/useCart.ts';
-import { UserCartResponse } from '../types/cart.ts';
+import { UserCartResponse, UserCartResponseDetailed } from '../types/cart.ts';
 import { SizeOption } from '../types/product.ts';
 
 interface CartAction {
     type: string;
     payload: {
         _id: string;
-        quantity: number;
+        quantity?: number;
         size?: SizeOption;
         cartItemResponse?: UserCartResponse;
     };
-}
-
-interface UserCartResponseDetailed extends UserCartResponse {
-    maxQuantity: number;
 }
 
 interface CartContext {

@@ -1,6 +1,10 @@
 import { RefObject, useEffect, useState } from 'react';
 
-export function useQuantityForm(initialQuantity: number, submitCallback: Function, formRef: RefObject<HTMLFormElement>) {
+export function useQuantityForm(
+    initialQuantity: number,
+    submitCallback: Function,
+    formRef: RefObject<HTMLFormElement | undefined>
+) {
     const [values, setValues] = useState({ quantity: initialQuantity });
 
     // form is submitted on every input change therefore we

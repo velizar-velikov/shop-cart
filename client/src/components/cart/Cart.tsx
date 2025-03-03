@@ -1,5 +1,5 @@
 import { Button, Container } from 'react-bootstrap';
-import CartItem from './cart-iitem/CartItem.jsx';
+import CartItem from './cart-iitem/CartItem.tsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
 import { Link } from 'react-router-dom';
 import paths from '../../config/paths.ts';
