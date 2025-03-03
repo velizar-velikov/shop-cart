@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
 import { useGetUserOrders } from '../../hooks/custom/useOrders.ts';
-import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
 import Order from './order/Order.jsx';
 import NoOrders from './no-orders/NoOrders.jsx';
 

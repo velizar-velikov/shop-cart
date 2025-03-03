@@ -8,7 +8,7 @@ import CreateReviewModal from '../create-review-modal/CreateReviewModal.jsx';
 import AddStockModal from '../add-stock-modal/AddStockModal.tsx';
 import DeleteProductModal from '../delete-product-modal/DeleteProductModal.jsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
-import LoadingSpinner from '../loading-spinner/LoadingSpinner.jsx';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
 import RatingStars from '../rating-stars/RatingStars.jsx';
 
 import { useState } from 'react';
