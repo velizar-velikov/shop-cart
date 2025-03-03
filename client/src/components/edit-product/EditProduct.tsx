@@ -13,20 +13,21 @@ import { validateInputs } from '../../util/validateInputs.ts';
 import { productSchema } from '../../validation-schemas/product.ts';
 
 import paths from '../../config/paths.ts';
+import { Product } from '../../types/product.ts';
 
 export default function EditProduct() {
-    const [validationErrors, setValidationErrors] = useState({});
-    const [serverError, setServerError] = useState({});
+    const [validationErrors, setValidationErrors] = useState<Product | {}>({});
+    const [serverError, setServerError] = useState<{ message?: string }>({});
 
     const navigate = useNavigate();
     const editProduct = useEditProduct();
 
-    const { productId } = useParams();
+    const { productId } = useParams<string>() as { productId: string };
     const { product, isLoading } = useGetOneProduct(productId);
 
-    const editHandler = async (values) => {
+    const editHandler = async (values: Product) => {
         try {
-            const { data, errors, success } = validateInputs(productSchema, values);
+            const { data, errors, success } = validateInputs<Product>(productSchema, values);
 
             if (!success) {
                 throw errors;
@@ -35,17 +36,19 @@ export default function EditProduct() {
             await editProduct(productId, data);
             navigate(paths.details.getHref(productId));
         } catch (error) {
-            if (error.message) {
-                setServerError(error);
-                setValidationErrors({});
-            } else {
-                setValidationErrors(error);
-                setServerError({});
+            if (error instanceof Error) {
+                if (error.message) {
+                    setServerError(error);
+                    setValidationErrors({});
+                } else {
+                    setValidationErrors(error);
+                    setServerError({});
+                }
             }
         }
     };
 
-    const { values, changeHandler, submitHandler } = useForm(product, editHandler);
+    const { values, changeHandler, submitHandler } = useForm<Product>(product, editHandler);
 
     return (
         <>
@@ -62,9 +65,9 @@ export default function EditProduct() {
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Name</Form.Label>
-                            {validationErrors.name && <InputErrorMessage text={validationErrors.name} />}
+                            {'name' in validationErrors && <InputErrorMessage text={validationErrors.name} />}
                             <Form.Control
-                                className={validationErrors.name ? 'input-error' : ''}
+                                className={'name' in validationErrors ? 'input-error' : ''}
                                 type="text"
                                 name="name"
                                 placeholder="Short sleeve t-shirt"
@@ -75,9 +78,9 @@ export default function EditProduct() {
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                             <Form.Label>Brand</Form.Label>
-                            {validationErrors.brand && <InputErrorMessage text={validationErrors.brand} />}
+                            {'brand' in validationErrors && <InputErrorMessage text={validationErrors.brand} />}
                             <Form.Control
-                                className={validationErrors.brand ? 'input-error' : ''}
+                                className={'brand' in validationErrors ? 'input-error' : ''}
                                 type="text"
                                 name="brand"
                                 placeholder="Nike"
@@ -88,9 +91,11 @@ export default function EditProduct() {
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                             <Form.Label>Category</Form.Label>
-                            {validationErrors.category && <InputErrorMessage text={validationErrors.category} />}
+                            {'category' in validationErrors && <InputErrorMessage text={validationErrors.category} />}
                             <Form.Select
-                                className={validationErrors.category ? 'input-error border rounded p-2' : 'border rounded p-2'}
+                                className={
+                                    'category' in validationErrors ? 'input-error border rounded p-2' : 'border rounded p-2'
+                                }
                                 size="sm"
                                 name="category"
                                 value={values.category}
@@ -105,9 +110,9 @@ export default function EditProduct() {
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                             <Form.Label>Price</Form.Label>
-                            {validationErrors.price && <InputErrorMessage text={validationErrors.price} />}
+                            {'price' in validationErrors && <InputErrorMessage text={validationErrors.price.toString()} />}
                             <Form.Control
-                                className={validationErrors.price ? 'input-error' : ''}
+                                className={'price' in validationErrors ? 'input-error' : ''}
                                 type="number"
                                 min="0.01"
                                 step="0.01"
@@ -119,9 +124,9 @@ export default function EditProduct() {
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
                             <Form.Label>Image URL</Form.Label>
-                            {validationErrors.imageUrl && <InputErrorMessage text={validationErrors.imageUrl} />}
+                            {'imageUrl' in validationErrors && <InputErrorMessage text={validationErrors.imageUrl} />}
                             <Form.Control
-                                className={validationErrors.imageUrl ? 'input-error' : ''}
+                                className={'imageUrl' in validationErrors ? 'input-error' : ''}
                                 type="text"
                                 name="imageUrl"
                                 placeholder="https://..."
@@ -132,9 +137,9 @@ export default function EditProduct() {
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput6">
                             <Form.Label>Summary (up to 40 characters)</Form.Label>
-                            {validationErrors.summary && <InputErrorMessage text={validationErrors.summary} />}
+                            {'summary' in validationErrors && <InputErrorMessage text={validationErrors.summary} />}
                             <Form.Control
-                                className={validationErrors.summary ? 'input-error' : ''}
+                                className={'summary' in validationErrors ? 'input-error' : ''}
                                 type="text"
                                 name="summary"
                                 placeholder="comfortable cotton t-shirt"
@@ -145,11 +150,11 @@ export default function EditProduct() {
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput7">
                             <Form.Label>Full description</Form.Label>
-                            {validationErrors.description && <InputErrorMessage text={validationErrors.description} />}
+                            {'description' in validationErrors && <InputErrorMessage text={validationErrors.description} />}
                             <Form.Control
                                 as="textarea"
                                 rows={3}
-                                className={validationErrors.description ? 'input-error' : ''}
+                                className={'description' in validationErrors ? 'input-error' : ''}
                                 name="description"
                                 placeholder="Great for summer and spring and also..."
                                 value={values.description}

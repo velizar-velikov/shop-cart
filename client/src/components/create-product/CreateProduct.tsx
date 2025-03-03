@@ -46,10 +46,10 @@ export default function CreateProduct() {
                 if (error.message) {
                     setServerError(error);
                     setValidationErrors({});
+                } else {
+                    setValidationErrors(error);
+                    setServerError({});
                 }
-            } else {
-                setValidationErrors(error as Product);
-                setServerError({});
             }
         }
     };
