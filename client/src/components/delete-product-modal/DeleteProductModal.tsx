@@ -6,7 +6,15 @@ import productsAPI from '../../api/products-api.ts';
 import { toast } from 'react-toastify';
 import paths from '../../config/paths.ts';
 
-export default function DeleteProductModal({ show, handleClose, _id, name, brand }) {
+interface DeleteProductModalProps {
+    show: () => void;
+    handleClose: () => void;
+    _id: string;
+    name: string;
+    brand: string;
+}
+
+export default function DeleteProductModal({ show, handleClose, _id, name, brand }: DeleteProductModalProps) {
     const navigate = useNavigate();
 
     const notify = () => {
@@ -20,13 +28,15 @@ export default function DeleteProductModal({ show, handleClose, _id, name, brand
 
             notify();
         } catch (error) {
-            console.log(error.message);
-            handleClose();
+            if (error instanceof Error) {
+                console.log(error.message);
+                handleClose();
+            }
         }
     };
     return (
         <>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show as any} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                         <span className="small">Are you sure you want to delete:</span>

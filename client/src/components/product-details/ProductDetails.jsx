@@ -6,7 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import CreateReviewModal from '../create-review-modal/CreateReviewModal.tsx';
 import AddStockModal from '../add-stock-modal/AddStockModal.tsx';
-import DeleteProductModal from '../delete-product-modal/DeleteProductModal.jsx';
+import DeleteProductModal from '../delete-product-modal/DeleteProductModal.tsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
 import RatingStars from '../rating-stars/RatingStars.jsx';
