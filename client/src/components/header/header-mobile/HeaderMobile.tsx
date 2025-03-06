@@ -9,14 +9,18 @@ import { UseCartContext } from '../../../contexts/CartContext.tsx';
 import { useWishlistContext } from '../../../contexts/WishlistContext.tsx';
 import { useMenuContext } from '../../../contexts/MenuContext.tsx';
 
-import CartBubble from '../cart-bubble/CartBubble.jsx';
+import CartBubble from '../cart-bubble/CartBubble.tsx';
 import Logo from '../../../assets/img/shopping-cart.webp';
-import HamburgerMenu from './hamburger-menu/HamburgerMenu.jsx';
+import HamburgerMenu from './hamburger-menu/HamburgerMenu.tsx';
 
 import styles from '../header.module.css';
 import paths from '../../../config/paths.ts';
 
-export default function HeaderMobile({ logoutHandler }) {
+interface HeaderMobileProps {
+    logoutHandler: () => Promise<void>;
+}
+
+export default function HeaderMobile({ logoutHandler }: HeaderMobileProps) {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = UseCartContext();
     const { wishlist } = useWishlistContext();

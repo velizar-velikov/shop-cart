@@ -1,29 +1,36 @@
 import { Link } from 'react-router-dom';
 import { useMenuContext } from '../../../../contexts/MenuContext.tsx';
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { useAuthContext } from '../../../../contexts/AuthContext.tsx';
 
 import styles from './hamburgerMenu.module.css';
 import paths from '../../../../config/paths.ts';
+import { Category } from '../../../../types/product.ts';
 
-const categories = ['All products', 'T-shirts', 'Shorts', 'Sweatshirts', 'Pants'];
+type CategoryOptions = Category | 'All products';
 
-export default function HamburgerMenu({ logoutHandler }) {
+const categories: CategoryOptions[] = ['All products', 'T-shirts', 'Shorts', 'Sweatshirts', 'Pants'];
+
+interface HamburgerMenuProps {
+    logoutHandler: () => Promise<void>;
+}
+
+export default function HamburgerMenu({ logoutHandler }: HamburgerMenuProps) {
     const { isAuthenticated } = useAuthContext();
     const { closeMenu } = useMenuContext();
 
-    const menuRef = useRef();
-    const timeoutRef = useRef();
+    const menuRef = useRef<HTMLDivElement>();
+    const timeoutRef = useRef<number>();
 
     const closeMenuHandler = () => {
-        menuRef.current.classList.remove(styles.menu);
-        menuRef.current.classList.add(styles.removeMenu);
+        menuRef!.current!.classList.remove(styles.menu);
+        menuRef!.current!.classList.add(styles.removeMenu);
 
         timeoutRef.current = setTimeout(() => closeMenu(), 330);
     };
 
     useEffect(() => {
-        return () => clearTimeout(timeoutRef);
+        return () => clearTimeout(timeoutRef.current);
     }, []);
 
     const logoutAction = () => {
@@ -33,7 +40,7 @@ export default function HamburgerMenu({ logoutHandler }) {
 
     return (
         <section onClick={closeMenuHandler} className={styles['menu-wrapper']}>
-            <div ref={menuRef} className={styles.menu} onClick={(e) => e.stopPropagation()}>
+            <div ref={menuRef as RefObject<HTMLDivElement>} className={styles.menu} onClick={(e) => e.stopPropagation()}>
                 <div className={styles['btn-wrapper']}>
                     <button onClick={closeMenuHandler} className={`${styles['btn-close']} fa-lg`}>
                         <i className="fa-solid fa-xmark fa-2x"></i>
@@ -48,7 +55,7 @@ export default function HamburgerMenu({ logoutHandler }) {
                     {isAuthenticated && (
                         <ul className={styles['account-list']}>
                             <li className={styles['account-list-item']}>
-                                <Link className={styles.link} onClick={closeMenuHandler}>
+                                <Link className={styles.link} onClick={closeMenuHandler} to="#">
                                     Account
                                 </Link>
                             </li>
@@ -63,7 +70,7 @@ export default function HamburgerMenu({ logoutHandler }) {
                                 </Link>
                             </li>
                             <li className={styles['account-list-item']}>
-                                <Link className={styles.link} onClick={logoutAction}>
+                                <Link className={styles.link} onClick={logoutAction} to="#">
                                     Sign out
                                 </Link>
                             </li>
@@ -75,7 +82,12 @@ export default function HamburgerMenu({ logoutHandler }) {
     );
 }
 
-function CategoryLink({ category, closeMenuHandler }) {
+interface CategoryLinkProps {
+    category: CategoryOptions;
+    closeMenuHandler: () => void;
+}
+
+function CategoryLink({ category, closeMenuHandler }: CategoryLinkProps) {
     let path = paths.catalog.basePath;
 
     if (category !== 'All products') {

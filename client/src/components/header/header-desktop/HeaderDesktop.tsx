@@ -8,13 +8,17 @@ import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../../contexts/CartContext.tsx';
 import { useWishlistContext } from '../../../contexts/WishlistContext.tsx';
 
-import CartBubble from '../cart-bubble/CartBubble.jsx';
+import CartBubble from '../cart-bubble/CartBubble.tsx';
 import Logo from '../../../assets/img/shopping-cart.webp';
 import styles from '../header.module.css';
 
 import paths from '../../../config/paths.ts';
 
-export default function HeaderDesktop({ logoutHandler }) {
+interface HeaderDesktopProps {
+    logoutHandler: () => Promise<void>;
+}
+
+export default function HeaderDesktop({ logoutHandler }: HeaderDesktopProps) {
     const { isAuthenticated } = useAuthContext();
     const { cartItemsCount } = UseCartContext();
     const { wishlist } = useWishlistContext();
@@ -53,7 +57,7 @@ export default function HeaderDesktop({ logoutHandler }) {
                                     Olders
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={logoutHandler} as={Link}>
+                                <NavDropdown.Item onClick={logoutHandler} as={Link} to={'#'}>
                                     Sign out
                                 </NavDropdown.Item>
                             </NavDropdown>

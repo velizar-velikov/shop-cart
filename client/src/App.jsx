@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import Header from './components/header/Header.jsx';
+import Header from './components/header/Header.tsx';
 import Footer from './components/footer/Footer.tsx';
 import NotFound from './components/not-found/NotFound.jsx';
 import Login from './components/login/Login.jsx';

@@ -1,5 +1,5 @@
-import HeaderDesktop from './header-desktop/HeaderDesktop.jsx';
-import HeaderMobile from './header-mobile/HeaderMobile.jsx';
+import HeaderDesktop from './header-desktop/HeaderDesktop.tsx';
+import HeaderMobile from './header-mobile/HeaderMobile.tsx';
 import { useDynamicNav } from '../../hooks/custom/useDynamicNav.ts';
 import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../../hooks/custom/useAuth.ts';
