@@ -1,5 +1,5 @@
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 
 import { useForm } from '../../../hooks/abstracts/useForm.ts';
 import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
@@ -7,11 +7,28 @@ import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
 import { useAuthContext } from '../../../contexts/AuthContext.tsx';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.tsx';
 import paths from '../../../config/paths.ts';
+import { ProductResponse, SizeOption } from '../../../types/product.ts';
+import { Sizes } from '../../../types/stock.ts';
+import { Dispatch, ForwardRefExoticComponent, RefAttributes, SetStateAction } from 'react';
 
-const initialValues = {
+type ProductAddToCartDetails = {
+    quantity: string;
+    size: SizeOption | '---';
+};
+
+const initialValues: ProductAddToCartDetails = {
     quantity: '1',
     size: '---',
 };
+
+interface ActionButtonsProps {
+    product: ProductResponse;
+    inStockSizes: Sizes<number>;
+    setInStockSizes: Dispatch<SetStateAction<Sizes<number>>>;
+    isOutOfStock: boolean;
+    handleShowAddStock: () => void;
+    handleShowDelete: () => void;
+}
 
 export default function ActionButtons({
     product,
@@ -20,28 +37,42 @@ export default function ActionButtons({
     isOutOfStock,
     handleShowAddStock,
     handleShowDelete,
-}) {
+}: ActionButtonsProps) {
     const { userId } = useAuthContext();
     const isOwner = userId == product._ownerId;
 
     const { addToCartHandler, maxQuantities, errorMessage } = useAddToUserCartHandler(product._id, inStockSizes);
 
-    const { values, changeHandler, submitHandler } = useForm(initialValues, addToCartHandler);
+    const { values, changeHandler, submitHandler } = useForm<ProductAddToCartDetails>(initialValues, addToCartHandler);
 
     return (
         <>
             {isOwner ? (
                 <Row className="d-flex flex-wrap align-items-center">
                     <Col className="col-7 col-sm-5">
-                        <Button as={Link} onClick={handleShowAddStock} className="btn-dark mb-1">
+                        <Button
+                            as={Link as ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>> & 'symbol'}
+                            onClick={handleShowAddStock}
+                            className="btn-dark mb-1"
+                            to="#"
+                        >
                             Add in stock
                         </Button>
                     </Col>
                     <div className="col-7 d-flex flex-wrap justify-content-start gap-2">
-                        <Button as={Link} to={paths.editProduct.getHref(product._id)} className="mb-1">
+                        <Button
+                            as={Link as ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>> & 'symbol'}
+                            to={paths.editProduct.getHref(product._id)}
+                            className="mb-1"
+                        >
                             Edit
                         </Button>
-                        <Button as={Link} onClick={handleShowDelete} className="btn-danger mb-1">
+                        <Button
+                            as={Link as ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>> & 'symbol'}
+                            onClick={handleShowDelete}
+                            className="btn-danger mb-1"
+                            to="#"
+                        >
                             Delete
                         </Button>
                     </div>

@@ -7,7 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 import CreateReviewModal from '../create-review-modal/CreateReviewModal.tsx';
 import AddStockModal from '../add-stock-modal/AddStockModal.tsx';
 import DeleteProductModal from '../delete-product-modal/DeleteProductModal.tsx';
-import ActionButtons from './action-buttons/ActionButtons.jsx';
+import ActionButtons from './action-buttons/ActionButtons.tsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
 import RatingStars from '../rating-stars/RatingStars.tsx';
 
@@ -21,7 +21,7 @@ import styles from './productDetails.module.css';
 import paths from '../../config/paths.ts';
 
 export default function ProductDetails() {
-    const { productId } = useParams();
+    const { productId } = useParams<string>() as { productId: string };
     const { userId, isAuthenticated } = useAuthContext();
 
     const [hasAddedNewReview, setHasAddedNewReview] = useState(false);
@@ -67,7 +67,6 @@ export default function ProductDetails() {
                             show={handleShowAddReview}
                             handleClose={handleCloseAddReview}
                             updateDetails={() => setHasAddedNewReview(true)}
-                            productName={product.name}
                         />
                     )}
                     {showAddStockModal && (
@@ -104,7 +103,11 @@ export default function ProductDetails() {
                                             </p>
                                         </div>
 
-                                        {canUserReview && <Link onClick={handleShowAddReview}>Add review</Link>}
+                                        {canUserReview && (
+                                            <Link onClick={handleShowAddReview} to="#">
+                                                Add review
+                                            </Link>
+                                        )}
                                         {hasUserReviewed && <p className="small col-7">You reviewed this product.</p>}
                                     </div>
                                     <p className="small">{product.description}</p>
@@ -119,7 +122,6 @@ export default function ProductDetails() {
                                         <ActionButtons
                                             product={product}
                                             inStockSizes={sizes}
-                                            setInStockSizes={setSizes}
                                             isOutOfStock={isOutOfStock}
                                             handleShowAddStock={handleShowAddStock}
                                             handleShowDelete={handleShowDelete}
