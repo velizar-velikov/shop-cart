@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Header from './components/header/Header.tsx';
 import Footer from './components/footer/Footer.tsx';
-import NotFound from './components/not-found/NotFound.jsx';
+import NotFound from './components/not-found/NotFound.tsx';
 import Login from './components/login/Login.tsx';
 import Register from './components/register/Register.tsx';
 import Home from './components/home/Home.tsx';
@@ -14,12 +14,12 @@ import EditProduct from './components/edit-product/EditProduct.tsx';
 import ProductReviews from './components/product-reviews/ProductReviews.jsx';
 import Cart from './components/cart/Cart.tsx';
 import PurchaseSection from './components/purchase/PurshaseSection.jsx';
-import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.jsx';
+import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.tsx';
 import MyOrders from './components/my-orders/MyOrders.tsx';
 import Wishlist from './components/wishlist/Wishlist.jsx';
 
-import PrivateGuard from './components/route-guards/PrivateGuard.jsx';
-import GuestGuard from './components/route-guards/GuestGuard.jsx';
+import PrivateGuard from './components/route-guards/PrivateGuard.tsx';
+import GuestGuard from './components/route-guards/GuestGuard.tsx';
 import { ContextWrapperProvider } from './contexts/ContextWrapper.tsx';
 
 import paths from './config/paths.ts';

@@ -1,10 +1,11 @@
 import { Button, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 
 import checkLogo from '../../assets/img/check.png';
 
 import styles from './purchaseSuccess.module.css';
 import paths from '../../config/paths.ts';
+import { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 export default function PurchaseSuccess() {
     return (
@@ -16,7 +17,11 @@ export default function PurchaseSuccess() {
             <p className="col-9 col-sm-8 col-md-7 col-xxl-6 fs-5 text-center">
                 We'll send you a shipping confirmation email as soon as your order ships.
             </p>
-            <Button className={styles.button} as={Link} to={paths.catalog.basePath}>
+            <Button
+                className={styles.button}
+                as={Link as ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>> & 'symbol'}
+                to={paths.catalog.basePath}
+            >
                 Continue shopping
             </Button>
         </Container>
