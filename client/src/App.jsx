@@ -11,7 +11,7 @@ import Catalog from './components/catalog/Catalog.tsx';
 import ProductDetails from './components/product-details/ProductDetails.tsx';
 import CreateProduct from './components/create-product/CreateProduct.tsx';
 import EditProduct from './components/edit-product/EditProduct.tsx';
-import ProductReviews from './components/product-reviews/ProductReviews.jsx';
+import ProductReviews from './components/product-reviews/ProductReviews.tsx';
 import Cart from './components/cart/Cart.tsx';
 import PurchaseSection from './components/purchase/PurshaseSection.jsx';
 import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.tsx';

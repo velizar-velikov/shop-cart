@@ -13,18 +13,17 @@ import { Dispatch, ForwardRefExoticComponent, RefAttributes, SetStateAction } fr
 
 type ProductAddToCartDetails = {
     quantity: string;
-    size: SizeOption | '---';
+    size: SizeOption;
 };
 
 const initialValues: ProductAddToCartDetails = {
     quantity: '1',
-    size: '---',
+    size: '---' as SizeOption,
 };
 
 interface ActionButtonsProps {
     product: ProductResponse;
     inStockSizes: Sizes<number>;
-    setInStockSizes: Dispatch<SetStateAction<Sizes<number>>>;
     isOutOfStock: boolean;
     handleShowAddStock: () => void;
     handleShowDelete: () => void;
@@ -33,7 +32,6 @@ interface ActionButtonsProps {
 export default function ActionButtons({
     product,
     inStockSizes,
-    setInStockSizes,
     isOutOfStock,
     handleShowAddStock,
     handleShowDelete,

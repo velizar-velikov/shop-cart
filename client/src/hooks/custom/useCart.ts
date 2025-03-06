@@ -98,7 +98,7 @@ type UserCartType = CartResponseDetailed & {
     maxQuantity?: number;
 };
 
-export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes<number>, closeModal: Function | undefined) {
+export function useAddToUserCartHandler(productId: string, inStockSizes: Sizes<number>, closeModal?: Function | undefined) {
     const [errorMessage, setErrorMessage] = useState('');
 
     const { userId } = useAuthContext();
