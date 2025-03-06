@@ -4,7 +4,7 @@ import stockAPI from '../../api/stock-api.ts';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 import { UseCartContext } from '../../contexts/CartContext.tsx';
 import { UserCartResponse } from '../../types/cart.ts';
-import { Order, PaymentType } from '../../types/order.ts';
+import { Order, OrderDetailed, PaymentType } from '../../types/order.ts';
 import { useLoadData } from '../abstracts/useLoadData.ts';
 
 export function useMakeOrder() {
@@ -38,7 +38,7 @@ export function useGetUserOrders() {
         data: orders,
         setData: setOrders,
         isLoading,
-    } = useLoadData<Array<Order>>([], ordersAPI.getUserOrders, { userId }, []);
+    } = useLoadData<Array<OrderDetailed>>([], ordersAPI.getUserOrders, { userId }, []);
 
     return {
         orders,

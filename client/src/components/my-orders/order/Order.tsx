@@ -1,10 +1,11 @@
 import { Container } from 'react-bootstrap';
 import { parseDate } from '../../../util/parseDate.ts';
-import OrderItem from './order-item/OrderItem.jsx';
+import OrderItem from './order-item/OrderItem.tsx';
 
 import styles from './order.module.css';
+import { OrderDetailed } from '../../../types/order.ts';
 
-export default function Order({ _createdOn, paymentType, address, products }) {
+export default function Order({ _createdOn, paymentType, address, products }: OrderDetailed) {
     const date = parseDate(_createdOn);
     const priceOfOrder = products.reduce((acc, val) => acc + val.priceOfPurchase * val.quantity, 0);
 
@@ -30,7 +31,7 @@ export default function Order({ _createdOn, paymentType, address, products }) {
             </div>
             <Container className="d-flex gap-2 flex-wrap p-3 pt-4">
                 {products.map((product) => (
-                    <OrderItem key={product._id} {...product} />
+                    <OrderItem key={product.productId} {...product} />
                 ))}
             </Container>
         </Container>

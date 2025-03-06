@@ -1,5 +1,5 @@
 import Accordion from 'react-bootstrap/Accordion';
-import RatingStars from '../../rating-stars/RatingStars.jsx';
+import RatingStars from '../../rating-stars/RatingStars.tsx';
 import EditReviewForm from './edit-review-form/EditReviewForm.jsx';
 import ReviewControlButtons from './review-control-buttons/ReviewControlButtons.jsx';
 

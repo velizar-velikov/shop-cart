@@ -6,7 +6,7 @@ export interface OrderedProduct {
     productId: string;
     size: SizeOption;
     quantity: number;
-    priceOfPurchase?: number;
+    priceOfPurchase: number;
 }
 
 export type Category = 'T-shirts' | 'Pants' | 'Sweatshirts' | 'Shorts';

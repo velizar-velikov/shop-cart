@@ -9,7 +9,7 @@ import AddStockModal from '../add-stock-modal/AddStockModal.tsx';
 import DeleteProductModal from '../delete-product-modal/DeleteProductModal.tsx';
 import ActionButtons from './action-buttons/ActionButtons.jsx';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner.tsx';
-import RatingStars from '../rating-stars/RatingStars.jsx';
+import RatingStars from '../rating-stars/RatingStars.tsx';
 
 import { useState } from 'react';
 import { useGetOneProduct } from '../../hooks/custom/useProducts.ts';

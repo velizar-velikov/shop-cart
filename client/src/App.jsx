@@ -5,7 +5,7 @@ import Header from './components/header/Header.tsx';
 import Footer from './components/footer/Footer.tsx';
 import NotFound from './components/not-found/NotFound.jsx';
 import Login from './components/login/Login.tsx';
-import Register from './components/register/Register.jsx';
+import Register from './components/register/Register.tsx';
 import Home from './components/home/Home.tsx';
 import Catalog from './components/catalog/Catalog.tsx';
 import ProductDetails from './components/product-details/ProductDetails.jsx';
@@ -15,7 +15,7 @@ import ProductReviews from './components/product-reviews/ProductReviews.jsx';
 import Cart from './components/cart/Cart.tsx';
 import PurchaseSection from './components/purchase/PurshaseSection.jsx';
 import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.jsx';
-import MyOrders from './components/my-orders/MyOrders.jsx';
+import MyOrders from './components/my-orders/MyOrders.tsx';
 import Wishlist from './components/wishlist/Wishlist.jsx';
 
 import PrivateGuard from './components/route-guards/PrivateGuard.jsx';

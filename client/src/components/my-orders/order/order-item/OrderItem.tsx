@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './orderItem.module.css';
 import paths from '../../../../config/paths.ts';
+import { SizeOption } from '../../../../types/product.ts';
 
 const sizes = {
     small: 'S',
@@ -8,7 +9,16 @@ const sizes = {
     large: 'L',
 };
 
-export default function OrderItem({ productId, size, quantity, priceOfPurchase, imageUrl, name }) {
+interface OrderItemProps {
+    productId: string;
+    size: SizeOption;
+    quantity: number;
+    priceOfPurchase: number;
+    imageUrl: string;
+    name: string;
+}
+
+export default function OrderItem({ productId, size, quantity, priceOfPurchase, imageUrl, name }: OrderItemProps) {
     return (
         <Link className={styles.link} to={paths.details.getHref(productId)}>
             <article className={styles.card}>
