@@ -12,19 +12,29 @@ import { validateInputs } from '../../util/validateInputs.ts';
 
 import paths from '../../config/paths.ts';
 
-const initialValues = {
+type LoginDetails = {
+    email: string;
+    password: string;
+};
+
+type LoginValidationsErrors = {
+    errors?: LoginDetails;
+    message?: string;
+};
+
+const initialValues: LoginDetails = {
     email: '',
     password: '',
 };
 
 export default function Login() {
-    const [validationErrors, setValidationErrors] = useState({});
-    const [serverError, setServerError] = useState({});
+    const [validationErrors, setValidationErrors] = useState<LoginValidationsErrors>({});
+    const [serverError, setServerError] = useState<{ message?: string }>({});
 
     const navigate = useNavigate();
     const login = useLogin();
 
-    const loginHandler = async (values) => {
+    const loginHandler = async (values: LoginDetails) => {
         try {
             const { data, errors, success } = validateInputs(loginSchema, values);
 
@@ -39,17 +49,19 @@ export default function Login() {
 
             navigate(paths.home.path);
         } catch (error) {
-            if (error.message) {
-                setServerError(error);
-                setValidationErrors({});
+            if (error instanceof Error) {
+                if (error.message) {
+                    setServerError(error);
+                    setValidationErrors({});
+                }
             } else {
-                setValidationErrors({ errors: error, message: 'All fields are required.' });
+                setValidationErrors({ errors: error as LoginDetails, message: 'All fields are required.' });
                 setServerError({});
             }
         }
     };
 
-    const { values, changeHandler, submitHandler } = useForm(initialValues, loginHandler);
+    const { values, changeHandler, submitHandler } = useForm<LoginDetails>(initialValues, loginHandler);
 
     return (
         <Container className="container-sm col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mt-5 p-4 p-lg-5 pb-1 pb-lg-2 bg-dark-subtle shadow rounded-3">

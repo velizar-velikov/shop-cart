@@ -13,7 +13,15 @@ import InputErrorMessage from '../error-messages/InputErrorMessage.tsx';
 
 import paths from '../../config/paths.ts';
 
-const initialValues = {
+type RegisterDetails = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    repass: string;
+};
+
+const initialValues: RegisterDetails = {
     firstName: '',
     lastName: '',
     email: '',
@@ -22,12 +30,12 @@ const initialValues = {
 };
 
 export default function Register() {
-    const [validationErrors, setValidationErrors] = useState({});
-    const [serverError, setServerError] = useState({});
+    const [validationErrors, setValidationErrors] = useState<RegisterDetails | {}>({});
+    const [serverError, setServerError] = useState<{ message?: string }>({});
     const navigate = useNavigate();
     const register = useRegister();
 
-    const registerHandler = async (values) => {
+    const registerHandler = async (values: RegisterDetails) => {
         try {
             const { data, errors, success } = validateInputs(registerSchema, values);
 
@@ -42,17 +50,19 @@ export default function Register() {
 
             navigate(paths.home.path);
         } catch (error) {
-            if (error.message) {
-                setServerError(error);
-                setValidationErrors({});
-            } else {
-                setValidationErrors(error);
-                setServerError({});
+            if (error instanceof Error) {
+                if (error.message) {
+                    setServerError(error);
+                    setValidationErrors({});
+                } else {
+                    setValidationErrors(error);
+                    setServerError({});
+                }
             }
         }
     };
 
-    const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler);
+    const { values, changeHandler, submitHandler } = useForm<RegisterDetails>(initialValues, registerHandler);
 
     return (
         <Container className="container-sm col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mt-5 p-4 p-lg-5 pb-1 pb-lg-2 mb-4 bg-dark-subtle shadow rounded-3">
@@ -62,9 +72,9 @@ export default function Register() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>First name</Form.Label>
-                    {validationErrors.firstName && <InputErrorMessage text={validationErrors.firstName} />}
+                    {'firstName' in validationErrors && <InputErrorMessage text={validationErrors.firstName} />}
                     <Form.Control
-                        className={validationErrors.firstName ? 'input-error' : ''}
+                        className={'firstName' in validationErrors ? 'input-error' : ''}
                         type="text"
                         placeholder="Peter"
                         name="firstName"
@@ -75,9 +85,9 @@ export default function Register() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                     <Form.Label>Last name</Form.Label>
-                    {validationErrors.lastName && <InputErrorMessage text={validationErrors.lastName} />}
+                    {'lastName' in validationErrors && <InputErrorMessage text={validationErrors.lastName} />}
                     <Form.Control
-                        className={validationErrors.lastName ? 'input-error' : ''}
+                        className={'lastName' in validationErrors ? 'input-error' : ''}
                         type="text"
                         placeholder="Petrov"
                         name="lastName"
@@ -88,9 +98,9 @@ export default function Register() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                     <Form.Label>Email address</Form.Label>
-                    {validationErrors.email && <InputErrorMessage text={validationErrors.email} />}
+                    {'email' in validationErrors && <InputErrorMessage text={validationErrors.email} />}
                     <Form.Control
-                        className={validationErrors.email ? 'input-error' : ''}
+                        className={'email' in validationErrors ? 'input-error' : ''}
                         type="email"
                         placeholder="name@example.com"
                         name="email"
@@ -101,9 +111,9 @@ export default function Register() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                     <Form.Label>Pasword</Form.Label>
-                    {validationErrors.password && <InputErrorMessage text={validationErrors.password} />}
+                    {'password' in validationErrors && <InputErrorMessage text={validationErrors.password} />}
                     <Form.Control
-                        className={validationErrors.password ? 'input-error' : ''}
+                        className={'password' in validationErrors ? 'input-error' : ''}
                         type="password"
                         placeholder=""
                         name="password"
@@ -114,9 +124,9 @@ export default function Register() {
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
                     <Form.Label>Confirm password</Form.Label>
-                    {validationErrors.repass && <InputErrorMessage text={validationErrors.repass} />}
+                    {'repass' in validationErrors && <InputErrorMessage text={validationErrors.repass} />}
                     <Form.Control
-                        className={validationErrors.repass ? 'input-error' : ''}
+                        className={'repass' in validationErrors ? 'input-error' : ''}
                         type="password"
                         placeholder=""
                         name="repass"
