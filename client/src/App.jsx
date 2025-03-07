@@ -13,7 +13,7 @@ import CreateProduct from './components/create-product/CreateProduct.tsx';
 import EditProduct from './components/edit-product/EditProduct.tsx';
 import ProductReviews from './components/product-reviews/ProductReviews.tsx';
 import Cart from './components/cart/Cart.tsx';
-import PurchaseSection from './components/purchase/PurshaseSection.jsx';
+import PurchaseSection from './components/purchase/PurchaseSection.tsx';
 import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.tsx';
 import MyOrders from './components/my-orders/MyOrders.tsx';
 import Wishlist from './components/wishlist/Wishlist.jsx';

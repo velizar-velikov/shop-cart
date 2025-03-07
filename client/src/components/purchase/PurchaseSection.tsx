@@ -1,5 +1,5 @@
 import { Button, Container, Form } from 'react-bootstrap';
-import { useState } from 'react';
+import { FormEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { UseCartContext } from '../../contexts/CartContext.tsx';
@@ -7,17 +7,23 @@ import { useMakeOrder } from '../../hooks/custom/useOrders.ts';
 import { validateInputs } from '../../util/validateInputs.ts';
 import { orderSchema } from '../../validation-schemas/order.ts';
 import InputErrorMessage from '../error-messages/InputErrorMessage.tsx';
-import PurchaseItem from './purchase-item/PurchaseItem.jsx';
+import PurchaseItem from './purchase-item/PurchaseItem.tsx';
 import { toast } from 'react-toastify';
+import { PaymentType } from '../../types/order.ts';
 
-const initialValues = {
+type PaymentDetails = {
+    address: string;
+    payment: PaymentType | string;
+};
+
+const initialValues: PaymentDetails = {
     address: '',
     payment: '',
 };
 
 export default function PurchaseSection() {
-    const [validationErrors, setValidationErrors] = useState({});
-    const [serverError, setServerError] = useState({});
+    const [validationErrors, setValidationErrors] = useState<PaymentDetails | {}>({});
+    const [serverError, setServerError] = useState<{ message?: string }>({});
 
     const { userCartProducts, setUserCartProducts, totalPrice } = UseCartContext();
 
@@ -26,8 +32,8 @@ export default function PurchaseSection() {
     const navigate = useNavigate();
     const makeOrder = useMakeOrder();
 
-    const orderHandler = async (values) => {
-        values.payment = values.payment.trim();
+    const orderHandler = async (values: PaymentDetails) => {
+        values.payment = values.payment.trim() as PaymentType;
 
         const notify = () => toast.success('Your order has successfully been made.', { autoClose: 3500 });
 
@@ -42,23 +48,23 @@ export default function PurchaseSection() {
                 throw errors;
             }
 
-            const order = await makeOrder(data.address, data.payment);
+            const order = await makeOrder(data.address, data.payment as PaymentType);
 
             setUserCartProducts([]);
             notify();
             navigate('/purchase-success');
         } catch (error) {
-            if (error.message) {
+            if (error instanceof Error) {
                 setServerError(error);
                 setValidationErrors({});
             } else {
-                setValidationErrors(error);
+                setValidationErrors(error as PaymentType);
                 setServerError({});
             }
         }
     };
 
-    const { values, changeHandler, submitHandler } = useForm(initialValues, orderHandler);
+    const { values, changeHandler, submitHandler } = useForm<PaymentDetails>(initialValues, orderHandler);
 
     return (
         <Container className="container-sm col-12 col-md-10 col-lg-7 mt-5 mb-5 p-4 p-lg-5 bg-dark-subtle shadow rounded-3">
@@ -78,7 +84,7 @@ export default function PurchaseSection() {
                     {serverError && <p className="text-danger">{serverError.message}</p>}
                     <Form.Group className="mb-5 mx-2" controlId="controlId1">
                         <Form.Label className="fs-5">Delivery adress</Form.Label>
-                        {validationErrors.address && <InputErrorMessage text={validationErrors.address} />}
+                        {'address' in validationErrors && <InputErrorMessage text={validationErrors.address} />}
                         <Form.Control
                             type="text"
                             name="address"
@@ -89,7 +95,7 @@ export default function PurchaseSection() {
                     </Form.Group>
                     <div key="default-radio" className="mb-5 mx-2" value={values.payment} onChange={changeHandler}>
                         <Form.Label className="fs-5">Payment method</Form.Label>
-                        {validationErrors.payment && <InputErrorMessage text={validationErrors.payment} />}
+                        {'payment' in validationErrors && <InputErrorMessage text={validationErrors.payment} />}
                         <Form.Check type="radio" label="Visa" name="payment" id="visa" value="visa" />
                         <Form.Check type="radio" label="Mastercard" name="payment" id="mastercard" value="mastercard" />
                         <Form.Check type="radio" label="Cash on Delivery" name="payment" id="cash" value="cash" />

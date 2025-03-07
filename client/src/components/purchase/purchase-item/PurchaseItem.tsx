@@ -1,3 +1,4 @@
+import { ProductResponse, SizeOption } from '../../../types/product';
 import styles from './purchaseItem.module.css';
 
 const sizes = {
@@ -6,7 +7,13 @@ const sizes = {
     large: 'L',
 };
 
-export default function PurchaseItem({ size, quantity, productInfo }) {
+interface PurchaseItemProps {
+    size: SizeOption;
+    quantity: number;
+    productInfo: ProductResponse;
+}
+
+export default function PurchaseItem({ size, quantity, productInfo }: PurchaseItemProps) {
     return (
         <article className={styles.card}>
             <div className={styles['img-wrapper']}>
