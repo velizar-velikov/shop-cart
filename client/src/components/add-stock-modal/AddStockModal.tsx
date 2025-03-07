@@ -8,7 +8,7 @@ import { useAddStock } from '../../hooks/custom/useStock.ts';
 import { useForm } from '../../hooks/abstracts/useForm.ts';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Sizes } from '../../types/stock.ts';
-import InputErrorMessage from '../error-messages/InputErrorMessage.js';
+import InputErrorMessage from '../error-messages/InputErrorMessage.tsx';
 import { ProductResponse } from '../../types/product.ts';
 
 const initialValues: Sizes<string> = {

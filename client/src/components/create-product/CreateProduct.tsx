@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
-import InputErrorMessage from '../error-messages/InputErrorMessage.js';
+import InputErrorMessage from '../error-messages/InputErrorMessage.tsx';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
