@@ -51,13 +51,11 @@ export default function Register() {
             navigate(paths.home.path);
         } catch (error) {
             if (error instanceof Error) {
-                if (error.message) {
-                    setServerError(error);
-                    setValidationErrors({});
-                } else {
-                    setValidationErrors(error);
-                    setServerError({});
-                }
+                setServerError(error);
+                setValidationErrors({});
+            } else {
+                setValidationErrors(error as RegisterDetails);
+                setServerError({});
             }
         }
     };

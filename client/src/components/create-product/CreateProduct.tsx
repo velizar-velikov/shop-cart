@@ -43,13 +43,11 @@ export default function CreateProduct() {
             navigate(paths.details.getHref(product._id));
         } catch (error) {
             if (error instanceof Error) {
-                if (error.message) {
-                    setServerError(error);
-                    setValidationErrors({});
-                } else {
-                    setValidationErrors(error);
-                    setServerError({});
-                }
+                setServerError(error);
+                setValidationErrors({});
+            } else {
+                setValidationErrors(error as Product);
+                setServerError({});
             }
         }
     };

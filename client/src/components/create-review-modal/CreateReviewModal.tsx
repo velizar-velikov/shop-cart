@@ -53,13 +53,11 @@ export default function CreateReviewModal({ show, handleClose, updateDetails }: 
             notify();
         } catch (error) {
             if (error instanceof Error) {
-                if (error.message) {
-                    setServerError(error);
-                    setValidationErrors({});
-                } else {
-                    setValidationErrors(error);
-                    setServerError({});
-                }
+                setServerError(error);
+                setValidationErrors({});
+            } else {
+                setValidationErrors(error as Review);
+                setServerError({});
             }
         }
     };

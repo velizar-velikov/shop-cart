@@ -36,10 +36,8 @@ export default function EditReviewForm({ reviewId, textState, setTextState, setI
             setIsEditing(false);
         } catch (error) {
             if (error instanceof Error) {
-                if ('code' in error) {
-                    setServerError(error);
-                    setValidationErrors({});
-                }
+                setServerError(error);
+                setValidationErrors({});
             } else {
                 setValidationErrors(error as TextState);
                 setServerError({});

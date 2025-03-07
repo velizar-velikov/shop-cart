@@ -62,7 +62,6 @@ export default function AddStockModal({ show, handleClose, product, sizes, updat
                 console.log(error.message);
                 setErrorMessage(error.message);
             }
-        } finally {
         }
     };
 
