@@ -4,19 +4,34 @@ import Form from 'react-bootstrap/Form';
 import { useAddToUserCartHandler } from '../../../hooks/custom/useCart.ts';
 import { useForm } from '../../../hooks/abstracts/useForm.ts';
 import InputErrorMessage from '../../error-messages/InputErrorMessage.tsx';
+import { Sizes } from '../../../types/stock.ts';
+import { SizeOption } from '../../../types/product.ts';
 
-const initialValues = {
-    size: '---',
+type ProductAddToCartDetails = {
+    quantity: string;
+    size: SizeOption;
+};
+
+const initialValues: ProductAddToCartDetails = {
+    size: '---' as SizeOption,
     quantity: '1',
 };
 
-export default function ChooseSizeModal({ show, handleClose, productId, name, inStockSizes }) {
+interface ChooseSizeModalProps {
+    show: () => void;
+    handleClose: () => void;
+    productId: string;
+    name: string;
+    inStockSizes: Sizes<number>;
+}
+
+export default function ChooseSizeModal({ show, handleClose, productId, name, inStockSizes }: ChooseSizeModalProps) {
     const { addToCartHandler, maxQuantities, errorMessage } = useAddToUserCartHandler(productId, inStockSizes, handleClose);
 
-    const { values, changeHandler, submitHandler } = useForm(initialValues, addToCartHandler);
+    const { values, changeHandler, submitHandler } = useForm<ProductAddToCartDetails>(initialValues, addToCartHandler);
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show as any} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>
                     <span className="small">Choose size: </span>

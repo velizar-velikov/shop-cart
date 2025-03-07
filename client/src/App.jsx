@@ -16,7 +16,7 @@ import Cart from './components/cart/Cart.tsx';
 import PurchaseSection from './components/purchase/PurchaseSection.tsx';
 import PurchaseSuccess from './components/purchase-success/PurchaseSuccess.tsx';
 import MyOrders from './components/my-orders/MyOrders.tsx';
-import Wishlist from './components/wishlist/Wishlist.jsx';
+import Wishlist from './components/wishlist/Wishlist.tsx';
 
 import PrivateGuard from './components/route-guards/PrivateGuard.tsx';
 import GuestGuard from './components/route-guards/GuestGuard.tsx';

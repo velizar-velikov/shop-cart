@@ -4,7 +4,7 @@ import { Product, ProductResponse } from '../../types/product.ts';
 import React, { Ref, RefObject, SyntheticEvent } from 'react';
 import { PersistedWishlistItem } from '../../types/wishlist.ts';
 
-export function useWishlist(productData: Partial<ProductResponse>, iconButtonRef: RefObject<HTMLButtonElement | undefined>) {
+export function useWishlist(productData: Partial<ProductResponse>, iconButtonRef?: RefObject<HTMLButtonElement | undefined>) {
     const { wishlist, updateWishlist } = useWishlistContext();
 
     const heartedProduct = wishlist.find((p) => p._id === productData._id);
@@ -15,8 +15,8 @@ export function useWishlist(productData: Partial<ProductResponse>, iconButtonRef
     };
 
     const fillHeart = () => {
-        if (iconButtonRef.current) {
-            iconButtonRef.current.children[0].className = iconClassName.filled;
+        if (iconButtonRef!.current) {
+            iconButtonRef!.current.children[0].className = iconClassName.filled;
         }
     };
 
@@ -25,8 +25,8 @@ export function useWishlist(productData: Partial<ProductResponse>, iconButtonRef
             return;
         }
 
-        if (iconButtonRef.current) {
-            iconButtonRef.current.children[0].className = iconClassName.empty;
+        if (iconButtonRef!.current) {
+            iconButtonRef!.current.children[0].className = iconClassName.empty;
         }
     };
 

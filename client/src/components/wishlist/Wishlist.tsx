@@ -1,7 +1,7 @@
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import WishlistItem from './wishlist-item/WishlistItem.jsx';
+import WishlistItem from './wishlist-item/WishlistItem.tsx';
 import { useWishlistContext } from '../../contexts/WishlistContext.tsx';
 import { useAuthContext } from '../../contexts/AuthContext.tsx';
 
