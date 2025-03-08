@@ -55,7 +55,15 @@ export default function Login() {
                     setValidationErrors({});
                 }
             } else {
-                setValidationErrors({ errors: error as LoginDetails, message: 'All fields are required.' });
+                console.log(error);
+
+                setValidationErrors({
+                    errors: error as LoginDetails,
+                    message:
+                        !('email' in (error as LoginDetails)) && !('password' in (error as LoginDetails))
+                            ? 'Incorrect email or password'
+                            : 'All fields are required.',
+                });
                 setServerError({});
             }
         }

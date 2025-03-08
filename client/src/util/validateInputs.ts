@@ -1,4 +1,4 @@
-import { ZodObject, ZodSchema } from 'zod';
+import { ZodSchema } from 'zod';
 
 interface ValidationResultCustom<T> {
     data: T;

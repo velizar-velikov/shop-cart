@@ -38,7 +38,7 @@ export default function CatalogSearch({ searchState, updateSearch, setSearchPara
         }
     };
 
-    const { values, changeHandler, submitHandler } = useForm(searchState, searchHandler);
+    const { values, changeHandler, submitHandler } = useForm<Search>(searchState, searchHandler);
     return (
         <Container>
             <div className="d-flex justify-content-center align-items-center">
