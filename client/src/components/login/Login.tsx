@@ -55,8 +55,6 @@ export default function Login() {
                     setValidationErrors({});
                 }
             } else {
-                console.log(error);
-
                 setValidationErrors({
                     errors: error as LoginDetails,
                     message:

@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, ReactNode, useContext } from 'react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 import { usePersistedState } from '../hooks/abstracts/usePersistedState.ts';
 import { PersistedWishlistItem } from '../types/wishlist.ts';
 
